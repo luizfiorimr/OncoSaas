@@ -3,7 +3,7 @@
 import { useAlerts } from '@/hooks/useAlerts';
 import { formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { AlertTriangle, X } from 'lucide-react';
+import { AlertTriangle, X, ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAcknowledgeAlert, useResolveAlert } from '@/hooks/useAlerts';
 import { Alert } from '@/lib/api/alerts';
@@ -22,6 +22,7 @@ export function CriticalAlertsPanel({
   const acknowledgeAlert = useAcknowledgeAlert();
   const resolveAlert = useResolveAlert();
   const [dismissedAlerts, setDismissedAlerts] = useState<Set<string>>(new Set());
+  const [isExpanded, setIsExpanded] = useState(true); // Expandido por padrão para alertas críticos
 
   // Filtrar apenas alertas críticos
   const criticalAlerts =
@@ -51,24 +52,33 @@ export function CriticalAlertsPanel({
 
   return (
     <div className="bg-red-50 border-l-4 border-red-500 rounded-lg p-4 mb-6 shadow-md">
-      <div className="flex items-start justify-between mb-3">
-        <div className="flex items-center gap-2">
+      <div className="flex items-start justify-between">
+        <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="flex items-center gap-2 flex-1 text-left hover:opacity-80 transition-opacity"
+        >
+          {isExpanded ? (
+            <ChevronUp className="h-5 w-5 text-red-600" />
+          ) : (
+            <ChevronDown className="h-5 w-5 text-red-600" />
+          )}
           <AlertTriangle className="h-5 w-5 text-red-600 animate-pulse" />
           <h3 className="text-lg font-semibold text-red-900">
             Alertas Críticos ({criticalAlerts.length})
           </h3>
-        </div>
+        </button>
         {onClose && (
           <button
             onClick={onClose}
-            className="text-red-600 hover:text-red-800"
+            className="text-red-600 hover:text-red-800 ml-2"
           >
             <X className="h-5 w-5" />
           </button>
         )}
       </div>
 
-      <div className="space-y-3">
+      {isExpanded && (
+        <div className="space-y-3 mt-3">
         {criticalAlerts.slice(0, 3).map((alert) => (
           <div
             key={alert.id}
@@ -144,7 +154,8 @@ export function CriticalAlertsPanel({
             +{criticalAlerts.length - 3} alertas críticos adicionais
           </div>
         )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
