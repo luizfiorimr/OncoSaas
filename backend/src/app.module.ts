@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { ScheduleModule } from '@nestjs/schedule';
 import { APP_GUARD } from '@nestjs/core';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -21,6 +22,7 @@ import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
       envFilePath: '../.env', // Caminho relativo ao backend/src
       expandVariables: true,
     }),
+    ScheduleModule.forRoot(), // Habilita agendamento de tarefas
     PrismaModule,
     AuthModule,
     PatientsModule,
