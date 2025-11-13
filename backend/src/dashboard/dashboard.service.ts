@@ -75,8 +75,8 @@ export class DashboardService {
       where: {
         tenantId,
         status: 'RESOLVED',
-        resolvedAt: { not: null },
-        createdAt: { not: null },
+        resolvedAt: { not: null }, // resolvedAt é nullable, então podemos filtrar por not null
+        // createdAt não é nullable no schema, então não precisa verificar
       },
       select: {
         createdAt: true,
