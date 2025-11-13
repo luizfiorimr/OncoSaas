@@ -26,7 +26,10 @@ import { MetricsCharts } from '@/components/dashboard/oncologist/metrics-charts'
 import { CriticalAlertsPanel } from '@/components/dashboard/oncologist/critical-alerts-panel';
 import { TeamPerformance } from '@/components/dashboard/oncologist/team-performance';
 import { PatientListEnhanced } from '@/components/dashboard/oncologist/patient-list-enhanced';
-import { useDashboardMetrics, useDashboardStatistics } from '@/hooks/useDashboardMetrics';
+import {
+  useDashboardMetrics,
+  useDashboardStatistics,
+} from '@/hooks/useDashboardMetrics';
 import { usePatients } from '@/hooks/usePatients';
 import { useDashboardSocket } from '@/hooks/useDashboardSocket';
 import { Calendar, RefreshCw } from 'lucide-react';
@@ -312,14 +315,62 @@ function NursingDashboard() {
 // Componente do Dashboard Gerencial (Oncologistas)
 function ManagementDashboard() {
   const router = useRouter();
-  const { user, logout } = useAuthStore();
-  const [statisticsPeriod, setStatisticsPeriod] = useState<'7d' | '30d' | '90d'>('7d');
+  const { user, logout, isAuthenticated, initialize } = useAuthStore();
+  const [statisticsPeriod, setStatisticsPeriod] = useState<
+    '7d' | '30d' | '90d'
+  >('7d');
 
-  const { data: metrics, isLoading: isLoadingMetrics, refetch: refetchMetrics } = useDashboardMetrics();
-  const { data: statistics, isLoading: isLoadingStatistics } = useDashboardStatistics(statisticsPeriod);
+  // Inicializar autenticação
+  useEffect(() => {
+    initialize();
+  }, [initialize]);
+
+  // Verificar autenticação
+  useEffect(() => {
+    if (!isAuthenticated) {
+      router.replace('/login');
+      return;
+    }
+  }, [isAuthenticated, router]);
+
+  const {
+    data: metrics,
+    isLoading: isLoadingMetrics,
+    error: metricsError,
+    refetch: refetchMetrics,
+  } = useDashboardMetrics();
+  const {
+    data: statistics,
+    isLoading: isLoadingStatistics,
+    error: statisticsError,
+  } = useDashboardStatistics(statisticsPeriod);
   const { data: patients, isLoading: isLoadingPatients } = usePatients();
-  
+
   useDashboardSocket();
+
+  // Debug: Log dos dados
+  useEffect(() => {
+    if (metrics) {
+      // eslint-disable-next-line no-console
+      console.log('Dashboard Metrics:', metrics);
+    }
+    if (metricsError) {
+      // eslint-disable-next-line no-console
+      console.error('Dashboard Metrics Error:', metricsError);
+    }
+    if (statistics) {
+      // eslint-disable-next-line no-console
+      console.log('Dashboard Statistics:', statistics);
+    }
+    if (statisticsError) {
+      // eslint-disable-next-line no-console
+      console.error('Dashboard Statistics Error:', statisticsError);
+    }
+  }, [metrics, metricsError, statistics, statisticsError]);
+
+  if (!isAuthenticated || !user) {
+    return null;
+  }
 
   const handleLogout = () => {
     logout();
@@ -387,22 +438,78 @@ function ManagementDashboard() {
 
       <main className="flex-1 p-6">
         <div className="container mx-auto space-y-6">
+          {/* Mensagens de erro */}
+          {(metricsError || statisticsError) && (
+            <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+              <h3 className="text-red-800 font-semibold mb-2">
+                Erro ao carregar dados
+              </h3>
+              {metricsError && (
+                <p className="text-red-600 text-sm">
+                  Métricas:{' '}
+                  {metricsError instanceof Error
+                    ? metricsError.message
+                    : 'Erro desconhecido'}
+                </p>
+              )}
+              {statisticsError && (
+                <p className="text-red-600 text-sm">
+                  Estatísticas:{' '}
+                  {statisticsError instanceof Error
+                    ? statisticsError.message
+                    : 'Erro desconhecido'}
+                </p>
+              )}
+            </div>
+          )}
+
+          {/* Loading state */}
+          {(isLoadingMetrics || isLoadingStatistics) &&
+            !metrics &&
+            !statistics && (
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <p className="text-blue-800">
+                  Carregando dados do dashboard...
+                </p>
+              </div>
+            )}
+
+          {/* Alertas Críticos */}
           {metrics && metrics.criticalAlertsCount > 0 && (
             <CriticalAlertsPanel onAlertSelect={handleAlertSelect} />
           )}
 
-          {metrics && (
-            <KPICards metrics={metrics} isLoading={isLoadingMetrics} />
+          {/* KPI Cards - sempre mostrar se houver dados ou loading */}
+          {isLoadingMetrics ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+              {[...Array(5)].map((_, i) => (
+                <div
+                  key={i}
+                  className="bg-white rounded-lg border p-6 h-32 animate-pulse"
+                >
+                  <div className="h-4 bg-gray-200 rounded w-2/3 mb-2"></div>
+                  <div className="h-8 bg-gray-200 rounded w-1/2"></div>
+                </div>
+              ))}
+            </div>
+          ) : metricsError ? (
+            <div className="bg-white rounded-lg border p-6">
+              <p className="text-gray-500 text-center">
+                Erro ao carregar métricas. Tente novamente.
+              </p>
+            </div>
+          ) : metrics ? (
+            <KPICards metrics={metrics} isLoading={false} />
+          ) : (
+            <div className="bg-white rounded-lg border p-6">
+              <p className="text-gray-500 text-center">
+                Aguardando dados do dashboard...
+              </p>
+            </div>
           )}
 
-          {metrics && statistics ? (
-            <MetricsCharts
-              metrics={metrics}
-              statistics={statistics}
-              isLoading={isLoadingMetrics || isLoadingStatistics}
-              onPriorityFilter={handlePriorityFilter}
-            />
-          ) : (
+          {/* Gráficos de Métricas */}
+          {isLoadingMetrics || isLoadingStatistics ? (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {[...Array(4)].map((_, i) => (
                 <div
@@ -414,15 +521,23 @@ function ManagementDashboard() {
                 </div>
               ))}
             </div>
-          )}
-
-          {metrics && statistics ? (
-            <TeamPerformance
+          ) : metrics && statistics ? (
+            <MetricsCharts
               metrics={metrics}
               statistics={statistics}
-              isLoading={isLoadingMetrics || isLoadingStatistics}
+              isLoading={false}
+              onPriorityFilter={handlePriorityFilter}
             />
-          ) : (
+          ) : metricsError || statisticsError ? (
+            <div className="bg-white rounded-lg border p-6">
+              <p className="text-gray-500 text-center">
+                Não foi possível carregar os gráficos. Verifique os erros acima.
+              </p>
+            </div>
+          ) : null}
+
+          {/* Performance da Equipe */}
+          {isLoadingMetrics || isLoadingStatistics ? (
             <div className="bg-white rounded-lg border p-6 animate-pulse">
               <div className="h-6 bg-gray-200 rounded w-1/3 mb-4"></div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -431,7 +546,13 @@ function ManagementDashboard() {
                 ))}
               </div>
             </div>
-          )}
+          ) : metrics && statistics ? (
+            <TeamPerformance
+              metrics={metrics}
+              statistics={statistics}
+              isLoading={false}
+            />
+          ) : null}
 
           <div className="bg-white rounded-lg border p-6">
             <div className="flex items-center justify-between mb-4">
@@ -486,9 +607,9 @@ export default function DashboardPage() {
   }
 
   // Detectar role e renderizar dashboard apropriado
-  const isManagementRole = 
-    user.role === 'ONCOLOGIST' || 
-    user.role === 'ADMIN' || 
+  const isManagementRole =
+    user.role === 'ONCOLOGIST' ||
+    user.role === 'ADMIN' ||
     user.role === 'COORDINATOR';
 
   if (isManagementRole) {
