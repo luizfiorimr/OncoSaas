@@ -1,0 +1,660 @@
+---
+alwaysApply: true
+description: Padrões específicos de desenvolvimento para Backend (NestJS, TypeScript, Prisma). Regras de módulos, controllers, services, DTOs, validação, segurança e integração com banco de dados.
+---
+
+# Padrões de Desenvolvimento - Backend (NestJS)
+
+## Princípios Fundamentais
+
+### 1. Arquitetura Modular (NestJS)
+
+**Regra**: Cada feature deve ser um módulo completo e independente.
+
+**Estrutura de um Módulo**:
+
+```
+modules/patients/
+├── patients.module.ts        # Módulo NestJS
+├── patients.controller.ts    # Endpoints HTTP
+├── patients.service.ts       # Lógica de negócio
+├── dto/                      # Data Transfer Objects
+│   ├── create-patient.dto.ts
+│   └── update-patient.dto.ts
+├── entities/                 # Entidades (opcional, se não usar Prisma diretamente)
+└── patients.service.spec.ts  # Testes
+```
+
+**Padrões**:
+
+- ✅ Um módulo por feature/domínio
+- ✅ Controller apenas roteamento e validação
+- ✅ Service contém toda lógica de negócio
+- ✅ DTOs para validação de entrada/saída
+- ✅ Exportar Service se usado em outros módulos
+
+**Exemplo**:
+
+```typescript
+// ✅ CORRETO
+// patients.module.ts
+import { Module } from '@nestjs/common';
+import { PrismaModule } from '@/prisma/prisma.module';
+import { PatientsController } from './patients.controller';
+import { PatientsService } from './patients.service';
+
+@Module({
+  imports: [PrismaModule],
+  controllers: [PatientsController],
+  providers: [PatientsService],
+  exports: [PatientsService], // Exportar se usado em outros módulos
+})
+export class PatientsModule {}
+```
+
+---
+
+### 2. Controllers (Endpoints HTTP)
+
+**Regra**: Controllers apenas roteamento, validação e formatação de resposta.
+
+**Padrões**:
+
+- ✅ Usar decorators do NestJS (`@Get`, `@Post`, `@Put`, `@Delete`)
+- ✅ Validação com DTOs e `class-validator`
+- ✅ Guards para autenticação/autorização
+- ✅ Tratamento de erros com exceptions
+- ✅ Nunca colocar lógica de negócio
+
+**Exemplo**:
+
+```typescript
+// ✅ CORRETO
+// patients.controller.ts
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  UseGuards,
+  Request,
+} from '@nestjs/common';
+import { JwtAuthGuard } from '@/common/guards/jwt-auth.guard';
+import { TenantGuard } from '@/common/guards/tenant.guard';
+import { PatientsService } from './patients.service';
+import { CreatePatientDto } from './dto/create-patient.dto';
+
+@Controller('patients')
+@UseGuards(JwtAuthGuard, TenantGuard) // Guards obrigatórios
+export class PatientsController {
+  constructor(private readonly patientsService: PatientsService) {}
+
+  @Get()
+  async findAll(@Request() req): Promise<Patient[]> {
+    return this.patientsService.findAll(req.user.tenantId);
+  }
+
+  @Get(':id')
+  async findOne(@Param('id') id: string, @Request() req): Promise<Patient> {
+    return this.patientsService.findOne(id, req.user.tenantId);
+  }
+
+  @Post()
+  async create(
+    @Body() createPatientDto: CreatePatientDto,
+    @Request() req
+  ): Promise<Patient> {
+    return this.patientsService.create(createPatientDto, req.user.tenantId);
+  }
+}
+```
+
+**Nunca**:
+
+- ❌ Lógica de negócio no controller
+- ❌ Acesso direto ao Prisma no controller
+- ❌ Queries SQL diretas
+
+---
+
+### 3. Services (Lógica de Negócio)
+
+**Regra**: Services contêm toda lógica de negócio e interagem com o banco de dados.
+
+**Padrões**:
+
+- ✅ Injetar PrismaService via constructor
+- ✅ Sempre incluir `tenantId` em queries
+- ✅ Validações de negócio
+- ✅ Tratamento de erros com exceptions do NestJS
+- ✅ Retornar tipos explícitos
+
+**Exemplo**:
+
+```typescript
+// ✅ CORRETO
+// patients.service.ts
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { PrismaService } from '@/prisma/prisma.service';
+import { CreatePatientDto } from './dto/create-patient.dto';
+import { Patient } from '@prisma/client';
+
+@Injectable()
+export class PatientsService {
+  constructor(private readonly prisma: PrismaService) {}
+
+  async findAll(tenantId: string): Promise<Patient[]> {
+    return this.prisma.patient.findMany({
+      where: { tenantId }, // SEMPRE incluir tenantId
+      orderBy: { createdAt: 'desc' },
+    });
+  }
+
+  async findOne(id: string, tenantId: string): Promise<Patient> {
+    const patient = await this.prisma.patient.findFirst({
+      where: {
+        id,
+        tenantId, // SEMPRE incluir tenantId
+      },
+    });
+
+    if (!patient) {
+      throw new NotFoundException(`Patient with ID ${id} not found`);
+    }
+
+    return patient;
+  }
+
+  async create(
+    createPatientDto: CreatePatientDto,
+    tenantId: string
+  ): Promise<Patient> {
+    return this.prisma.patient.create({
+      data: {
+        ...createPatientDto,
+        tenantId, // SEMPRE incluir tenantId
+      },
+    });
+  }
+}
+```
+
+**Nunca**:
+
+- ❌ Queries sem `tenantId`
+- ❌ Lógica de apresentação (formatação, transformação de dados)
+- ❌ Acesso direto a `req` ou objetos HTTP
+
+---
+
+### 4. DTOs (Data Transfer Objects)
+
+**Regra**: DTOs para validação e transformação de dados de entrada/saída.
+
+**Padrões**:
+
+- ✅ Usar `class-validator` para validação
+- ✅ Usar `class-transformer` para transformação
+- ✅ Um DTO por operação (Create, Update, etc.)
+- ✅ Validações claras e mensagens de erro
+
+**Exemplo**:
+
+```typescript
+// ✅ CORRETO
+// dto/create-patient.dto.ts
+import {
+  IsString,
+  IsEmail,
+  IsDateString,
+  IsNotEmpty,
+  MinLength,
+} from 'class-validator';
+
+export class CreatePatientDto {
+  @IsString()
+  @IsNotEmpty()
+  @MinLength(2)
+  name: string;
+
+  @IsEmail()
+  @IsNotEmpty()
+  email: string;
+
+  @IsDateString()
+  @IsNotEmpty()
+  dateOfBirth: string;
+
+  @IsString()
+  @IsNotEmpty()
+  gender: 'male' | 'female' | 'other';
+}
+
+// dto/update-patient.dto.ts
+import { PartialType } from '@nestjs/mapped-types';
+import { CreatePatientDto } from './create-patient.dto';
+
+export class UpdatePatientDto extends PartialType(CreatePatientDto) {}
+```
+
+**Nunca**:
+
+- ❌ DTOs sem validação
+- ❌ Usar `any` ou tipos genéricos demais
+- ❌ Validações complexas no DTO (mover para service)
+
+---
+
+### 5. Prisma e Banco de Dados
+
+**Regra**: Sempre usar Prisma ORM, nunca queries SQL diretas.
+
+**Padrões**:
+
+- ✅ PrismaService injetado via DI
+- ✅ Sempre incluir `tenantId` em `where`
+- ✅ Usar `include` para relacionamentos (evitar N+1)
+- ✅ Transações para operações múltiplas
+- ✅ Paginação em listas grandes
+
+**Exemplo**:
+
+```typescript
+// ✅ CORRETO - Evitar N+1
+const patients = await this.prisma.patient.findMany({
+  where: { tenantId },
+  include: {
+    conversations: true, // Carrega relacionamentos de uma vez
+  },
+  take: 20, // Paginação
+  skip: 0,
+});
+
+// ✅ CORRETO - Transação
+await this.prisma.$transaction([
+  this.prisma.patient.create({ data: patientData }),
+  this.prisma.conversation.create({ data: conversationData }),
+]);
+
+// ❌ ERRADO - N+1 query
+const patients = await this.prisma.patient.findMany({ where: { tenantId } });
+for (const patient of patients) {
+  patient.conversations = await this.prisma.conversation.findMany({
+    where: { patientId: patient.id },
+  }); // Query dentro de loop!
+}
+```
+
+---
+
+### 6. Autenticação e Autorização
+
+**Regra**: JWT obrigatório, RBAC para controle de acesso.
+
+**Padrões**:
+
+- ✅ Guard de autenticação (`JwtAuthGuard`)
+- ✅ Guard de tenant (`TenantGuard`)
+- ✅ Guard de roles (`RolesGuard`)
+- ✅ Decorator `@Roles()` para endpoints específicos
+- ✅ `@Request() req` para acessar usuário autenticado
+
+**Exemplo**:
+
+```typescript
+// ✅ CORRETO
+@Controller('patients')
+@UseGuards(JwtAuthGuard, TenantGuard)
+export class PatientsController {
+  @Get()
+  @Roles('nurse', 'oncologist', 'admin')
+  async findAll(@Request() req) {
+    // req.user contém: { id, email, tenantId, roles }
+    return this.patientsService.findAll(req.user.tenantId);
+  }
+
+  @Delete(':id')
+  @Roles('admin') // Apenas admin pode deletar
+  async remove(@Param('id') id: string, @Request() req) {
+    return this.patientsService.remove(id, req.user.tenantId);
+  }
+}
+```
+
+---
+
+### 7. Tratamento de Erros
+
+**Regra**: Usar exceptions do NestJS e filtros customizados.
+
+**Padrões**:
+
+- ✅ Exceptions específicas (`NotFoundException`, `BadRequestException`)
+- ✅ Exception filter global para formatação
+- ✅ Logging de erros
+- ✅ Mensagens de erro não expor detalhes internos
+
+**Exemplo**:
+
+```typescript
+// ✅ CORRETO
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
+
+@Injectable()
+export class PatientsService {
+  async findOne(id: string, tenantId: string): Promise<Patient> {
+    const patient = await this.prisma.patient.findFirst({
+      where: { id, tenantId },
+    });
+
+    if (!patient) {
+      throw new NotFoundException(`Patient with ID ${id} not found`);
+    }
+
+    return patient;
+  }
+
+  async create(dto: CreatePatientDto, tenantId: string): Promise<Patient> {
+    // Validação de negócio
+    const existing = await this.prisma.patient.findFirst({
+      where: { email: dto.email, tenantId },
+    });
+
+    if (existing) {
+      throw new BadRequestException('Patient with this email already exists');
+    }
+
+    return this.prisma.patient.create({
+      data: { ...dto, tenantId },
+    });
+  }
+}
+```
+
+---
+
+### 8. Validação de Dados
+
+**Regra**: Validar todos os dados de entrada.
+
+**Padrões**:
+
+- ✅ DTOs com `class-validator`
+- ✅ ValidationPipe global
+- ✅ Validação de tipos e formato
+- ✅ Validações de negócio no service
+
+**Exemplo**:
+
+```typescript
+// main.ts
+import { ValidationPipe } from '@nestjs/common';
+
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule);
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true, // Remove propriedades não definidas no DTO
+      forbidNonWhitelisted: true, // Rejeita se tiver propriedades extras
+      transform: true, // Transforma tipos automaticamente
+    })
+  );
+
+  await app.listen(3000);
+}
+```
+
+---
+
+### 9. Logging e Monitoramento
+
+**Regra**: Logging estruturado para debugging e auditoria.
+
+**Padrões**:
+
+- ✅ Logger do NestJS (`@nestjs/common`)
+- ✅ Logs estruturados (JSON)
+- ✅ Níveis apropriados (error, warn, info, debug)
+- ✅ Sempre incluir contexto (tenantId, userId, requestId)
+
+**Exemplo**:
+
+```typescript
+import { Injectable, Logger } from '@nestjs/common';
+
+@Injectable()
+export class PatientsService {
+  private readonly logger = new Logger(PatientsService.name);
+
+  async create(dto: CreatePatientDto, tenantId: string): Promise<Patient> {
+    this.logger.log(`Creating patient: ${dto.name}`, {
+      tenantId,
+      email: dto.email,
+    });
+
+    try {
+      const patient = await this.prisma.patient.create({
+        data: { ...dto, tenantId },
+      });
+
+      this.logger.log(`Patient created: ${patient.id}`, { tenantId });
+      return patient;
+    } catch (error) {
+      this.logger.error(`Failed to create patient`, {
+        tenantId,
+        error: error.message,
+      });
+      throw error;
+    }
+  }
+}
+```
+
+---
+
+### 10. Testes
+
+**Regra**: Testes unitários para services, testes E2E para endpoints.
+
+**Padrões**:
+
+- ✅ Mock de dependências (Prisma)
+- ✅ Testes isolados e independentes
+- ✅ Cobertura mínima 70%
+- ✅ Testes E2E para fluxos críticos
+
+**Exemplo**:
+
+```typescript
+// ✅ CORRETO
+// patients.service.spec.ts
+import { Test, TestingModule } from '@nestjs/testing';
+import { NotFoundException } from '@nestjs/common';
+import { PatientsService } from './patients.service';
+import { PrismaService } from '@/prisma/prisma.service';
+
+describe('PatientsService', () => {
+  let service: PatientsService;
+  let prisma: PrismaService;
+
+  const mockPrisma = {
+    patient: {
+      findMany: jest.fn(),
+      findFirst: jest.fn(),
+      create: jest.fn(),
+    },
+  };
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [
+        PatientsService,
+        {
+          provide: PrismaService,
+          useValue: mockPrisma,
+        },
+      ],
+    }).compile();
+
+    service = module.get<PatientsService>(PatientsService);
+    prisma = module.get<PrismaService>(PrismaService);
+  });
+
+  describe('findAll', () => {
+    it('should return patients filtered by tenant', async () => {
+      const mockPatients = [
+        { id: '1', name: 'Patient 1', tenantId: 'tenant-1' },
+      ];
+
+      mockPrisma.patient.findMany.mockResolvedValue(mockPatients);
+
+      const result = await service.findAll('tenant-1');
+
+      expect(mockPrisma.patient.findMany).toHaveBeenCalledWith({
+        where: { tenantId: 'tenant-1' },
+        orderBy: { createdAt: 'desc' },
+      });
+      expect(result).toEqual(mockPatients);
+    });
+  });
+});
+```
+
+---
+
+### 11. Convenções de Nomenclatura
+
+**Arquivos**:
+
+- ✅ Módulos: `[feature].module.ts` (`patients.module.ts`)
+- ✅ Controllers: `[feature].controller.ts`
+- ✅ Services: `[feature].service.ts`
+- ✅ DTOs: `[action]-[feature].dto.ts` (`create-patient.dto.ts`)
+- ✅ Guards: `[name].guard.ts` (`jwt-auth.guard.ts`)
+- ✅ Interceptors: `[name].interceptor.ts`
+- ✅ Filters: `[name].filter.ts`
+
+**Classes e Funções**:
+
+- ✅ Classes: `PascalCase` (`PatientsService`, `CreatePatientDto`)
+- ✅ Funções: `camelCase` (`findAll`, `createPatient`)
+- ✅ Constantes: `UPPER_SNAKE_CASE` (`MAX_RETRIES`)
+
+---
+
+### 12. Estrutura de Pastas Recomendada
+
+```
+backend/src/
+├── main.ts                   # Entry point
+├── app.module.ts             # Root module
+├── modules/                  # Módulos por feature
+│   ├── patients/
+│   │   ├── patients.module.ts
+│   │   ├── patients.controller.ts
+│   │   ├── patients.service.ts
+│   │   └── dto/
+│   ├── auth/
+│   └── alerts/
+├── common/                   # Código compartilhado
+│   ├── guards/
+│   ├── interceptors/
+│   ├── filters/
+│   └── decorators/
+├── config/                   # Configurações
+├── prisma/                   # Prisma service
+└── shared/                   # Utilitários
+```
+
+---
+
+### 13. WebSocket e Atualizações em Tempo Real
+
+**Regra**: Usar Socket.io para atualizações em tempo real (alertas, conversas, priorização).
+
+**Padrões**:
+
+- ✅ Gateway separado por funcionalidade (`AlertsGateway`, `ConversationsGateway`)
+- ✅ Autenticação JWT obrigatória no handshake
+- ✅ Rooms por tenant (`tenant:${tenantId}`)
+- ✅ Rooms por paciente para atualizações específicas
+- ✅ Service para emitir eventos (não emitir diretamente do Gateway)
+- ✅ Tipos TypeScript para todos os payloads
+
+**Exemplo**:
+
+```typescript
+// ✅ CORRETO
+@WebSocketGateway({ namespace: '/alerts' })
+export class AlertsGateway {
+  @WebSocketServer()
+  server: Server;
+
+  handleConnection(client: Socket) {
+    const tenantId = client.handshake.auth?.tenantId;
+    if (!tenantId) {
+      client.disconnect();
+      return;
+    }
+    client.join(`tenant:${tenantId}`);
+  }
+
+  emitCriticalAlert(tenantId: string, alert: AlertPayload) {
+    this.server.to(`tenant:${tenantId}`).emit('critical_alert', alert);
+  }
+}
+
+// ✅ CORRETO - Service emite eventos
+@Injectable()
+export class AlertsService {
+  constructor(private readonly alertsGateway: AlertsGateway) {}
+
+  async emitCriticalAlert(tenantId: string, alert: AlertPayload) {
+    this.alertsGateway.emitCriticalAlert(tenantId, alert);
+    await this.saveAlertToDatabase(tenantId, alert);
+  }
+}
+```
+
+**Nunca**:
+
+- ❌ Emitir eventos diretamente do Service sem Gateway
+- ❌ Conectar sem autenticação
+- ❌ Broadcast para todos os tenants (sempre filtrar por tenant)
+
+---
+
+### 14. Checklist Antes de Commitar
+
+- [ ] Service tem lógica de negócio, não apenas CRUD
+- [ ] Controller apenas roteamento, sem lógica
+- [ ] DTOs com validação completa
+- [ ] Sempre incluir `tenantId` em queries
+- [ ] Tratamento de erros adequado
+- [ ] Logging implementado
+- [ ] WebSocket: Autenticação JWT no handshake
+- [ ] WebSocket: Rooms por tenant (isolamento)
+- [ ] TypeScript sem erros (`npm run type-check`)
+- [ ] ESLint sem erros (`npm run lint`)
+- [ ] Testes passando (`npm test`)
+- [ ] Cobertura de testes adequada
+
+---
+
+## Referências
+
+- [NestJS Documentation](https://docs.nestjs.com)
+- [Prisma Documentation](https://www.prisma.io/docs)
+- [class-validator](https://github.com/typestack/class-validator)
+- [class-transformer](https://github.com/typestack/class-transformer)
+
+---
+
+**Última atualização**: 2024-01-XX  
+**Versão**: 1.0.0

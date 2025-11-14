@@ -1,0 +1,88 @@
+import {
+  Controller,
+  Post,
+  Get,
+  Param,
+  UseGuards,
+  Request,
+  HttpCode,
+  HttpStatus,
+} from '@nestjs/common';
+import { JwtAuthGuard } from '../../auth/guards/jwt-auth.guard';
+import { TenantGuard } from '../../auth/guards/tenant.guard';
+import { FHIRSyncService } from './services/fhir-sync.service';
+import { FHIRConfigService } from './services/fhir-config.service';
+
+@Controller('fhir')
+@UseGuards(JwtAuthGuard, TenantGuard)
+export class FHIRController {
+  constructor(
+    private readonly fhirSyncService: FHIRSyncService,
+    private readonly fhirConfigService: FHIRConfigService
+  ) {}
+
+  /**
+   * Sincronizar observação específica com EHR
+   */
+  @Post('observations/:id/sync')
+  @HttpCode(HttpStatus.OK)
+  async syncObservation(@Param('id') id: string, @Request() req) {
+    const config = await this.fhirConfigService.getConfig(req.user.tenantId);
+    if (!config || !config.enabled) {
+      throw new Error('Integração FHIR não habilitada para este tenant');
+    }
+
+    return this.fhirSyncService.syncObservationToEHR(config, id);
+  }
+
+  /**
+   * Sincronizar paciente específico com EHR
+   */
+  @Post('patients/:id/sync')
+  @HttpCode(HttpStatus.OK)
+  async syncPatient(@Param('id') id: string, @Request() req) {
+    const config = await this.fhirConfigService.getConfig(req.user.tenantId);
+    if (!config || !config.enabled) {
+      throw new Error('Integração FHIR não habilitada para este tenant');
+    }
+
+    await this.fhirSyncService.syncPatientToEHR(config, id);
+    return { message: 'Paciente sincronizado com sucesso' };
+  }
+
+  /**
+   * Sincronizar todas as observações não sincronizadas
+   */
+  @Post('observations/sync-all')
+  @HttpCode(HttpStatus.OK)
+  async syncAllObservations(@Request() req) {
+    const config = await this.fhirConfigService.getConfig(req.user.tenantId);
+    if (!config || !config.enabled) {
+      throw new Error('Integração FHIR não habilitada para este tenant');
+    }
+
+    return this.fhirSyncService.syncUnsyncedObservations(config, 100);
+  }
+
+  /**
+   * Fazer pull de observações do EHR para um paciente
+   */
+  @Post('patients/:id/pull')
+  @HttpCode(HttpStatus.OK)
+  async pullPatientObservations(@Param('id') id: string, @Request() req) {
+    const config = await this.fhirConfigService.getConfig(req.user.tenantId);
+    if (!config || !config.enabled) {
+      throw new Error('Integração FHIR não habilitada para este tenant');
+    }
+
+    const count = await this.fhirSyncService.pullObservationsFromEHR(
+      config,
+      id
+    );
+    return {
+      message: `Pull concluído`,
+      observationsCreated: count,
+    };
+  }
+}
+

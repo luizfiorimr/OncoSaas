@@ -1,0 +1,22 @@
+import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
+import { PrismaClient } from '@prisma/client';
+
+@Injectable()
+export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
+  async onModuleInit() {
+    await this.$connect();
+  }
+
+  async onModuleDestroy() {
+    await this.$disconnect();
+  }
+
+  // Método para obter cliente Prisma com schema específico do tenant
+  async getTenantClient(schemaName: string) {
+    // Implementação será feita para suportar schemas dinâmicos
+    // Por enquanto, retorna cliente padrão
+    return this;
+  }
+}
+
+

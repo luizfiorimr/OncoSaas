@@ -1,0 +1,12 @@
+node_modules
+dist
+build
+.next
+out
+coverage
+*.generated.ts
+*.generated.js
+prisma/migrations
+.env
+.env.local
+

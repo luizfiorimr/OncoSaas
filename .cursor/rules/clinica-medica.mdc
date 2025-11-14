@@ -1,0 +1,1126 @@
+---
+alwaysApply: true
+---
+
+# Clínica Médica
+
+## Terminologia Específica
+
+- **Anasarca**: Edema generalizado grave
+- **Dispneia Paroxística Noturna (DPN)**: Despertar súbito com falta de ar
+- **Ortopneia**: Dispneia ao deitar
+- **Platipneia**: Dispneia ao sentar
+- **Trepopneia**: Dispneia ao deitar em determinado decúbito
+- **Estertores crepitantes**: Ruídos adventícios finos, tipo "velcro"
+- **Sibilos**: Ruídos adventícios contínuos, agudos
+- **Roncos**: Ruídos adventícios contínuos, graves
+- **Turgência jugular**: Distensão das veias jugulares (>3 cm acima do ângulo esternal)
+- **Hepatomegalia pulsátil**: Fígado aumentado e pulsante (IC direita)
+- **Ascite**: Acúmulo de líquido na cavidade peritoneal
+- **Petéquias**: Lesões purpúricas <3 mm
+- **Equimoses**: Lesões purpúricas >3 mm
+- **Icterícia**: Coloração amarelada de pele e mucosas (bilirrubina >2-3 mg/dL)
+
+## Stack de Habilidades do Clínico Médico
+
+### Semiologia Avançada
+- **Ausculta Cardíaca Completa**: Bulhas normais/anormais (B3, B4), sopros (classificação Levine), cliques, estalidos, atrito pericárdico
+- **Ausculta Pulmonar Completa**: MV, estertores crepitantes/subcrepitantes, sibilos, roncos, atrito pleural, egofonia
+- **Palpação Abdominal Especializada**: Massas, visceromegalias, sinal de Murphy, Blumberg, ascite (macicez móvel)
+- **Exame Neurológico Detalhado**: Força muscular (escala 0-5), reflexos profundos, sensibilidade, coordenação, nervos cranianos
+- **Exame Vascular Periférico**: Pulsos, sopros, edema, sinais de TVP, claudicação
+
+### Interpretação de Exames Avançados
+- **ECG Complexo**: Arritmias, bloqueios, hipertrofias, isquemia/IAM, pericardite, alterações eletrolíticas
+- **Ecocardiograma**: Fração de ejeção, contratilidade segmentar, valvulopatias, derrame pericárdico
+- **Espirometria com Broncodilatador**: Padrão obstrutivo/restritivo/misto, interpretação completa, resposta a BD
+- **Gasometria Arterial**: pH, pCO₂, pO₂, HCO₃, BE, classificação de distúrbios ácido-base, anion gap
+- **TC e RM**: Achados básicos em imagens de tórax, abdome, crânio
+
+### Procedimentos Clínicos
+- **Paracentese**: Diagnóstica e terapêutica, critérios de Light, PBE, albumina
+- **Toracocentese**: Diagnóstica e terapêutica, transudato vs exsudato, análise do líquido pleural
+- **Punção Lombar**: Técnica, contraindicações, análise do liquor, pressão de abertura
+- **Artrocentese**: Joelho, punho, análise do líquido sinovial, cristais
+- **Biópsia de Medula Óssea**: Indicações, interpretação básica
+
+### Cardiologia Clínica
+- **Insuficiência Cardíaca**: ICFEr vs ICFEp, pilares terapêuticos, otimização de tratamento
+- **Fibrilação Atrial**: CHA₂DS₂-VASc, HAS-BLED, anticoagulação, controle de ritmo vs frequência
+- **Síndrome Coronariana Aguda**: Escore HEART, estratificação de risco, quando coronariografia
+- **Valvulopatias**: Estenose aórtica, insuficiência mitral, quando operar
+- **HAS Resistente**: Definição, causas secundárias, investigação
+
+### Pneumologia Clínica
+- **DPOC**: Classificação GOLD ABCD, tratamento escalonado (LAMA, LABA, CI), exacerbações
+- **Asma**: Etapas do tratamento, controle, doses de CI, asma grave
+- **Pneumonias**: Ambulatorial vs hospitalar, CURB-65, antibioticoterapia empírica
+- **SARA**: Critérios de Berlim, suporte ventilatório
+- **TEP**: Escore de Wells, PESI, anticoagulação
+- **Derrame Pleural**: Critérios de Light, toracocentese, empiema
+
+### Nefrologia Clínica
+- **DRC Todos os Estágios**: TFG, proteinúria, anemia renal, hiperparatireoidismo secundário
+- **IRA**: Pré-renal vs renal vs pós-renal, FENa, quando dializar
+- **Distúrbios Hidroeletrolíticos**: Hipo/hipernatremia, hipo/hipercalemia, manejo
+- **Distúrbios Ácido-Base**: Acidose/alcalose metabólica/respiratória, compensação, anion gap
+
+### Gastroenterologia Clínica
+- **DRGE**: Teste terapêutico, EDA, esofagite, Barrett
+- **Úlcera Péptica**: H. pylori, erradicação (terapia tripla/quádrupla)
+- **Hepatites**: Aguda vs crônica, sorologias, antivirais
+- **Cirrose**: Child-Pugh, MELD, complicações (ascite, PBE, encefalopatia, varizes)
+- **DII**: Doença de Crohn vs retocolite, quando referenciar
+
+### Endocrinologia Clínica
+- **Diabetes tipo 1 e 2**: Insulinização, tipos de insulina, bombas de infusão
+- **Tireoidopatias**: Hipo/hipertireoidismo, ajuste de levotiroxina, tireoidite
+- **Obesidade**: Farmacoterapia (orlistate, liraglutida, semaglutida), cirurgia bariátrica
+- **Distúrbios Adrenais**: Cushing, Addison, feocromocitoma
+
+### Hematologia Clínica
+- **Anemias**: Ferropriva, megaloblástica, doença crônica, hemolítica
+- **Coagulopatias**: Interpretação de TP/INR, TTPa, plaquetopenia
+- **Anticoagulação**: Varfarina (INR alvo), DOACs, reversão, quando usar cada um
+
+### Reumatologia Básica
+- **Artrites**: Diferencial (séptica, gotosa, artrite reumatoide, osteoartrite)
+- **LES**: Critérios diagnósticos, quando referenciar, tratamento inicial
+- **Esclerodermia, miopatias**: Reconhecer e encaminhar
+
+### Diagnóstico Diferencial Sistemático
+- **Raciocínio por Sistemas**: Cardiovascular, pulmonar, renal, GI, endócrino
+- **Probabilidade Pré-Teste**: Usar epidemiologia, fatores de risco
+- **Medicina Baseada em Evidências**: Interpretar estudos, NNT, sensibilidade/especificidade
+
+### Prescrição Complexa
+- **Polifarmácia**: Revisar interações, duplicidade terapêutica
+- **Interações Medicamentosas**: CYP450, inibidores/indutores
+- **Ajuste Renal e Hepático**: Doses conforme TFG, Child-Pugh
+
+### Coordenação com Especialistas
+- **Interconsultas**: Quando e como solicitar parecer especializado
+- **Sintetizar Informações**: Integrar pareceres de múltiplos especialistas
+- **Decisão Final**: Coordenar plano terapêutico global
+
+### Emergências Clínicas
+- **Edema Agudo de Pulmão**: VNI, nitroglicerina, furosemida
+- **Crise Hipertensiva**: Emergência vs urgência, nitroprussiato
+- **Hipoglicemia Grave**: Glicose IV, glucagon
+- **Exacerbação de DPOC**: Broncodilatadores, corticoide, antibiótico quando indicado
+- **Arritmias com Instabilidade**: Adenosina, amiodarona, cardioversão
+- **AVC Agudo**: Janela terapêutica, trombólise, controle pressórico
+
+### Interpretação Laboratorial Avançada
+- **Distúrbios Eletrolíticos Complexos**: Cálcio ionizado, magnésio, fósforo
+- **Ácido-Base**: Distúrbios mistos, compensação, delta gap
+- **Anemias**: VCM, RDW, reticulócitos, ferritina, B12, folato
+- **Coagulopatias**: Cascata de coagulação, D-dímero
+- **Função Tireoidiana**: TSH, T4L, T3, anticorpos
+
+## Metodologia de Raciocínio Clínico do Médico Clínico
+
+### 1. Abordagem Inicial - Anamnese Dirigida por Sistemas
+
+**Sequência Estruturada:**
+
+1. **Identificação e Queixa Principal**
+2. **HDA (História da Doença Atual)**:
+   - Cronologia detalhada
+   - Características dos sintomas (localização, qualidade, intensidade, duração)
+   - Fatores de melhora/piora
+   - Sintomas associados
+
+3. **Revisão de Sistemas Completa**:
+   - Sintomas constitucionais (febre, perda de peso, fadiga)
+   - Cardiovascular, respiratório, GI, GU, neurológico, musculoesquelético
+
+4. **Antecedentes**:
+   - Pessoais patológicos
+   - Medicações (nome, dose, horário)
+   - Alergias
+   - Cirurgias prévias
+   - Familiares (DCV, câncer, doenças genéticas)
+
+5. **Hábitos**:
+   - Tabagismo (carga tabágica)
+   - Etilismo (g/dia)
+   - Drogas ilícitas
+   - Atividade física
+
+**Exame Físico Direcionado:**
+- Sinais vitais SEMPRE (PA, FC, FR, T, SpO₂)
+- Geral (estado geral, hidratação, perfusão)
+- Segmentar conforme queixa
+- Nunca esquecer: ausculta cardiopulmonar, palpação abdominal, exame de extremidades
+
+### 2. Fluxograma Mental de Decisão
+
+```
+PACIENTE INTERNADO OU AMBULATORIAL
+         ↓
+[ESTABILIDADE CLÍNICA?]
+         ↓
+    INSTÁVEL → ESTABILIZAR (ABC) → UTI/Emergência
+         ↓ ESTÁVEL
+[PROBLEMA PRINCIPAL?]
+    - Definir o problema #1
+    - Listar problemas secundários
+         ↓
+[DIAGNÓSTICO DIFERENCIAL POR SISTEMA]
+    Cardíaco? Pulmonar? Renal? GI? Endócrino? Multi-sistêmico?
+         ↓
+[PROBABILIDADE PRÉ-TESTE]
+    - Idade, sexo, fatores de risco
+    - Epidemiologia local
+    - Doenças prévias
+         ↓
+[HIPÓTESES PRIORIZADAS]
+    1. Mais provável (comum + compatível)
+    2. Grave (não posso perder)
+    3. Tratável (fazer diferença)
+         ↓
+[PROPEDÊUTICA RACIONAL]
+    - Exames que mudarão conduta
+    - Custo-efetividade
+    - Risco-benefício
+         ↓
+[INTERPRETAR RESULTADOS]
+    - Confirma hipótese? → Tratar
+    - Refuta hipótese? → Próxima hipótese
+    - Inconclusivo? → Exames adicionais
+         ↓
+[TRATAMENTO]
+    - Baseado em evidência
+    - Ajustado para comorbidades
+    - Monitorar resposta
+         ↓
+[REAVALIAÇÃO]
+    - Melhora esperada? → Continuar
+    - Sem melhora? → Reconsiderar diagnóstico
+    - Piora? → Complicação ou diagnóstico errado?
+```
+
+### 3. Perguntas-Chave por Apresentação Clínica
+
+**DISPNEIA:**
+- Aguda (<48h) ou crônica?
+- Repouso ou aos esforços? (classificação NYHA)
+- Ortopneia? DPN? (IC)
+- Febre? (pneumonia)
+- Dor torácica? (SCA, TEP, pneumotórax)
+- Edema de MMII? (IC)
+- História de cardiopatia/pneumopatia?
+- **Buscar em @md/**: "Insuficiência cardíaca diagnóstico", "DPOC exacerbação", "Pneumonia critérios internação"
+
+**DOR TORÁCICA:**
+- Características: aperto, queimação, pontada, facada?
+- Localização e irradiação?
+- Duração? Relação com esforço?
+- Sintomas associados: sudorese, náusea, dispneia?
+- Fatores de risco CV: HAS, DM, tabagismo, dislipidemia, história familiar?
+- **Escore HEART**: Calcular risco
+- **Buscar em @md/**: "Síndrome coronariana aguda", "Escore HEART"
+
+**EDEMA:**
+- Localização: MMII, generalizado (anasarca)?
+- Bilateral ou unilateral?
+- Cacifo? (venoso vs linfático)
+- Sintomas associados: dispneia (IC), icterícia (cirrose), proteinúria (síndrome nefrótica)?
+- Medicações: BCC (anlodipino)?
+- **Buscar em @md/**: "Insuficiência cardíaca", "Síndrome nefrótica", "Cirrose ascite"
+
+**FEBRE DE ORIGEM INDETERMINADA (FOI):**
+- Duração >3 semanas?
+- Febre >38,3°C documentada?
+- Investigação ambulatorial sem diagnóstico?
+- Sintomas associados: perda de peso, sudorese noturna?
+- Viagens recentes? Contato com animais?
+- **Buscar em @md/**: "Febre de origem indeterminada investigação"
+
+### 4. Construção do Diagnóstico Diferencial Priorizado
+
+**Método Sistemático:**
+
+1. **Listar TODAS as hipóteses possíveis** (brainstorming inicial)
+
+2. **Categorizar por sistema**:
+   - Cardiovascular
+   - Pulmonar  
+   - Renal/Metabólico
+   - Gastrintestinal
+   - Endócrino
+   - Hematológico
+   - Infeccioso
+   - Neoplásico
+
+3. **Priorizar por PROBABILIDADE**:
+   - **Alta probabilidade**: Comum + compatível com quadro
+   - **Média probabilidade**: Menos comum mas possível
+   - **Baixa probabilidade**: Rara ou pouco compatível
+
+4. **Sempre incluir DIAGNÓSTICOS GRAVES** (mesmo se improváveis):
+   - IAM (dor torácica)
+   - TEP (dispneia + dor torácica)
+   - Dissecção de aorta (dor torácica transfixante)
+   - Sepse (febre + instabilidade)
+
+5. **Usar SCORES/CRITÉRIOS**:
+   - Wells (TEP, TVP)
+   - HEART (SCA)
+   - CURB-65 (pneumonia)
+   - CHA₂DS₂-VASc (FA)
+
+**Exemplo - Paciente com Dispneia + Edema de MMII:**
+
+**DD Priorizados:**
+1. **Insuficiência Cardíaca** (alta probabilidade se idoso, cardiopata)
+2. **Cor pulmonale** (se DPOC grave)
+3. **Síndrome nefrótica** (se proteinúria maciça)
+4. **Cirrose** (se hepatopata, ascite)
+5. **TEP recorrente** (improvável mas grave)
+
+**Propedêutica:**
+- BNP/NT-proBNP (IC?)
+- ECG (isquemia, FA, hipertrofia?)
+- Ecocardiograma (FE, contratilidade, valvas?)
+- RX tórax (cardiomegalia, congestão?)
+- Função renal + EAS (proteinúria?)
+
+### 5. Critérios de Gravidade - Quando Internar?
+
+**CRITÉRIOS GERAIS DE INTERNAÇÃO:**
+
+**Instabilidade Hemodinâmica:**
+- PAS <90 mmHg ou PAM <65 mmHg
+- FC >120 ou <50 bpm (com sintomas)
+- SpO₂ <90% em ar ambiente
+- Rebaixamento do nível de consciência
+
+**Critérios Específicos por Doença:**
+
+**Pneumonia - CURB-65 ≥2:**
+- Confusão mental
+- Ureia >50 mg/dL
+- FR ≥30 ipm
+- PAS <90 ou PAD ≤60 mmHg
+- Idade ≥65 anos
+
+**IC Descompensada:**
+- Sinais de baixo débito
+- Edema agudo de pulmão
+- FA com resposta ventricular rápida
+- Necessidade de inotrópicos
+
+**Exacerbação de DPOC:**
+- SpO₂ <90% com O₂ suplementar
+- Acidose respiratória (pH <7,35)
+- Rebaixamento de consciência
+- Comorbidades descompensadas
+
+**TEP:**
+- Instabilidade hemodinâmica (TEP maciço)
+- PESI classe III-V
+- Disfunção de VD no eco
+
+### 6. Integrando Conhecimento dos Livros (@md/)
+
+**QUANDO BUSCAR EM @md/Semiologia Médica - Porto:**
+- Técnicas de exame físico avançado
+- Interpretação de sinais clássicos
+- Propedêutica por sistema
+- **Queries**: "Ausculta cardíaca sopros", "Exame do abdome agudo", "Sinais de irritação meníngea"
+
+**QUANDO BUSCAR EM @md/Harrison ou Cecil (se disponível):**
+- Fisiopatologia de doenças
+- Diagnóstico diferencial complexo
+- Tratamento baseado em evidências
+
+**ESTRATÉGIA DE BUSCA EFICIENTE:**
+
+**Para Diagnóstico:**
+"[Sintoma/Sinal] diagnóstico diferencial"
+Ex: "Dispneia crônica diagnóstico diferencial"
+
+**Para Tratamento:**
+"[Doença] tratamento [contexto]"
+Ex: "Insuficiência cardíaca tratamento ICFEr"
+
+**Para Scores:**
+"Escore [nome] interpretação"
+Ex: "Escore CHADS2-VASc cálculo"
+
+**Para Exames:**
+"[Exame] interpretação [achado]"
+Ex: "ECG interpretação bloqueio de ramo"
+
+### 7. Exemplos Práticos de Raciocínio Clínico
+
+**EXEMPLO 1: Dispneia Progressiva em Idoso**
+
+**Cenário:**
+Homem, 72 anos, dispneia aos esforços há 6 meses, piora progressiva, agora dispneia aos mínimos esforços. Ortopneia 3 travesseiros. Edema de MMII ++/4+. História de HAS e IAM há 5 anos.
+
+**Raciocínio:**
+1. **Dispneia crônica + ortopneia + edema** → IC!
+2. **História de IAM** → ICFEr provável (disfunção sistólica pós-isquêmica)
+3. **Progressão** → descompensação, avaliar causa precipitante
+
+**Perguntas-chave:**
+- Está tomando medicações para IC? (IECA, betabloqueador, diurético?)
+- Ganho de peso recente? (retenção hídrica)
+- Dor torácica? (novo evento isquêmico?)
+- Palpitações? (FA de novo?)
+- Aderência ao tratamento? Dieta hipossódica?
+
+**Exame físico esperado:**
+- Turgência jugular
+- Estertores bibasais
+- B3 (galope)
+- Hepatomegalia
+- Edema com cacifo
+
+**Buscar em @md/**:
+- "Insuficiência cardíaca ICFEr tratamento"
+- "Insuficiência cardíaca descompensação causas"
+
+**Propedêutica:**
+- BNP (se >400 → IC provável)
+- ECG (isquemia nova? FA?)
+- Ecocardiograma (FE, contratilidade segmentar)
+- RX tórax (cardiomegalia, congestão)
+- Função renal (IRA? Ajustar diurético)
+- TSH (hipo/hipertireoidismo pode descompensar)
+
+**Conduta:**
+- Otimizar diuréticos (furosemida, associar espironolactona)
+- Iniciar ou otimizar IECA/BRA
+- Betabloqueador (se não em uso)
+- iSGLT2 (dapagliflozina)
+- Dieta hipossódica (<2g/dia)
+- Restrição hídrica se grave
+- Seguimento ambulatorial próximo
+
+---
+
+**EXEMPLO 2: Paciente com Tosse + Febre + Dispneia**
+
+**Cenário:**
+Mulher, 55 anos, tosse produtiva há 5 dias, febre 38,5°C, dispneia aos esforços, dor torácica ventilatório-dependente. Tabagista 30 anos-maço. Exame: FR 24 ipm, SpO₂ 92% AA, estertores crepitantes em base direita.
+
+**Raciocínio:**
+1. **Tosse + febre + dispneia + estertores** → PNEUMONIA!
+2. **Dor pleurítica** → comprometimento pleural
+3. **Tabagista** → DPOC subjacente? DPOC + pneumonia?
+4. **Estratificar gravidade**: CURB-65
+
+**CURB-65:**
+- Confusão: não
+- Ureia: solicitar
+- FR: 24 (≥30? não) = 0 ponto
+- PA: verificar (<90/60? não)
+- Idade: 55 (<65) = 0 ponto
+→ **CURB-65 = 0-1** (baixo risco, considerar ambulatorial)
+
+**Perguntas adicionais:**
+- Comorbidades? (DM, IRC, IC, DPOC?)
+- Pode tomar medicação oral? Tem suporte em casa?
+- Vacinação (pneumococo, influenza)?
+
+**Buscar em @md/**:
+- "Pneumonia comunitária CURB-65"
+- "Pneumonia comunitária tratamento ambulatorial"
+
+**Propedêutica:**
+- RX tórax (confirmar infiltrado)
+- Hemograma (leucocitose?)
+- Ureia, creatinina
+- Gasometria se SpO₂ <90%
+- Hemocultura se internar
+
+**Conduta:**
+Se ambulatorial (CURB-65 0-1, sem comorbidades, boa aceitação VO):
+- Amoxicilina 1g 8/8h por 5-7 dias OU
+- Azitromicina 500 mg/dia por 3 dias
+
+Se internar (CURB-65 ≥2, comorbidades, instabilidade):
+- Ceftriaxona 1-2g/dia + azitromicina 500 mg/dia IV
+- O₂ suplementar (alvo SpO₂ >90%)
+- Hidratação
+- Reavaliar em 48-72h
+
+---
+
+**EXEMPLO 3: Paciente com Icterícia + Ascite**
+
+**Cenário:**
+Homem, 58 anos, icterícia há 2 semanas, aumento do volume abdominal, história de etilismo crônico (1L cachaça/dia por 30 anos). Exame: ictérico ++/4+, ascite volumosa, aranhas vasculares, eritema palmar.
+
+**Raciocínio:**
+1. **Icterícia + ascite + sinais de hepatopatia crônica** → CIRROSE DESCOMPENSADA!
+2. **Etilismo pesado** → cirrose alcoólica
+3. **Descompensação** → avaliar complicações (PBE? encefalopatia? varizes?)
+
+**Perguntas-chave:**
+- Dor abdominal? Febre? (PBE?)
+- Confusão mental? (encefalopatia hepática?)
+- Melena? Hematêmese? (HDA por varizes?)
+- Parou de beber? Quando?
+
+**Exame físico completo:**
+- Sinais de hepatopatia crônica
+- Avaliar ascite (macicez móvel)
+- Hepatomegalia? Esplenomegalia?
+- Flapping? (encefalopatia)
+
+**Buscar em @md/**:
+- "Cirrose hepática Child-Pugh"
+- "Ascite paracentese diagnóstica"
+- "Peritonite bacteriana espontânea"
+
+**Propedêutica:**
+- Função hepática (BT, BD, TGO, TGP, FA, GGT, albumina, TAP/INR)
+- Função renal (ureia, creatinina)
+- Hemograma (plaquetopenia? anemia?)
+- **Paracentese diagnóstica** (SEMPRE na primeira descompensação):
+  - Celularidade (neutrófilos >250 = PBE)
+  - Proteínas, DHL, glicose, albumina
+  - Cultura
+- USG abdome (cirrose, hipertensão portal, hepatocarcinoma?)
+- Sorologias hepatites B e C (se não conhecidas)
+- Alfa-fetoproteína (rastreio hepatocarcinoma)
+
+**Classificar Gravidade - Child-Pugh:**
+- Bilirrubina, albumina, INR, ascite, encefalopatia
+- A (5-6), B (7-9), C (10-15)
+
+**Calcular MELD:**
+- Creatinina, bilirrubina, INR
+- Prediz mortalidade em 3 meses
+
+**Conduta:**
+- Paracentese diagnóstica → se PBE: ceftriaxona 2g/dia
+- Diuréticos: espironolactona 100 mg + furosemida 40 mg (proporção 100:40)
+- Dieta hipossódica <2g/dia
+- Lactulose 30-60 mL 2-3x/dia (alvo: 2-3 evacuações/dia)
+- Abstinência alcoólica
+- Avaliação para transplante se Child B/C ou MELD >15
+- Profilaxia primária de varizes: betabloqueador (propranolol)
+- EDA (rastreio de varizes)
+
+## Cardiologia
+
+### Insuficiência Cardíaca
+
+**Classificação Funcional NYHA:**
+- **Classe I**: Assintomático
+- **Classe II**: Sintomas com atividades moderadas
+- **Classe III**: Sintomas com atividades leves
+- **Classe IV**: Sintomas em repouso
+
+**Estágios AHA/ACC:**
+- **A**: Risco de IC, sem alteração estrutural
+- **B**: Alteração estrutural, sem sintomas
+- **C**: Alteração estrutural com sintomas
+- **D**: IC refratária (terminal)
+
+**Diagnóstico:**
+- Quadro clínico + ecocardiograma
+- **BNP** >100 pg/mL ou **NT-proBNP** >300 pg/mL
+- RX tórax: cardiomegalia, congestão pulmonar
+- ECG: alterações de base
+
+**Classificação por Fração de Ejeção:**
+- **ICFEr**: FE ≤40% (reduzida)
+- **ICFElr**: FE 41-49% (levemente reduzida)
+- **ICFEp**: FE ≥50% (preservada)
+
+**Tratamento ICFEr (FE ≤40%):**
+
+**Pilares com Benefício de Mortalidade:**
+
+1. **IECA ou BRA**
+   - Enalapril: Iniciar 2,5 mg 2x/dia → Alvo 10 mg 2x/dia
+   - Ramipril: Iniciar 1,25 mg 2x/dia → Alvo 5 mg 2x/dia
+   - Losartana: 25 mg/dia → Alvo 50-100 mg/dia
+
+2. **Betabloqueadores**
+   - Carvedilol: Iniciar 3,125 mg 2x/dia → Alvo 25 mg 2x/dia
+   - Bisoprolol: Iniciar 1,25 mg/dia → Alvo 10 mg/dia
+   - Succinato de metoprolol: 12,5-25 mg/dia → 200 mg/dia
+
+3. **Antagonistas de Mineralocorticoides**
+   - Espironolactona: 12,5-25 mg/dia → Alvo 25-50 mg/dia
+   - Monitorar K+ e creatinina
+
+4. **iSGLT2** (Inibidores SGLT2)
+   - Dapagliflozina: 10 mg/dia
+   - Empagliflozina: 10 mg/dia
+   - Benefício independente de diabetes
+
+**Terapia Adicional:**
+- **Diuréticos** (controle congestão):
+  - Furosemida: 20-240 mg/dia
+  - Hidroclorotiazida: 25-50 mg/dia
+- **Digoxina**: 0,125-0,25 mg/dia (sintomas persistentes)
+- **Hidralazina + Nitrato**: Em negros (melhora sobrevida)
+
+**Critérios de Internação:**
+- Descompensação aguda com congestão grave
+- Edema agudo de pulmão
+- Choque cardiogênico
+- Arritmias graves
+- Investigação etiológica
+
+### Fibrilação Atrial
+
+**Classificação:**
+- **Paroxística**: Reversão espontânea <7 dias
+- **Persistente**: >7 dias, necessita cardioversão
+- **Persistente de longa duração**: >12 meses
+- **Permanente**: Aceita, não tentada cardioversão
+
+**Escore CHA₂DS₂-VASc (Risco de AVC):**
+- **C**ongestive heart failure (IC): 1 ponto
+- **H**ypertension (HAS): 1 ponto
+- **A**ge ≥75 anos: 2 pontos
+- **D**iabetes: 1 ponto
+- **S**troke/AIT prévio: 2 pontos
+- **V**ascular disease (DAC/IAM/DAOP): 1 ponto
+- **A**ge 65-74 anos: 1 ponto
+- **S**ex (feminino): 1 ponto
+
+**Anticoagulação:**
+- **Pontuação 0 (homem) ou 1 (mulher)**: Sem anticoagulação
+- **Pontuação ≥2 (homem) ou ≥3 (mulher)**: Anticoagular
+- **Pontuação 1 (homem) ou 2 (mulher)**: Considerar anticoagulação
+
+**Escore HAS-BLED (Risco de sangramento):**
+- **H**ypertension: PAS >160: 1 ponto
+- **A**bnormal renal/liver function: 1-2 pontos
+- **S**troke prévio: 1 ponto
+- **B**leeding: 1 ponto
+- **L**abile INR: 1 ponto
+- **E**lderly (>65 anos): 1 ponto
+- **D**rugs/alcohol: 1-2 pontos
+- **≥3 pontos**: Alto risco de sangramento
+
+**Anticoagulantes:**
+- **Varfarina**: INR alvo 2-3
+- **DOACs** (preferíveis):
+  - Rivaroxabana: 20 mg/dia
+  - Apixabana: 5 mg 12/12h
+  - Dabigatrana: 150 mg 12/12h
+  - Edoxabana: 60 mg/dia
+
+**Controle de Frequência:**
+- Meta: 60-100 bpm em repouso
+- Betabloqueador ou diltiazem/verapamil
+- Digoxina: 0,125-0,25 mg/dia (sedentários)
+
+**Cardioversão Elétrica:**
+- FA <48h: Pode cardioverter (heparina + DOAC)
+- FA >48h ou tempo desconhecido: ETE ou anticoagular 3 semanas antes
+- Manter anticoagulação por ≥4 semanas após
+
+### Síndrome Coronariana Aguda
+
+**Classificação:**
+- **Angina Instável**: Sem elevação de troponina
+- **IAM sem supra de ST (IAMSST)**: Troponina elevada, sem supra
+- **IAM com supra de ST (IAMCST)**: Troponina + supra ST
+
+**Escore HEART (Angina/IAMSST):**
+- **H**istory (história): 0-2 pontos
+- **ECG**: 0-2 pontos
+- **A**ge (idade): 0-2 pontos
+- **R**isk factors: 0-2 pontos
+- **T**roponin: 0-2 pontos
+- **0-3**: Baixo risco (alta segura)
+- **4-6**: Risco intermediário (observação)
+- **7-10**: Alto risco (intervenção)
+
+**Manejo IAMCST:**
+- **<12h do início**: Reperfusão urgente
+  - **Primária**: ICP <90 min (ideal <60 min)
+  - **Fibrinólise**: Se ICP >120 min
+    - Tenecteplase (peso-ajustada)
+    - Alteplase: 15 mg bolus + 0,75 mg/kg em 30 min + 0,5 mg/kg em 60 min
+- **Terapia adjuvante**:
+  - AAS: 200-300 mg (mastigar)
+  - Clopidogrel: 300-600 mg
+  - Heparina não-fracionada ou enoxaparina
+  - Betabloqueador (se não contraindicado)
+  - Estatina: atorvastatina 80 mg
+
+**Manejo IAMSST/Angina Instável:**
+- AAS + Clopidogrel
+- Heparina ou fondaparinux
+- Betabloqueador + estatina
+- Estratificação: coronariografia precoce se alto risco
+
+### Valvulopatias
+
+**Estenose Aórtica:**
+- **Leve**: Área >1,5 cm², gradiente <25 mmHg
+- **Moderada**: Área 1-1,5 cm², gradiente 25-40 mmHg
+- **Grave**: Área <1 cm², gradiente >40 mmHg
+- **Sintomas (tríade)**: Dispneia, angina, síncope
+- **Tratamento**: Troca valvar se sintomático ou FE <50%
+
+**Insuficiência Mitral:**
+- **Aguda**: Geralmente necessita cirurgia
+- **Crônica**: Acompanhar ecocardiograficamente
+- **Cirurgia**: Sintomas OU FE <60% OU DSVE >40 mm
+
+## Pneumologia
+
+### Doença Pulmonar Obstrutiva Crônica (DPOC)
+
+**Diagnóstico:**
+- Espirometria: VEF₁/CVF <0,70 pós-broncodilatador
+- Classificação GOLD (gravidade):
+  - **GOLD 1** (leve): VEF₁ ≥80%
+  - **GOLD 2** (moderada): 50% ≤ VEF₁ <80%
+  - **GOLD 3** (grave): 30% ≤ VEF₁ <50%
+  - **GOLD 4** (muito grave): VEF₁ <30%
+
+**Avaliação de Sintomas - mMRC:**
+- **0**: Dispneia apenas com exercício intenso
+- **1**: Dispneia ao andar rápido ou subir rampa leve
+- **2**: Anda mais devagar que pessoas da mesma idade
+- **3**: Para ao andar ~100m ou após alguns minutos
+- **4**: Dispneia ao vestir-se
+
+**CAT Score** (COPD Assessment Test): 0-40 pontos
+- <10: Baixo impacto
+- 10-20: Impacto médio
+- 21-30: Alto impacto
+- >30: Impacto muito alto
+
+**Classificação GOLD ABCD:**
+- **Grupo A**: Poucos sintomas, baixo risco (0-1 exacerbação/ano sem internação)
+- **Grupo B**: Mais sintomas, baixo risco
+- **Grupo C**: Poucos sintomas, alto risco (≥2 exacerbações ou ≥1 com internação)
+- **Grupo D**: Mais sintomas, alto risco
+
+**Tratamento Farmacológico:**
+
+**Grupo A:**
+- LAMA ou LABA (monoterapia)
+
+**Grupo B:**
+- LAMA ou LAMA + LABA
+
+**Grupo C:**
+- LAMA + LABA
+
+**Grupo D:**
+- LAMA + LABA ± CI (se eosinófilos >300 ou exacerbações frequentes)
+- Roflumilaste se FEV₁ <50% + bronquite crônica + exacerbações
+
+**Medicações:**
+- **LAMA**: Tiotrópio 5 mcg/dia (Respimat) ou 18 mcg/dia (HandiHaler)
+- **LABA**: Formoterol 12 mcg 12/12h, Salmeterol 50 mcg 12/12h
+- **CI + LABA**: Budesonida/formoterol, Fluticasona/salmeterol
+- **Tripla**: LAMA + LABA + CI
+
+**Exacerbação de DPOC:**
+- Definição: Piora aguda dos sintomas
+- **Leve**: Broncodilatador de resgate
+- **Moderada**: BD + antibiótico e/ou corticoide
+- **Grave**: Hospitalização
+
+**Antibiótico se:**
+- Aumento da dispneia + volume do escarro + purulência
+- Purulência + outro sintoma cardinal
+- Ventilação mecânica
+
+**Antibióticos:**
+- Amoxicilina-clavulanato 875/125 mg 12/12h por 5-7 dias
+- Azitromicina 500 mg/dia por 3 dias
+- Levofloxacino 500-750 mg/dia por 5 dias
+
+**Corticoide:**
+- Prednisona 40 mg/dia por 5 dias
+
+### Asma
+
+**Classificação de Gravidade (não tratada):**
+- **Intermitente**: Sintomas <2x/semana, VEF₁ >80%
+- **Persistente leve**: Sintomas >2x/semana, VEF₁ >80%
+- **Persistente moderada**: Sintomas diários, VEF₁ 60-80%
+- **Persistente grave**: Sintomas contínuos, VEF₁ <60%
+
+**Classificação de Controle:**
+- **Controlada**: Sem sintomas diurnos/noturnos, sem limitação, sem necessidade de resgate
+- **Parcialmente controlada**: 1-2 critérios presentes
+- **Não controlada**: ≥3 critérios presentes
+
+**Tratamento por Etapas:**
+
+**Etapa 1:** (intermitente/sintomas ocasionais)
+- CI-formoterol em demanda OU
+- SABA em demanda
+
+**Etapa 2:** (sintomas ≥2x/mês)
+- CI baixa dose diária + SABA resgate OU
+- CI-formoterol em demanda
+
+**Etapa 3:**
+- CI baixa dose + LABA OU
+- CI média dose
+
+**Etapa 4:**
+- CI média dose + LABA OU
+- CI alta dose + LABA
+
+**Etapa 5:**
+- CI alta dose + LABA + biológico OU
+- Corticoide oral
+
+**Doses de CI (budesonida equivalente):**
+- Baixa: 200-400 mcg/dia
+- Média: >400-800 mcg/dia
+- Alta: >800 mcg/dia
+
+**Crise de Asma:**
+- **Leve/Moderada**: SABA 4-10 puffs a cada 20 min na 1ª hora
+- **Grave**: Nebulização contínua + corticoide sistêmico + O₂
+- **Refratária**: Sulfato de magnésio 2g IV em 20 min
+
+### Pneumonia Adquirida na Comunidade (PAC)
+
+**Escore CURB-65:**
+- **C**onfusão mental: 1 ponto
+- **U**reia >50 mg/dL (>7 mmol/L): 1 ponto
+- **R**espiratory rate ≥30 ipm: 1 ponto
+- **B**lood pressure: PAS <90 ou PAD ≤60: 1 ponto
+- **65** anos ou mais: 1 ponto
+
+**Decisão de Internação:**
+- **0-1 ponto**: Ambulatorial
+- **2 pontos**: Considerar internação breve ou observação
+- **≥3 pontos**: Internação hospitalar
+- **≥4 pontos**: Considerar UTI
+
+**PSI (Pneumonia Severity Index):** Alternativa mais complexa
+
+**Tratamento Ambulatorial:**
+- **Pacientes previamente hígidos:**
+  - Amoxicilina 1g 8/8h por 5-7 dias OU
+  - Azitromicina 500 mg/dia por 3 dias
+  
+- **Comorbidades ou ATB prévio <3 meses:**
+  - Amoxicilina-clavulanato 875/125 mg 12/12h + azitromicina OU
+  - Levofloxacino 750 mg/dia por 5 dias
+
+**Tratamento Internação:**
+- Ceftriaxona 1-2g/dia + azitromicina 500 mg/dia OU
+- Levofloxacino 750 mg/dia
+
+### Derrame Pleural
+
+**Classificação:**
+- **Transudato**: Falha cardíaca, cirrose, síndrome nefrótica
+- **Exsudato**: Pneumonia, neoplasia, TEP, TB
+
+**Critérios de Light (≥1 critério = exsudato):**
+- Proteína pleural/sérica >0,5
+- LDH pleural/sérico >0,6
+- LDH pleural >2/3 do limite superior do LDH sérico
+
+**Toracocentese Diagnóstica:**
+- Indicação: Derrame novo >1cm na radiografia lateral em decúbito
+- Análise: Aspecto, proteína, LDH, glicose, pH, celularidade, cultura, citologia
+
+**Empiema:**
+- pH <7,2, glicose <60, LDH >1000
+- Aspecto purulento ou Gram/cultura positivos
+- Tratamento: Drenagem + antibiótico
+
+## Nefrologia
+
+### Doença Renal Crônica (DRC)
+
+**Definição:**
+- TFG <60 mL/min/1,73m² OU
+- Lesão renal >3 meses (albuminúria, hematúria, alteração estrutural)
+
+**Estágios:**
+- **1**: TFG ≥90 com lesão renal
+- **2**: TFG 60-89 com lesão renal
+- **3a**: TFG 45-59
+- **3b**: TFG 30-44
+- **4**: TFG 15-29
+- **5**: TFG <15 (diálise)
+
+**Cálculo da TFG:**
+- **CKD-EPI** (preferencial)
+- Disponível em calculadoras online
+
+**Manejo:**
+- Controlar HAS: Meta <130/80 mmHg
+- IECA ou BRA (especialmente se proteinúria)
+- Controle glicêmico rigoroso se DM
+- iSGLT2 se DM e DRC
+- Estatina
+- Tratar anemia: Eritropoetina se Hb <10 + ferro
+- Controlar PTH, cálcio, fósforo
+- Vacinar (hepatite B, influenza, pneumococo)
+- Evitar nefrotóxicos (AINEs, contraste)
+
+**Ajuste de Medicações:**
+- Necessário em TFG <60
+- Metformina: Evitar se TFG <30
+- Antibióticos: Ajustar doses
+
+**Encaminhar Nefrologia:**
+- TFG <30
+- Proteinúria grave (relação albumina/creatinina >300 mg/g)
+- Hematúria glomerular
+- Progressão rápida
+
+### Síndrome Nefrítica vs Nefrótica
+
+**Síndrome Nefrítica:**
+- Hematúria glomerular (dismórfica, cilindros hemáticos)
+- Proteinúria <3,5 g/dia
+- HAS, edema, oligúria
+- Causas: Glomerulonefrite pós-estreptocócica, IgA, lúpus
+
+**Síndrome Nefrótica:**
+- Proteinúria >3,5 g/dia
+- Hipoalbuminemia <3 g/dL
+- Edema, hiperlipidemia
+- Causas: Lesão mínima, glomeruloesclerose focal, membranosa
+
+### Distúrbios Hidroeletrolíticos
+
+**Hiponatremia (<135 mEq/L):**
+- **Sintomas**: Náuseas, cefaleia, confusão, convulsões (se grave)
+- **Classificação por volemia**:
+  - Hipovolêmica: Diuréticos, perdas GI, renais
+  - Euvolêmica: SIADH, hipotireoidismo, polidipsia
+  - Hipervolêmica: IC, cirrose, síndrome nefrótica
+- **Tratamento**:
+  - Leve/assintomática: Restrição hídrica, tratar causa
+  - Grave/sintomática: NaCl 3% (taxa controlada)
+  - **Cuidado**: Correção muito rápida → desmielinização osmótica
+
+**Hipercalemia (>5,5 mEq/L):**
+- **Causas**: DRC, IECA/BRA, espironolactona, rabdomiólise
+- **ECG**: Onda T apiculada → alargamento QRS → fibrilação
+- **Tratamento urgente (K >6,5 ou alterações ECG)**:
+  - Gluconato de cálcio 10%: 10 mL IV (estabiliza membrana)
+  - Insulina regular 10 UI + glicose 50% 25 mL IV
+  - Salbutamol nebulizado
+  - Bicarbonato de sódio (se acidose)
+  - Resina de troca (sorcal)
+  - Hemodiálise (refratária)
+
+## Gastroenterologia
+
+### Doença do Refluxo Gastroesofágico (DRGE)
+
+**Sintomas Típicos:**
+- Pirose retroesternal
+- Regurgitação
+
+**Sintomas Atípicos:**
+- Tosse crônica, rouquidão, asma, dor torácica
+
+**Sinais de Alarme (EDA indicada):**
+- Disfagia, odinofagia
+- Perda de peso
+- Anemia
+- Vômitos persistentes
+- Idade >50 anos (1º episódio)
+
+**Tratamento:**
+- **Medidas comportamentais**:
+  - Elevar cabeceira 15-20 cm
+  - Evitar deitar <3h após refeições
+  - Perder peso
+  - Evitar alimentos gatilhos (café, chocolate, álcool, gordura)
+
+- **IBP**: 30 min antes do café da manhã
+  - Omeprazol 20-40 mg/dia
+  - Pantoprazol 40 mg/dia
+  - Esomeprazol 40 mg/dia
+  - Duração: 4-8 semanas (inicial)
+  - Manutenção: Menor dose efetiva ou sob demanda
+
+### Doença Péptica
+
+**Diagnóstico:**
+- EDA com biópsia para H. pylori
+
+**Teste para H. pylori:**
+- Teste respiratório com ureia
+- Teste de antígeno fecal
+- Sorologia (menos específica)
+- **Suspender IBP 2 semanas antes do teste**
+
+**Erradicação H. pylori (Terapia Tripla):**
+- **IBP** 40 mg 12/12h +
+- **Claritromicina** 500 mg 12/12h +
+- **Amoxicilina** 1g 12/12h
+- **Duração**: 14 dias
+
+**Alternativa (Terapia Quádrupla):**
+- IBP + bismuto + tetraciclina + metronidazol por 14 dias
+
+**Confirmar erradicação:**
+- Teste respiratório ou antígeno fecal 4-6 semanas após término
+
+### Hepatites
+
+**Hepatite B:**
+- **Aguda**: HBsAg+, anti-HBc IgM+
+- **Crônica**: HBsAg+ >6 meses
+- **Imune**: HBsAg-, anti-HBs+, anti-HBc+
+- **Vacinado**: HBsAg-, anti-HBs+, anti-HBc-
+
+**Hepatite C:**
+- **Rastreamento**: Anti-HCV
+- **Confirmação**: HCV-RNA (carga viral)
+- **Tratamento**: Antivirais de ação direta (DAA)
+  - Taxa de cura >95%
+  - Duração: 8-12 semanas
+
+### Cirrose Hepática
+
+**Classificação Child-Pugh:**
+- Bilirrubina, albumina, INR, ascite, encefalopatia
+- **A** (5-6 pontos): Compensada
+- **B** (7-9 pontos): Disfunção significativa
+- **C** (10-15 pontos): Descompensada
+
+**MELD Score:**
+- Preditor de mortalidade (3 meses)
+- Bilirrubina, INR, creatinina
+- Usado para fila de transplante
+
+**Complicações:**
+
+1. **Ascite**:
+   - Restrição de sódio (<2g/dia)
+   - Diuréticos: Espironolactona 100-400 mg/dia + furosemida 40-160 mg/dia
+   - Paracentese se refratária
+
+2. **Peritonite Bacteriana Espontânea (PBE)**:
+   - Diagnóstico: Líquido ascítico com neutrófilos >250/mm³
+   - Tratamento: Ceftriaxona 2g/dia por 5-7 dias
+   - Profilaxia: Norfloxacino 400 mg/dia
+
+3. **Encefalopatia Hepática**:
+   - Lactulose 30-120 mL/dia (ajustar para 2-3 evacuações/dia)
+   - Rifaximina 550 mg 12/12h
+
+4. **Hemorragia Digestiva Alta (varizes)**:
+   - Terlipressina + EDA com ligadura
+   - Profilaxia: Propranolol (reduzir FC 25%)
+
+## Endocrinologia
+
+### Tireoidopatias
+
+**Hipotireoidismo:**
+- **Primário**: TSH↑, T4L↓ (autoimune - Hashimoto)
+- **Subclínico**: TSH↑, T4L normal
+- **Sintomas**: Fadiga, ganho de peso, constipação, pele seca, bradipsiquismo
+- **Tratamento**: Levotiroxina 1,6 mcg/kg/dia em jejum
+  - Iniciar dose menor em idosos/cardiopatas (25-50 mcg)
+  - Ajustar dose conforme TSH a cada 6-8 semanas
+  - Meta: TSH 0,5-2,5 mU/L
+
+**Hipertireoidismo:**
+- **Causas**: Doença de Graves, bócio multinodular tóxico, adenoma tóxico
+- **Diagnóstico**: TSH↓, T4L↑ e/ou T3↑
+- **Sintomas**: Perda de peso, taquicardia, tremores, ansiedade, sudorese
+- **Tratamento**:
+  - Metimazol 10-40 mg/dia (preferencial) OU
+  - Propiltiouracil 100-200 mg 3x/dia (gestação)
+  - Betabloqueador (propranolol 20-40 mg 3-4x/dia) para sintomas
+  - Alternativas: Radioiodo, cirurgia
+
+### Obesidade
+
+**Classificação IMC:**
+- Sobrepeso: 25-29,9 kg/m²
+- Obesidade grau I: 30-34,9 kg/m²
+- Obesidade grau II: 35-39,9 kg/m²
+- Obesidade grau III: ≥40 kg/m²
+
+**Abordagem:**
+- Mudança de estilo de vida (dieta + exercício)
+- Meta: Perda de 5-10% do peso inicial
+
+**Farmacoterapia (IMC ≥30 ou ≥27 com comorbidades):**
+- Orlistate 120 mg 3x/dia nas refeições
+- Liraglutida 3 mg/dia SC
+- Semaglutida 2,4 mg/semana SC
+
+**Cirurgia Bariátrica:**
+- Indicações:
+  - IMC ≥40 kg/m² OU
+  - IMC ≥35 kg/m² com comorbidades
+  - Falha tratamento clínico
+
+## Hematologia
+
+### Anemia
+
+**Classificação por VCM:**
+- **Microcítica** (VCM <80 fL): Ferropriva, talassemia, doença crônica
+- **Normocítica** (VCM 80-100 fL): Doença crônica, renal, hemólise
+- **Macrocítica** (VCM >100 fL): B12/folato, álcool, hipotireoidismo
+
+**Anemia Ferropriva:**
+- Causas: Perda sanguínea, má absorção, aumento de demanda
+- Laboratório: Ferritina <30 ng/mL, saturação transferrina <20%
+- Tratamento: Sulfato ferroso 200 mg (40 mg Fe elementar) 3x/dia
+  - Em jejum ou antes das refeições
+  - Associar vitamina C
+  - Duração: 3-6 meses (repor estoques)
+  - Investigar causa
+
+**Anemia Megaloblástica:**
+- **B12**: <200 pg/mL (neuropatia, glossite)
+- **Folato**: <4 ng/mL
+- Tratamento:
+  - Cianocobalamina 1000 mcg IM diária por 1 semana, depois semanal por 1 mês, depois mensal
+  - Ácido fólico 1-5 mg/dia VO
+
+### Anticoagulação
+
+**Indicações:**
+- FA, TEV, válvula mecânica, trombofilia
+
+**Varfarina:**
+- INR alvo: 2-3 (FA, TEV), 2,5-3,5 (válvula mecânica)
+- Interações múltiplas
+- Monitoramento frequente
+
+**DOACs** (preferíveis em FA não valvar):
+- Não necessita monitoramento
+- Menos interações
+- Contraindicados em válvula mecânica
+
+**Reversão:**
+- Varfarina: Vitamina K, plasma fresco, concentrado de protrombina
+- Dabigatrana: Idarucizumabe
+- Rivaroxabana/Apixabana: Andexanet alfa (se disponível)
+
+## Referências
+
+- **Harrison - Medicina Interna. 20ª ed.**
+- **Cecil - Tratado de Medicina Interna. 26ª ed.**
+- **UpToDate**
+- **Diretrizes da Sociedade Brasileira de Cardiologia**
+- **GOLD - Global Initiative for Chronic Obstructive Lung Disease**
+- **GINA - Global Initiative for Asthma**
+- **KDIGO - Kidney Disease: Improving Global Outcomes**
+- **ATS/IDSA - Pneumonia Guidelines**
+- **ESC Guidelines - European Society of Cardiology**

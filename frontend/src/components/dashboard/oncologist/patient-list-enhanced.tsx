@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Patient } from '@/lib/api/patients';
 import { formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { Search, Filter, X, Calendar, Pill, AlertCircle } from 'lucide-react';
+import { ScoreBreakdownTooltip } from './score-breakdown-tooltip';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
@@ -12,6 +13,14 @@ interface PatientListEnhancedProps {
   patients: Patient[];
   onPatientClick: (patientId: string) => void;
   isLoading?: boolean;
+  externalFilters?: {
+    priority?: 'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW' | null;
+    minScore?: number;
+    hasAlerts?: boolean;
+    hasOverdueSteps?: boolean;
+    cancerType?: string;
+    journeyStage?: string;
+  };
 }
 
 type PriorityFilter = 'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW' | null;
@@ -23,14 +32,38 @@ export function PatientListEnhanced({
   patients,
   onPatientClick,
   isLoading,
+  externalFilters,
 }: PatientListEnhancedProps) {
   const [searchQuery, setSearchQuery] = useState('');
-  const [priorityFilter, setPriorityFilter] = useState<PriorityFilter>(null);
-  const [cancerTypeFilter, setCancerTypeFilter] = useState<CancerTypeFilter>(null);
-  const [journeyStageFilter, setJourneyStageFilter] = useState<JourneyStageFilter>(null);
+  const [priorityFilter, setPriorityFilter] = useState<PriorityFilter>(
+    externalFilters?.priority || null
+  );
+  const [cancerTypeFilter, setCancerTypeFilter] = useState<CancerTypeFilter>(
+    externalFilters?.cancerType || null
+  );
+  const [journeyStageFilter, setJourneyStageFilter] = useState<JourneyStageFilter>(
+    externalFilters?.journeyStage || null
+  );
   const [statusFilter, setStatusFilter] = useState<StatusFilter>(null);
-  const [hasAlertsFilter, setHasAlertsFilter] = useState(false);
+  const [hasAlertsFilter, setHasAlertsFilter] = useState(
+    externalFilters?.hasAlerts || false
+  );
+  const [hasOverdueStepsFilter, setHasOverdueStepsFilter] = useState(
+    externalFilters?.hasOverdueSteps || false
+  );
   const [showFilters, setShowFilters] = useState(false);
+  const [visibleCount, setVisibleCount] = useState(20); // Mostrar 20 pacientes por vez
+
+  // Atualizar filtros quando externalFilters mudar
+  useEffect(() => {
+    if (externalFilters) {
+      if (externalFilters.priority) setPriorityFilter(externalFilters.priority);
+      if (externalFilters.hasAlerts) setHasAlertsFilter(true);
+      if (externalFilters.hasOverdueSteps) setHasOverdueStepsFilter(true);
+      if (externalFilters.cancerType) setCancerTypeFilter(externalFilters.cancerType);
+      if (externalFilters.journeyStage) setJourneyStageFilter(externalFilters.journeyStage);
+    }
+  }, [externalFilters]);
 
   // Obter valores únicos para filtros
   const uniqueCancerTypes = useMemo(() => {
@@ -68,6 +101,11 @@ export function PatientListEnhanced({
         return false;
       }
 
+      // Filtro de score mínimo (para pacientes críticos)
+      if (externalFilters?.minScore !== undefined && (patient.priorityScore || 0) < externalFilters.minScore) {
+        return false;
+      }
+
       // Filtro de tipo de câncer
       if (cancerTypeFilter && patient.cancerType !== cancerTypeFilter) {
         return false;
@@ -88,6 +126,17 @@ export function PatientListEnhanced({
         return false;
       }
 
+      // Filtro de etapas atrasadas (por enquanto, apenas verifica se tem alertas de navegação)
+      // TODO: Adicionar informação de etapas atrasadas ao tipo Patient
+      if (hasOverdueStepsFilter) {
+        // Por enquanto, verificamos se tem alertas de navegação
+        // Isso será melhorado quando tivermos dados de etapas diretamente no paciente
+        const hasNavigationAlerts = (patient._count?.alerts || 0) > 0;
+        if (!hasNavigationAlerts) {
+          return false;
+        }
+      }
+
       return true;
     });
   }, [
@@ -98,6 +147,8 @@ export function PatientListEnhanced({
     journeyStageFilter,
     statusFilter,
     hasAlertsFilter,
+    hasOverdueStepsFilter,
+    externalFilters,
   ]);
 
   const getPriorityColor = (category: string | null | undefined) => {
@@ -324,7 +375,8 @@ export function PatientListEnhanced({
 
         {/* Contador de resultados */}
         <div className="text-sm text-gray-600">
-          Mostrando {filteredPatients.length} de {patients.length} pacientes
+          Mostrando {Math.min(visibleCount, filteredPatients.length)} de {filteredPatients.length} pacientes
+          {filteredPatients.length < patients.length && ` (${patients.length} total)`}
         </div>
       </div>
 
@@ -335,7 +387,8 @@ export function PatientListEnhanced({
             Nenhum paciente encontrado com os filtros aplicados
           </div>
         ) : (
-          filteredPatients.map((patient) => (
+          <>
+            {filteredPatients.slice(0, visibleCount).map((patient) => (
             <div
               key={patient.id}
               className={cn(
@@ -409,10 +462,13 @@ export function PatientListEnhanced({
 
                 {/* Informações de score e alertas */}
                 <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground pt-2 border-t border-gray-200">
-                  <span>
-                    Score: {patient.priorityScore}/100 (
-                    {patient.priorityCategory?.toUpperCase() || 'N/A'})
-                  </span>
+                  <div className="flex items-center gap-1">
+                    <span>
+                      Score: {patient.priorityScore}/100 (
+                      {patient.priorityCategory?.toUpperCase() || 'N/A'})
+                    </span>
+                    <ScoreBreakdownTooltip patient={patient} />
+                  </div>
                   {patient.lastInteraction && (
                     <span className="hidden sm:inline">
                       Última interação:{' '}
@@ -430,7 +486,20 @@ export function PatientListEnhanced({
                 </div>
               </div>
             </div>
-          ))
+          ))}
+          
+          {/* Botão "Carregar Mais" */}
+          {filteredPatients.length > visibleCount && (
+            <div className="flex justify-center pt-4">
+              <Button
+                variant="outline"
+                onClick={() => setVisibleCount(prev => Math.min(prev + 20, filteredPatients.length))}
+              >
+                Carregar mais ({filteredPatients.length - visibleCount} restantes)
+              </Button>
+            </div>
+          )}
+          </>
         )}
       </div>
     </div>

@@ -1,0 +1,886 @@
+---
+alwaysApply: false
+description: Template e guia para criar regras de especialidades médicas com raciocínio clínico estruturado
+---
+
+# Template: Regras de Especialidades Médicas
+
+## 📋 Introdução e Propósito
+
+Esta meta-regra documenta a estrutura padrão para criar regras de especialidades médicas no Cursor. É um **template vivo** que serve como:
+
+- **Guia estrutural** para criar novas especialidades
+- **Documentação** do padrão estabelecido
+- **Referência de qualidade** para manter consistência
+- **Ferramenta de validação** antes de finalizar uma regra
+
+### Quando Usar Esta Meta-Regra
+
+- Ao criar uma nova especialidade médica (ex: Cardiologia, Neurologia, Pediatria)
+- Para revisar e melhorar regras existentes
+- Para garantir consistência entre diferentes especialidades
+- Como referência ao expandir o conjunto de regras
+
+### Filosofia por Trás da Estrutura
+
+As regras de especialidades seguem três princípios fundamentais:
+
+1. **Raciocínio Clínico Explícito**: Não apenas "o que fazer", mas **como pensar** como aquele especialista
+2. **Integração com Conhecimento**: Orientar buscas eficientes em `@md/` para cada situação
+3. **Exemplos Práticos**: Casos reais que demonstram o raciocínio em ação
+
+---
+
+## 🏗️ Estrutura Completa (Template Anotado)
+
+### FRONTMATTER
+```yaml
+---
+alwaysApply: true
+---
+```
+**Todas as especialidades médicas devem ter `alwaysApply: true`** para estarem sempre ativas durante consultas médicas.
+
+---
+
+### 1. TÍTULO DA ESPECIALIDADE
+```markdown
+# [Nome da Especialidade]
+```
+**Exemplos:**
+- `# Medicina de Família e Comunidade`
+- `# Clínica Médica`
+- `# Cardiologia`
+- `# Neurologia`
+
+---
+
+### 2. TERMINOLOGIA ESPECÍFICA
+```markdown
+## Terminologia Específica
+
+- **Termo 1**: Definição concisa e clara
+- **Termo 2**: Definição concisa e clara
+- **Termo 3**: Definição concisa e clara
+```
+
+**Propósito:** Criar um glossário rápido de termos técnicos, acrônimos e jargões da especialidade.
+
+**Quantos termos incluir:** 10-30 termos essenciais
+
+**Boas práticas:**
+✓ Usar negrito no termo, definição após dois pontos
+✓ Ser conciso (1-2 linhas por definição)
+✓ Incluir acrônimos comuns da área
+✓ Focar em termos que aparecem frequentemente nos protocolos
+✓ Incluir sinais clássicos e scores importantes
+
+**Evitar:**
+✗ Definições longas e rebuscadas
+✗ Termos óbvios ou universais
+✗ Repetir o que será detalhado depois
+
+**Exemplo da Clínica Cirúrgica:**
+```markdown
+- **Abdome agudo**: Síndrome clínica de dor abdominal súbita que pode necessitar tratamento cirúrgico
+- **Sinal de Blumberg**: Descompressão brusca positiva (peritonite)
+- **Pneumoperitônio**: Ar livre na cavidade peritoneal (perfuração víscera oca)
+```
+
+---
+
+### 3. STACK DE HABILIDADES DO [ESPECIALISTA]
+```markdown
+## Stack de Habilidades do [Nome do Especialista]
+
+### [Categoria 1]
+- **Habilidade específica**: Descrição do que sabe fazer
+- **Habilidade específica**: Descrição do que sabe fazer
+
+### [Categoria 2]
+- **Habilidade específica**: Descrição do que sabe fazer
+- **Habilidade específica**: Descrição do que sabe fazer
+```
+
+**Propósito:** Documentar de forma completa e estruturada TODAS as competências do especialista.
+
+**Categorias Sugeridas (adaptar conforme especialidade):**
+
+1. **Habilidades Clínicas Essenciais** ou **Semiologia Avançada**
+   - Competências diagnósticas únicas
+   - Técnicas de exame físico especializadas
+
+2. **Procedimentos**
+   - Procedimentos diagnósticos
+   - Procedimentos terapêuticos
+   - Técnicas específicas
+
+3. **Interpretação de Exames**
+   - Exames de imagem
+   - Exames laboratoriais
+   - Exames funcionais
+
+4. **Manejo de Doenças/Condições Específicas**
+   - Por sistema (cardio, pulmonar, renal, etc.)
+   - Por gravidade (agudo vs crônico)
+   - Por complexidade
+
+5. **Competências Transversais**
+   - Comunicação
+   - Coordenação de cuidado
+   - Educação (paciente/família/equipe)
+   - Tomada de decisão complexa
+
+**Boas práticas:**
+✓ Ser específico e detalhado
+✓ Incluir níveis de complexidade quando relevante
+✓ Mencionar doses, técnicas, indicações
+✓ Organizar logicamente (do básico ao avançado)
+✓ 8-15 subseções é ideal
+
+**Evitar:**
+✗ Generalidades vagas
+✗ Habilidades óbvias de qualquer médico
+✗ Duplicação entre categorias
+
+**Exemplo do Intensivista:**
+```markdown
+### Ventilação Mecânica Avançada
+- **Programação Completa**: Todos os parâmetros (modo, VC/Pinsp, PEEP, FR, FiO₂, sensibilidade, tempo inspiratório)
+- **Todos os Modos Ventilatórios**: VCV, PCV, PSV, SIMV, PRVC, APRV
+- **Estratégia Protetora**: VC 6 mL/kg peso predito, Pplatô <30, driving pressure <15
+
+### Hemodinâmica e Choque
+- **Interpretação de Parâmetros**: PAM, DC/IC, PVC, pressão de pulso, ScvO₂, SvO₂
+- **Vasopressores (doses e indicações)**:
+  - **Noradrenalina**: 0,05-3 mcg/kg/min (1ª escolha em choque séptico)
+  - **Vasopressina**: 0,03-0,04 UI/min (dose fixa, poupe noradrenalina)
+```
+
+---
+
+### 4. METODOLOGIA DE RACIOCÍNIO CLÍNICO
+```markdown
+## Metodologia de Raciocínio Clínico do [Especialista]
+```
+
+**Esta é a seção MAIS IMPORTANTE da regra.** É aqui que você documenta **COMO o especialista pensa**, não apenas o que ele sabe.
+
+#### 4.1. Abordagem Inicial
+```markdown
+### 1. Abordagem Inicial ao Paciente
+
+**[Princípio Fundamental da Especialidade]**
+
+**Sequência Estruturada:**
+
+1. **Primeiro passo**:
+   - Detalhamento
+   
+2. **Segundo passo**:
+   - Detalhamento
+
+**[Se houver método específico (SOAP, ABCDE, etc.), detalhar aqui]**
+```
+
+**Propósito:** Documentar os primeiros passos sistemáticos que o especialista toma ao ver um paciente.
+
+**Boas práticas:**
+✓ Começar com princípio fundamental (ex: "Estabilizar antes de diagnosticar", "Suporte de órgãos, não cura")
+✓ Criar uma sequência clara e numerada
+✓ Incluir métodos estruturados se existirem (SOAP, ABCDE, etc.)
+✓ Ser prático e acionável
+
+**Exemplos por Especialidade:**
+- **Emergencista**: ABCDE (Airway, Breathing, Circulation, Disability, Exposure)
+- **Médico de Família**: SOAP (Subjetivo, Objetivo, Avaliação, Plano)
+- **Cirurgião**: Estabilidade → Tipo de abdome agudo → Cirúrgico vs Conservador
+- **Intensivista**: Revisão da admissão → Avaliação sistemática por órgãos
+
+---
+
+#### 4.2. Fluxograma Mental de Decisão
+```markdown
+### 2. Fluxograma Mental de Decisão
+
+\`\`\`
+SITUAÇÃO INICIAL
+         ↓
+[PRIMEIRA DECISÃO/BIFURCAÇÃO]
+         ↓
+    OPÇÃO A         OPÇÃO B
+         ↓               ↓
+[SEGUNDA DECISÃO]   [SEGUNDA DECISÃO]
+         ↓               ↓
+    CONDUTA A       CONDUTA B
+\`\`\`
+```
+
+**Propósito:** Criar uma árvore de decisão dinâmica que mostra o processo mental do especialista.
+
+**Características:**
+- Deve ser um fluxo **dinâmico** que muda conforme dados chegam
+- Usar [ ] para pontos de decisão
+- Usar → para fluxo
+- Usar ↓ para progressão vertical
+- Incluir 3-5 níveis de profundidade
+
+**Boas práticas:**
+✓ Começar com avaliação de gravidade/estabilidade
+✓ Incluir bifurcações importantes
+✓ Mostrar quando paralelo vs sequencial
+✓ Terminar com condutas/destinos claros
+
+**Exemplo do Emergencista:**
+```
+PACIENTE NA EMERGÊNCIA
+         ↓
+[TRIAGEM] → Manchester → Vermelho/Laranja/Amarelo
+         ↓
+[ABCDE - PRIMARY SURVEY]
+    Ameaça à vida? → SIM → Intervir IMEDIATAMENTE
+         ↓ NÃO (Estável)
+[PENSAR "WORST-CASE SCENARIO"]
+    - IAM? AVC? Dissecção? Sepse?
+         ↓
+[PROPEDÊUTICA RÁPIDA]
+    - ECG <10min, TC <25min, FAST
+         ↓
+[DECISÃO DE DESTINO]
+    Alta? Observação? Internação? UTI?
+```
+
+---
+
+#### 4.3. Perguntas-Chave por Cenário
+```markdown
+### 3. Perguntas-Chave por Cenário Clínico
+
+**[CENÁRIO 1 - QUEIXA/SITUAÇÃO COMUM]:**
+- Pergunta essencial 1? (por que é importante)
+- Pergunta essencial 2? (por que é importante)
+- Pergunta essencial 3? (por que é importante)
+- **Buscar em @md/**: "Query sugerida", "Outra query"
+
+**[CENÁRIO 2 - QUEIXA/SITUAÇÃO COMUM]:**
+- Pergunta essencial 1? (por que é importante)
+- Pergunta essencial 2? (por que é importante)
+```
+
+**Propósito:** Documentar as perguntas CRÍTICAS que o especialista sempre faz em cada situação.
+
+**Quantos cenários incluir:** 3-7 cenários mais comuns da especialidade
+
+**Estrutura de cada cenário:**
+1. Nome do cenário (negrito + caps)
+2. 5-10 perguntas essenciais
+3. Rationale entre parênteses quando não óbvio
+4. **Query sugerida** para buscar em @md/
+
+**Boas práticas:**
+✓ Focar nas 3-7 apresentações mais comuns
+✓ Perguntas que MUDAM a conduta
+✓ Incluir red flags a procurar
+✓ Mencionar o que as respostas sugerem
+✓ Sempre incluir sugestão de busca em @md/
+
+**Exemplo do Médico de Família:**
+```markdown
+**DISPNEIA:**
+- Início súbito ou progressivo? (agudo → IC, pneumonia, TEP; crônico → DPOC, asma)
+- Aos esforços ou repouso? (gravidade)
+- Ortopneia, DPN? (IC)
+- Febre, tosse produtiva? (pneumonia)
+- **Buscar em @md/**: "Insuficiência cardíaca diagnóstico", "DPOC exacerbação"
+```
+
+---
+
+#### 4.4. Construção do Diagnóstico Diferencial
+```markdown
+### 4. Construção do Diagnóstico Diferencial
+
+**[Método Específico da Especialidade]**
+
+1. **Estratégia específica**:
+   - Passo 1
+   - Passo 2
+   
+2. **Como priorizar**:
+   - Critério 1
+   - Critério 2
+
+[Incluir exemplo prático se útil]
+```
+
+**Propósito:** Ensinar o método sistemático para gerar e priorizar hipóteses diagnósticas.
+
+**Elementos essenciais:**
+- Método de geração de hipóteses (brainstorming, por sistema, por gravidade)
+- Critérios de priorização
+- Como usar probabilidade pré-teste
+- Exemplo prático (opcional mas recomendado)
+
+**Métodos por Especialidade:**
+
+**Médico de Família:** VINDICATE (Vascular, Inflamatório, Neoplásico, Degenerativo, Iatrogênico, Congênito, Autoimune, Traumático, Endócrino)
+
+**Clínico Médico:** 
+1. Listar todas as hipóteses
+2. Categorizar por sistema
+3. Priorizar por probabilidade
+4. Sempre incluir diagnósticos graves
+
+**Cirurgião:** Por localização anatômica + tipo (inflamatório, perfurativo, obstrutivo, vascular)
+
+**Emergencista:** Worst-case scenario primeiro! (descartar graves, depois comuns)
+
+**Intensivista:** Identificar TODAS as disfunções orgânicas (SOFA), priorizar, tratar sistemicamente
+
+---
+
+#### 4.5. Critérios de Gravidade
+```markdown
+### 5. Critérios de Gravidade - [Quando se Preocupar/Agir]
+
+**[SINAIS DE ALTA GRAVIDADE]:**
+- Sinal 1 (significado)
+- Sinal 2 (significado)
+
+**[QUANDO ESCALONAR/REFERENCIAR/OPERAR]:**
+- Critério 1
+- Critério 2
+```
+
+**Propósito:** Definir claramente quando a situação é grave e exige ação imediata.
+
+**Elementos essenciais:**
+- Sinais vitais alterados (limiares específicos)
+- Red flags por sistema/apresentação
+- Critérios de escalação (quando ir para UTI, quando operar, quando referenciar)
+
+**Boas práticas:**
+✓ Ser específico com valores (PA <90/60, não "hipotensão")
+✓ Organizar por sistema ou por ação necessária
+✓ Incluir critérios objetivos sempre que possível
+✓ Mencionar o que fazer quando identificar gravidade
+
+**Exemplo do Cirurgião:**
+```markdown
+**INDICAÇÕES ABSOLUTAS DE CIRURGIA URGENTE:**
+
+**Peritonite Difusa:**
+- Abdome em tábua
+- Descompressão brusca positiva
+- Ausência de RHA (íleo paralítico)
+
+**Pneumoperitônio:**
+- Ar livre no RX (perfuração de víscera oca)
+- Exceção: pós-operatório recente
+```
+
+---
+
+#### 4.6. Integrando Conhecimento dos Livros
+```markdown
+### 6. Integrando Conhecimento dos Livros (@md/)
+
+**QUANDO BUSCAR EM @md/[Livro Principal]:**
+- Situação 1
+- Situação 2
+- **Query exemplo**: "exemplo de busca"
+
+**ESTRATÉGIA DE BUSCA EFICIENTE:**
+
+**Para [Tipo de Busca 1]:**
+"[Padrão de query]"
+Ex: "exemplo concreto"
+
+**Para [Tipo de Busca 2]:**
+"[Padrão de query]"
+Ex: "exemplo concreto"
+```
+
+**Propósito:** Ensinar QUANDO e COMO buscar informações nos livros da pasta @md/.
+
+**Elementos essenciais:**
+1. Quais livros usar para cada situação
+2. Padrões de query eficientes
+3. Exemplos concretos de buscas
+
+**Estrutura de Queries:**
+- **Para Diagnóstico**: "[Sintoma/Sinal] diagnóstico diferencial"
+- **Para Tratamento**: "[Doença] tratamento [contexto]"
+- **Para Scores**: "Escore [nome] interpretação"
+- **Para Protocolos**: "[Protocolo] completo"
+
+**Boas práticas:**
+✓ Ser específico > vago
+✓ Usar contexto quando relevante
+✓ Fornecer template + exemplo
+✓ Mencionar livro-fonte quando específico
+
+**Exemplo:**
+```markdown
+**QUANDO BUSCAR EM @md/Semiologia Médica - Porto:**
+- Dúvida sobre técnica de exame físico
+- Interpretação de achados semiológicos
+- **Query exemplo**: "Como realizar ausculta cardíaca completa?"
+
+**ESTRATÉGIA DE BUSCA EFICIENTE:**
+
+**Para Diagnóstico:**
+"[Sintoma/Sinal] diagnóstico diferencial"
+Ex: "Dispneia crônica diagnóstico diferencial"
+
+**Para Tratamento:**
+"[Doença] tratamento [contexto]"
+Ex: "Insuficiência cardíaca tratamento ICFEr"
+```
+
+---
+
+#### 4.7. Exemplos Práticos de Raciocínio
+```markdown
+### 7. Exemplos Práticos de Raciocínio Clínico
+
+**EXEMPLO 1: [Título do Caso]**
+
+**Cenário:**
+[Descrição do caso: idade, sexo, queixa, tempo, dados vitais]
+
+**Raciocínio:**
+1. [Passo 1 do raciocínio]
+2. [Passo 2 do raciocínio]
+3. [Conclusão/hipótese principal]
+
+**Perguntas-chave:**
+- Pergunta específica?
+- Pergunta específica?
+
+**[Se relevante] Exame físico esperado/direcionado:**
+- Achado esperado
+- O que procurar
+
+**Buscar em @md/**:
+- "Query específica"
+- "Outra query"
+
+**Propedêutica:**
+- Exame 1 (por quê)
+- Exame 2 (por quê)
+
+**Conduta:**
+- Ação 1
+- Ação 2
+- Seguimento
+
+---
+
+**EXEMPLO 2: [...]**
+[Mesma estrutura]
+
+---
+
+**EXEMPLO 3: [...]**
+[Mesma estrutura]
+```
+
+**Propósito:** Demonstrar o raciocínio em ação através de casos clínicos práticos.
+
+**OBRIGATÓRIO: 3 exemplos práticos completos**
+
+**Características dos bons exemplos:**
+- **Cenários realistas** (dados completos mas concisos)
+- **Raciocínio passo a passo** (mostrar o processo mental)
+- **Busca em @md/** (queries específicas)
+- **Decisão clara** (o que fazer e por quê)
+
+**Escolha de casos:**
+- Caso 1: Apresentação clássica/comum
+- Caso 2: Situação grave/urgente
+- Caso 3: Diagnóstico diferencial desafiador OU complicação
+
+**Estrutura de cada exemplo:**
+1. **Cenário** (3-5 linhas): idade, sexo, tempo, queixa, dados vitais básicos
+2. **Raciocínio** (3-5 pontos numerados): processo mental explicito
+3. **Perguntas-chave** (opcional): o que perguntar especificamente
+4. **Exame físico** (opcional): o que esperar/procurar
+5. **Buscar em @md/** (obrigatório): 1-3 queries específicas
+6. **Propedêutica** (quando relevante): exames e justificativa
+7. **Conduta** (obrigatório): o que fazer, medicações com doses, seguimento
+
+**Boas práticas:**
+✓ Casos progressivos em complexidade
+✓ Mostrar processo mental, não só resultado
+✓ Incluir doses de medicações quando relevante
+✓ Mencionar o que NÃO fazer também
+✓ Ser detalhado mas conciso
+
+**Evitar:**
+✗ Casos muito raros ou exóticos
+✗ Pular etapas do raciocínio
+✗ Ser vago nas condutas
+✗ Esquecer de incluir queries para @md/
+
+---
+
+### 5. PROTOCOLOS E CONTEÚDO ESPECÍFICO DA ESPECIALIDADE
+
+```markdown
+## [Nome do Protocolo/Tema 1]
+
+### [Subtema]
+[Conteúdo detalhado]
+
+## [Nome do Protocolo/Tema 2]
+
+### [Subtema]
+[Conteúdo detalhado]
+```
+
+**Propósito:** Documentar protocolos, scores, critérios e conhecimento específico da especialidade.
+
+**O que incluir:**
+- Protocolos clínicos detalhados
+- Scores e critérios diagnósticos
+- Classificações importantes
+- Tratamentos específicos
+- Doses de medicações
+- Algoritmos de decisão
+
+**Organização:**
+- Por sistema (cardio, pulmonar, etc.)
+- Por condição (HAS, DM, DPOC, etc.)
+- Por gravidade (ambulatorial, urgência, emergência)
+- Por tipo (diagnóstico, tratamento, seguimento)
+
+**Boas práticas:**
+✓ Estruturar hierarquicamente (H2, H3, H4)
+✓ Usar listas e tabelas quando apropriado
+✓ Incluir doses precisas de medicações
+✓ Mencionar fontes (guidelines, anos)
+✓ Atualizar periodicamente
+
+---
+
+## 📝 Guia de Preenchimento (Passo a Passo)
+
+### Passo 1: Defina o Escopo
+- Qual especialidade está documentando?
+- Qual o nível (generalista vs sub-especialidade)?
+- Qual o contexto (ambulatorial, hospitalar, emergência)?
+
+### Passo 2: Colete Terminologia
+- Liste 15-30 termos mais usados
+- Inclua acrônimos comuns
+- Defina de forma concisa
+
+### Passo 3: Mapeie as Habilidades
+- Quebre em 8-15 categorias lógicas
+- Seja específico e completo
+- Organize do básico ao avançado
+
+### Passo 4: Documente o Raciocínio
+**Esta é a parte mais trabalhosa mas ESSENCIAL:**
+
+1. **Abordagem Inicial**: Como o especialista inicia?
+2. **Fluxograma**: Desenhe o processo mental
+3. **Perguntas-chave**: 5-7 cenários comuns
+4. **Diagnóstico Diferencial**: Método sistemático
+5. **Gravidade**: Quando agir rápido
+6. **Busca em @md/**: Quando e como buscar
+7. **Exemplos**: 3 casos completos
+
+### Passo 5: Adicione Protocolos
+- Organize logicamente
+- Seja detalhado
+- Inclua doses e parâmetros
+
+### Passo 6: Revise com Checklist
+Use o checklist abaixo antes de finalizar.
+
+---
+
+## 🎯 Princípios Fundamentais
+
+### 1. Raciocínio Clínico Dinâmico
+
+As regras devem ensinar **COMO PENSAR**, não apenas **O QUE SABER**.
+
+**Ruim:** "Paciente com dispneia: pedir RX tórax"
+**Bom:** "Paciente com dispneia: primeiro classificar se agudo/crônico. Se agudo + febre → pensar pneumonia → buscar estertores → RX tórax para confirmar"
+
+### 2. Integração com @md/
+
+SEMPRE incluir orientação sobre quando e como buscar nos livros.
+
+**Formato padrão:**
+- Situação específica
+- Query sugerida
+- Livro-fonte quando relevante
+
+### 3. Exemplos Práticos Obrigatórios
+
+**Mínimo de 3 exemplos completos** com:
+- Cenário realista
+- Raciocínio passo a passo
+- Busca em @md/
+- Conduta clara
+
+### 4. Especificidade vs Generalização
+
+**Ser específico em:**
+- Doses de medicações
+- Valores de referência
+- Critérios diagnósticos
+- Indicações de procedimentos
+
+**Ser geral em:**
+- Princípios de raciocínio
+- Abordagem sistemática
+- Fluxos de decisão
+
+### 5. Manter Atualizado
+
+Regras devem ser documentos vivos:
+- Revisar anualmente
+- Atualizar com novos guidelines
+- Adicionar novos exemplos
+- Refinar raciocínio conforme uso
+
+---
+
+## ✅ Checklist de Qualidade
+
+Use este checklist antes de finalizar uma regra de especialidade:
+
+### Estrutura Básica
+- [ ] Frontmatter com `alwaysApply: true`
+- [ ] Título claro (H1)
+- [ ] Seção de Terminologia (10-30 termos)
+- [ ] Seção de Stack de Habilidades (8-15 subseções)
+- [ ] Seção de Metodologia de Raciocínio Clínico completa
+- [ ] Seções de protocolos específicos
+
+### Metodologia de Raciocínio Clínico
+- [ ] 1. Abordagem Inicial (estruturada e clara)
+- [ ] 2. Fluxograma Mental (com bifurcações)
+- [ ] 3. Perguntas-Chave (5-7 cenários)
+- [ ] 4. Diagnóstico Diferencial (método sistemático)
+- [ ] 5. Critérios de Gravidade (específicos)
+- [ ] 6. Integração @md/ (quando e como buscar)
+- [ ] 7. Exemplos Práticos (MÍNIMO 3, completos)
+
+### Stack de Habilidades
+- [ ] Habilidades clínicas/semiologia documentadas
+- [ ] Procedimentos listados com detalhes
+- [ ] Interpretação de exames especificada
+- [ ] Manejo de condições específicas
+- [ ] Competências transversais incluídas
+- [ ] Organização lógica (8-15 subseções)
+
+### Exemplos Práticos
+- [ ] 3 exemplos completos
+- [ ] Cenários realistas com dados suficientes
+- [ ] Raciocínio passo a passo explícito
+- [ ] Queries para @md/ incluídas em cada exemplo
+- [ ] Condutas claras com doses quando aplicável
+- [ ] Seguimento especificado
+
+### Qualidade do Conteúdo
+- [ ] Terminologia consistente
+- [ ] Doses de medicações precisas
+- [ ] Valores de referência especificados
+- [ ] Queries para @md/ em formato correto
+- [ ] Sem erros ortográficos/gramaticais
+- [ ] Formatação markdown correta
+
+### Completude
+- [ ] Cobre as situações mais comuns da especialidade
+- [ ] Inclui urgências/emergências quando relevante
+- [ ] Documenta o raciocínio, não só o conhecimento
+- [ ] Orienta buscas eficientes em @md/
+- [ ] Fornece exemplos práticos suficientes
+
+### Usabilidade
+- [ ] Fácil de navegar (boa hierarquia de títulos)
+- [ ] Informação encontrável rapidamente
+- [ ] Exemplos demonstram raciocínio claramente
+- [ ] Queries para @md/ são acionáveis
+- [ ] Pode ser usada em tempo real durante atendimento
+
+---
+
+## 🔄 Processo de Criação Recomendado
+
+### Fase 1: Preparação (1-2h)
+1. Identificar a especialidade e escopo
+2. Listar tópicos principais
+3. Coletar material de referência (guidelines, livros)
+
+### Fase 2: Estrutura Básica (2-3h)
+1. Criar frontmatter e título
+2. Preencher terminologia
+3. Mapear stack de habilidades
+
+### Fase 3: Raciocínio Clínico (4-6h)
+**Esta é a fase mais importante:**
+1. Documentar abordagem inicial
+2. Criar fluxograma mental
+3. Listar perguntas-chave por cenário (5-7 cenários)
+4. Definir método de diagnóstico diferencial
+5. Especificar critérios de gravidade
+6. Orientar integração com @md/
+7. **Criar 3 exemplos práticos completos**
+
+### Fase 4: Protocolos Específicos (3-5h)
+1. Organizar protocolos por tema
+2. Detalhar cada protocolo
+3. Incluir doses e parâmetros
+
+### Fase 5: Revisão e Refinamento (1-2h)
+1. Usar checklist de qualidade
+2. Testar queries em @md/
+3. Verificar exemplos práticos
+4. Corrigir inconsistências
+5. Validar com especialista se possível
+
+**Tempo total estimado: 11-18 horas** para uma regra completa e de qualidade.
+
+---
+
+## 📚 Exemplos de Referência
+
+As seguintes regras foram criadas seguindo este template e servem como referência:
+
+1. **Medicina de Família** (`.cursor/rules/medicina-familia.mdc`)
+   - Excelente exemplo de abordagem longitudinal
+   - Método SOAP bem documentado
+   - Exemplos práticos de rastreamento e prevenção
+
+2. **Clínica Médica** (`.cursor/rules/clinica-medica.mdc`)
+   - Raciocínio por sistemas bem estruturado
+   - Diagnóstico diferencial complexo
+   - Manejo de múltiplas comorbidades
+
+3. **Clínica Cirúrgica** (`.cursor/rules/clinica-cirurgica.mdc`)
+   - Abordagem do abdome agudo exemplar
+   - Decisão cirúrgica vs conservadora clara
+   - Pós-operatório bem documentado
+
+4. **Emergencista** (`.cursor/rules/emergencista.mdc`)
+   - ABCDE rigorosamente seguido
+   - Worst-case scenario approach
+   - Protocolos ACLS/ATLS/PALS integrados
+
+5. **Intensivista** (`.cursor/rules/intensivista.mdc`)
+   - Avaliação sistemática por órgãos
+   - SOFA diário documentado
+   - Suporte vs cura claramente diferenciado
+
+---
+
+## 🚀 Expandindo para Novas Especialidades
+
+### Especialidades Sugeridas para Expansão
+
+**Clínicas:**
+- Cardiologia
+- Pneumologia
+- Nefrologia
+- Gastroenterologia
+- Endocrinologia
+- Neurologia
+- Psiquiatria
+- Reumatologia
+- Hematologia
+- Infectologia
+- Oncologia
+
+**Cirúrgicas:**
+- Cirurgia Cardíaca
+- Cirurgia Torácica
+- Neurocirurgia
+- Ortopedia
+- Urologia
+- Oftalmologia
+- Otorrinolaringologia
+
+**Outras:**
+- Pediatria
+- Ginecologia e Obstetrícia
+- Geriatria
+- Medicina do Esporte
+- Medicina Paliativa
+
+### Adaptações por Tipo de Especialidade
+
+**Para sub-especialidades (ex: Cardiologia):**
+- Stack de habilidades ainda mais focada
+- Raciocínio clínico aprofundado no sistema
+- Mais exemplos de casos complexos
+- Protocolos muito detalhados
+
+**Para especialidades procedimentais (ex: Ortopedia):**
+- Ênfase em procedimentos e técnicas
+- Interpretação de imagens crítica
+- Indicações cirúrgicas detalhadas
+- Pós-operatório específico
+
+**Para especialidades diagnósticas (ex: Radiologia):**
+- Stack focada em interpretação
+- Raciocínio de padrões de imagem
+- Diagnóstico diferencial por achado
+- Correlação clínico-radiológica
+
+---
+
+## 💡 Dicas Finais
+
+### Do's (Fazer)
+✅ Ser específico e detalhado
+✅ Incluir exemplos práticos abundantes
+✅ Documentar o raciocínio, não só o conhecimento
+✅ Orientar buscas em @md/ constantemente
+✅ Usar listas, hierarquias e estruturas claras
+✅ Incluir doses, valores, critérios objetivos
+✅ Revisar e atualizar periodicamente
+
+### Don'ts (Evitar)
+❌ Ser vago ou genérico demais
+❌ Apenas listar conhecimento sem raciocínio
+❌ Esquecer os exemplos práticos
+❌ Não mencionar como buscar em @md/
+❌ Usar jargão sem definir
+❌ Copiar e colar sem adaptar
+❌ Deixar incompleto
+
+---
+
+## 📞 Manutenção e Evolução
+
+Esta meta-regra deve evoluir com:
+- Feedback de uso prático
+- Novos padrões identificados
+- Melhores práticas emergentes
+- Atualização de guidelines
+
+**Última atualização:** [Data da criação]
+**Versão:** 1.0
+**Baseado em:** Análise de 5 regras de especialidades (Medicina de Família, Clínica Médica, Clínica Cirúrgica, Emergencista, Intensivista)
+
+---
+
+## 🎓 Conclusão
+
+Este template representa o padrão ouro para criar regras de especialidades médicas que:
+
+1. **Ensinam a pensar** como o especialista
+2. **Integram conhecimento** dos livros em @md/
+3. **Demonstram raciocínio** através de exemplos práticos
+4. **Facilitam uso** em situações clínicas reais
+
+Seguindo esta estrutura, você criará regras consistentes, completas e práticas que realmente ajudam no raciocínio clínico diário.
+
+**Boa documentação = Melhor raciocínio clínico = Melhor cuidado ao paciente**

@@ -10,6 +10,14 @@ export class DashboardMetricsDto {
   unassumedMessagesCount: number;
   resolvedTodayCount: number;
   averageResponseTimeMinutes: number | null;
+  overdueStepsCount: number; // Etapas de navegação atrasadas (OVERDUE)
+
+  // Métricas Clínicas Críticas
+  averageTimeToTreatmentDays: number | null; // Tempo médio desde diagnóstico até início de tratamento (meta <30 dias)
+  averageTimeToDiagnosisDays: number | null; // Tempo médio desde suspeita até diagnóstico confirmado (meta <60 dias)
+  stagingCompletePercentage: number; // % de pacientes com estadiamento completo antes de tratamento
+  pendingBiomarkersCount: number; // Pacientes aguardando resultados de biomarcadores críticos
+  treatmentAdherencePercentage: number; // % de pacientes que completam ciclos conforme planejado
 
   // Distribuições
   priorityDistribution: {

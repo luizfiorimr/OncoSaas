@@ -1,0 +1,581 @@
+---
+alwaysApply: true
+description: Padrões específicos de desenvolvimento para Frontend (Next.js 14, React, TypeScript). Regras de componentes, hooks, estado, formulários, roteamento e performance.
+---
+
+# Padrões de Desenvolvimento - Frontend (Next.js 14)
+
+## Princípios Fundamentais
+
+### 1. Componentes React
+
+**Regra**: Componentes devem ser funcionais, pequenos e focados em uma única responsabilidade.
+
+**Padrões**:
+
+- ✅ Componentes funcionais com hooks
+- ✅ Props tipadas com TypeScript
+- ✅ Um componente por arquivo
+- ✅ Nome do arquivo = nome do componente (PascalCase)
+- ✅ Separar lógica de apresentação
+
+**Estrutura de um Componente**:
+
+```typescript
+// ✅ CORRETO
+// src/components/dashboard/PatientCard.tsx
+import React from 'react';
+import { cn } from '@/lib/utils';
+
+interface PatientCardProps {
+  patient: Patient;
+  onClick?: (id: string) => void;
+  className?: string;
+}
+
+export const PatientCard: React.FC<PatientCardProps> = ({
+  patient,
+  onClick,
+  className,
+}) => {
+  const handleClick = () => {
+    onClick?.(patient.id);
+  };
+
+  return (
+    <div
+      className={cn('border rounded-lg p-4', className)}
+      onClick={handleClick}
+    >
+      <h3>{patient.name}</h3>
+      {/* ... */}
+    </div>
+  );
+};
+```
+
+**Nunca**:
+
+- ❌ Componentes de classe (usar apenas funcionais)
+- ❌ Lógica de negócio dentro do componente (mover para hooks/services)
+- ❌ Componentes muito grandes (>200 linhas - dividir)
+
+---
+
+### 2. Custom Hooks
+
+**Regra**: Extrair lógica reutilizável para custom hooks.
+
+**Padrões**:
+
+- ✅ Nome começa com `use` (ex: `usePatients`, `useAuth`)
+- ✅ Um hook por arquivo
+- ✅ Retornar objeto com estado e funções
+- ✅ Tratamento de erros e loading
+
+**Exemplo**:
+
+```typescript
+// ✅ CORRETO
+// src/hooks/usePatients.ts
+import { useQuery } from '@tanstack/react-query';
+import { patientsApi } from '@/services/api';
+
+export const usePatients = (tenantId: string) => {
+  return useQuery({
+    queryKey: ['patients', tenantId],
+    queryFn: () => patientsApi.getAll(tenantId),
+    staleTime: 5 * 60 * 1000, // 5 minutos
+  });
+};
+```
+
+---
+
+### 3. Gerenciamento de Estado
+
+**Regra**: Escolher a ferramenta certa para cada tipo de estado.
+
+**Hierarquia de Escolha**:
+
+1. **Estado Local**: `useState` ou `useReducer`
+2. **Estado do Servidor**: `React Query` (@tanstack/react-query)
+3. **Estado Global Simples**: `Zustand`
+4. **Estado Global Complexo**: `Zustand` com slices
+
+**Nunca**:
+
+- ❌ Context API para estado que muda frequentemente (performance)
+- ❌ Prop drilling excessivo (usar Zustand ou React Query)
+
+**Exemplo**:
+
+```typescript
+// ✅ Estado local
+const [isOpen, setIsOpen] = useState(false);
+
+// ✅ Estado do servidor
+const { data, isLoading } = usePatients(tenantId);
+
+// ✅ Estado global (Zustand)
+import { usePatientStore } from '@/stores/patient-store';
+const { selectedPatient, setSelectedPatient } = usePatientStore();
+```
+
+---
+
+### 4. Formulários
+
+**Regra**: Usar React Hook Form + Zod para validação.
+
+**Padrões**:
+
+- ✅ React Hook Form para gerenciamento de formulários
+- ✅ Zod para validação de schemas
+- ✅ `@hookform/resolvers` para integrar Zod com React Hook Form
+- ✅ Mensagens de erro acessíveis
+
+**Exemplo**:
+
+```typescript
+// ✅ CORRETO
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
+const patientSchema = z.object({
+  name: z.string().min(1, 'Nome é obrigatório'),
+  dateOfBirth: z.date(),
+  email: z.string().email('Email inválido'),
+});
+
+type PatientFormData = z.infer<typeof patientSchema>;
+
+export const PatientForm = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<PatientFormData>({
+    resolver: zodResolver(patientSchema),
+  });
+
+  const onSubmit = (data: PatientFormData) => {
+    // Enviar para API
+  };
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <input {...register('name')} />
+      {errors.name && <span>{errors.name.message}</span>}
+      {/* ... */}
+    </form>
+  );
+};
+```
+
+---
+
+### 5. Roteamento (Next.js App Router)
+
+**Regra**: Usar App Router do Next.js 14, não Pages Router.
+
+**Padrões**:
+
+- ✅ Rotas em `src/app/`
+- ✅ Layouts para compartilhar UI entre rotas
+- ✅ Route Groups `(auth)` para organizar sem afetar URL
+- ✅ Server Components por padrão, Client Components quando necessário
+- ✅ `'use client'` apenas quando necessário (interatividade, hooks)
+
+**Estrutura**:
+
+```
+src/app/
+├── layout.tsx              # Layout raiz
+├── page.tsx                # Home (/)
+├── (auth)/
+│   ├── login/
+│   │   └── page.tsx        # /login
+│   └── register/
+│       └── page.tsx        # /register
+├── dashboard/
+│   ├── layout.tsx          # Layout do dashboard
+│   ├── page.tsx            # /dashboard
+│   └── patients/
+│       └── page.tsx        # /dashboard/patients
+```
+
+**Nunca**:
+
+- ❌ Usar Pages Router (`pages/`)
+- ❌ `'use client'` desnecessário (performance)
+
+---
+
+### 6. Server vs Client Components
+
+**Regra**: Server Components por padrão, Client Components apenas quando necessário.
+
+**Server Components (padrão)**:
+
+- ✅ Fetch de dados diretamente
+- ✅ Acesso a APIs do servidor
+- ✅ Menor bundle JavaScript
+- ✅ Não pode usar hooks, useState, useEffect
+
+**Client Components (`'use client'`)**:
+
+- ✅ Interatividade (onClick, onChange)
+- ✅ Hooks (useState, useEffect, useQuery)
+- ✅ Browser APIs (localStorage, window)
+- ✅ Event listeners
+
+**Exemplo**:
+
+```typescript
+// ✅ Server Component (padrão)
+// src/app/dashboard/page.tsx
+import { patientsApi } from '@/services/api';
+
+export default async function DashboardPage() {
+  const patients = await patientsApi.getAll(); // Fetch direto
+
+  return (
+    <div>
+      <h1>Dashboard</h1>
+      <PatientList patients={patients} />
+    </div>
+  );
+}
+
+// ✅ Client Component (quando precisa interatividade)
+// src/components/dashboard/PatientList.tsx
+'use client';
+
+import { useState } from 'react';
+
+export const PatientList = ({ patients }: { patients: Patient[] }) => {
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+
+  return (
+    <div>
+      {patients.map(patient => (
+        <div key={patient.id} onClick={() => setSelectedId(patient.id)}>
+          {patient.name}
+        </div>
+      ))}
+    </div>
+  );
+};
+```
+
+---
+
+### 7. Estilização (Tailwind CSS)
+
+**Regra**: Usar Tailwind CSS com componentes shadcn/ui.
+
+**Padrões**:
+
+- ✅ Classes Tailwind para estilização
+- ✅ Componentes shadcn/ui para UI complexa
+- ✅ Função `cn()` para merge de classes
+- ✅ Variáveis CSS para temas (cores, espaçamento)
+
+**Exemplo**:
+
+```typescript
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+
+export const PatientCard = ({ patient, className }: Props) => {
+  return (
+    <div className={cn(
+      'border rounded-lg p-4 shadow-sm',
+      patient.priority === 'critical' && 'border-red-500',
+      className
+    )}>
+      <h3 className="text-lg font-semibold">{patient.name}</h3>
+      <Button variant="outline">Ver detalhes</Button>
+    </div>
+  );
+};
+```
+
+**Nunca**:
+
+- ❌ CSS Modules complexos (usar Tailwind)
+- ❌ Estilos inline (exceto dinâmicos)
+- ❌ Classes Tailwind muito longas (extrair para componente)
+
+---
+
+### 8. Fetch de Dados
+
+**Regra**: Usar React Query para dados do servidor, Server Components para dados estáticos.
+
+**Padrões**:
+
+- ✅ React Query para dados que mudam frequentemente
+- ✅ Server Components para dados iniciais
+- ✅ Cache configurado (staleTime, cacheTime)
+- ✅ Tratamento de erro e loading states
+
+**Exemplo**:
+
+```typescript
+// ✅ React Query (Client Component)
+'use client';
+
+import { useQuery } from '@tanstack/react-query';
+import { patientsApi } from '@/services/api';
+
+export const PatientList = () => {
+  const { data, isLoading, error } = useQuery({
+    queryKey: ['patients'],
+    queryFn: () => patientsApi.getAll(),
+    staleTime: 5 * 60 * 1000, // 5 minutos
+  });
+
+  if (isLoading) return <div>Carregando...</div>;
+  if (error) return <div>Erro ao carregar</div>;
+
+  return <div>{/* ... */}</div>;
+};
+```
+
+---
+
+### 9. Performance e Otimização
+
+**Regra**: Otimizar para performance desde o início.
+
+**Padrões**:
+
+- ✅ Lazy loading de componentes pesados
+- ✅ Code splitting por rota (automático no Next.js)
+- ✅ Imagens com `next/image`
+- ✅ Memoização quando necessário (`memo`, `useMemo`, `useCallback`)
+
+**Exemplo**:
+
+```typescript
+// ✅ Lazy loading
+import { lazy, Suspense } from 'react';
+
+const HeavyComponent = lazy(() => import('./HeavyComponent'));
+
+export const Page = () => {
+  return (
+    <Suspense fallback={<div>Carregando...</div>}>
+      <HeavyComponent />
+    </Suspense>
+  );
+};
+
+// ✅ Memoização quando necessário
+import { memo, useMemo } from 'react';
+
+export const ExpensiveComponent = memo(({ data }: Props) => {
+  const processedData = useMemo(() => {
+    return data.map(/* processamento pesado */);
+  }, [data]);
+
+  return <div>{/* ... */}</div>;
+});
+```
+
+---
+
+### 10. Acessibilidade (a11y)
+
+**Regra**: Seguir diretrizes WCAG 2.1 nível AA.
+
+**Padrões**:
+
+- ✅ Sempre usar labels em formulários
+- ✅ Contraste de cores adequado
+- ✅ Navegação por teclado funcional
+- ✅ ARIA labels quando necessário
+- ✅ Testar com leitores de tela
+
+**Exemplo**:
+
+```typescript
+// ✅ Acessível
+<button
+  aria-label="Fechar modal"
+  onClick={handleClose}
+>
+  <XIcon />
+</button>
+
+// ✅ Formulário acessível
+<label htmlFor="name">Nome</label>
+<input
+  id="name"
+  type="text"
+  aria-required="true"
+  aria-invalid={!!errors.name}
+/>
+{errors.name && (
+  <span role="alert">{errors.name.message}</span>
+)}
+```
+
+---
+
+### 11. Tratamento de Erros
+
+**Regra**: Tratar erros de forma consistente e amigável.
+
+**Padrões**:
+
+- ✅ Error boundaries para erros de renderização
+- ✅ Try/catch em funções assíncronas
+- ✅ Mensagens de erro amigáveis ao usuário
+- ✅ Log de erros para debugging
+
+**Exemplo**:
+
+```typescript
+// ✅ Error Boundary
+'use client';
+
+import { ErrorBoundary } from 'react-error-boundary';
+
+function ErrorFallback({ error }: { error: Error }) {
+  return (
+    <div role="alert">
+      <h2>Algo deu errado</h2>
+      <pre>{error.message}</pre>
+    </div>
+  );
+}
+
+export const App = () => {
+  return (
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <YourApp />
+    </ErrorBoundary>
+  );
+};
+```
+
+---
+
+### 12. Convenções de Nomenclatura
+
+**Arquivos**:
+
+- ✅ Componentes: `PascalCase.tsx` (`PatientCard.tsx`)
+- ✅ Hooks: `camelCase.ts` com prefixo `use` (`usePatients.ts`)
+- ✅ Utilitários: `camelCase.ts` (`formatDate.ts`)
+- ✅ Types: `PascalCase.ts` (`Patient.ts`)
+- ✅ Constantes: `UPPER_SNAKE_CASE.ts` (`API_ENDPOINTS.ts`)
+
+**Variáveis e Funções**:
+
+- ✅ Variáveis: `camelCase` (`patientName`, `isLoading`)
+- ✅ Funções: `camelCase` (`getPatient`, `calculatePriority`)
+- ✅ Componentes: `PascalCase` (`PatientCard`)
+- ✅ Constantes: `UPPER_SNAKE_CASE` (`MAX_RETRIES`)
+
+---
+
+### 13. Estrutura de Pastas Recomendada
+
+```
+frontend/src/
+├── app/                    # App Router (rotas)
+│   ├── (auth)/            # Route groups
+│   ├── dashboard/
+│   └── layout.tsx
+├── components/             # Componentes React
+│   ├── ui/                # Componentes UI básicos (shadcn)
+│   ├── dashboard/         # Componentes específicos
+│   └── shared/            # Componentes compartilhados
+├── hooks/                  # Custom hooks
+├── lib/                    # Utilitários
+│   ├── api/               # Clientes de API
+│   └── utils/             # Funções utilitárias
+├── stores/                 # Zustand stores
+├── types/                  # TypeScript types
+└── styles/                 # Estilos globais
+```
+
+---
+
+### 14. WebSocket e Atualizações em Tempo Real
+
+**Regra**: Usar Socket.io client para receber atualizações em tempo real.
+
+**Padrões**:
+
+- ✅ Hook customizado `useSocket` para gerenciar conexão
+- ✅ Hook específico por funcionalidade (`useAlerts`, `useConversations`)
+- ✅ Cleanup adequado (desconectar no unmount)
+- ✅ Tratamento de reconexão automática
+- ✅ Estados de loading/error para conexão
+- ✅ Notificações do navegador para alertas críticos (opcional)
+
+**Exemplo**:
+
+```typescript
+// ✅ CORRETO
+export const useAlerts = () => {
+  const { socket, isConnected } = useSocket('/alerts');
+  const [alerts, setAlerts] = useState<AlertPayload[]>([]);
+
+  useEffect(() => {
+    if (!socket || !isConnected) return;
+
+    socket.on('critical_alert', (alert: AlertPayload) => {
+      setAlerts((prev) => [alert, ...prev]);
+    });
+
+    return () => {
+      socket.off('critical_alert');
+    };
+  }, [socket, isConnected]);
+
+  return { alerts, isConnected };
+};
+```
+
+**Nunca**:
+
+- ❌ Criar múltiplas conexões Socket.io (reutilizar hook)
+- ❌ Não fazer cleanup de listeners
+- ❌ Conectar sem autenticação (token JWT)
+
+---
+
+### 15. Checklist Antes de Commitar
+
+- [ ] Componente funciona corretamente
+- [ ] TypeScript sem erros (`npm run type-check`)
+- [ ] ESLint sem erros (`npm run lint`)
+- [ ] Prettier formatado (`npm run format:check`)
+- [ ] Acessibilidade verificada (labels, ARIA, contraste)
+- [ ] Performance verificada (lazy loading, memoização se necessário)
+- [ ] Tratamento de erros implementado
+- [ ] Loading states implementados
+- [ ] WebSocket: Cleanup de listeners no unmount
+- [ ] WebSocket: Tratamento de reconexão
+
+---
+
+## Referências
+
+- [Next.js 14 Documentation](https://nextjs.org/docs)
+- [React Documentation](https://react.dev)
+- [React Query Documentation](https://tanstack.com/query/latest)
+- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
+- [shadcn/ui Components](https://ui.shadcn.com)
+
+---
+
+**Última atualização**: 2024-01-XX  
+**Versão**: 1.0.0

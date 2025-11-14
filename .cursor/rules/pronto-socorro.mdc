@@ -1,0 +1,1112 @@
+---
+alwaysApply: true
+---
+
+# Medicina de Pronto Socorro e UPA
+
+## Terminologia Específica
+
+- **UPA**: Unidade de Pronto Atendimento (complexidade intermediária)
+- **Pronto Socorro**: Serviço de urgência de menor complexidade
+- **Urgência**: Situação que requer atendimento rápido, mas sem risco de vida iminente
+- **Emergência**: Situação com risco de vida iminente (transferir para emergência)
+- **Acolhimento com Classificação de Risco**: Triagem para priorização de atendimento
+- **Observação clínica**: Período de acompanhamento no PS antes da decisão (alta/internação/transferência)
+- **Alta com orientação**: Liberação com receita e orientações de retorno
+- **Retorno se**: Sinais de alarme que indicam necessidade de retornar
+- **Transferência responsável**: Estabilização + contato + transporte adequado
+- **Fast-track**: Atendimento rápido para queixas simples
+- **Medicação de resgate**: Uso imediato para alívio sintomático
+- **Analgesia de demanda**: Analgésico conforme necessidade (dor persistente)
+- **Reavaliação em X horas**: Observação com nova avaliação em período definido
+
+## Stack de Habilidades do Médico de Pronto Socorro
+
+### Avaliação Rápida e Classificação de Risco
+- **Triagem Adaptada**: Usar critérios de Manchester adaptados para UPA/PS
+- **Reconhecer Urgência vs Emergência**: Diferenciação rápida (resolver aqui vs transferir)
+- **Sinais Vitais Direcionados**: PA, FC, FR, T, SpO₂, glicemia capilar, dor (escala)
+- **Priorização Dinâmica**: Re-avaliar periodicamente pacientes em espera
+- **Identificar Red Flags**: Sinais de alerta que exigem transferência imediata
+
+### Procedimentos Ambulatoriais de Urgência
+- **Suturas Simples e Complexas**: Face, couro cabeludo, membros - escolha de fio e técnica
+- **Imobilizações**: Talas gessadas, tipóias, imobilizadores de tornozelo/joelho
+- **Curativos**: Ferimentos, queimaduras de 1º e 2º grau superficial
+- **Drenagem de Abscessos Simples**: Pele, subcutâneo (pequenos)
+- **Remoção de Corpos Estranhos Superficiais**: Farpas, anzóis (se não complexo)
+- **Redução de Luxações Simples**: Ombro anterior, dedos (sem fratura associada)
+- **Lavagem Ocular**: Corpo estranho, irritação química leve
+- **Cauterização de Epistaxe**: Nitrato de prata, cauterização elétrica se disponível
+- **Nebulização**: Medicação inalatória para crise asmática/broncoespasmo
+
+### Manejo de Dores Agudas
+- **Cólica Renal**: Analgesia potente (AINE, opioide), antiemético, hidratação
+- **Lombalgia Aguda**: Diferenciar mecânica de red flags, analgesia, relaxante muscular
+- **Cefaleia**: Classificar (tensional, enxaqueca, sinais de alarme), analgesia escalonada
+- **Dor Abdominal Não-Cirúrgica**: Gastrite, constipação, cólica menstrual - tratar sintomas
+- **Dor Torácica Não-Cardíaca**: Osteomuscular, ansiedade - após descartar SCA
+- **Odontalgia**: Analgesia, antibiótico se abscesso, encaminhar dentista
+
+### Urgências Clínicas Comuns
+- **Crise Hipertensiva (Urgência)**: Diferenciar de emergência, captopril SL, observação
+- **Hipoglicemia**: Glicose VO ou IV, ajustar hipoglicemiantes, orientar
+- **Hiperglicemia Sem Cetoacidose**: Ajuste de dose, orientações, seguimento ambulatorial
+- **Crise Asmática Leve/Moderada**: Beta-2 inalatório, corticoide VO/IV, observação
+- **Exacerbação de DPOC Leve**: Broncodilatador, corticoide, avaliar necessidade de ATB
+- **Vertigem/Tontura**: Diferenciar periférica (labirintite) de central, antivertiginoso
+- **Gastroenterite Aguda**: Hidratação, antiemético, sintomáticos, orientar sinais de desidratação
+- **Infecções Urinárias**: Sintomáticos, antibiótico VO, orientar hidratação
+- **Faringite/Amigdalite**: Critérios para ATB (Centor), analgesia, anti-inflamatório
+- **Sinusite Aguda**: Sintomáticos, ATB se bacteriana, descongestionante
+
+### Pequenas Emergências (Estabilização Inicial)
+- **Reação Alérgica Leve/Moderada**: Anti-histamínico, corticoide, observação (sem anafilaxia)
+- **Crise de Ansiedade/Pânico**: Contenção verbal, benzodiazepínico se necessário, descartar orgânico
+- **Convulsão Pós-Ictal**: Proteger, observar, investigar causa se 1ª crise
+- **Sangramento Nasal (Epistaxe)**: Compressão, cauterização, tamponamento anterior se persistente
+- **Desmaio (Síncope)**: Descartar causas graves (cardíaca, neurológica), observação
+- **Intoxicação Leve**: Carvão ativado se indicado, hidratação, observação
+
+### Estabilização e Transferência
+- **Reconhecer Instabilidade**: PA, perfusão, consciência, respiração
+- **Estabilização Inicial**: O₂, acesso venoso, cristaloide, glicemia
+- **Comunicação com Regulação**: Descrever quadro, exames, condutas já realizadas
+- **Transferência Responsável**: Garantir transporte adequado (SAMU, ambulância), acompanhamento
+- **Quando NÃO Transferir**: Urgências simples que podem ser resolvidas no PS
+
+### Orientações de Alta e Retorno
+- **Receita Clara**: Medicação, dose, duração, como tomar
+- **Orientações Escritas**: O que fazer em casa, cuidados
+- **Sinais de Retorno**: Quando voltar ao PS ("Retorne se...")
+- **Seguimento**: Quando e onde buscar acompanhamento (médico de família, especialista)
+- **Atestado Médico**: Quando indicado, quantos dias
+- **Explicação do Diagnóstico**: Linguagem acessível ao paciente
+
+### Prescrição de Receitas de Urgência
+- **Analgésicos**: Paracetamol, dipirona, AINEs, tramadol (quando necessário)
+- **Anti-inflamatórios**: Ibuprofeno, naproxeno, diclofenaco
+- **Antieméticos**: Metoclopramida, ondansetrona, bromoprida
+- **Antibióticos**: Amoxicilina, azitromicina, cefalexina, ciprofloxacino, SMX-TMP
+- **Anti-hipertensivos**: Captopril, anlodipino (para casa)
+- **Broncodilatadores**: Salbutamol (bombinha), espaçador se criança
+- **Corticoides**: Prednisona, prednisolona (cursos curtos)
+- **Protetores Gástricos**: Omeprazol, ranitidina
+- **Relaxantes Musculares**: Ciclobenzaprina, orfenadrina
+- **Antivertiginosos**: Dimenidrinato, betaistina
+
+### Interpretação Rápida de Exames Point-of-Care
+- **Glicemia Capilar**: Hipo/hiperglicemia, ajustar conduta imediata
+- **ECG**: Ritmo, sinais de isquemia/IAM (quando transferir), alterações básicas
+- **RX Simples**: Fraturas evidentes, pneumonia, obstrução intestinal
+- **Teste de Gravidez (β-HCG urinário)**: Mulher em idade fértil com dor abdominal
+- **Urina Tipo I**: Leucocitúria (ITU), hematúria (cálculo), cetonúria (jejum/diabetes)
+- **Glicosúria/Cetonúria**: Capilar (descompensação diabética)
+
+### Comunicação e Manejo de Fluxo
+- **Comunicação com Paciente/Família**: Explicar de forma clara e empática
+- **Gerenciar Expectativas**: Nem tudo precisa de exame, nem tudo precisa de medicação
+- **Priorização Ética**: Casos graves primeiro, mas todos serão atendidos
+- **Interação com Equipe**: Enfermagem, técnicos, recepção - trabalho em equipe
+- **Documentação**: Registro claro e objetivo no prontuário
+- **Manejo de Conflitos**: Paciente insatisfeito, família ansiosa - comunicação assertiva
+
+## Metodologia de Raciocínio Clínico do Médico de Pronto Socorro
+
+### 1. Abordagem Inicial - Classificação e Diferenciação
+
+**Princípio Fundamental: RESOLVER URGÊNCIAS, TRANSFERIR EMERGÊNCIAS**
+
+**Sequência Obrigatória:**
+
+1. **Classificação de Risco Imediata**:
+   - Sinais vitais
+   - Nível de consciência
+   - Dor (intensidade 0-10)
+   - Tempo de evolução
+
+2. **Primeira Decisão Crítica - É EMERGÊNCIA?**:
+   - **SIM** (risco de vida iminente): Estabilizar + Chamar SAMU/Transferir
+   - **NÃO** (urgência): Prosseguir com atendimento no PS
+
+3. **Segunda Decisão - POSSO RESOLVER AQUI?**:
+   - **SIM**: Tratar e dar alta OU observar
+   - **NÃO**: Estabilizar e encaminhar para hospital de referência
+
+**Critérios de EMERGÊNCIA (transferir):**
+- Instabilidade hemodinâmica (PA <90/60, FC >140 ou <40, perfusão ruim)
+- Insuficiência respiratória grave (SpO₂ <90% com O₂, FR >30 ou <10)
+- Alteração do nível de consciência (Glasgow <13)
+- Dor torácica sugestiva de SCA
+- AVC agudo (déficit neurológico agudo)
+- Abdome agudo cirúrgico (peritonite)
+- Trauma moderado/grave
+- Anafilaxia
+
+**Critérios de URGÊNCIA (resolver no PS):**
+- Sinais vitais estáveis ou levemente alterados
+- Dor controlável com medicação
+- Condições clínicas sem risco de vida
+- Traumas leves sem indicação cirúrgica
+- Exacerbações leves de doenças crônicas
+
+### 2. Fluxograma Mental de Decisão
+
+```
+PACIENTE CHEGA NO PRONTO SOCORRO
+         ↓
+[TRIAGEM - CLASSIFICAÇÃO DE RISCO]
+    Vermelho? → EMERGÊNCIA → ABC → Estabilizar → SAMU/Transferir URGENTE
+         ↓ Laranja?
+    Avaliar: é EMERGÊNCIA disfarçada? → SIM → Mesmo fluxo acima
+         ↓ NÃO (Amarelo/Verde/Azul)
+[URGÊNCIA - ATENDER NO PS]
+         ↓
+[ANAMNESE + EXAME FÍSICO DIRECIONADO]
+    - Queixa principal
+    - Tempo de evolução
+    - Sintomas associados
+    - Comorbidades
+    - Medicações em uso
+         ↓
+[POSSO RESOLVER AQUI?]
+         ↓
+    SIM → Qual a categoria?        NÃO → Transferir para hospital
+         ↓                                   ↓
+[CATEGORIA DA URGÊNCIA]              [ESTABILIZAR]
+    - Dor?                              - Medicação sintomática
+    - Febre/Infecção?                   - Acesso venoso se necessário
+    - Dispneia?                         - Contato com hospital
+    - Trauma leve?                      - Transporte adequado
+    - Outros?
+         ↓
+[DIAGNÓSTICO SINDRÔMICO]
+    - Não precisa de diagnóstico definitivo
+    - Tratar sintomas e causa provável
+         ↓
+[TRATAMENTO]
+    - Medicação no PS
+    - Observação se necessário (2-6h)
+    - Reavaliação
+         ↓
+[RESPOSTA AO TRATAMENTO?]
+    Melhorou → ALTA           Não melhorou → REAVALIAR
+         ↓                              ↓
+[ORIENTAÇÕES DE ALTA]         Transferir? Observar mais?
+    - Receita                     Exames adicionais?
+    - Retorne se...
+    - Seguimento ambulatorial
+```
+
+### 3. Perguntas-Chave por Cenário de Urgência
+
+**DOR ABDOMINAL AGUDA (Não-Cirúrgica):**
+- Início súbito ou progressivo? (perfuração vs inflamação)
+- Localização? (epigástrio = gastrite; FID = apendicite?)
+- Vômitos? Diarreia? (gastroenterite)
+- Última menstruação? (mulher - gravidez ectópica, cólica menstrual)
+- **RED FLAGS para EMERGÊNCIA**:
+  - Peritonite (abdome em tábua)?
+  - Instabilidade hemodinâmica?
+  - Gravidez ectópica rota?
+- **Se não tem red flags**: Gastrite, constipação, cólica menstrual → tratar sintomas
+- **Buscar em @md/**: "Dor abdominal diagnóstico diferencial ambulatorial", "Gastrite tratamento"
+
+**CRISE HIPERTENSIVA:**
+- PA atual? (≥180/120 = crise)
+- Sintomas de lesão de órgão-alvo? (dor torácica, dispneia, déficit neuro, alteração visual)
+- **Se TEM sintomas**: EMERGÊNCIA → Transferir
+- **Se NÃO TEM sintomas**: URGÊNCIA → Tratar no PS
+- Toma anti-hipertensivo? Parou? (causa da crise)
+- **Conduta**:
+  - Captopril 25-50 mg SL
+  - Reavaliar PA em 30-60 min
+  - Meta: Reduzir 20-25% da PA, não normalizar!
+- **Buscar em @md/**: "Crise hipertensiva urgência vs emergência", "Captopril dose"
+
+**CRISE ASMÁTICA LEVE/MODERADA:**
+- Consegue falar frases completas? (leve/moderada) ou apenas palavras? (grave)
+- SpO₂? (≥90% = leve/moderada; <90% = grave/transferir)
+- Uso de medicação prévia? (beta-2 em casa?)
+- **Conduta**:
+  - Salbutamol spray 4-8 jatos (repetir a cada 20min até 3x)
+  - Prednisona 40-60 mg VO ou hidrocortisona 200 mg IV
+  - Observar 2-4h
+  - Alta se melhora sustentada
+- **Transferir se**: SpO₂ <90%, não melhora após 3 ciclos, cansaço respiratório
+- **Buscar em @md/**: "Asma exacerbação leve tratamento", "Crise asmática quando transferir"
+
+**CÓLICA RENAL:**
+- Dor lombar irradiando para flanco/virilha? (clássico)
+- Intensidade? (geralmente 9-10/10)
+- Hematúria? (micro ou macroscópica)
+- História de cálculo prévio?
+- **Conduta**:
+  - Analgesia potente: Cetoprofeno 100 mg IV OU Tenoxicam 40 mg IV
+  - Se não melhorar: Tramadol 50-100 mg IV OU Morfina 2-5 mg IV
+  - Antiemético: Metoclopramida 10 mg IV
+  - Hidratação: 500-1000 mL SF 0,9% IV
+  - Observação até melhora da dor
+- **Alta com**: Analgésico VO, muito líquido, USG abdome ambulatorial, urologista se necessário
+- **Buscar em @md/**: "Cólica renal analgesia", "Nefrolitíase manejo"
+
+**CEFALEIA AGUDA:**
+- **RED FLAGS (EMERGÊNCIA - transferir)**:
+  - Pior cefaleia da vida (hemorragia subaracnóidea)
+  - Início súbito (thunderclap)
+  - Febre + rigidez de nuca (meningite)
+  - Déficit neurológico focal (AVC)
+  - Alteração do nível de consciência
+  - Papiledema (↑ PIC)
+- **Se não tem red flags**: Enxaqueca, tensional, sinusite
+- Características: pulsátil (enxaqueca), pressão (tensional), facial (sinusite)?
+- Foto/fonofobia, náuseas? (enxaqueca)
+- **Conduta enxaqueca**:
+  - Dipirona 1g IV + metoclopramida 10 mg IV
+  - Se não melhorar: Dexametasona 4-8 mg IV
+  - Ambiente escuro, silencioso
+- **Buscar em @md/**: "Cefaleia red flags", "Enxaqueca tratamento agudo"
+
+**TRAUMA LEVE (Entorse, Ferimento Superficial):**
+- Mecanismo? (alta energia = transferir)
+- Deformidade óbvia? (fratura exposta = transferir)
+- Pulsos preservados? Sensibilidade? (neurovascular íntegro)
+- **Entorse de tornozelo/joelho**:
+  - Regras de Ottawa (pé/tornozelo, joelho) - quando RX?
+  - PRICE: Proteção, Repouso, Gelo, Compressão, Elevação
+  - Analgesia: AINE
+  - Imobilização: Tala/bota se necessário
+- **Ferimentos**:
+  - Limpeza com SF 0,9%
+  - Anestesia local (lidocaína 1-2%)
+  - Sutura: fio adequado conforme região
+  - Profilaxia tétano se necessário
+- **Buscar em @md/**: "Regras de Ottawa tornozelo", "Sutura técnica face"
+
+**FEBRE EM ADULTO:**
+- Temperatura? (>38,5°C)
+- Foco aparente? (respiratório, urinário, cutâneo)
+- Sinais de sepse? (instabilidade, confusão mental) → TRANSFERIR
+- Comorbidades? (imunossuprimido?)
+- **Conduta**:
+  - Antitérmico: Dipirona 1g IV ou paracetamol 1g VO
+  - Tratar foco se identificado:
+    - Pneumonia: ATB VO e alta (se CURB-65 0-1)
+    - ITU: ATB VO e alta
+    - Faringite: ATB se Centor ≥3
+  - Observação até melhora da febre
+- **Buscar em @md/**: "Febre sem foco adulto", "Sepse critérios qSOFA"
+
+### 4. Construção do Diagnóstico Diferencial
+
+**Método do Pronto Socorro: URGÊNCIAS COMUNS PRIMEIRO, RED FLAGS SEMPRE**
+
+**Estratégia:**
+
+1. **Descartar EMERGÊNCIAS primeiro** (mesmo que improváveis):
+   - Sempre perguntar: "Pode ser grave?"
+   - IAM, AVC, abdome agudo, anafilaxia, sepse
+
+2. **Pensar nas URGÊNCIAS COMUNS**:
+   - Dor: cólica renal, lombalgia, cefaleia tensional
+   - Febre: ITU, pneumonia, faringite
+   - Dispneia: crise asmática, DPOC exacerbado
+   - GI: gastrite, gastroenterite
+
+3. **Diagnóstico SINDRÔMICO é suficiente**:
+   - Não precisa fechar diagnóstico definitivo
+   - "Provável gastrite aguda" é OK
+   - "Lombalgia mecânica" é OK
+   - Encaminhar para investigação ambulatorial se necessário
+
+4. **Usar TEMPO como aliado**:
+   - Observação clínica (2-6h)
+   - Reavaliar após medicação
+   - Resposta ao tratamento ajuda no diagnóstico
+
+**Exemplo Prático - Dor Abdominal:**
+
+**RED FLAGS (Emergências):**
+1. Apendicite complicada
+2. Gravidez ectópica rota
+3. Úlcera perfurada
+4. Isquemia mesentérica
+
+**URGÊNCIAS COMUNS (resolver no PS):**
+1. Gastrite aguda (mais comum)
+2. Constipação
+3. Cólica menstrual
+4. ITU com dor lombar
+5. Gastroenterite
+
+**Método:**
+- Exame físico: tem peritonite? → NÃO → não é emergência
+- β-HCG se mulher em idade fértil
+- Tratar sintomaticamente
+- Observar resposta
+- Alta se melhora OU encaminhar para investigação ambulatorial
+
+### 5. Critérios de Gravidade - Quando Transferir
+
+**TRANSFERÊNCIA IMEDIATA (EMERGÊNCIA):**
+
+**Cardiovascular:**
+- PAS <90 mmHg (choque)
+- FC >140 bpm sustentada (taquiarritmia)
+- FC <40 bpm sintomática (bradiarritmia)
+- Dor torácica + alteração de ECG (IAMCST)
+- Sinais de IC aguda descompensada
+
+**Respiratório:**
+- SpO₂ <90% com O₂ máscara
+- FR >30 ou <10 ipm
+- Cianose, tiragem, uso de musculatura acessória
+- Incapacidade de falar frases completas
+
+**Neurológico:**
+- Glasgow <13
+- Déficit neurológico focal agudo (AVC)
+- Convulsão ativa >5 min
+- Cefaleia com red flags
+
+**Abdominal:**
+- Peritonite (abdome em tábua)
+- Instabilidade + abdome doloroso (hemoperitônio)
+- Gravidez ectópica rota (β-HCG+ + dor + instabilidade)
+
+**Trauma:**
+- Trauma craniano com alteração de consciência
+- Trauma de alta energia
+- Fraturas expostas ou com lesão neurovascular
+- Trauma de tórax/abdome fechado com instabilidade
+
+**Outros:**
+- Anafilaxia
+- Sepse (qSOFA ≥2)
+- Intoxicação grave
+- Sangramento ativo não controlável
+
+**ENCAMINHAMENTO PARA HOSPITAL (não emergência, mas não resolve no PS):**
+- Necessita internação (ex: pneumonia CURB-65 ≥2)
+- Necessita procedimento (ex: drenagem de abscesso grande)
+- Investigação complexa (ex: dor abdominal persistente sem diagnóstico)
+- Seguimento impossível no ambulatório
+
+### 6. Integrando Conhecimento dos Livros (@md/)
+
+**QUANDO BUSCAR EM @md/Medicina Ambulatorial:**
+- Protocolos de urgências ambulatoriais
+- Manejo de doenças crônicas descompensadas
+- Critérios de antibioticoterapia
+- **Query exemplo**: "ITU tratamento ambulatorial", "Pneumonia CURB-65"
+
+**QUANDO BUSCAR EM @md/Semiologia:**
+- Técnicas de exame físico específico
+- Sinais clássicos de doenças
+- Diferenciação de achados
+- **Query exemplo**: "Exame do abdome agudo", "Teste de Ottawa tornozelo"
+
+**QUANDO BUSCAR EM @md/Emergencista:**
+- Quando há dúvida se é urgência ou emergência
+- Estabilização inicial antes de transferir
+- Protocolos de suporte inicial
+- **Query exemplo**: "ACLS bradicardia", "Crise hipertensiva emergência"
+
+**ESTRATÉGIA DE BUSCA ESPECÍFICA:**
+
+**Para Tratamento de Urgência:**
+"[Condição] tratamento ambulatorial" ou "[Condição] manejo pronto socorro"
+Ex: "Cólica renal analgesia", "Crise asmática leve tratamento"
+
+**Para Diferenciar Urgência de Emergência:**
+"[Condição] critérios internação" ou "[Condição] red flags"
+Ex: "Pneumonia CURB-65", "Cefaleia red flags"
+
+**Para Procedimentos:**
+"[Procedimento] técnica" ou "Sutura [região]"
+Ex: "Sutura face técnica", "Imobilização tornozelo"
+
+**Para Prescrição:**
+"[Medicamento] dose" ou "[Condição] antibiótico escolha"
+Ex: "Amoxicilina dose adulto", "Faringite critérios antibiótico"
+
+### 7. Exemplos Práticos de Raciocínio no Pronto Socorro
+
+**EXEMPLO 1: Cólica Renal em Homem de 35 Anos**
+
+**Cenário:**
+Homem, 35 anos, dor lombar direita há 2 horas, intensidade 10/10, irradiando para virilha, inquieto, náuseas, sem vômitos. Afebril, PA 145/90 (dor), FC 95. Nega comorbidades.
+
+**Raciocínio:**
+1. **É emergência?** → NÃO (sinais vitais estáveis, não é abdome agudo)
+2. **Posso resolver aqui?** → SIM (cólica renal típica)
+3. **Dor lombar + irradiação + intensidade extrema + inquietação** → CÓLICA RENAL CLÁSSICA!
+4. **Objetivo**: Controlar dor, hidratação, alta com orientação
+
+**Perguntas-chave:**
+- História de cálculo prévio? (recorrência comum)
+- Hematúria? (suporta diagnóstico)
+- Febre? (se sim, pensar em pielonefrite - não dar só alta)
+
+**Exame físico direcionado:**
+- Giordano positivo (dor à percussão lombar)
+- Abdome sem peritonite
+- Não há bexigoma
+
+**Buscar em @md/**:
+- "Cólica renal tratamento analgesia"
+- "Nefrolitíase manejo ambulatorial"
+
+**Propedêutica no PS:**
+- Urina tipo I (hematúria micro/macro)
+- Glicemia capilar (descartar hiperglicemia)
+
+**Conduta:**
+1. **Analgesia imediata**:
+   - Cetoprofeno 100 mg IV (ou Tenoxicam 40 mg IV)
+   - Se não melhorar em 20-30 min: Tramadol 100 mg IV
+2. **Antiemético**:
+   - Metoclopramida 10 mg IV
+3. **Hidratação**:
+   - SF 0,9% 500 mL IV
+4. **Observação**: 2-4h até controle da dor
+5. **Alta quando dor controlada** com:
+   - Receita:
+     - Cetoprofeno 100 mg VO 12/12h por 3 dias (ou ibuprofeno 600 mg 8/8h)
+     - Escopolamina 10 mg VO 8/8h se dor
+     - Metoclopramida 10 mg VO se náuseas
+   - Orientações:
+     - Beber MUITA água (3-4 L/dia)
+     - Coar a urina (procurar cálculo)
+     - **Retorne se**: febre, vômitos persistentes, anúria, dor não controlável
+   - Seguimento:
+     - USG de vias urinárias (ambulatorial em 1-2 semanas)
+     - Urologista se cálculo >5 mm ou sintomas persistentes
+
+---
+
+**EXEMPLO 2: Crise Hipertensiva (Urgência) em Mulher de 60 Anos**
+
+**Cenário:**
+Mulher, 60 anos, PA 200/110 mmHg (medida 3x), cefaleia leve, sem dor torácica, sem dispneia, sem déficit neurológico. Hipertensa, parou de tomar losartana há 1 semana (acabou o remédio).
+
+**Raciocínio:**
+1. **PA 200/110 = Crise hipertensiva**
+2. **TEM lesão de órgão-alvo?** (dor torácica, dispneia, déficit neuro, alteração visual)
+   → **NÃO** → É URGÊNCIA, não emergência
+3. **Pode tratar no PS**: SIM
+4. **Causa**: Suspensão abrupta de anti-hipertensivo (comum!)
+
+**Perguntas-chave:**
+- Sintomas de emergência hipertensiva? (dor torácica, dispneia, déficit neuro)
+- Por que parou a medicação? (falta de remédio, efeito colateral, esquecimento)
+- Já teve AVC ou IAM prévio?
+
+**Exame físico:**
+- PA em ambos os MMSS (confirmar)
+- Ausculta cardíaca: B3? (IC)
+- Fundoscopia se possível (hemorragias, exsudatos, papiledema)
+- Exame neurológico: pupilas, força, sensibilidade (descartar AVC)
+
+**Buscar em @md/**:
+- "Crise hipertensiva urgência vs emergência"
+- "Captopril sublingual dose"
+
+**Propedêutica no PS:**
+- ECG (hipertrofia VE, isquemia?)
+- Glicemia capilar
+
+**Conduta:**
+1. **Captopril 25 mg SL** (sob a língua)
+2. **Reavaliar PA após 30-60 min**
+3. **Meta: Reduzir 20-25% da PA**, não normalizar! (risco de isquemia se queda abrupta)
+4. **Se PA ainda >180/110**: Repetir captopril 25 mg SL
+5. **Observação**: 2-3h total
+
+**Resultado esperado:**
+- PA após 1h: 170/95 mmHg (redução adequada)
+- Cefaleia melhora
+- Sem sintomas de lesão de órgão-alvo
+
+**Alta com:**
+- Receita:
+  - **Losartana 50 mg 1x/dia** (retomar)
+  - **Anlodipino 5 mg 1x/dia** (adicionar para melhor controle)
+  - Orientar tomar pela MANHÃ, não parar
+- Orientações:
+  - PA alta NÃO DÁ sintomas na maioria das vezes
+  - Medir PA em casa 2x/dia (anotar)
+  - Reduzir sal, exercício, perder peso
+  - **Retorne se**: Dor torácica, falta de ar, visão turva, dormência, cefaleia intensa
+- Seguimento:
+  - Médico de família em 1 semana (ajustar doses)
+  - Cardiologista se PA não controlar
+
+**IMPORTANTE:** Se tivesse dor torácica, dispneia ou déficit neuro → EMERGÊNCIA HIPERTENSIVA → Transferir para emergência!
+
+---
+
+**EXEMPLO 3: Ferimento em Face (Laceração) em Criança de 8 Anos**
+
+**Cenário:**
+Menino, 8 anos, caiu de bicicleta há 1h, laceração de 3 cm em região supraciliar direita, sangrando moderadamente. Consciente, sem perda de consciência no trauma, sem vômitos. Pais preocupados com cicatriz.
+
+**Raciocínio:**
+1. **É emergência?** → NÃO (trauma leve, estável)
+2. **Precisa transferir?** → NÃO (ferimento suturável no PS)
+3. **TCE?** → Não (sem perda de consciência, sem vômitos, Glasgow 15)
+4. **Objetivo**: Sutura estética (face), orientar cuidados
+
+**Perguntas-chave:**
+- Perdeu a consciência? (TCE grave)
+- Quanto tempo desde o trauma? (<12h para suturar)
+- Vacinação em dia? (tétano - última dose <5 anos?)
+- Alergias? (anestésico)
+
+**Exame físico:**
+- Glasgow 15
+- Pupilas isocóricas e fotorreagentes
+- Ferimento: laceração 3 cm, bordas regulares, sem corpo estranho visível, não atinge supercílio completo
+- Palpar crânio: sem afundamento
+
+**Buscar em @md/**:
+- "Sutura face técnica"
+- "TCE leve critérios observação"
+
+**Propedêutica:**
+- Nenhum exame necessário (TCE leve sem critérios)
+
+**Conduta:**
+
+1. **Limpeza**:
+   - SF 0,9% abundante (200-300 mL)
+   - Remover sujidades
+   - Inspeção: sem corpo estranho
+
+2. **Anestesia**:
+   - Lidocaína 1% sem vasoconstritor (face)
+   - Infiltração ao redor da ferida
+   - Aguardar 5-10 min
+
+3. **Sutura**:
+   - **Fio**: Nylon 5-0 ou 6-0 (face de criança)
+   - **Técnica**: Pontos simples separados
+   - **Eversão das bordas** (cicatriz mais estética)
+   - Distância entre pontos: 3-5 mm
+   - Total: ~6-8 pontos
+
+4. **Curativo**:
+   - Gaze estéril + micropore
+   - Não apertar (não precisa)
+
+5. **Profilaxia de Tétano**:
+   - Vacina em dia? → Não precisa
+   - Não vacinado ou última dose >5 anos → dT (se >7 anos) ou dTpa
+
+**Alta com:**
+- Receita:
+  - Paracetamol 200 mg (gotas) se dor
+  - (Não precisa antibiótico - ferimento limpo)
+- Orientações escritas:
+  - Manter curativo limpo e seco por 48h
+  - Após 48h: Pode lavar com água e sabão suavemente
+  - Não molhar muito nos primeiros 5 dias
+  - **Retorno em 5-7 dias para retirar pontos** (face cicatriza rápido)
+  - **Retorne IMEDIATAMENTE se**: Febre, vermelhidão, secreção purulenta, dor aumentando
+- Orientações sobre TCE:
+  - Observar em casa por 48h
+  - **Retorne se**: Vômitos, sonolência excessiva, confusão, convulsão
+
+**Tranquilizar os pais:**
+- Face cicatriza muito bem
+- Cicatriz vai clarear com tempo
+- Evitar sol na cicatriz por 6 meses (hiperpigmentação)
+
+## Protocolos Específicos de Urgências Comuns
+
+### Dores Agudas
+
+#### Cólica Renal
+**Diagnóstico Clínico:**
+- Dor lombar unilateral, tipo cólica, intensidade 8-10/10
+- Irradiação para flanco, abdome inferior, virilha, genitália
+- Inquietação (não consegue ficar parado)
+- Náuseas/vômitos
+- Hematúria (micro ou macroscópica)
+
+**Tratamento:**
+1. **Analgesia**:
+   - 1ª linha: Cetoprofeno 100 mg IV ou Tenoxicam 40 mg IV
+   - 2ª linha (se não melhorar): Tramadol 50-100 mg IV ou Morfina 2-5 mg IV
+   - Evitar: Dipirona isolada (pouco potente para cólica renal)
+
+2. **Antiemético**: Metoclopramida 10 mg IV
+
+3. **Hidratação**: SF 0,9% 500-1000 mL IV
+
+4. **Observação**: 2-4h até controle da dor
+
+**Alta:**
+- AINE VO (cetoprofeno, ibuprofeno)
+- Orientar: muito líquido (3-4 L/dia), coar urina
+- USG vias urinárias ambulatorial
+- Urologista se cálculo >5 mm
+
+**Critérios de Internação/Transferência:**
+- Febre (pielonefrite obstrutiva - emergência urológica)
+- Anúria (obstrução bilateral)
+- Rim único
+- Dor refratária
+
+---
+
+#### Lombalgia Aguda
+**Diferenciação:**
+- **Mecânica** (95%): Início após esforço, melhora com repouso, sem irradiação ou irradiação leve
+- **Red flags** (5%): Trauma, febre, perda de peso, déficit neurológico, incontinência
+
+**Exame Físico:**
+- Inspeção: postura antálgica
+- Palpação: contratura paravertebral, pontos dolorosos
+- Mobilidade: limitação
+- Lasègue: reproduz dor irradiada (compressão radicular)
+- Força, sensibilidade, reflexos de MMII
+
+**Tratamento (Mecânica):**
+- **Analgesia**:
+  - Paracetamol 1g 6/6h + Ibuprofeno 600 mg 8/8h OU
+  - Dipirona 1g 6/6h + Diclofenaco 50 mg 8/8h
+- **Relaxante muscular**:
+  - Ciclobenzaprina 5-10 mg à noite (5-10 dias)
+- **Orientações**:
+  - Calor local
+  - Evitar repouso absoluto (pior)
+  - Retornar atividades gradualmente
+  - Fisioterapia se não melhorar em 2 semanas
+
+**Transferir/Encaminhar se:**
+- Red flags (TC urgente, avaliação neurocirúrgica)
+- Síndrome da cauda equina (anestesia em sela, incontinência) - EMERGÊNCIA
+
+---
+
+#### Cefaleia
+**Classificação Rápida:**
+
+**1. RED FLAGS (EMERGÊNCIA - transferir):**
+- Pior cefaleia da vida (thunderclap)
+- Início súbito em segundos
+- Febre + rigidez de nuca
+- Déficit neurológico focal
+- Alteração do nível de consciência
+- Papiledema
+- Cefaleia nova em >50 anos
+
+**2. Enxaqueca:**
+- Pulsátil, unilateral, moderada/intensa
+- Foto/fonofobia, náuseas/vômitos
+- Piora com atividade física
+- Duração: 4-72h
+
+**Tratamento Enxaqueca no PS:**
+- Dipirona 1g IV + Metoclopramida 10 mg IV
+- Se não melhorar: Dexametasona 4-8 mg IV
+- Ambiente escuro, silencioso
+- Hidratação SE vômitos
+
+**Alta:**
+- Analgésico VO (naproxeno 500 mg, paracetamol)
+- Orientar: dormir, hidratação
+- Encaminhar neurologista se crises frequentes (profilaxia)
+
+**3. Cefaleia Tensional:**
+- Pressão/aperto bilateral
+- Leve/moderada
+- Não piora com atividade
+
+**Tratamento:**
+- Paracetamol 1g ou Dipirona 1g
+- Orientar: massagem, relaxamento
+
+**4. Sinusite:**
+- Dor/pressão facial (maxilar, frontal)
+- Congestão nasal, rinorreia
+- Piora ao abaixar cabeça
+
+**Tratamento:**
+- Analgésico + descongestionante nasal
+- Antibiótico se >10 dias ou sintomas graves
+
+---
+
+### Urgências Respiratórias
+
+#### Crise Asmática Leve/Moderada
+**Classificação:**
+- **Leve**: Fala frases completas, SpO₂ >95%, sem tiragem
+- **Moderada**: Fala frases curtas, SpO₂ 90-95%, tiragem leve
+- **Grave** (TRANSFERIR): Fala palavras isoladas, SpO₂ <90%, tiragem, cianose
+
+**Tratamento no PS:**
+1. **Salbutamol spray**:
+   - 4-8 jatos com espaçador
+   - Repetir a cada 20 min (até 3 ciclos na 1ª hora)
+
+2. **Corticoide**:
+   - Prednisona 40-60 mg VO OU
+   - Hidrocortisona 200 mg IV (se vômitos ou muito grave)
+
+3. **Oxigênio**: Se SpO₂ <90% (alvo 93-95%)
+
+4. **Observação**: 2-4h após último ciclo de salbutamol
+
+**Alta:**
+- Critérios: SpO₂ >93%, melhora clínica sustentada, pode usar salbutamol <3/3h
+- Receita:
+  - Salbutamol spray (2 jatos 6/6h por 3-5 dias, depois SOS)
+  - Prednisona 40 mg/dia por 5 dias
+  - Encaminhar pneumologista (otimizar controle)
+
+**Transferir se:**
+- SpO₂ <90% após tratamento
+- Sem melhora após 3 ciclos
+- Piora clínica (cansaço, confusão)
+- Necessidade de salbutamol <1h
+
+---
+
+#### Exacerbação de DPOC
+**Diagnóstico:**
+- Piora da dispneia, tosse, volume/purulência do escarro
+- História de DPOC (tabagismo, espirometria prévia)
+
+**Classificação:**
+- **Leve**: Aumento de medicação resolve
+- **Moderada**: Necessita corticoide/ATB
+- **Grave**: Insuficiência respiratória (SpO₂ <90%, FR >25, tiragem)
+
+**Tratamento Moderado no PS:**
+1. **Broncodilatador**:
+   - Salbutamol + Ipratrópio (nebulização ou spray)
+   - Repetir conforme necessidade
+
+2. **Corticoide**:
+   - Prednisona 40 mg/dia por 5 dias
+
+3. **Antibiótico** (se aumento de purulência do escarro):
+   - Azitromicina 500 mg/dia por 3 dias OU
+   - Amoxicilina-clavulanato 875/125 mg 12/12h por 5-7 dias
+
+4. **Oxigênio**: Se SpO₂ <88-92% (alvo 88-92% no DPOC!)
+
+**Alta:**
+- Se melhora clínica, SpO₂ >88%
+- Orientar: não parar medicação de base, parar de fumar
+
+**Transferir se:**
+- Insuficiência respiratória grave
+- Acidose respiratória (gasometria)
+- Comorbidades descompensadas
+- Não melhora com tratamento
+
+---
+
+### Urgências Cardiovasculares
+
+#### Crise Hipertensiva
+**Definição:**
+- PAS ≥180 mmHg ou PAD ≥120 mmHg
+
+**Diferenciar:**
+
+**Urgência Hipertensiva** (tratar no PS):
+- PA muito elevada SEM lesão aguda de órgão-alvo
+- Sem dor torácica, sem dispneia, sem déficit neuro, sem alteração visual
+
+**Emergência Hipertensiva** (TRANSFERIR):
+- PA muito elevada COM lesão aguda de órgão-alvo:
+  - Encefalopatia hipertensiva
+  - AVC
+  - Síndrome coronariana aguda
+  - Edema agudo de pulmão
+  - Dissecção de aorta
+  - Eclâmpsia
+
+**Tratamento Urgência Hipertensiva:**
+1. **Captopril 25-50 mg SL** (sublingual)
+2. **Reavaliar PA em 30-60 min**
+3. **Meta: Reduzir 20-25% da PA inicial** (não normalizar!)
+4. **Se ainda muito alta**: Repetir captopril
+5. **Observação**: 2-3h
+
+**Alta:**
+- Otimizar anti-hipertensivos VO
+- Orientar: tomar regularmente, não parar
+- Seguimento: médico de família/cardiologista em 1 semana
+
+---
+
+#### Palpitações
+**Diferenciação:**
+- Extrassístoles benignas (mais comum)
+- Taquiarritmia sustentada (FA, flutter, TPSV)
+
+**Avaliação:**
+- ECG (obrigatório!)
+- Sinais vitais (estabilidade)
+
+**Se ECG normal E assintomático:**
+- Tranquilizar
+- Orientar: evitar cafeína, álcool, estresse
+- Cardiologista se recorrente (Holter)
+
+**Se taquiarritmia no ECG:**
+- Estável: medicação (adenosina se TPSV)
+- Instável: TRANSFERIR para emergência (cardioversão)
+
+---
+
+### Trauma Leve
+
+#### Entorses e Contusões
+**Avaliação:**
+- Mecanismo (baixa energia)
+- Dor, edema, limitação funcional
+- Pulsos, sensibilidade, mobilidade ativa
+
+**Regras de Ottawa (quando RX?):**
+
+**Tornozelo:**
+- Dor no maléolo + incapacidade de dar 4 passos + dor óssea à palpação
+
+**Joelho:**
+- Idade >55 anos OU
+- Dor isolada na patela OU
+- Dor isolada na cabeça da fíbula OU
+- Incapacidade de flexionar 90° OU
+- Incapacidade de dar 4 passos
+
+**Se RX não indicado:**
+- Diagnóstico: entorse
+- PRICE: Proteção, Repouso relativo, Gelo, Compressão, Elevação
+- Analgesia: AINE
+- Imobilização: tala/bota se dor intensa
+- Orientar: repouso 48-72h, retornar atividades gradualmente
+
+**Alta:**
+- Ibuprofeno 600 mg 8/8h
+- Orientações PRICE
+- Fisioterapia se não melhorar em 1-2 semanas
+
+---
+
+#### Ferimentos - Suturas
+**Avaliação:**
+- Tempo desde trauma (<12h: suturar; >12h: considerar 2ª intenção)
+- Profundidade (apenas pele? músculo? tendão?)
+- Localização (face, mão, tronco, membros)
+- Contaminação (limpo, sujo)
+
+**Limpeza:**
+- SF 0,9% abundante (100-500 mL)
+- Remover sujidades, detritos
+- Inspeção: corpo estranho? lesão profunda?
+
+**Anestesia:**
+- Lidocaína 1-2% sem vasoconstritor (máx 4 mg/kg)
+- Lidocaína com vasoconstritor (máx 7 mg/kg) - NÃO usar em extremidades (dedos, orelha, nariz)
+
+**Escolha do Fio:**
+- **Face**: Nylon 5-0 ou 6-0 (retirar em 5-7 dias)
+- **Couro cabeludo**: Nylon 3-0 ou 4-0 (7-10 dias)
+- **Tronco**: Nylon 3-0 ou 4-0 (10-14 dias)
+- **Membros**: Nylon 3-0 ou 4-0 (10-14 dias)
+- **Mãos**: Nylon 4-0 ou 5-0 (10-12 dias)
+
+**Técnica:**
+- Pontos simples separados
+- Eversão das bordas
+- Distância: 5-10 mm entre pontos
+
+**Profilaxia de Tétano:**
+- Vacina completa + última dose <5 anos: Não precisa
+- Vacina completa + última dose >5 anos: dT ou dTpa
+- Vacinação incompleta/desconhecida: dT + imunoglobulina (se ferimento sujo)
+
+**Antibiótico Profilático:**
+- Ferimento limpo, suturado em <6h: NÃO precisa
+- Indicações: Ferimento sujo, mordedura, mão, imunossuprimido
+- Escolha: Amoxicilina-clavulanato 875/125 mg 12/12h por 5-7 dias
+
+**Alta:**
+- Orientar: manter limpo e seco, retorno para retirar pontos
+- Retornar se: febre, vermelhidão, secreção, dor aumentando
+
+---
+
+### Urgências Dermatológicas
+
+#### Celulite
+**Diagnóstico:**
+- Eritema, calor, edema, dor em região de pele
+- Pode ter porta de entrada (ferimento, micose)
+- Febre (variável)
+
+**Classificação:**
+- **Leve**: Sem sinais sistêmicos, área pequena
+- **Moderada**: Febre baixa, área maior
+- **Grave** (TRANSFERIR): Febre alta, sinais sistêmicos, área extensa, face, imunossuprimido
+
+**Tratamento Leve/Moderado no PS:**
+- Cefalexina 500 mg 6/6h por 7-10 dias OU
+- Amoxicilina-clavulanato 875/125 mg 12/12h por 7-10 dias
+- Analgesia: AINE
+- Orientar: repouso, elevação do membro, compressa morna
+
+**Alta:**
+- Retornar em 48-72h (avaliar melhora)
+- Retornar IMEDIATAMENTE se: piora, febre alta, área aumentando rapidamente
+
+---
+
+#### Abscesso Cutâneo Pequeno
+**Diagnóstico:**
+- Coleção purulenta, flutuação
+- Dor, eritema local
+
+**Tratamento:**
+- **Drenagem** (se flutuante):
+  - Anestesia local
+  - Incisão + drenagem
+  - Cultura do pus
+  - Curativo
+- **Antibiótico**:
+  - Cefalexina 500 mg 6/6h por 7 dias (se celulite associada)
+  - Se só drenagem: pode não precisar ATB
+
+**Alta:**
+- Orientar: trocar curativo diário, compressa morna
+- Retorno em 48h (reavaliar)
+
+---
+
+### Orientações de Alta
+
+#### Como Prescrever Receita de Urgência
+**Estrutura da Receita:**
+1. **Cabeçalho**: Nome do médico, CRM, carimbo/assinatura
+2. **Paciente**: Nome completo, idade
+3. **Data**
+4. **Prescrição**:
+   - Nome genérico do medicamento
+   - Concentração/apresentação
+   - Quantidade
+   - Posologia (como tomar)
+5. **Orientações gerais**
+
+**Exemplo:**
+```
+Ibuprofeno 600 mg comprimidos
+Quantidade: 20 comprimidos
+Posologia: Tomar 1 comprimido de 8 em 8 horas, junto com alimento, por 5 dias
+```
+
+**Dicas:**
+- Usar linguagem clara ("de 8 em 8 horas" > "8/8h")
+- Especificar duração ("por 5 dias")
+- Alertas: "junto com alimento", "não dirigir"
+- Sempre assinar e carimbar
+
+---
+
+#### Critérios de "Retorne Se..."
+**Sempre incluir sinais de alarme específicos:**
+
+**Dor Abdominal:**
+- Febre
+- Vômitos persistentes
+- Dor aumentando
+- Sangue nas fezes ou vômito
+
+**Ferimentos:**
+- Febre
+- Vermelhidão aumentando
+- Secreção purulenta
+- Dor aumentando
+
+**Crise Asmática:**
+- Falta de ar não melhorando
+- Usando salbutamol de 2/2h ou menos
+- Dificuldade para falar
+- Cor arroxeada
+
+**Infecções:**
+- Febre persistente >48h
+- Piora dos sintomas
+- Novo sintoma surgindo
+
+**Geral:**
+- Qualquer piora
+- Sintoma novo ou inesperado
+- Dúvida
+
+---
+
+### Critérios de Transferência
+
+#### Para Emergência (SAMU/Urgente)
+- Instabilidade hemodinâmica
+- Insuficiência respiratória grave
+- Alteração do nível de consciência
+- Dor torácica + alteração de ECG
+- Abdome agudo cirúrgico
+- AVC agudo
+- Trauma moderado/grave
+- Anafilaxia
+- Sepse
+
+**Como transferir:**
+1. Estabilizar (O₂, acesso, cristaloide)
+2. Contatar regulação/hospital de destino
+3. SAMU ou ambulância com suporte
+4. Relatório por escrito (resumo + exames)
+
+---
+
+#### Para Hospital (Internação Programada)
+- Pneumonia CURB-65 ≥2
+- Celulite extensa
+- Desidratação grave
+- Necessita procedimento (drenagem, cirurgia)
+- Investigação complexa
+
+**Como encaminhar:**
+1. Contato com hospital (vaga confirmada)
+2. Relatório detalhado
+3. Transporte adequado (ambulância simples OK)
+4. Orientar paciente/família
+
+---
+
+#### Para Seguimento Ambulatorial
+- Urgência resolvida, mas necessita acompanhamento
+- Investigação diagnóstica complementar
+- Ajuste de medicação crônica
+
+**Como encaminhar:**
+- Relatório com resumo
+- Exames já realizados (anexar)
+- Sugestão de especialidade
+- Orientar procurar UBS/especialista em X dias
+
+---
+
+## Referências
+
+- **Medicina Ambulatorial - Duncan - 5ª Ed.**
+- **Protocolos de Urgências e Emergências - Ministério da Saúde**
+- **Diretrizes da Sociedade Brasileira de Clínica Médica**
+- **Protocolos de Manchester para Classificação de Risco**
+- **Manual de Suturas - Técnicas e Materiais**
+- **CURB-65 e Critérios de Internação em Pneumonia**
+- **Guidelines de Manejo de Dor Aguda**

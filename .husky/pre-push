@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# Verifica lint em todo o projeto antes de push
+echo "🔍 Verificando lint..."
+npm run lint || exit 1
+
+# Verifica formatação
+echo "🎨 Verificando formatação..."
+npm run format:check || exit 1
+
+# Roda todos os testes antes de push
+echo "🧪 Rodando testes..."
+npm run backend:test || exit 1
+
+echo "✅ Tudo certo! Pode fazer push."
+

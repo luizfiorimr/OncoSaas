@@ -1,0 +1,909 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Schema compartilhado (cross-tenant)
+model User {
+  id         String   @id @default(uuid())
+  tenantId   String
+  email      String
+  name       String
+  role       UserRole
+  password   String // Hash bcrypt
+  mfaEnabled Boolean  @default(false)
+  mfaSecret  String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  tenant        Tenant         @relation(fields: [tenantId], references: [id])
+  internalNotes InternalNote[]
+  interventions Intervention[]
+
+  @@unique([tenantId, email])
+  @@map("users")
+}
+
+enum UserRole {
+  ADMIN
+  ONCOLOGIST
+  DOCTOR
+  NURSE_CHIEF
+  NURSE
+  COORDINATOR
+}
+
+// ============================================
+// MODELOS ESPECÍFICOS POR TENANT
+// ============================================
+// Nota: Todos os modelos abaixo incluem tenantId para isolamento multi-tenant
+// As queries devem SEMPRE incluir tenantId no where clause
+
+// Paciente Oncológico
+model Patient {
+  id       String @id @default(uuid())
+  tenantId String
+
+  // Dados básicos
+  name      String
+  cpf       String? // Criptografado (LGPD)
+  birthDate DateTime
+  gender    String? // male, female, other
+  phone     String // WhatsApp - Criptografado (LGPD)
+  phoneHash String? // Hash SHA-256 do telefone normalizado para busca eficiente (indexado)
+  email     String?
+
+  // Dados oncológicos
+  cancerType        String? // Tipo de câncer
+  stage             String? // TNM ou estágio (ex: "T2N1M0", "Estágio II")
+  diagnosisDate     DateTime?
+  performanceStatus Int? // ECOG (0-4) ou Karnofsky (0-100)
+
+  // Comorbidades e Fatores de Risco
+  comorbidities        Json? // Array de objetos: { name: string, severity: string, controlled: boolean }
+  smokingHistory       String? // nunca fumou, ex-fumante, fumante atual (anos-maço)
+  alcoholHistory       String? // nunca, ocasional, moderado, pesado (g/dia)
+  occupationalExposure String? // Exposições ocupacionais conhecidas
+  familyHistory        Json? // Array de objetos: { relationship: string, cancerType: string, ageAtDiagnosis: number }
+
+  // Jornada oncológica
+  currentStage     JourneyStage @default(SCREENING)
+  currentSpecialty String? // oncologia, cirurgia, radioterapia
+
+  // Priorização IA
+  priorityScore     Int              @default(0) // 0-100
+  priorityCategory  PriorityCategory @default(LOW)
+  priorityReason    String? // Explicação do score
+  priorityUpdatedAt DateTime?
+
+  // Integração EHR
+  ehrPatientId String? // ID no sistema externo (EHR/PMS)
+  lastSyncAt   DateTime?
+
+  // Status
+  status          PatientStatus @default(ACTIVE)
+  lastInteraction DateTime? // Última interação com agente
+
+  // Relacionamentos
+  tenant                 Tenant                  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  messages               Message[]
+  alerts                 Alert[]
+  journey                PatientJourney?
+  observations           Observation[]
+  priorityHistory        PriorityScore[]
+  questionnaireResponses QuestionnaireResponse[]
+  cancerDiagnoses        CancerDiagnosis[] // Múltiplos diagnósticos de câncer
+  treatments             Treatment[] // Tratamentos oncológicos
+  navigationSteps        NavigationStep[] // Etapas de navegação oncológica
+  internalNotes          InternalNote[]
+  interventions          Intervention[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([tenantId])
+  @@index([priorityScore])
+  @@index([currentStage])
+  @@index([status])
+  @@index([ehrPatientId])
+  @@index([phoneHash]) // Índice para busca eficiente por telefone
+  @@map("patients")
+}
+
+enum JourneyStage {
+  SCREENING // Rastreio
+  NAVIGATION // Navegação entre especialidades
+  DIAGNOSIS // Diagnóstico
+  TREATMENT // Tratamento
+  FOLLOW_UP // Seguimento
+}
+
+enum PriorityCategory {
+  CRITICAL // Crítico (score 80-100)
+  HIGH // Alto (score 60-79)
+  MEDIUM // Médio (score 40-59)
+  LOW // Baixo (score 0-39)
+}
+
+enum PatientStatus {
+  ACTIVE // Ativo
+  IN_TREATMENT // Em tratamento
+  FOLLOW_UP // Em seguimento
+  COMPLETED // Tratamento completo
+  DECEASED // Óbito
+  INACTIVE // Inativo
+  PALLIATIVE_CARE // Tratamento paliativo
+}
+
+// Jornada do Paciente (1:1 com Patient)
+model PatientJourney {
+  id        String @id @default(uuid())
+  tenantId  String
+  patientId String @unique
+
+  // Rastreio
+  screeningDate   DateTime?
+  screeningResult String?
+
+  // Diagnóstico
+  diagnosisDate      DateTime?
+  diagnosisConfirmed Boolean   @default(false)
+  pathologyReport    String?
+  stagingDate        DateTime?
+
+  // Tratamento
+  treatmentStartDate DateTime?
+  treatmentType      TreatmentType?
+  treatmentProtocol  String?
+  currentCycle       Int?
+  totalCycles        Int?
+
+  // Seguimento
+  lastFollowUpDate DateTime?
+  nextFollowUpDate DateTime?
+
+  // Navegação
+  currentStep String? // Etapa atual detalhada
+  nextStep    String? // Próxima etapa
+  blockers    String[] // Bloqueios/atrasos
+
+  // Relacionamentos
+  tenant          Tenant           @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  patient         Patient          @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  navigationSteps NavigationStep[] // Etapas de navegação do paciente
+
+  updatedAt DateTime @updatedAt
+
+  @@index([tenantId])
+  @@index([patientId])
+  @@map("patient_journeys")
+}
+
+// Etapas de Navegação Oncológica (checklist por tipo de câncer e etapa)
+model NavigationStep {
+  id        String  @id @default(uuid())
+  tenantId  String
+  patientId String
+  journeyId String? // Opcional: referência ao PatientJourney
+
+  // Contexto
+  cancerType      String // Tipo de câncer (ex: "colorectal", "breast")
+  journeyStage    JourneyStage // Etapa da jornada (SCREENING, DIAGNOSIS, TREATMENT, FOLLOW_UP)
+  stepKey         String // Chave única da etapa (ex: "colonoscopy", "biopsy", "surgery")
+  stepName        String // Nome legível (ex: "Colonoscopia")
+  stepDescription String? // Descrição detalhada
+
+  // Status da etapa
+  status      NavigationStepStatus @default(PENDING)
+  isRequired  Boolean              @default(true) // Etapa obrigatória?
+  isCompleted Boolean              @default(false)
+  completedAt DateTime?
+  completedBy String? // userId que marcou como completa
+
+  // Datas e prazos
+  expectedDate DateTime? // Data esperada para conclusão
+  dueDate      DateTime? // Prazo máximo (data limite para gerar alarmes de atraso)
+  actualDate   DateTime? // Data real de conclusão
+
+  // Dados da realização da etapa
+  institutionName  String? // Instituição de saúde onde foi realizada
+  professionalName String? // Profissional que realizou a etapa
+  result           String? // Resultado da etapa (ex: "Normal", "Alterado", "Pendente")
+  findings         Json? // Lista de achados/alterações (array de strings ou objetos)
+
+  // Metadados
+  metadata Json? // Informações adicionais (exame, resultado, etc.)
+  notes    String? // Observações
+
+  // Relacionamentos
+  tenant  Tenant          @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  patient Patient         @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  journey PatientJourney? @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([tenantId])
+  @@index([patientId])
+  @@index([journeyId])
+  @@index([cancerType, journeyStage])
+  @@index([status])
+  @@index([dueDate])
+  @@map("navigation_steps")
+}
+
+enum NavigationStepStatus {
+  PENDING // Pendente
+  IN_PROGRESS // Em andamento
+  COMPLETED // Concluída
+  OVERDUE // Atrasada
+  CANCELLED // Cancelada
+  NOT_APPLICABLE // Não aplicável
+}
+
+enum TreatmentType {
+  CHEMOTHERAPY // Quimioterapia
+  RADIOTHERAPY // Radioterapia
+  SURGERY // Cirurgia
+  COMBINED // Combinado
+  IMMUNOTHERAPY // Imunoterapia
+  TARGETED // Terapia alvo
+}
+
+// Diagnóstico de Câncer (suporta múltiplos diagnósticos por paciente)
+model CancerDiagnosis {
+  id        String @id @default(uuid())
+  tenantId  String
+  patientId String
+
+  // Tipo de câncer
+  cancerType String // Ex: "Câncer de Mama", "Câncer de Pulmão"
+  icd10Code  String? // Código ICD-10 (ex: "C50.9")
+
+  // Estadiamento
+  stage       String? // TNM ou estágio (ex: "T2N1M0", "Estágio II") - calculado automaticamente
+  tStage      String? // T1, T2, T3, T4, Tis, Tx
+  nStage      String? // N0, N1, N2, N3, Nx
+  mStage      String? // M0, M1, Mx
+  grade       String? // G1, G2, G3, G4, Gx (graduação histológica)
+  stagingDate DateTime?
+
+  // Tipo Histológico
+  histologicalType String? // adenocarcinoma, carcinoma escamoso, carcinoma de pequenas células, etc.
+
+  // Diagnóstico
+  diagnosisDate      DateTime
+  diagnosisConfirmed Boolean  @default(true)
+  pathologyReport    String? // Laudo anatomopatológico
+  confirmedBy        String? // Médico que confirmou (ID do usuário)
+
+  // Biomarcadores - Câncer de Mama
+  her2Status    String? // positivo, negativo, indeterminado
+  erStatus      String? // positivo, negativo (receptor de estrogênio)
+  prStatus      String? // positivo, negativo (receptor de progesterona)
+  ki67Percentage Float? // Percentual Ki-67 (0-100)
+
+  // Biomarcadores - Câncer de Pulmão/Colorretal
+  egfrMutation     String? // mutado, wild-type, indeterminado
+  alkRearrangement String? // positivo, negativo
+  ros1Rearrangement String? // positivo, negativo
+  brafMutation     String? // mutado, wild-type
+  krasMutation     String? // mutado, wild-type
+  nrasMutation     String? // mutado, wild-type
+  pdl1Expression   Float? // Percentual PD-L1 (0-100)
+  msiStatus        String? // MSI-H, MSS, indeterminado
+
+  // Biomarcadores - Câncer de Próstata
+  psaBaseline  Float? // PSA inicial (ng/mL)
+  gleasonScore String? // ex: "3+4=7", "4+3=7"
+
+  // Marcadores Tumorais
+  ceaBaseline  Float? // CEA inicial (ng/mL)
+  ca199Baseline Float? // CA 19-9 inicial (U/mL)
+  ca125Baseline Float? // CA 125 inicial (U/mL)
+  ca153Baseline Float? // CA 15-3 inicial (U/mL)
+  afpBaseline  Float? // AFP inicial (ng/mL)
+  hcgBaseline  Float? // β-HCG inicial (mUI/mL)
+
+  // Status do diagnóstico
+  isPrimary        Boolean   @default(true) // Diagnóstico primário?
+  isActive         Boolean   @default(true) // Ainda ativo?
+  resolvedDate     DateTime? // Data de resolução (se curado/removido)
+  resolutionReason String? // Motivo da resolução
+
+  // Relacionamentos
+  tenant     Tenant      @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  patient    Patient     @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  treatments Treatment[] // Tratamentos vinculados a este diagnóstico
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([tenantId])
+  @@index([patientId])
+  @@index([isActive])
+  @@index([isPrimary])
+  @@map("cancer_diagnoses")
+}
+
+// Tratamento Oncológico (vinculado a um diagnóstico específico)
+model Treatment {
+  id        String @id @default(uuid())
+  tenantId  String
+  patientId String
+  diagnosisId String // Vinculado a um CancerDiagnosis específico
+
+  // Tipo e Protocolo
+  treatmentType   TreatmentType // Quimioterapia, Radioterapia, Cirurgia, etc.
+  treatmentName   String? // Nome do tratamento (ex: "FOLFOX", "AC-T")
+  protocol         String? // Protocolo completo
+  line             Int? // Linha de tratamento (1ª linha, 2ª linha, etc.)
+  intent           TreatmentIntent @default(CURATIVE) // Curativo ou paliativo
+
+  // Datas
+  startDate        DateTime? // Data de início
+  plannedEndDate   DateTime? // Data prevista de término
+  actualEndDate    DateTime? // Data real de término
+  lastCycleDate    DateTime? // Data do último ciclo
+
+  // Ciclos
+  currentCycle     Int? // Ciclo atual
+  totalCycles      Int? // Total de ciclos planejados
+  cyclesCompleted  Int? @default(0) // Ciclos já completados
+
+  // Status
+  status           TreatmentStatus @default(PLANNED)
+  isActive         Boolean         @default(true)
+  discontinuationReason String? // Motivo da descontinuação (se aplicável)
+
+  // Detalhes do Tratamento
+  medications      Json? // Array de medicamentos: [{ name: string, dose: string, route: string }]
+  frequency        String? // Frequência (ex: "A cada 21 dias", "Diário")
+  administrationRoute String? // Via de administração (IV, VO, SC, etc.)
+  institutionName String? // Instituição onde está sendo realizado
+  physicianName   String? // Médico responsável
+
+  // Toxicidades e Acompanhamento
+  toxicities       Json? // Array de toxicidades: [{ type: string, grade: number, date: DateTime }]
+  doseReductions   Json? // Histórico de reduções de dose: [{ date: DateTime, reason: string, newDose: string }]
+  delays           Json? // Histórico de atrasos: [{ date: DateTime, reason: string, daysDelayed: number }]
+
+  // Resposta ao Tratamento
+  response         TreatmentResponse? // RC, RP, DE, PD
+  responseDate     DateTime? // Data da avaliação de resposta
+  responseNotes    String? // Observações sobre a resposta
+
+  // Metadados
+  notes            String? // Observações gerais
+  metadata         Json? // Informações adicionais
+
+  // Relacionamentos
+  tenant   Tenant          @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  patient  Patient         @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  diagnosis CancerDiagnosis @relation(fields: [diagnosisId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([tenantId])
+  @@index([patientId])
+  @@index([diagnosisId])
+  @@index([status])
+  @@index([isActive])
+  @@index([treatmentType])
+  @@map("treatments")
+}
+
+enum TreatmentIntent {
+  CURATIVE // Curativo
+  PALLIATIVE // Paliativo
+  ADJUVANT // Adjuvante
+  NEOADJUVANT // Neoadjuvante
+}
+
+enum TreatmentStatus {
+  PLANNED // Planejado
+  ACTIVE // Em andamento
+  COMPLETED // Concluído
+  SUSPENDED // Suspenso
+  DISCONTINUED // Descontinuado
+  CANCELLED // Cancelado
+}
+
+enum TreatmentResponse {
+  COMPLETE_RESPONSE // Resposta Completa (RC)
+  PARTIAL_RESPONSE // Resposta Parcial (RP)
+  STABLE_DISEASE // Doença Estável (DE)
+  PROGRESSIVE_DISEASE // Doença Progressiva (PD)
+  NOT_EVALUATED // Não avaliado
+}
+
+// Mensagens WhatsApp (Conversas)
+model Message {
+  id             String  @id @default(uuid())
+  tenantId       String
+  patientId      String
+  conversationId String? // Agrupa mensagens da mesma conversa
+
+  // Dados da mensagem
+  whatsappMessageId String           @unique // ID único do WhatsApp
+  whatsappTimestamp DateTime // Timestamp original do WhatsApp
+  type              MessageType
+  direction         MessageDirection
+  content           String // Texto ou transcrição do áudio - Criptografado (LGPD)
+
+  // Áudio (se aplicável)
+  audioUrl        String? // URL do áudio no S3 - Criptografado
+  audioDuration   Int? // Duração em segundos
+  transcribedText String? // Texto transcrito (STT) - Criptografado
+
+  // Processamento IA
+  processedBy              ProcessedBy @default(AGENT)
+  structuredData           Json? // Dados estruturados extraídos (sintomas, escalas)
+  criticalSymptomsDetected String[] // Sintomas críticos detectados
+  alertTriggered           Boolean     @default(false)
+
+  // Handoff manual (enfermagem assume)
+  assumedBy String? // userId que assumiu
+  assumedAt DateTime?
+
+  // Relacionamentos
+  tenant        Tenant         @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  patient       Patient        @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  interventions Intervention[]
+
+  createdAt DateTime @default(now())
+
+  @@index([tenantId])
+  @@index([patientId])
+  @@index([conversationId])
+  @@index([whatsappTimestamp])
+  @@index([alertTriggered])
+  @@map("messages")
+}
+
+enum MessageType {
+  TEXT
+  AUDIO
+  IMAGE
+  DOCUMENT
+}
+
+enum MessageDirection {
+  INBOUND // Paciente → Sistema
+  OUTBOUND // Sistema → Paciente
+}
+
+enum ProcessedBy {
+  AGENT // Processado pelo agente de IA
+  NURSING // Processado manualmente pela enfermagem
+}
+
+// Alertas
+model Alert {
+  id        String @id @default(uuid())
+  tenantId  String
+  patientId String
+
+  // Tipo e severidade
+  type     AlertType
+  severity AlertSeverity
+  message  String
+
+  // Contexto
+  context Json? // Metadados (conversationId, symptom, scores, etc.)
+
+  // Status
+  status         AlertStatus @default(PENDING)
+  acknowledgedBy String? // userId
+  acknowledgedAt DateTime?
+  resolvedBy     String? // userId
+  resolvedAt     DateTime?
+  dismissedAt    DateTime?
+
+  // Relacionamentos
+  tenant  Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  patient Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([tenantId])
+  @@index([patientId])
+  @@index([status])
+  @@index([severity, createdAt])
+  @@map("alerts")
+}
+
+enum AlertType {
+  CRITICAL_SYMPTOM // Sintoma crítico detectado
+  NO_RESPONSE // Paciente não respondeu (≥3 dias)
+  DELAYED_APPOINTMENT // Atraso em consulta/exame
+  SCORE_CHANGE // Mudança significativa no score
+  SYMPTOM_WORSENING // Piora súbita de sintomas
+  NAVIGATION_DELAY // Atraso em etapa da navegação oncológica
+  MISSING_EXAM // Exame necessário não realizado
+  STAGING_INCOMPLETE // Estadiamento incompleto
+  TREATMENT_DELAY // Atraso no início do tratamento
+  FOLLOW_UP_OVERDUE // Seguimento atrasado
+  PALLIATIVE_SYMPTOM_WORSENING // Piora de sintomas em paciente paliativo
+  PALLIATIVE_MEDICATION_ADJUSTMENT // Necessidade de ajuste de medicação em paciente paliativo
+  PALLIATIVE_FAMILY_SUPPORT // Necessidade de suporte familiar em paciente paliativo
+  PALLIATIVE_PSYCHOSOCIAL // Necessidade de avaliação psicossocial em paciente paliativo
+}
+
+enum AlertSeverity {
+  CRITICAL
+  HIGH
+  MEDIUM
+  LOW
+}
+
+enum AlertStatus {
+  PENDING // Pendente
+  ACKNOWLEDGED // Reconhecido
+  RESOLVED // Resolvido
+  DISMISSED // Descartado
+}
+
+// Observações Clínicas (FHIR Observation)
+model Observation {
+  id        String  @id @default(uuid())
+  tenantId  String
+  patientId String
+  messageId String? // Origem da observação (mensagem WhatsApp)
+
+  // FHIR Resource
+  code          String // LOINC code (ex: "72514-3" para Pain severity)
+  display       String // Descrição legível
+  valueQuantity Decimal? // Valor numérico
+  valueString   String? // Valor textual
+  unit          String? // Unidade de medida
+
+  // Metadados FHIR
+  effectiveDateTime DateTime // Quando foi coletado
+  status            String   @default("final")
+
+  // Sincronização EHR
+  fhirResourceId String? // ID no FHIR server externo
+  syncedToEHR    Boolean   @default(false)
+  syncedAt       DateTime?
+
+  // Relacionamentos
+  tenant  Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  patient Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@index([tenantId])
+  @@index([patientId])
+  @@index([code])
+  @@index([syncedToEHR])
+  @@map("observations")
+}
+
+// Histórico de Scores de Priorização
+model PriorityScore {
+  id        String @id @default(uuid())
+  tenantId  String
+  patientId String
+
+  // Score
+  score    Int // 0-100
+  category PriorityCategory
+  reason   String? // Explicação do score
+
+  // Metadados
+  calculatedAt DateTime @default(now())
+  modelVersion String? // Versão do modelo ML usado
+
+  // Relacionamentos
+  tenant  Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  patient Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([patientId])
+  @@index([calculatedAt])
+  @@map("priority_scores")
+}
+
+// Questionários (EORTC, PRO-CTCAE, ESAS, etc.)
+model Questionnaire {
+  id       String @id @default(uuid())
+  tenantId String
+
+  // Identificação
+  code        String  @unique // Código único (ex: "EORTC-QLQ-C30", "PRO-CTCAE")
+  name        String
+  description String?
+
+  // Tipo e configuração
+  type     QuestionnaireType
+  isActive Boolean           @default(true)
+
+  // Estrutura do questionário (JSON schema)
+  structure Json // Estrutura completa do questionário
+
+  // Relacionamentos
+  tenant    Tenant                  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  responses QuestionnaireResponse[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([tenantId])
+  @@index([code])
+  @@map("questionnaires")
+}
+
+enum QuestionnaireType {
+  EORTC_QLQ_C30
+  PRO_CTCAE
+  ESAS
+  CUSTOM
+}
+
+// Respostas aos Questionários
+model QuestionnaireResponse {
+  id              String @id @default(uuid())
+  tenantId        String
+  patientId       String
+  questionnaireId String
+
+  // Respostas
+  responses   Json // Respostas estruturadas
+  completedAt DateTime @default(now())
+
+  // Contexto
+  messageId String? // Se aplicado via WhatsApp
+  appliedBy ProcessedBy @default(AGENT)
+
+  // Relacionamentos
+  tenant        Tenant        @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  patient       Patient       @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  questionnaire Questionnaire @relation(fields: [questionnaireId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([patientId])
+  @@index([questionnaireId])
+  @@index([completedAt])
+  @@map("questionnaire_responses")
+}
+
+// Logs de Auditoria (LGPD - retenção 5 anos)
+model AuditLog {
+  id       String  @id @default(uuid())
+  tenantId String
+  userId   String? // Usuário que executou a ação
+
+  // Ação
+  action       AuditAction
+  resourceType String // Tipo de recurso (patient, message, alert, etc.)
+  resourceId   String? // ID do recurso
+
+  // Dados
+  oldValues Json? // Valores antigos (para UPDATE)
+  newValues Json? // Valores novos
+
+  // Metadados
+  ipAddress String?
+  userAgent String?
+
+  // Relacionamentos
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@index([tenantId])
+  @@index([userId])
+  @@index([resourceType, resourceId])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
+
+enum AuditAction {
+  CREATE
+  UPDATE
+  DELETE
+  VIEW
+  EXPORT
+}
+
+// Conexões WhatsApp Business API
+model WhatsAppConnection {
+  id       String @id @default(uuid())
+  tenantId String
+
+  // Identificação
+  name                      String // Nome descritivo (ex: "WhatsApp Oncologia", "WhatsApp Emergência")
+  phoneNumber               String // Número de telefone (formato internacional)
+  phoneNumberId             String? // ID do número na Meta (após OAuth)
+  whatsappBusinessAccountId String? // ID da conta WhatsApp Business na Meta
+  businessAccountId         String? // ID da Business Manager na Meta
+
+  // Método de autenticação
+  authMethod WhatsAppAuthMethod @default(OAUTH)
+
+  // OAuth (preferencial)
+  oauthAccessToken  String? // Token de acesso OAuth - Criptografado
+  oauthRefreshToken String? // Refresh token - Criptografado
+  oauthExpiresAt    DateTime? // Data de expiração do token
+  oauthScopes       String[] // Escopos concedidos
+
+  // Configuração Manual (fallback)
+  apiToken           String? // Token de acesso manual - Criptografado
+  appId              String? // App ID da Meta
+  appSecret          String? // App Secret - Criptografado
+  webhookUrl         String? // URL do webhook configurada
+  webhookVerifyToken String? // Token de verificação do webhook
+
+  // Status e configuração
+  status    WhatsAppConnectionStatus @default(PENDING)
+  isActive  Boolean                  @default(false)
+  isDefault Boolean                  @default(false) // Conexão padrão do tenant
+
+  // Metadados
+  lastSyncAt DateTime? // Última sincronização com Meta
+  lastError  String? // Último erro ocorrido
+  metadata   Json? // Dados adicionais (webhook config, etc.)
+
+  // Relacionamentos
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([tenantId, phoneNumber])
+  @@index([tenantId])
+  @@index([status])
+  @@index([isActive])
+  @@map("whatsapp_connections")
+}
+
+enum WhatsAppAuthMethod {
+  OAUTH // OAuth da Meta (preferencial)
+  MANUAL // Configuração manual (fallback)
+}
+
+enum WhatsAppConnectionStatus {
+  PENDING // Aguardando configuração
+  CONNECTING // Conectando via OAuth
+  CONNECTED // Conectado e ativo
+  DISCONNECTED // Desconectado
+  ERROR // Erro na conexão
+  EXPIRED // Token expirado
+}
+
+// Estados temporários do OAuth (armazenados durante fluxo de autorização)
+model OAuthState {
+  id        String   @id @default(uuid())
+  state     String   @unique // Token state único
+  tenantId  String
+  expiresAt DateTime // Expira em 10 minutos
+  createdAt DateTime @default(now())
+
+  @@index([state])
+  @@index([expiresAt])
+  @@map("oauth_states")
+}
+
+// Notas Internas (comunicação entre equipe)
+model InternalNote {
+  id        String @id @default(uuid())
+  tenantId  String
+  patientId String
+  authorId  String // userId que criou a nota
+
+  content String // Conteúdo da nota
+
+  // Relacionamentos
+  tenant  Tenant  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  patient Patient @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  author  User    @relation(fields: [authorId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([tenantId])
+  @@index([patientId])
+  @@index([authorId])
+  @@index([createdAt])
+  @@map("internal_notes")
+}
+
+// Histórico de Intervenções (rastreabilidade de ações do enfermeiro)
+model Intervention {
+  id        String  @id @default(uuid())
+  tenantId  String
+  patientId String
+  userId    String // Enfermeiro que fez a intervenção
+  messageId String? // Mensagem relacionada (opcional)
+
+  type  InterventionType // Tipo de intervenção
+  notes String? // Observações adicionais
+
+  // Relacionamentos
+  tenant  Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  patient Patient  @relation(fields: [patientId], references: [id], onDelete: Cascade)
+  user    User     @relation(fields: [userId], references: [id])
+  message Message? @relation(fields: [messageId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+
+  @@index([tenantId])
+  @@index([patientId])
+  @@index([userId])
+  @@index([createdAt])
+  @@index([type])
+  @@map("interventions")
+}
+
+enum InterventionType {
+  ASSUME // Assumiu conversa manualmente
+  RESPONSE // Respondeu ao paciente
+  ALERT_RESOLVED // Resolveu um alerta
+  NOTE_ADDED // Adicionou nota interna
+  PRIORITY_UPDATED // Atualizou prioridade manualmente
+}
+
+// Atualizar relacionamentos no Tenant
+model Tenant {
+  id         String   @id @default(uuid())
+  name       String
+  schemaName String   @unique
+  settings   Json?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  users                  User[]
+  patients               Patient[]
+  patientJourneys        PatientJourney[]
+  cancerDiagnoses        CancerDiagnosis[]
+  treatments             Treatment[]
+  messages               Message[]
+  alerts                 Alert[]
+  observations           Observation[]
+  priorityScores         PriorityScore[]
+  questionnaires         Questionnaire[]
+  questionnaireResponses QuestionnaireResponse[]
+  auditLogs              AuditLog[]
+  navigationSteps        NavigationStep[]
+  whatsappConnections    WhatsAppConnection[]
+  internalNotes          InternalNote[]
+  interventions          Intervention[]
+  fhirIntegrationConfig FHIRIntegrationConfig?
+
+  @@map("tenants")
+}
+
+// Configuração de integração FHIR por tenant
+model FHIRIntegrationConfig {
+  id             String   @id @default(uuid())
+  tenantId       String   @unique
+  enabled        Boolean  @default(false)
+  baseUrl        String
+  authType       String // 'oauth2' | 'basic' | 'apikey'
+  authConfig     Json // Configuração de autenticação (FHIRAuthConfig)
+  syncDirection  String   @default("pull") // 'pull' | 'push' | 'bidirectional'
+  syncFrequency  String   @default("daily") // 'realtime' | 'hourly' | 'daily'
+  maxRetries     Int      @default(3)
+  initialDelay   Int      @default(1000) // ms
+  maxDelay       Int      @default(30000) // ms
+  backoffMultiplier Decimal @default(2.0)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@map("fhir_integration_configs")
+}
+
+// Configuração de seed
+// Para executar: npm run prisma:seed ou npx prisma db seed

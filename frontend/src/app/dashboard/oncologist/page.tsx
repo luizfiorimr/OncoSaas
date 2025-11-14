@@ -12,12 +12,13 @@ import { useDashboardMetrics, useDashboardStatistics } from '@/hooks/useDashboar
 import { usePatients } from '@/hooks/usePatients';
 import { useDashboardSocket } from '@/hooks/useDashboardSocket';
 import { Button } from '@/components/ui/button';
-import { LogOut, Calendar, RefreshCw } from 'lucide-react';
+import { Calendar, RefreshCw } from 'lucide-react';
 import { Alert } from '@/lib/api/alerts';
+import { NavigationBar } from '@/components/shared/navigation-bar';
 
 export default function OncologistDashboardPage() {
   const router = useRouter();
-  const { user, logout, isAuthenticated, initialize } = useAuthStore();
+  const { user, isAuthenticated, isInitializing, initialize } = useAuthStore();
   const [selectedPatient, setSelectedPatient] = useState<string | null>(null);
   const [selectedAlert, setSelectedAlert] = useState<Alert | null>(null);
   const [priorityFilter, setPriorityFilter] = useState<string | null>(null);
@@ -36,22 +37,13 @@ export default function OncologistDashboardPage() {
     initialize();
   }, [initialize]);
 
-  // Verificar autenticação
+  // Verificar autenticação (após inicialização)
   useEffect(() => {
-    const checkAuth = setTimeout(() => {
-      if (!isAuthenticated) {
-        router.replace('/login');
-        return;
-      }
-    }, 100);
-
-    return () => clearTimeout(checkAuth);
-  }, [isAuthenticated, router]);
-
-  const handleLogout = () => {
-    logout();
-    router.push('/login');
-  };
+    if (!isInitializing && !isAuthenticated) {
+      router.replace('/login');
+      return;
+    }
+  }, [isAuthenticated, isInitializing, router]);
 
   const handlePatientClick = (patientId: string) => {
     setSelectedPatient(patientId);
@@ -70,69 +62,60 @@ export default function OncologistDashboardPage() {
     setPriorityFilter(category);
   };
 
+  if (isInitializing) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-lg text-gray-600">Carregando...</p>
+        </div>
+      </div>
+    );
+  }
+
   if (!isAuthenticated || !user) {
     return null;
   }
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b sticky top-0 z-10">
-        <div className="px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <h1 className="text-2xl font-bold text-gray-900">
-                Dashboard Gerencial
-              </h1>
-              <span className="text-sm text-gray-500">
-                {user.tenant?.name || user.tenantId || 'Tenant'}
-              </span>
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <Calendar className="h-4 w-4 text-gray-400" />
-                <select
-                  value={statisticsPeriod}
-                  onChange={(e) =>
-                    setStatisticsPeriod(
-                      e.target.value as '7d' | '30d' | '90d'
-                    )
-                  }
-                  className="text-sm border rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                >
-                  <option value="7d">Últimos 7 dias</option>
-                  <option value="30d">Últimos 30 dias</option>
-                  <option value="90d">Últimos 90 dias</option>
-                </select>
-              </div>
-              <Button
-                variant="outline"
-                size="sm"
-                onClick={() => {
-                  refetchMetrics();
-                }}
-              >
-                <RefreshCw className="h-4 w-4 mr-2" />
-                Atualizar
-              </Button>
-              <div className="flex items-center gap-2 text-sm text-gray-600">
-                <span>{user.name}</span>
-                <span className="text-gray-400">•</span>
-                <span className="text-xs px-2 py-1 bg-indigo-100 text-indigo-700 rounded">
-                  {user.role}
-                </span>
-              </div>
-              <Button variant="ghost" size="sm" onClick={handleLogout}>
-                <LogOut className="h-4 w-4 mr-2" />
-                Sair
-              </Button>
-            </div>
-          </div>
-        </div>
-      </header>
+      <NavigationBar />
 
       {/* Conteúdo Principal */}
       <main className="px-6 py-6 space-y-6 max-w-7xl mx-auto">
+        {/* Controles do Dashboard */}
+        <div className="flex items-center justify-between mb-4">
+          <h1 className="text-2xl font-bold text-gray-900">
+            Dashboard Gerencial
+          </h1>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <Calendar className="h-4 w-4 text-gray-400" />
+              <select
+                value={statisticsPeriod}
+                onChange={(e) =>
+                  setStatisticsPeriod(
+                    e.target.value as '7d' | '30d' | '90d'
+                  )
+                }
+                className="text-sm border rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              >
+                <option value="7d">Últimos 7 dias</option>
+                <option value="30d">Últimos 30 dias</option>
+                <option value="90d">Últimos 90 dias</option>
+              </select>
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => {
+                refetchMetrics();
+              }}
+            >
+              <RefreshCw className="h-4 w-4 mr-2" />
+              Atualizar
+            </Button>
+          </div>
+        </div>
         {/* Alertas Críticos (se houver) */}
         {metrics && metrics.criticalAlertsCount > 0 && (
           <CriticalAlertsPanel onAlertSelect={handleAlertSelect} />

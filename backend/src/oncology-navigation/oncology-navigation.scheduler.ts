@@ -69,9 +69,10 @@ export class OncologyNavigationScheduler {
    */
   @Cron(CronExpression.EVERY_HOUR)
   async handleHourlyOverdueStepsCheck() {
-    // Desabilitado por padrão - descomente se quiser verificação horária
-    // this.logger.log('Verificação horária de etapas atrasadas...');
-    // await this.handleOverdueStepsCheck();
+    // Habilitado para verificação mais frequente durante desenvolvimento
+    // Comentar em produção se preferir apenas verificação diária
+    this.logger.log('Verificação horária de etapas atrasadas...');
+    await this.handleOverdueStepsCheck();
   }
 }
 

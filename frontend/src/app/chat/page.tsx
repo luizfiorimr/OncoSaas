@@ -1,0 +1,554 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuthStore } from '@/stores/auth-store';
+import { useDebounce } from '@/lib/utils/use-debounce';
+import { saveFiltersToStorage, loadFiltersFromStorage, clearFiltersFromStorage, PatientFilters } from '@/lib/utils/filter-storage';
+import { PatientListConnected } from '@/components/dashboard/patient-list-connected';
+import { AlertsPanel } from '@/components/dashboard/alerts-panel';
+import { ConversationView } from '@/components/dashboard/conversation-view';
+import { PatientDetails } from '@/components/dashboard/patient-details';
+import { AlertDetails } from '@/components/dashboard/alert-details';
+import { ResizablePanel } from '@/components/dashboard/resizable-panel';
+import { usePatient, usePatients } from '@/hooks/usePatients';
+import {
+  useMessages,
+  useUnassumedMessagesCount,
+  useSendMessage,
+  useAssumeMessage,
+} from '@/hooks/useMessages';
+import { useMessagesSocket } from '@/hooks/useMessagesSocket';
+import { useAlert, useCriticalAlertsCount } from '@/hooks/useAlerts';
+import { Button } from '@/components/ui/button';
+import { Bell, X } from 'lucide-react';
+import { Alert } from '@/lib/api/alerts';
+import { Skeleton } from '@/components/ui/skeleton';
+import { EmptyState } from '@/components/ui/empty-state';
+import { User, MessageSquare } from 'lucide-react';
+import { NavigationBar } from '@/components/shared/navigation-bar';
+
+export default function ChatPage() {
+  const router = useRouter();
+  const { user, isAuthenticated, initialize } = useAuthStore();
+  const [selectedPatient, setSelectedPatient] = useState<string | null>(null);
+  const [selectedAlert, setSelectedAlert] = useState<Alert | null>(null);
+  const [isNursingActive, setIsNursingActive] = useState(false);
+  const [activeTab, setActiveTab] = useState<'patients' | 'alerts'>('patients');
+  const [searchTerm, setSearchTerm] = useState('');
+  const debouncedSearchTerm = useDebounce(searchTerm, 300);
+
+  // Filtros
+  const [priorityFilter, setPriorityFilter] = useState<
+    'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW' | null
+  >(null);
+  const [cancerTypeFilter, setCancerTypeFilter] = useState<string>('');
+  const [alertsSeverityFilter, setAlertsSeverityFilter] = useState<
+    'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW' | null
+  >(null);
+
+  const { data: unassumedCount } = useUnassumedMessagesCount();
+  const { data: criticalAlertsCount } = useCriticalAlertsCount();
+  const { data: patients } = usePatients();
+
+  // Obter tipos de câncer únicos para o dropdown
+  const uniqueCancerTypes = Array.from(
+    new Set(
+      patients
+        ?.flatMap((p) => {
+          if (p.cancerDiagnoses && p.cancerDiagnoses.length > 0) {
+            return p.cancerDiagnoses.map((d) => d.cancerType);
+          }
+          return p.cancerType ? [p.cancerType] : [];
+        })
+        .filter((type): type is string => !!type) || []
+    )
+  ).sort();
+
+  // Inicializar autenticação do localStorage
+  useEffect(() => {
+    initialize();
+  }, [initialize]);
+
+  // Verificar autenticação e obter paciente da URL (após inicialização)
+  useEffect(() => {
+    if (!isInitializing) {
+      if (!isAuthenticated) {
+        router.replace('/login');
+        return;
+      }
+
+      // Obter paciente da query string
+      if (typeof window !== 'undefined') {
+        const params = new URLSearchParams(window.location.search);
+        const patientId = params.get('patient');
+        if (patientId) {
+          setSelectedPatient(patientId);
+        }
+      }
+    }
+  }, [isAuthenticated, isInitializing, router]);
+
+  const { data: selectedPatientData, isLoading: isLoadingPatient } = usePatient(
+    selectedPatient || '',
+    { enabled: !!selectedPatient }
+  );
+  const { data: messages } = useMessages(selectedPatient || undefined);
+  const { data: alertDetails, isLoading: isLoadingAlert } = useAlert(
+    selectedAlert?.id || ''
+  );
+
+  // Usar alertDetails se disponível, senão usar selectedAlert (dados básicos)
+  const displayAlert = alertDetails || selectedAlert;
+
+  // WebSocket para atualizações em tempo real
+  useMessagesSocket(selectedPatient || undefined);
+
+  // Hooks para ações
+  const sendMessageMutation = useSendMessage();
+  const assumeMessageMutation = useAssumeMessage();
+
+  // Obter conversationId da primeira mensagem (se existir)
+  const conversationId =
+    messages && messages.length > 0 ? messages[0].conversationId : undefined;
+
+  // Encontrar mensagem assumida mais recente para mostrar quem assumiu
+  const assumedMessage = messages
+    ?.filter((msg) => msg.assumedBy && msg.assumedAt)
+    .sort(
+      (a, b) =>
+        new Date(b.assumedAt!).getTime() - new Date(a.assumedAt!).getTime()
+    )[0];
+
+  // Determinar se a conversa está ativa para o usuário atual
+  const isConversationAssumedByCurrentUser =
+    assumedMessage?.assumedBy === user?.id;
+
+  // Atualizar isNursingActive baseado na mensagem assumida
+  useEffect(() => {
+    if (assumedMessage && isConversationAssumedByCurrentUser) {
+      setIsNursingActive(true);
+    } else if (!assumedMessage) {
+      setIsNursingActive(false);
+    }
+  }, [assumedMessage?.id, isConversationAssumedByCurrentUser]);
+
+  // Carregar filtros do localStorage ao montar o componente
+  useEffect(() => {
+    const savedFilters = loadFiltersFromStorage();
+    if (savedFilters) {
+      setSearchTerm(savedFilters.searchTerm || '');
+      setPriorityFilter(savedFilters.priorityCategory || null);
+      setCancerTypeFilter(savedFilters.cancerType || '');
+    }
+  }, []);
+
+  // Salvar filtros no localStorage sempre que mudarem
+  useEffect(() => {
+    const filtersToSave: PatientFilters = {
+      searchTerm,
+      priorityCategory: priorityFilter,
+      cancerType: cancerTypeFilter,
+    };
+    saveFiltersToStorage(filtersToSave);
+  }, [searchTerm, priorityFilter, cancerTypeFilter]);
+
+  // Função para limpar todos os filtros
+  const handleClearFilters = () => {
+    setSearchTerm('');
+    setPriorityFilter(null);
+    setCancerTypeFilter('');
+    clearFiltersFromStorage();
+  };
+
+  // Nome do usuário que assumiu (se for o usuário atual, usar o nome dele)
+  const assumedByName =
+    assumedMessage?.assumedBy === user?.id
+      ? user?.name || 'Você'
+      : assumedMessage?.assumedBy
+        ? 'Outro usuário'
+        : null;
+
+  const handleSendMessage = async (content: string) => {
+    if (!selectedPatient) return;
+
+    try {
+      await sendMessageMutation.mutateAsync({
+        patientId: selectedPatient,
+        content,
+        conversationId: conversationId || undefined,
+      });
+    } catch (error) {
+      console.error('Erro ao enviar mensagem:', error);
+      // TODO: Mostrar toast de erro
+    }
+  };
+
+  const handleTakeOver = async () => {
+    if (!selectedPatient || !messages || messages.length === 0) return;
+
+    // Assumir a última mensagem não assumida do paciente
+    const unassumedMessage = messages
+      .filter((msg) => !msg.assumedBy && msg.direction === 'INBOUND')
+      .sort(
+        (a, b) =>
+          new Date(b.whatsappTimestamp).getTime() -
+          new Date(a.whatsappTimestamp).getTime()
+      )[0];
+
+    if (unassumedMessage) {
+      try {
+        await assumeMessageMutation.mutateAsync(unassumedMessage.id);
+        setIsNursingActive(true);
+      } catch (error) {
+        console.error('Erro ao assumir conversa:', error);
+        // TODO: Mostrar toast de erro
+      }
+    } else {
+      // Se não há mensagens não assumidas, apenas ativar modo manual
+      setIsNursingActive(true);
+    }
+  };
+
+  if (isInitializing) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-lg text-gray-600">Carregando...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return null;
+  }
+
+  return (
+    <div className="h-screen bg-gray-50 overflow-hidden flex flex-col">
+      <NavigationBar />
+
+      <div className="flex-1 overflow-hidden">
+        <div className="flex h-full">
+          {/* Sidebar Esquerda - Pacientes e Alertas */}
+          <ResizablePanel
+            defaultWidth={320}
+            minWidth={250}
+            maxWidth={500}
+            storageKey="chat-left-panel-width"
+            side="left"
+          >
+            <div className="h-full flex flex-col bg-white border-r">
+              {/* Header fixo com tabs */}
+              <div className="p-4 border-b flex-shrink-0">
+                {/* Tabs para alternar entre Pacientes e Alertas */}
+                <div className="flex gap-2 mb-4">
+                  <button
+                    onClick={() => setActiveTab('patients')}
+                    className={`px-4 py-2 rounded-md font-semibold transition-colors ${
+                      activeTab === 'patients'
+                        ? 'bg-indigo-600 text-white'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    Pacientes
+                  </button>
+                  <button
+                    onClick={() => setActiveTab('alerts')}
+                    className={`px-4 py-2 rounded-md font-semibold transition-colors ${
+                      activeTab === 'alerts'
+                        ? 'bg-indigo-600 text-white'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    Alertas
+                  </button>
+                </div>
+
+                {/* Campo de busca e Filtros (apenas para Pacientes) */}
+                {activeTab === 'patients' && (
+                  <div className="space-y-3">
+                    {/* Campo de busca */}
+                    <div>
+                      <input
+                        type="text"
+                        placeholder="Buscar paciente (nome ou CPF)..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                      />
+                    </div>
+
+                    {/* Filtros */}
+                    <div className="space-y-2">
+                      {/* Filtro por Prioridade */}
+                      <div>
+                        <label className="text-xs font-semibold text-gray-600 mb-1 block">
+                          Prioridade
+                        </label>
+                        <div className="flex flex-wrap gap-2">
+                          {(['CRITICAL', 'HIGH', 'MEDIUM', 'LOW'] as const).map(
+                            (priority) => (
+                              <button
+                                key={priority}
+                                onClick={() =>
+                                  setPriorityFilter(
+                                    priorityFilter === priority
+                                      ? null
+                                      : priority
+                                  )
+                                }
+                                className={`px-2 py-1 text-xs rounded-md transition-colors ${
+                                  priorityFilter === priority
+                                    ? priority === 'CRITICAL'
+                                      ? 'bg-red-600 text-white'
+                                      : priority === 'HIGH'
+                                        ? 'bg-orange-600 text-white'
+                                        : priority === 'MEDIUM'
+                                          ? 'bg-yellow-600 text-white'
+                                          : 'bg-gray-600 text-white'
+                                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                                }`}
+                              >
+                                {priority === 'CRITICAL'
+                                  ? 'Crítico'
+                                  : priority === 'HIGH'
+                                    ? 'Alto'
+                                    : priority === 'MEDIUM'
+                                      ? 'Médio'
+                                      : 'Baixo'}
+                              </button>
+                            )
+                          )}
+                          {priorityFilter && (
+                            <button
+                              onClick={() => setPriorityFilter(null)}
+                              className="px-2 py-1 text-xs rounded-md bg-gray-100 text-gray-700 hover:bg-gray-200 flex items-center gap-1"
+                            >
+                              <X className="h-3 w-3" />
+                              Limpar
+                            </button>
+                          )}
+                        </div>
+                      </div>
+
+                      {/* Filtro por Tipo de Câncer */}
+                      {uniqueCancerTypes.length > 0 && (
+                        <div>
+                          <label className="text-xs font-semibold text-gray-600 mb-1 block">
+                            Tipo de Câncer
+                          </label>
+                          <select
+                            value={cancerTypeFilter}
+                            onChange={(e) =>
+                              setCancerTypeFilter(e.target.value)
+                            }
+                            className="w-full px-3 py-2 text-sm border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                          >
+                            <option value="">Todos os tipos</option>
+                            {uniqueCancerTypes.map((type) => (
+                              <option key={type} value={type}>
+                                {type}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                      )}
+
+                      {/* Indicador de filtros ativos */}
+                      {(priorityFilter || cancerTypeFilter) && (
+                        <div className="pt-2 border-t">
+                          <button
+                            onClick={handleClearFilters}
+                            className="text-xs text-indigo-600 hover:text-indigo-800 flex items-center gap-1"
+                          >
+                            <X className="h-3 w-3" />
+                            Limpar todos os filtros
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Conteúdo da aba ativa */}
+              <div className="flex-1 overflow-y-auto p-4 min-h-0">
+                      {activeTab === 'patients' ? (
+                        <PatientListConnected
+                          onPatientSelect={setSelectedPatient}
+                          filters={{
+                            searchTerm: debouncedSearchTerm,
+                            priorityCategory: priorityFilter || undefined,
+                            cancerType: cancerTypeFilter || undefined,
+                          }}
+                          selectedPatientId={selectedPatient}
+                          onClearFilters={handleClearFilters}
+                        />
+                      ) : (
+                  <AlertsPanel
+                    onAlertSelect={(alert) => {
+                      // Selecionar o alerta para mostrar detalhes
+                      setSelectedAlert(alert);
+                      // Também selecionar o paciente para abrir a conversa
+                      if (alert.patientId) {
+                        setSelectedPatient(alert.patientId);
+                        // Mudar para aba de pacientes para mostrar a conversa
+                        setActiveTab('patients');
+                      }
+                    }}
+                    selectedAlertId={selectedAlert?.id}
+                    severityFilter={alertsSeverityFilter}
+                  />
+                )}
+              </div>
+            </div>
+          </ResizablePanel>
+
+          {/* Área Principal - Conversa */}
+          <div className="flex-1 min-w-0 h-full">
+            {selectedPatient ? (
+              isLoadingPatient ? (
+                <div className="bg-white h-full border-x flex flex-col">
+                  {/* Header skeleton */}
+                  <div className="border-b p-4">
+                    <Skeleton className="h-7 w-48 mb-2" />
+                    <Skeleton className="h-4 w-64" />
+                  </div>
+                  {/* Messages skeleton */}
+                  <div className="flex-1 overflow-y-auto p-4 space-y-4">
+                    {[1, 2, 3].map((i) => (
+                      <div
+                        key={i}
+                        className={`flex ${i % 2 === 0 ? 'justify-end' : 'justify-start'}`}
+                      >
+                        <div className="max-w-[70%] rounded-lg p-3 bg-gray-100">
+                          <Skeleton className="h-3 w-16 mb-2" />
+                          <Skeleton className="h-4 w-48 mb-1" />
+                          <Skeleton className="h-3 w-24" />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  {/* Input skeleton */}
+                  <div className="border-t p-4">
+                    <div className="flex gap-2">
+                      <Skeleton className="h-10 flex-1" />
+                      <Skeleton className="h-10 w-20" />
+                    </div>
+                  </div>
+                </div>
+              ) : selectedPatientData ? (
+                <div className="bg-white h-full border-x">
+                  <ConversationView
+                    patientName={selectedPatientData.name}
+                    patientInfo={{
+                      cancerType:
+                        selectedPatientData.cancerDiagnoses &&
+                        selectedPatientData.cancerDiagnoses.length > 0
+                          ? selectedPatientData.cancerDiagnoses
+                              .map((d) => d.cancerType)
+                              .join(', ')
+                          : selectedPatientData.cancerType || 'Em Rastreio',
+                      stage:
+                        selectedPatientData.cancerDiagnoses &&
+                        selectedPatientData.cancerDiagnoses.length > 0
+                          ? selectedPatientData.cancerDiagnoses[0].stage ||
+                            'N/A'
+                          : selectedPatientData.stage || 'N/A',
+                      age: selectedPatientData.birthDate
+                        ? new Date().getFullYear() -
+                          new Date(selectedPatientData.birthDate).getFullYear()
+                        : 0,
+                      priorityScore: selectedPatientData.priorityScore || 0,
+                      priorityCategory: (
+                        selectedPatientData.priorityCategory || 'MEDIUM'
+                      ).toLowerCase() as 'critico' | 'alto' | 'medio' | 'baixo',
+                    }}
+                    messages={(messages || []).map((msg) => ({
+                      id: msg.id,
+                      sender:
+                        msg.direction === 'INBOUND'
+                          ? 'patient'
+                          : msg.processedBy === 'NURSING'
+                            ? 'nursing'
+                            : 'agent',
+                      content: msg.content || '',
+                      timestamp: new Date(
+                        msg.whatsappTimestamp || msg.createdAt
+                      ),
+                    }))}
+                    structuredData={{
+                      symptoms: {},
+                    }}
+                    onSendMessage={handleSendMessage}
+                    onTakeOver={handleTakeOver}
+                    isNursingActive={isNursingActive || isConversationAssumedByCurrentUser}
+                    isSending={sendMessageMutation.isPending}
+                    assumedBy={assumedByName}
+                    assumedAt={
+                      assumedMessage?.assumedAt
+                        ? new Date(assumedMessage.assumedAt)
+                        : null
+                    }
+                  />
+                </div>
+              ) : (
+                <EmptyState
+                  icon={<User className="h-12 w-12 text-red-500" />}
+                  title="Erro ao carregar paciente"
+                  description="Não foi possível carregar os dados do paciente selecionado. Tente selecionar novamente."
+                  action={
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => window.location.reload()}
+                    >
+                      Recarregar página
+                    </Button>
+                  }
+                  className="h-full"
+                />
+              )
+            ) : (
+              <EmptyState
+                icon={<MessageSquare className="h-12 w-12 text-gray-400" />}
+                title="Selecione um paciente"
+                description="Escolha um paciente da lista ao lado para visualizar e gerenciar a conversa."
+                className="h-full"
+              />
+            )}
+          </div>
+
+          {/* Sidebar Direita - Detalhes do Paciente e Alerta */}
+          <ResizablePanel
+            defaultWidth={360}
+            minWidth={280}
+            maxWidth={600}
+            storageKey="chat-right-panel-width"
+            side="right"
+          >
+            <div className="h-full overflow-y-auto flex flex-col">
+              {/* Detalhes do Paciente */}
+              <div className="border-b">
+                <PatientDetails
+                  patient={selectedPatientData || null}
+                  isLoading={isLoadingPatient}
+                />
+              </div>
+
+              {/* Detalhes do Alerta */}
+              <div className="flex-1">
+                <AlertDetails
+                  alert={displayAlert}
+                  isLoading={isLoadingAlert && !!selectedAlert}
+                  onClose={() => setSelectedAlert(null)}
+                />
+              </div>
+            </div>
+          </ResizablePanel>
+        </div>
+      </div>
+    </div>
+  );
+}

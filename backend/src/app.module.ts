@@ -13,6 +13,11 @@ import { ObservationsModule } from './observations/observations.module';
 import { GatewaysModule } from './gateways/gateways.module';
 import { OncologyNavigationModule } from './oncology-navigation/oncology-navigation.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { WhatsAppConnectionsModule } from './whatsapp-connections/whatsapp-connections.module';
+import { UsersModule } from './users/users.module';
+import { InternalNotesModule } from './internal-notes/internal-notes.module';
+import { InterventionsModule } from './interventions/interventions.module';
+import { TreatmentsModule } from './treatments/treatments.module';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 
 @Module({
@@ -32,6 +37,11 @@ import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
     GatewaysModule,
     OncologyNavigationModule,
     DashboardModule,
+    WhatsAppConnectionsModule,
+    UsersModule,
+    InternalNotesModule,
+    InterventionsModule,
+    TreatmentsModule,
   ],
   controllers: [AppController],
   providers: [

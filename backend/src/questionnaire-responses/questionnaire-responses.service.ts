@@ -1,0 +1,122 @@
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
+import { CreateQuestionnaireResponseDto } from './dto/create-questionnaire-response.dto';
+import { QuestionnaireResponse } from '@prisma/client';
+
+@Injectable()
+export class QuestionnaireResponsesService {
+  constructor(private readonly prisma: PrismaService) {}
+
+  async create(
+    createDto: CreateQuestionnaireResponseDto,
+    tenantId: string
+  ): Promise<QuestionnaireResponse> {
+    // Verificar se paciente existe e pertence ao tenant
+    const patient = await this.prisma.patient.findFirst({
+      where: {
+        id: createDto.patientId,
+        tenantId,
+      },
+    });
+
+    if (!patient) {
+      throw new NotFoundException(
+        `Patient with ID ${createDto.patientId} not found`
+      );
+    }
+
+    // Verificar se questionário existe e pertence ao tenant
+    const questionnaire = await this.prisma.questionnaire.findFirst({
+      where: {
+        id: createDto.questionnaireId,
+        tenantId,
+      },
+    });
+
+    if (!questionnaire) {
+      throw new NotFoundException(
+        `Questionnaire with ID ${createDto.questionnaireId} not found`
+      );
+    }
+
+    // Criar resposta
+    return this.prisma.questionnaireResponse.create({
+      data: {
+        tenantId,
+        patientId: createDto.patientId,
+        questionnaireId: createDto.questionnaireId,
+        responses: createDto.responses,
+        messageId: createDto.messageId,
+        appliedBy: createDto.appliedBy || 'AGENT',
+      },
+    });
+  }
+
+  async findAll(
+    tenantId: string,
+    patientId?: string,
+    questionnaireId?: string
+  ): Promise<QuestionnaireResponse[]> {
+    return this.prisma.questionnaireResponse.findMany({
+      where: {
+        tenantId,
+        ...(patientId && { patientId }),
+        ...(questionnaireId && { questionnaireId }),
+      },
+      include: {
+        patient: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+        questionnaire: {
+          select: {
+            id: true,
+            code: true,
+            name: true,
+          },
+        },
+      },
+      orderBy: {
+        completedAt: 'desc',
+      },
+    });
+  }
+
+  async findOne(
+    id: string,
+    tenantId: string
+  ): Promise<QuestionnaireResponse> {
+    const response = await this.prisma.questionnaireResponse.findFirst({
+      where: {
+        id,
+        tenantId,
+      },
+      include: {
+        patient: {
+          select: {
+            id: true,
+            name: true,
+          },
+        },
+        questionnaire: {
+          select: {
+            id: true,
+            code: true,
+            name: true,
+          },
+        },
+      },
+    });
+
+    if (!response) {
+      throw new NotFoundException(
+        `QuestionnaireResponse with ID ${id} not found`
+      );
+    }
+
+    return response;
+  }
+}
+

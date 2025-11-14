@@ -1,0 +1,1436 @@
+---
+alwaysApply: true
+---
+
+# Medicina Intensiva
+
+## Terminologia Específica
+
+- **UTI**: Unidade de Terapia Intensiva
+- **SARA**: Síndrome da Angústia Respiratória Aguda
+- **VMI**: Ventilação Mecânica Invasiva
+- **VNI**: Ventilação Não-Invasiva
+- **PEEP**: Pressão Expiratória Final Positiva
+- **Driving Pressure**: Pressão de distensão (Pplatô - PEEP)
+- **Compliance pulmonar**: Complacência do sistema respiratório
+- **PaO₂/FiO₂**: Relação de oxigenação (normal ~400-500)
+- **Voltrauma**: Lesão pulmonar por volume elevado
+- **Barotrauma**: Lesão pulmonar por pressão elevada
+- **Biotrauma**: Lesão pulmonar por resposta inflamatória
+- **Atelectrauma**: Lesão por colapso/reabertura cíclica
+- **Choque**: Perfusão tecidual inadequada
+- **PAM**: Pressão Arterial Média (PAM = PAD + 1/3(PAS-PAD))
+- **PVC**: Pressão Venosa Central
+- **DC**: Débito Cardíaco
+- **IC**: Índice Cardíaco (DC/superfície corporal)
+- **RVS**: Resistência Vascular Sistêmica
+- **ScvO₂**: Saturação venosa central de oxigênio
+- **SvO₂**: Saturação venosa mista de oxigênio
+- **Lactato**: Marcador de hipoperfusão tecidual
+- **qSOFA**: Quick SOFA (triagem de sepse)
+
+## Stack de Habilidades do Intensivista
+
+### Ventilação Mecânica Avançada
+- **Programação Completa**: Todos os parâmetros (modo, VC/Pinsp, PEEP, FR, FiO₂, sensibilidade, tempo inspiratório)
+- **Todos os Modos Ventilatórios**: VCV, PCV, PSV, SIMV, PRVC, APRV
+- **Estratégia Protetora**: VC 6 mL/kg peso predito, Pplatô <30, driving pressure <15
+- **PEEP Ideal**: Titulação por tabela ARDSnet, melhor compliance, ou PV loop
+- **Desmame Protocolizado**: Critérios de prontidão, TRE (tubo T ou PSV baixo), critérios de falha
+- **VNI (CPAP, BiPAP)**: Indicações, contraindicações, interfaces, quando falha
+- **Pronação em SARA**: Indicações (PaO₂/FiO₂ <150), técnica, duração (16-18h)
+- **Assincronia Paciente-Ventilador**: Reconhecer e corrigir (trigger, ciclagem, flow, autoPEEP)
+
+### Hemodinâmica e Choque
+- **Interpretação de Parâmetros**: PAM, DC/IC, PVC, pressão de pulso, ScvO₂, SvO₂
+- **Vasopressores (doses e indicações)**:
+  - **Noradrenalina**: 0,05-3 mcg/kg/min (1ª escolha em choque séptico)
+  - **Vasopressina**: 0,03-0,04 UI/min (dose fixa, poupe noradrenalina)
+  - **Adrenalina**: 0,05-2 mcg/kg/min (alternativa/associação)
+  - **Dopamina**: Evitar (mais arritmias)
+- **Inotrópicos**:
+  - **Dobutamina**: 2-20 mcg/kg/min (disfunção miocárdica + baixo débito)
+- **Responsividade a Fluidos**: VPP >13%, VVS >10-15%, passive leg raising, mini-challenge (100 mL)
+- **Monitorização Hemodinâmica Avançada**: Swan-Ganz (quando ainda indicado), PiCCO, ecocardiografia funcional
+
+### Sepse e Choque Séptico
+- **Pacote de 1 Hora (Hour-1 Bundle)**:
+  1. Dosar lactato
+  2. Coletar hemoculturas (ANTES de ATB)
+  3. Antibiótico de amplo espectro
+  4. Ressuscitação volêmica (30 mL/kg se hipotensão ou lactato ≥4)
+  5. Vasopressor se hipotensão (alvo PAM ≥65)
+- **Ressuscitação Guiada por Metas**: PAM ≥65, diurese ≥0,5 mL/kg/h, lactato normalizar ou ↓50%, ScvO₂ ≥70%
+- **Antibioticoterapia Empírica Adequada**: Gram+ e Gram-, conforme foco, desescalonar após culturas
+- **Hidrocortisona**: 50 mg 6/6h se choque refratário a fluidos e vasopressores
+
+### Sedação e Analgesia em UTI
+- **Escala RASS (Richmond Agitation-Sedation Scale)**: -5 (coma) a +4 (combativo)
+- **Protocolos de Sedação**: Sedação leve (RASS 0 a -2) na maioria dos pacientes
+- **Analgesia Primeiro**: Tratar dor antes de sedar
+- **Drogas de Sedação**:
+  - **Propofol**: 5-50 mcg/kg/min (despertar rápido, síndrome da infusão se >48h dose alta)
+  - **Midazolam**: 1-10 mg/h (acúmulo, despertar prolongado)
+  - **Dexmedetomidina**: 0,2-1,4 mcg/kg/h (sem depressão respiratória, facilita desmame, menor delirium)
+- **Analgésicos**:
+  - **Fentanil**: 25-200 mcg/h (rápido início, sem metabólitos ativos)
+  - **Morfina**: 2-10 mg/h (metabólito ativo, cuidado em IRC)
+- **Despertar Diário**: Interromper sedação diariamente, avaliar necessidade
+- **Bloqueio Neuromuscular**: Cisatracúrio (SARA grave por 48h), rocurônio, monitorar TOF
+
+### Procedimentos Invasivos
+- **Acesso Venoso Central**: Jugular interna, subclávia, femoral - técnica, ultrassom-guiado
+- **Cateter de Artéria Pulmonar (Swan-Ganz)**: Indicações cada vez mais restritas, interpretação de curvas
+- **Cateter de PIC**: Monitorização da pressão intracraniana, cálculo de PPC
+- **Traqueostomia Percutânea**: Indicações (VM >7-10 dias), técnica, complicações
+- **ECMO (Conceitos)**: Indicações em SARA refratária, choque cardiogênico
+
+### Terapia de Substituição Renal
+- **Indicações Precisas (AEIOU)**:
+  - **A**cidose metabólica refratária (pH <7,1)
+  - **E**letrolíticos (hipercalemia >6,5 refratária)
+  - **I**ntoxicação dialisável
+  - **O**verload (hipervolemia refratária)
+  - **U**remia (sintomas: encefalopatia, pericardite, sangramento)
+- **Modalidades**:
+  - **HD Intermitente**: Paciente estável hemodinamicamente
+  - **CVVH (Hemofiltração Contínua)**: Instabilidade grave
+  - **CVVHDF (Hemodiafiltração)**: Mais eficiente
+- **Prescrição de Diálise**: Dose (mL/kg/h), anticoagulação (citrato vs heparina)
+
+### Nutrição no Paciente Crítico
+- **Enteral Precoce (24-48h)**: Preferível à parenteral, mantém barreira intestinal
+- **Parenteral**: Se impossibilidade de enteral após 7 dias
+- **Cálculo Calórico-Proteico Preciso**:
+  - Calorias: 20-25 kcal/kg/dia (fase aguda), 25-30 (recuperação)
+  - Proteínas: 1,2-2 g/kg/dia (aumentar em queimados, politrauma)
+- **Calorimetria Indireta**: Método ideal se disponível
+- **Vias de Acesso**: SNE gástrica vs pós-pilórica, gastrostomia/jejunostomia
+- **Procinéticos**: Metoclopramida, eritromicina se gastroparesia
+
+### Monitorização Hemodinâmica Avançada
+- **Gasometria Arterial Seriada**: pH, pCO₂, pO₂, HCO₃, BE, lactato
+- **Lactato Seriado**: Marcador de hipoperfusão, clearance de lactato (↓50% em 6h é bom prognóstico)
+- **Balanço Hídrico Rigoroso**: Entrada-saída, peso diário, acúmulo de fluidos (associado a pior prognóstico)
+- **PAM Contínua**: Via arterial, essencial em vasopressor
+- **Pressão de Pulso**: Variação (VPP) prediz responsividade a fluidos
+- **Débito Urinário Horário**: Alvo ≥0,5 mL/kg/h
+
+### Scores Prognósticos e Avaliação Diária
+- **APACHE II**: Cálculo na admissão, prediz mortalidade
+- **SOFA Sequencial (Cálculo Diário)**: Acompanhar evolução de disfunções orgânicas
+- **SAPS 3**: Predição de mortalidade hospitalar
+- **Interpretação e Tomada de Decisão**: Usar scores para prognosticar, não para limitar tratamento individual
+
+### Distúrbios Ácido-Base Complexos
+- **Interpretação Completa de Gasometria**:
+  1. pH (acidemia vs alcalemia)
+  2. Processo primário (respiratório vs metabólico)
+  3. Compensação (adequada?)
+  4. Anion gap (se acidose metabólica)
+  5. Delta gap (distúrbios mistos?)
+- **Distúrbios Mistos**: Acidose metabólica + alcalose respiratória (sepse)
+- **Correção de Bicarbonato**: Controverso, considerar se pH <7,1-7,2 + hipercalemia
+
+### Manejo de Complicações em UTI
+- **Delirium**:
+  - **CAM-ICU**: Avaliação diária
+  - **Prevenção**: Bundle ABCDEF, sedação leve, mobilização precoce
+  - **Tratamento**: Haloperidol 2,5-10 mg se agitação, quetiapina 25-100 mg
+- **PAV (Pneumonia Associada à Ventilação)**:
+  - **Prevenção**: Cabeceira 30-45°, higiene oral, aspiração subglótica, despertar diário
+  - **Diagnóstico**: Critérios clínicos + radiológicos + microbiológicos
+  - **Tratamento**: ATB de amplo espectro, desescalonar
+- **IRA (Insuficiência Renal Aguda)**:
+  - **Prevenção**: Manter PAM ≥65, evitar nefrotóxicos, ajustar doses
+  - **Tratamento**: Suporte, diálise se indicado (AEIOU)
+- **Coagulopatias**: CIVD, coagulopatia dilucional, deficiência de fatores
+- **Hipertensão Intracraniana**: Monitorizar PIC, manitol/salina hipertônica, manter PPC >60
+
+### Profilaxias em UTI
+- **TEV (Tromboembolismo Venoso)**:
+  - **Farmacológica**: Heparina 5000 UI 8/8h ou enoxaparina 40 mg/dia
+  - **Mecânica**: Compressão pneumática se contraindicação farmacológica
+- **Úlcera de Estresse**: IBP (pantoprazol 40 mg/dia) se VM ou coagulopatia
+- **Mobilização Precoce**: Fisioterapia motora, prevenir fraqueza adquirida
+- **Aspiração**: Cabeceira 30-45°, aspiração de secreções subglóticas
+
+### Controle Glicêmico
+- **Alvo**: 140-180 mg/dL (consenso atual)
+- **Evitar**: Controle estrito (80-110) → maior risco de hipoglicemia sem benefício
+- **Protocolo de Insulina em Infusão Contínua**: Ajustar conforme glicemia capilar 1-4/4h
+- **Hipoglicemia** (<70 mg/dL): Prevenir! Maior mortalidade
+
+### Hipertensão Intracraniana
+- **Monitorização de PIC**: Indicações (TCE grave Glasgow ≤8), valores (normal 5-15, HIC >20 mmHg)
+- **PPC (Pressão de Perfusão Cerebral)**: PPC = PAM - PIC, alvo 60-70 mmHg
+- **Manejo**:
+  - Cabeceira 30°, cabeça alinhada
+  - Normotermia, normovolemia
+  - **Manitol 20%**: 0,25-1 g/kg IV (osmolaridade <320 mOsm/L)
+  - **Salina Hipertônica 3%**: Bolus 150-250 mL ou infusão contínua (Na+ alvo 145-155)
+  - **Hiperventilação Temporária**: pCO₂ 30-35 (só em herniação iminente!)
+  - Drenagem de LCR se DVE
+  - Craniectomia descompressiva se refratária
+
+### Morte Encefálica
+- **Diagnóstico (CFM 2.173/2017)**:
+  - Pré-requisitos: causa conhecida, ausência de confundidores (hipotermia, drogas, distúrbios metabólicos)
+  - Coma aperceptivo (Glasgow 3)
+  - Ausência de reflexos de tronco (fotomotor, córneo, oculocefálico, oculovestibular, tosse)
+  - **Teste de apneia**: pCO₂ >55 mmHg sem movimentos respiratórios
+  - Exame complementar (Doppler, angio, cintilo, EEG)
+  - Intervalo entre exames conforme idade
+
+### Comunicação Avançada
+- **Reuniões Familiares Estruturadas**: Regularmente, informar prognóstico, envolver família
+- **Definição de Metas de Cuidado**: Curativo, paliativo, limitação de suporte
+- **Cuidados Paliativos em UTI**: Controle de sintomas, conforto, dignidade
+- **Limitação de Suporte de Vida**: Decisão compartilhada (equipe + família), valores do paciente
+- **DNR (Do Not Resuscitate)**: Documentar claramente, não significa suspender outros cuidados
+
+### Bundle ABCDEF
+- **A**wakening (Despertar diário)
+- **B**reathing (TRE diário)
+- **C**oordination (Coordenar A e B)
+- **D**elirium monitoring (CAM-ICU diário)
+- **E**arly mobility (Mobilização precoce)
+- **F**amily engagement (Envolvimento familiar)
+
+## Metodologia de Raciocínio Clínico do Intensivista
+
+### 1. Abordagem Inicial - Monitorização Contínua
+
+**Princípio Fundamental: SUPORTE DE ÓRGÃOS, NÃO CURA**
+
+**Ao assumir paciente em UTI:**
+
+1. **Revisar Admissão**:
+   - Motivo de internação
+   - Diagnóstico principal
+   - Comorbidades
+   - Procedimentos realizados
+   - Tempo de UTI
+
+2. **Avaliação Sistemática por Órgãos/Sistemas**:
+   
+**RESPIRATÓRIO:**
+- Em VM? Parâmetros? Gasometria? PaO₂/FiO₂?
+- Sincronia? Driving pressure? PEEP adequado?
+- Pronto para TRE?
+
+**CARDIOVASCULAR:**
+- Hemodinâmica: PAM, FC, perfusão
+- Em vasopressor? Qual dose?
+- Balanço hídrico: positivo/negativo acumulado?
+- Lactato: melhorando?
+
+**RENAL:**
+- Diurese: adeq uada (≥0,5 mL/kg/h)?
+- Creatinina: tendência?
+- Balanço hídrico
+- Em diálise?
+
+**NEUROLÓGICO:**
+- Sedação: RASS alvo? Despertar diário feito?
+- Delirium: CAM-ICU?
+- Pupilas, Glasgow (se não sedado)
+
+**INFECTOLÓGICO:**
+- Foco infeccioso?
+- Antibióticos: adequados? Desescalonar?
+- Culturas: resultados?
+- Marcadores inflamatórios: PCR, leucócitos
+
+**NUTRICIONAL:**
+- Dieta enteral: meta cal-prot atingida?
+- Balanço nitrogenado
+- Procinético se gastroparesia
+
+**PROFILAXIAS:**
+- TEV, úlcera de estresse, mobilização?
+
+3. **Calcular SOFA Diário**: Acompanhar evolução
+
+4. **Definir Metas do Dia**: O que fazer hoje para melhorar?
+
+### 2. Fluxograma Mental de Decisão
+
+```
+PACIENTE EM UTI - AVALIAÇÃO DIÁRIA
+         ↓
+[ESTABILIDADE?]
+    Instável → Ressuscitar → Identificar causa → Tratar
+         ↓ Estável
+[CALCULAR SOFA HOJE]
+    Comparar com ontem: melhorou? piorou? igual?
+         ↓
+[REVISAR CADA ÓRGÃO/SISTEMA]
+         ↓
+RESPIRATÓRIO:
+    VM? → Pronto para TRE? → SIM: fazer TRE
+                            → NÃO: otimizar parâmetros
+    SARA? → Estratégia protetora? Prona se grave?
+         ↓
+CARDIOVASCULAR:
+    Choque? → Tipo? → Fluidos? Vasopressor? Inotrópico?
+    PAM ≥65? Lactato↓? Diurese ok?
+    Desmame de vasopressor possível?
+         ↓
+RENAL:
+    IRA? → Pré/renal/pós?
+    Indicação de diálise (AEIOU)?
+    Ajustar doses de medicações
+         ↓
+SEDAÇÃO:
+    RASS alvo atingido?
+    Despertar diário feito?
+    Delirium (CAM-ICU)?
+    Mobilização feita?
+         ↓
+INFECÇÃO:
+    Foco controlado?
+    ATB adequado? Desescalonar?
+    Sinais de melhora?
+         ↓
+[METAS DO DIA]
+    1. Weaning de VM?
+    2. Weaning de vasopressor?
+    3. Iniciar dieta?
+    4. Mobilização?
+    5. Transferir para enfermaria?
+         ↓
+[PROFILAXIAS OK?]
+    TEV, úlcera de estresse, mobilização
+         ↓
+[REUNIÃO FAMILIAR?]
+    Atualizar família regularmente
+```
+
+### 3. Perguntas-Chave por Situação em UTI
+
+**PACIENTE EM CHOQUE:**
+- **Tipo de choque?** (hipovolêmico, cardiogênico, distributivo, obstrutivo)
+- PAM? Lactato? Diurese? ScvO₂?
+- Responsivo a fluidos? (VPP, VVS, PLR)
+- Dose de vasopressor: subindo ou descendo?
+- Foco infeccioso controlado? (se séptico)
+- **Buscar em @md/**: "Sepse pacote 1 hora", "Vasopressores doses"
+
+**PACIENTE EM VMI COM SARA:**
+- PaO₂/FiO₂? (leve >200, moderada 100-200, grave <100)
+- Parâmetros protetores? VC 6 mL/kg, Pplatô <30, driving pressure <15?
+- PEEP adequado? (tabela ARDSnet)
+- Indicação de prona? (PaO₂/FiO₂ <150 com PEEP ≥5, FiO₂ ≥0,6)
+- **Buscar em @md/**: "SARA estratégia protetora", "SARA critérios Berlim", "Pronação SARA"
+
+**PACIENTE COM IRA:**
+- Classificação KDIGO? (estágio 1, 2, 3)
+- Pré-renal vs renal vs pós-renal?
+- FENa? (se <1% = pré-renal)
+- Nefrotóxicos? (suspender!)
+- Indicação de diálise (AEIOU)?
+- **Buscar em @md/**: "IRA KDIGO", "Diálise indicações"
+
+**PACIENTE PÓS-PCR:**
+- Ritmo inicial? (FV/TV = melhor prognóstico)
+- Tempo de RCP?
+- Causa reversível identificada/tratada?
+- Neuroproteção: controle de temperatura (32-36°C por 24h), evitar febre
+- Controle glicêmico (140-180)
+- Prognóstico: evitar decisões <72h
+- **Buscar em @md/**: "Cuidados pós-PCR"
+
+**DESMAME DE VM - PRONTO PARA TRE?**
+- Causa resolvida/melhorando?
+- Gasometria adequada (pH >7,25, PaO₂ >60 com FiO₂ ≤0,5, PEEP ≤8)?
+- Hemodinâmica estável (sem/pouco vasopressor)?
+- Despertar e proteger via aérea (Glasgow adequado)?
+- Sem sedação contínua?
+- **Se SIM**: Fazer TRE (tubo T ou PSV 5-8 por 30-120 min)
+- **Buscar em @md/**: "Desmame de VM critérios"
+
+### 4. Construção do Raciocínio - Disfunções Orgânicas
+
+**Método do Intensivista:**
+
+1. **Identificar TODAS as disfunções orgânicas** (SOFA)
+2. **Priorizar por gravidade**
+3. **Tratar de forma SISTÊMICA**
+4. **Reavaliar CONTINUAMENTE**
+
+**Exemplo - Paciente com Sepse:**
+
+**Disfunções identificadas:**
+- Respiratório: PaO₂/FiO₂ = 180 (SARA leve)
+- Cardiovascular: PAM 58 com noradrenalina 0,4 mcg/kg/min
+- Renal: Creatinina 2,5 (basal 1,0), diurese 20 mL/h
+- Coagulação: Plaquetas 80.000
+- Hepático: Bilirrubinas normais
+- Neurológico: RASS -2 (sedado)
+
+**SOFA = 2 (resp) + 3 (CV) + 2 (renal) + 1 (coag) = 8 pontos**
+
+**Prioridades:**
+1. Hemodinâmica (choque)
+2. Respiratório (SARA)
+3. Renal (IRA)
+
+**Ações:**
+- Otimizar ressuscitação (lactato, diurese, PAM)
+- Ventilação protetora
+- Evitar nefrotóxicos, ajustar doses
+
+### 5. Critérios de Gravidade - Quando se Preocupar Mais
+
+**PIORA AGUDA EM UTI:**
+
+**Respiratória:**
+- PaO₂/FiO₂ caindo
+- Driving pressure subindo (>15)
+- Assincronia paciente-ventilador
+- Pneumotórax (atenção se PEEP alto!)
+
+**Hemodinâmica:**
+- Lactato subindo (ou não caindo)
+- Necessidade crescente de vasopressor
+- Diurese caindo
+- Perfusão periférica piorando
+
+**Renal:**
+- Creatinina subindo rapidamente
+- Oligúria/anúria
+- Hipercalemia
+- Acidose metabólica refratária
+
+**Neurológica:**
+- Anisocoria nova
+- Rebaixamento não explicado por sedação
+- Sinais de herniação (Cushing: HAS + bradicardia)
+
+**INDICAÇÃO DE TRANSFERIR PARA ENFERMARIA:**
+- Disfunções orgânicas resolvidas
+- Sem vasopressor/inotrópico
+- Sem VM (ou traqueostomia em ar ambiente)
+- Hemodinamicamente estável
+- Sem necessidade de monitorização invasiva
+
+### 6. Integrando Conhecimento dos Livros (@md/)
+
+**QUANDO BUSCAR EM @md/ICU Book (Marino):**
+- Fisiopatologia de disfunções orgânicas
+- Manejo prático de situações em UTI
+- Doses de medicações
+
+**QUANDO BUSCAR EM @md/Guidelines (Sepse, SARA):**
+- Protocolos baseados em evidência
+- Critérios diagnósticos
+- Metas terapêuticas
+
+**ESTRATÉGIA DE BUSCA EM UTI:**
+
+**Protocolos:**
+"[Protocolo] completo" - Ex: "Sepse pacote 1 hora", "SARA estratégia protetora"
+
+**Scores:**
+"[Score] cálculo interpretação" - Ex: "SOFA cálculo", "APACHE II"
+
+**Manejo:**
+"[Disfunção] manejo UTI" - Ex: "IRA em UTI", "Choque séptico vasopressores"
+
+**Desmame:**
+"Desmame de [suporte]" - Ex: "Desmame de VM", "Desmame de vasopressor"
+
+### 7. Exemplos Práticos de Raciocínio em UTI
+
+**EXEMPLO 1: Paciente com Sepse + SARA**
+
+**Cenário:**
+Homem, 55 anos, D3 de UTI. Pneumonia comunitária grave. VM em VCV: VC 450 mL (7 mL/kg peso real!), PEEP 12, FiO₂ 0,7. Gasometria: pH 7,32, pCO₂ 45, pO₂ 68, HCO₃ 23. Noradrenalina 0,3 mcg/kg/min. PAM 68. Lactato 2,5 (era 5 na admissão). Diurese 40 mL/h. SOFA hoje = 10 (era 14 na admissão).
+
+**Raciocínio:**
+
+**1. Avaliar SARA:**
+- PaO₂/FiO₂ = 68/0,7 = **97** → **SARA GRAVE!**
+- VC: 450 mL, paciente pesa 75 kg → peso predito ~70 kg → VC = 6,4 mL/kg → OK!
+- Mas usar peso PREDITO, não real!
+- Pplatô? Driving pressure? (solicitar)
+
+**Erro identificado:**
+- VC calculado em peso REAL (75 kg) quando deveria ser PESO PREDITO (~70 kg)
+- Se peso predito = 70 kg → VC ideal = 420 mL (6 mL/kg)
+
+**2. Avaliar hemodinâmica:**
+- PAM 68 → adequado (alvo ≥65)
+- Lactato 2,5 → caindo (era 5) → BOM sinal!
+- Diurese 40 mL/h → ~0,5 mL/kg/h → adequada
+- Noradrenalina 0,3 → dose moderada, respondendo
+
+**3. SOFA:**
+- 10 pontos hoje vs 14 na admissão → **MELHORANDO!**
+
+**Buscar em @md/**:
+- "SARA grave manejo"
+- "Ventilação protetora peso predito"
+- "Pronação indicações"
+
+**Decisões:**
+
+**VM:**
+- Ajustar VC para 420 mL (peso predito)
+- Verificar Pplatô (deve ser <30)
+- **Considerar PRONAÇÃO**: PaO₂/FiO₂ <100 + PEEP 12 + FiO₂ 0,7 = INDICADO!
+  - Pronar por 16-18h
+  - Reavaliar oxigenação
+
+**Hemodinâmica:**
+- Manter noradrenalina (ainda precisa)
+- Monitorar lactato (meta: normalizar)
+
+**Antibiótico:**
+- Revisar culturas
+- Desescalonar se possível
+
+**Sedação:**
+- Se pronar: sedação profunda (RASS -4/-5) + bloqueio neuromuscular por 16-18h
+
+**Nutrição:**
+- Dieta enteral (se estável hemodinamicamente)
+
+**Prognóstico:**
+- SOFA melhorando = bom sinal
+- SARA grave = ainda crítico
+- Continuar suporte agressivo
+
+---
+
+**EXEMPLO 2: Desmame de VM - Pronto ou Não?**
+
+**Cenário:**
+Mulher, 68 anos, D7 de UTI. Pneumonia, já completou antibiótico. VM em PSV 10, PEEP 5, FiO₂ 0,35. Gasometria: pH 7,42, pCO₂ 38, pO₂ 95. PaO₂/FiO₂ = 271. Sem vasopressor. RASS 0 (alerta). Obedece comandos. Tosse eficaz.
+
+**Raciocínio - Checar Critérios para TRE:**
+
+✓ **Causa resolvida**: Pneumonia tratada
+✓ **Gasometria adequada**: pH >7,25, PaO₂ >60
+✓ **FiO₂ ≤0,5 e PEEP ≤8**: FiO₂ 0,35, PEEP 5
+✓ **Hemodinâmica estável**: Sem vasopressor
+✓ **Despertar**: RASS 0, obedece comandos
+✓ **Proteção de via aérea**: Tosse eficaz
+
+→ **PRONTA PARA TRE!**
+
+**Buscar em @md/**:
+- "Teste de respiração espontânea protocolo"
+- "Desmame de VM critérios falha"
+
+**Conduta:**
+1. **Fazer TRE**:
+   - Tubo T OU PSV 5-8 (preferir PSV)
+   - Duração: 30-120 min
+   - Monitorar: FR, SpO₂, FC, PA, conforto
+
+2. **Critérios de FALHA do TRE** (suspender se):
+   - FR >35 ipm ou ↑>50%
+   - SpO₂ <88%
+   - FC >140 bpm ou ↑>20%
+   - PAS >180 ou <90 mmHg
+   - Agitação, sudorese, rebaixamento
+
+3. **Se SUCESSO no TRE:**
+   - **EXTUBAR!**
+   - Considerar VNI pós-extubação (alto risco: DPOC, idosa, IC)
+   - O₂ suplementar
+   - Fisioterapia respiratória
+
+4. **Se FALHA:**
+   - Retornar parâmetros de conforto
+   - Investigar causa (fadiga, broncoespasmo, sobrecarga volêmica)
+   - Tentar novamente em 24h
+
+---
+
+**EXEMPLO 3: Choque Séptico Refratário**
+
+**Cenário:**
+Homem, 42 anos, D2 de UTI. Peritonite pós-perfuração intestinal, operado (lavagem + ressecção). Noradrenalina 0,8 mcg/kg/min. PAM 62. Lactato 4,5. Diurese 15 mL/h. ScvO₂ 58%. Já recebeu 5L de cristaloide. Balanço +4L. Hb 8,5.
+
+**Raciocínio:**
+
+**Choque séptico NÃO controlado:**
+- PAM 62 (alvo ≥65)
+- Lactato ainda alto
+- Diurese baixa
+- ScvO₂ baixa (<70%)
+- Noradrenalina dose alta (0,8)
+
+**Checklist:**
+
+1. **Foco controlado?**
+   - Operado → controle cirúrgico OK
+   - ATB adequado? Revisar
+
+2. **Ressuscitação volêmica adequada?**
+   - Já recebeu 5L
+   - Balanço +4L
+   - **Responsivo a fluidos?** Checar VPP, PLR
+   - Se não responsivo → PARAR fluidos!
+
+3. **Vasopressor otimizado?**
+   - Noradrenalina 0,8 (dose alta)
+   - **Adicionar vasopressina** 0,04 UI/min (poupe noradrenalina)
+
+4. **Baixo débito?**
+   - ScvO₂ 58% → sugere baixo DC
+   - **Considerar ECOCARDIOGRAMA** (avaliar FE, contratilidade)
+   - Se disfunção miocárdica → **dobutamina** 5-10 mcg/kg/min
+
+5. **Hidrocortisona?**
+   - Choque refratário a fluidos e vasopressor
+   - **Hidrocortisona 50 mg 6/6h**
+
+6. **Anemia?**
+   - Hb 8,5 → considerar transfusão (alvo Hb 7-9)
+   - Melhorar oferta de O₂
+
+7. **Outras causas?**
+   - Tamponamento? (FAST)
+   - Pneumotórax hipertensivo?
+   - Foco não drenado? (novo abscesso?)
+
+**Buscar em @md/**:
+- "Choque séptico refratário"
+- "Vasopressina em sepse"
+- "Dobutamina indicações"
+
+**Plano:**
+1. Adicionar vasopressina 0,04 UI/min
+2. Eco à beira-leito (avaliar função cardíaca)
+3. Se FE baixa → dobutamina
+4. Hidrocortisona 50 mg 6/6h
+5. Transfundir 1 CH (Hb →9)
+6. TC abdome (descartar novo abscesso)
+7. Reavaliar em 6h:
+   - Lactato caindo?
+   - Diurese melhorando?
+   - PAM ≥65?
+
+## Escores Prognósticos
+
+### APACHE II (Acute Physiology and Chronic Health Evaluation II)
+
+**Componentes:**
+- Idade (0-6 pontos)
+- Doença crônica (0-5 pontos)
+- 12 variáveis fisiológicas (0-60 pontos):
+  - Temperatura, PAM, FC, FR
+  - PaO₂, pH arterial
+  - Na+, K+, Creatinina
+  - Hematócrito, leucócitos
+  - Glasgow
+
+**Pontuação Total:** 0-71 pontos
+- Maior pontuação = maior mortalidade
+- Usado para estratificação de risco e pesquisa
+
+### SOFA (Sequential Organ Failure Assessment)
+
+**Avalia 6 sistemas (0-4 pontos cada):**
+
+1. **Respiratório**: PaO₂/FiO₂
+   - ≥400: 0 | <400: 1 | <300: 2 | <200 com VM: 3 | <100 com VM: 4
+
+2. **Coagulação**: Plaquetas
+   - ≥150k: 0 | <150k: 1 | <100k: 2 | <50k: 3 | <20k: 4
+
+3. **Hepático**: Bilirrubinas
+   - <1,2: 0 | 1,2-1,9: 1 | 2-5,9: 2 | 6-11,9: 3 | ≥12: 4
+
+4. **Cardiovascular**: PAM ou vasopressores
+   - PAM ≥70: 0 | PAM <70: 1 | Dopa ≤5 ou dobutamina: 2 | Dopa >5 ou adrenalina ≤0,1 ou noradrenalina ≤0,1: 3 | Dopa >15 ou adrenalina >0,1 ou noradrenalina >0,1: 4
+
+5. **SNC**: Glasgow
+   - 15: 0 | 13-14: 1 | 10-12: 2 | 6-9: 3 | <6: 4
+
+6. **Renal**: Creatinina ou diurese
+   - <1,2: 0 | 1,2-1,9: 1 | 2-3,4: 2 | 3,5-4,9 ou <500mL/dia: 3 | ≥5 ou <200mL/dia: 4
+
+**Pontuação Total:** 0-24 pontos
+- SOFA ≥2: Disfunção orgânica
+- Δ SOFA ≥2: Critério de sepse (com infecção)
+
+### qSOFA (Quick SOFA)
+
+**Triagem rápida de sepse (≥2 pontos = alto risco):**
+- FR ≥22 ipm (1 ponto)
+- Alteração do estado mental (1 ponto)
+- PAS ≤100 mmHg (1 ponto)
+
+**Não substitui SOFA, mas útil fora de UTI para identificar pacientes graves**
+
+### SAPS 3 (Simplified Acute Physiology Score 3)
+
+**Avalia:**
+- Características prévias à admissão
+- Circunstâncias da admissão
+- Grau de disfunção na 1ª hora de UTI
+
+**Usado:** Predição de mortalidade hospitalar
+
+## Sepse e Choque Séptico
+
+### Definições (Sepsis-3, 2016)
+
+**Sepse:**
+- Infecção + disfunção orgânica (SOFA ≥2)
+
+**Choque Séptico:**
+- Sepse + necessidade de vasopressor para PAM ≥65 mmHg + lactato >2 mmol/L (18 mg/dL) APÓS ressuscitação volêmica adequada
+
+### Pacote de 1 Hora (Hour-1 Bundle)
+
+**Realizar imediatamente:**
+1. **Dosar lactato**
+2. **Coletar hemoculturas** (antes de ATB)
+3. **Antibiótico de amplo espectro**
+4. **Ressuscitação volêmica**: 30 mL/kg de cristaloide se hipotensão ou lactato ≥4 mmol/L
+5. **Vasopressor** se hipotensão durante ou após ressuscitação (alvo PAM ≥65 mmHg)
+
+### Antibioticoterapia Empírica
+
+**Sepse Comunitária:**
+- Ceftriaxona 2g/dia + azitromicina 500 mg/dia (se pneumonia) OU
+- Piperacilina-tazobactam 4,5g 6/6h
+
+**Sepse Nosocomial/Imunossuprimido:**
+- Piperacilina-tazobactam 4,5g 6/6h OU
+- Meropenem 1g 8/8h OU
+- Cefepime 2g 8/8h
+- Considerar adicionar vancomicina (MRSA) ou fluconazol/equinocandina
+
+**Desescalonar após culturas e melhora clínica**
+
+### Ressuscitação Hemodinâmica
+
+**Cristaloides:**
+- Ringer Lactato ou SF 0,9%
+- Bolus inicial: 30 mL/kg (primeiros 3h)
+- Reavaliações seriadas (responsividade a fluidos)
+
+**Responsividade a Fluidos:**
+- Avaliação dinâmica:
+  - Variação de pressão de pulso (VPP) >13%
+  - Variação de volume sistólico (VVS) >10-15%
+  - Prova de elevação passiva de MMII
+  - Mini-challenge (100 mL)
+
+**Parâmetros Estáticos (menos confiáveis):**
+- PVC <8 mmHg sugere hipovolemia
+- PVC >12 não garante responsividade
+
+### Vasopressores e Inotrópicos
+
+**Noradrenalina (1ª escolha):**
+- Dose: 0,05-3 mcg/kg/min
+- Efeito: Vasoconstrição (alfa-1) + inotropismo leve (beta-1)
+- Alvo: PAM ≥65 mmHg
+
+**Adrenalina:**
+- Dose: 0,05-2 mcg/kg/min
+- Efeito: Vasoconstrição + inotropismo + cronotropismo
+- Indicação: Alternativa/associação à noradrenalina
+
+**Vasopressina:**
+- Dose: 0,03-0,04 UI/min (dose fixa)
+- Efeito: Vasoconstrição (não-adrenérgica)
+- Indicação: Poupe noradrenalina (associar se dose >0,5 mcg/kg/min)
+
+**Dobutamina:**
+- Dose: 2-20 mcg/kg/min
+- Efeito: Inotropismo (beta-1)
+- Indicação: Disfunção miocárdica + baixo débito
+- **Não é vasopressor!**
+
+**Dopamina** (evitar):**
+- Maior risco de arritmias
+- Usar apenas em casos muito selecionados (bradicardia + hipotensão)
+
+### Metas de Ressuscitação
+
+**Primeiras 6h:**
+- PAM ≥65 mmHg
+- Diurese ≥0,5 mL/kg/h
+- Lactato: Normalizar ou reduzir ≥50%
+- ScvO₂ ≥70% (se disponível)
+
+**Corticoide:**
+- **Hidrocortisona 50 mg 6/6h IV** (ou 200 mg/dia em BIC)
+- Indicação: Choque séptico refratário a fluidos e vasopressores
+- Suspender quando retirar vasopressor
+
+## Ventilação Mecânica
+
+### Indicações de Intubação e VMI
+
+**Parada Respiratória:**
+- Apneia
+- FR <8 ou >35 ipm com sinais de fadiga
+- SpO₂ <90% com O₂ suplementar
+
+**Proteção de Via Aérea:**
+- Glasgow ≤8
+- Risco de aspiração
+
+**Insuficiência Respiratória:**
+- Hipoxemia refratária (PaO₂/FiO₂ <200)
+- Hipercapnia com acidose (pH <7,25)
+- Trabalho respiratório excessivo
+
+**Outras:**
+- Choque com hipoperfusão
+- Necessidade de sedação profunda
+- Pós-PCR
+
+### Estratégia Protetora Pulmonar (SARA)
+
+**Parâmetros:**
+- **Volume Corrente**: 6 mL/kg de peso predito (4-8 mL/kg)
+- **Pplatô**: <30 cmH₂O (idealmente <28)
+- **Driving Pressure**: <15 cmH₂O (Pplatô - PEEP)
+- **PEEP**: Titulação individualizada
+  - Tabela PEEP/FiO₂ (ARDSnet)
+  - Guiado por mecânica (melhor compliance)
+- **FR**: Ajustar para pH 7,30-7,45
+- **FiO₂**: Mínima necessária para SpO₂ 88-95%
+
+**Hipercapnia Permissiva:**
+- Aceitar pCO₂ elevado (até 70-80 mmHg)
+- Desde que pH >7,20-7,25
+
+### Modos Ventilatórios
+
+**VCV (Volume Controlado):**
+- Define volume corrente
+- Pressão varia conforme mecânica
+- Garante volume minuto
+
+**PCV (Pressão Controlada):**
+- Define pressão inspiratória
+- Volume varia conforme mecânica
+- Limita pressão
+
+**PSV (Pressão de Suporte):**
+- Modo espontâneo
+- Paciente dispara ciclos
+- Suporte inspiratório ajustável
+
+**SIMV (Ventilação Mandatória Intermitente Sincronizada):**
+- Ciclos mandatórios + suporte em ciclos espontâneos
+- Menos usado atualmente
+
+### PEEP
+
+**Funções:**
+- Recrutamento alveolar
+- Melhora oxigenação
+- Previne atelectrauma
+
+**Titulação:**
+- **PEEP/FiO₂ decrescente** (ARDSnet):
+  - FiO₂ alta → PEEP alto
+  - Deescealonar ambos conforme melhora
+
+**PEEP elevado (>10 cmH₂O):**
+- SARA moderada/grave
+- Pode melhorar oxigenação, mas monitorar hemodinâmica
+
+### SARA (Síndrome da Angústia Respiratória Aguda)
+
+**Critérios de Berlim:**
+- Início agudo (<7 dias)
+- Infiltrado bilateral à imagem
+- Não explicado por IC ou hipervolemia
+- **PaO₂/FiO₂**:
+  - Leve: 200-300
+  - Moderada: 100-200
+  - Grave: <100
+
+**Ventilação Protetora:**
+- Como descrito acima
+
+**Estratégias Adjuvantes:**
+
+**Posição Prona (SARA grave):**
+- Indicação: PaO₂/FiO₂ <150 com PEEP ≥5 e FiO₂ ≥0,6
+- Duração: 16-18h/dia
+- Reduz mortalidade
+
+**Bloqueio Neuromuscular (considerar em SARA grave inicial):**
+- Cisatracúrio 15 mg/h por 48h
+- Melhora sincronia, reduz barotrauma
+- **Uso controverso** (estudos recentes não mostram benefício)
+
+**Oxigenação por Membrana Extracorpórea (ECMO):**
+- SARA refratária (PaO₂/FiO₂ <80)
+- Centro especializado
+
+### Desmame da Ventilação Mecânica
+
+**Critérios para Teste de Respiração Espontânea (TRE):**
+- Causa da IOT resolvida/melhorada
+- Gasometria adequada (pH >7,25, PaO₂ >60 com FiO₂ ≤0,5 e PEEP ≤8)
+- Hemodinâmica estável (sem/pouco vasopressor)
+- Capaz de despertar e proteger via aérea
+- Sem sedação contínua
+
+**Teste de Respiração Espontânea:**
+- **Tubo T** ou **PSV 5-8 cmH₂O** por 30-120 min
+- Monitorar: FR, SpO₂, FC, PA, conforto, sudorese
+
+**Falha no TRE (suspender teste):**
+- FR >35 ipm ou aumento >50%
+- SpO₂ <88%
+- FC >140 bpm ou aumento >20%
+- PAS >180 ou <90 mmHg
+- Agitação, sudorese, alteração do nível de consciência
+
+**Sucesso no TRE:**
+- Extubar se proteção de via aérea adequada
+- Considerar VNI pós-extubação em alto risco (DPOC, idosos, IC, hipercapnia)
+
+### Complicações da VMI
+
+**Pneumonia Associada à Ventilação Mecânica (PAV):**
+- Definição: Pneumonia após >48h de IOT
+- Prevenção:
+  - Cabeceira 30-45°
+  - Higiene oral com clorexidina
+  - Aspiração de secreções subglóticas
+  - Evitar sedação excessiva (despertar diário)
+  - Extubação precoce quando possível
+
+**Barotrauma:**
+- Pneumotórax, pneumomediastino, enfisema subcutâneo
+- Prevenir: Limitar pressões (Pplatô <30)
+
+**Lesão Renal Aguda:**
+- VMI com PEEP alto pode reduzir retorno venoso e perfusão renal
+
+## Sedação e Analgesia
+
+### Escala RASS (Richmond Agitation-Sedation Scale)
+
+**Agitação:**
+- +4: Combativo
+- +3: Muito agitado
+- +2: Agitado
+- +1: Inquieto
+
+**Calmo e alerta:**
+- 0: Alerta e calmo
+
+**Sedação:**
+- -1: Sonolento (despertar sustentado >10s ao chamado)
+- -2: Sedação leve (despertar breve <10s ao chamado)
+- -3: Sedação moderada (movimento ao chamado, mas sem contato visual)
+- -4: Sedação profunda (sem resposta ao chamado, mas movimento à estimulação física)
+- -5: Não desperta (sem resposta a estímulos)
+
+### Protocolo de Sedação
+
+**Meta:**
+- RASS 0 a -2 (maioria dos pacientes)
+- RASS -4 a -5: SARA grave, assincronia, status epiléptico
+
+**Analgesia Primeiro:**
+- Tratar dor antes de sedar
+
+**Analgésicos:**
+
+**Fentanil:**
+- Bolus: 25-100 mcg
+- Infusão: 25-200 mcg/h
+- Rápido início, curta duração
+- Sem metabólitos ativos
+
+**Morfina:**
+- Bolus: 2-5 mg
+- Infusão: 2-10 mg/h
+- Metabólito ativo (cuidado em IRC)
+
+**Sedativos:**
+
+**Propofol:**
+- Bolus: 0,5-1 mg/kg
+- Infusão: 5-50 mcg/kg/min (0,3-3 mg/kg/h)
+- Despertar rápido
+- Risco: Hipotensão, síndrome da infusão (>48h, dose alta)
+
+**Midazolam:**
+- Bolus: 1-5 mg
+- Infusão: 1-10 mg/h
+- Acúmulo (despertar prolongado)
+- Evitar infusão prolongada
+
+**Dexmedetomidina:**
+- Infusão: 0,2-1,4 mcg/kg/h
+- Agonista alfa-2 (sedação sem depressão respiratória)
+- Facilita desmame
+- Menor delirium
+- Sem bolus (bradicardia, hipotensão)
+
+**Despertar Diário:**
+- Interromper sedação diariamente
+- Avaliar necessidade de continuar
+- Reduz tempo de VM e delirium
+
+### Bloqueio Neuromuscular
+
+**Indicações:**
+- SARA grave (PaO₂/FiO₂ <150) - uso precoce e limitado (48h)
+- Assincronia ventilatória refratária
+- Hipertensão intracraniana refratária
+- Redução do consumo de O₂
+
+**Agentes:**
+
+**Cisatracúrio:**
+- Dose: 0,15-0,2 mg/kg bolus, depois 1-3 mcg/kg/min
+- Eliminação de Hoffman (independe de função renal/hepática)
+
+**Rocurônio:**
+- Dose: 0,6-1,2 mg/kg bolus, depois 8-12 mg/kg/h
+
+**Monitorização:**
+- Train-of-Four (TOF): 1-2 respostas
+- Sedação profunda concomitante (RASS -4/-5)
+
+**Riscos:**
+- Miopatia/polineuropatia do paciente crítico
+- Uso prolongado (>48h): Evitar
+
+## Delirium
+
+### CAM-ICU (Confusion Assessment Method for ICU)
+
+**Critérios (todos devem estar presentes):**
+1. **Início agudo ou flutuante**
+2. **Desatenção**
+3. **Pensamento desorganizado** OU **Alteração do nível de consciência**
+
+**Tipos:**
+- **Hiperativo**: Agitação, alucinações
+- **Hipoativo**: Sonolência, lentificação (mais comum, pior prognóstico)
+- **Misto**
+
+### Prevenção e Manejo
+
+**Prevenção (Bundle ABCDEF):**
+- **A**waken (despertar diário)
+- **B**reathing (TRE diário)
+- **C**hoice of sedation (sedação leve)
+- **D**elirium monitoring (CAM-ICU)
+- **E**arly mobility (mobilização precoce)
+- **F**amily engagement (envolvimento familiar)
+
+**Não-Farmacológico (preferencial):**
+- Orientação temporal/espacial
+- Mobilização precoce
+- Ciclo claro/escuro
+- Óculos, aparelho auditivo
+- Reduzir ruídos noturnos
+
+**Farmacológico:**
+- **Haloperidol**: 2,5-10 mg IV (se agitação com risco)
+- **Quetiapina**: 25-100 mg VO
+- **Não usar rotineiramente para prevenção**
+
+**Evitar:**
+- Benzodiazepínicos (exceto abstinência alcoólica)
+
+## Nutrição no Paciente Crítico
+
+### Início da Nutrição
+
+**Enteral:**
+- Iniciar precocemente (24-48h)
+- Preferível à parenteral (mantém barreira intestinal)
+
+**Parenteral:**
+- Se impossibilidade de via enteral após 7 dias
+
+### Cálculo das Necessidades
+
+**Calorias:**
+- 20-25 kcal/kg/dia (fase aguda)
+- 25-30 kcal/kg/dia (fase de recuperação)
+- **Calorimetria indireta** (se disponível): método ideal
+
+**Proteínas:**
+- 1,2-2 g/kg/dia
+- Aumentar em queimados, politrauma
+
+### Vias de Acesso Enteral
+
+**Sonda Nasoenteral (SNE):**
+- Gástrica: Se TGI funcionante e baixo risco de aspiração
+- Pós-pilórica: Se gastroparesia, refluxo, alto risco de aspiração
+
+**Gastrostomia/Jejunostomia:**
+- Nutrição prolongada (>4-6 semanas)
+
+### Monitorização
+
+**Volume Residual Gástrico (VRG):**
+- Checar em pacientes com risco de intolerância
+- >500 mL: Considerar reduzir infusão ou procinético
+
+**Procinéticos:**
+- Metoclopramida 10 mg 8/8h IV
+- Eritromicina 250 mg 12/12h IV
+
+**Diarreia:**
+- Avaliar causas (infecção, antibióticos, dieta hiperosmolar)
+- Ajustar velocidade/concentração da dieta
+
+## Insuficiência Renal Aguda (IRA)
+
+### Critérios KDIGO
+
+**Estágio 1:**
+- Creatinina 1,5-1,9x basal OU aumento ≥0,3 mg/dL
+- Diurese <0,5 mL/kg/h por 6-12h
+
+**Estágio 2:**
+- Creatinina 2-2,9x basal
+- Diurese <0,5 mL/kg/h por ≥12h
+
+**Estágio 3:**
+- Creatinina ≥3x basal OU ≥4 mg/dL OU diálise
+- Diurese <0,3 mL/kg/h por ≥24h OU anúria por ≥12h
+
+### Classificação
+
+**Pré-Renal:**
+- Hipovolemia, hipotensão, baixo débito
+- FENa <1%, UNa <20
+- Reversível com restauração da perfusão
+
+**Renal (NTA - Necrose Tubular Aguda):**
+- Lesão do parênquima
+- FENa >2%, UNa >40
+- Causas: Isquemia, nefrotóxicos, sepse
+
+**Pós-Renal:**
+- Obstrução (sonda vesical obstruída, HPB, tumor)
+- USG: Hidronefrose
+
+### Manejo
+
+**Prevenir/Tratar Causas:**
+- Otimizar perfusão (PAM ≥65, euvolemia)
+- Suspender nefrotóxicos (AINEs, aminoglicosídeos, contraste)
+- Ajustar doses de medicações
+
+**Indicações de Diálise (AEIOU):**
+- **A**cidose metabólica refratária (pH <7,1)
+- **E**letrolíticos (hipercalemia >6,5 refratária)
+- **I**ntoxicação dialysável
+- **O**verload (hipervolemia refratária)
+- **U**remia (sintomas: encefalopatia, pericardite, sangramento)
+
+**Modalidades:**
+- **Hemodiálise intermitente**: Instabilidade hemodinâmica tolerada
+- **Hemodiálise contínua (CVVH/CVVHDF)**: Instabilidade hemodinâmica grave
+- **Diálise peritoneal**: Menos comum em UTI
+
+## Distúrbios Ácido-Base
+
+### Análise de Gasometria
+
+**Passo 1 - pH:**
+- Acidemia: pH <7,35
+- Alcalemia: pH >7,45
+
+**Passo 2 - Distúrbio Primário:**
+- **pCO₂**: Respiratório
+  - Acidose: pCO₂ >45
+  - Alcalose: pCO₂ <35
+- **HCO₃⁻**: Metabólico
+  - Acidose: HCO₃⁻ <22
+  - Alcalose: HCO₃⁻ >26
+
+**Passo 3 - Compensação:**
+- Avaliar se compensação é adequada (fórmulas)
+
+**Passo 4 - Anion Gap (se acidose metabólica):**
+- AG = Na - (Cl + HCO₃) = 8-12 mEq/L
+- **AG elevado** (MUDPILES):
+  - **M**etanol
+  - **U**remia
+  - **D**KA (cetoacidose)
+  - **P**ropileno glicol / **P**araldeído
+  - **I**nsulin (ausência = cetoacidose)
+  - **L**actato
+  - **E**tileno glicol
+  - **S**alicilatos
+- **AG normal**: Perda de HCO₃ (diarreia, IRA tubular)
+
+### Acidose Metabólica com AG Elevado
+
+**Lactato:**
+- Tipo A: Hipoperfusão (choque, isquemia)
+- Tipo B: Sem hipoperfusão (metformina, malignidade, disfunção hepática)
+- **Tratar causa-base**
+
+**Cetoacidose:**
+- Diabética, alcoólica, inanição
+- Tratamento específico (insulina, glicose, tiamina)
+
+### Acidose Metabólica Grave
+
+**Bicarbonato de sódio:**
+- Controverso
+- Considerar se pH <7,1-7,2 E hipercalemia ou acidose metabólica pura
+- Dose: 50-100 mEq em 200-400 mL H₂O (1-2h)
+- Monitorar (risco de alcalose, sobrecarga Na+)
+
+## Hipertensão Intracraniana
+
+### Monitorização da PIC
+
+**Indicações:**
+- TCE grave (Glasgow ≤8) com TC anormal OU
+- TCE grave com TC normal + idade >40 anos, PAS <90 ou postura anormal
+
+**Valores:**
+- Normal: 5-15 mmHg
+- HIC: >20 mmHg sustentada
+
+**PPC (Pressão de Perfusão Cerebral):**
+- PPC = PAM - PIC
+- Alvo: 60-70 mmHg
+
+### Manejo da HIC
+
+**Medidas Gerais:**
+- Cabeceira 30°
+- Cabeça/pescoço alinhados (facilitar drenagem venosa)
+- Normotermia
+- Normovolemia
+- Evitar hipotensão, hipóxia, hipercapnia, hipoglicemia, hiperglicemia
+
+**Sedação/Analgesia:**
+- Reduz metabolismo cerebral e PIC
+- Propofol ou midazolam + fentanil
+
+**Drenagem de LCR:**
+- Se DVE disponível
+
+**Hiperosmolaridade:**
+
+**Manitol 20%:**
+- Dose: 0,25-1 g/kg IV em bolus
+- Osmolaridade sérica alvo <320 mOsm/L
+- Monitorar função renal e eletrólitos
+
+**Salina Hipertônica 3%:**
+- Bolus: 150-250 mL (ou 2-5 mL/kg) em 15-30 min
+- Infusão contínua: 30-60 mL/h
+- Na+ alvo: 145-155 mEq/L
+
+**Hiperventilação:**
+- pCO₂ alvo: 30-35 mmHg (temporário!)
+- Reduz PIC, mas pode causar isquemia (vasoconstrição)
+- Uso breve em herniação iminente
+
+**Craniectomia Descompressiva:**
+- HIC refratária
+- Decisão neurocirúrgica
+
+**Barbitúricos:**
+- Pentobarbital (coma barbitúrico)
+- Último recurso (HIC refratária)
+- Necessita monitorização EEG
+
+**Hipotermia:**
+- 32-35°C
+- Controversa, não rotina
+
+## Morte Encefálica
+
+### Pré-requisitos
+
+- Causa conhecida e irreversível de lesão encefálica
+- Ausência de fatores confundidores:
+  - Hipotermia (T >35°C)
+  - Distúrbios metabólicos graves
+  - Intoxicação exógena, drogas depressoras do SNC
+
+### Critérios Clínicos
+
+**Coma aperceptivo:**
+- Glasgow 3
+- Ausência de resposta a estímulos nociceptivos
+
+**Ausência de Reflexos de Tronco Cerebral:**
+- Fotomotor
+- Córneo-palpebral
+- Oculocefálico
+- Oculovestibular (prova calórica)
+- Tosse (aspiração traqueal)
+
+**Teste de Apneia:**
+- pCO₂ >55 mmHg sem movimentos respiratórios
+
+### Exame Complementar
+
+**Obrigatório no Brasil:**
+- Demonstrar ausência de perfusão/atividade cerebral
+- Opções:
+  - Doppler transcraniano
+  - Arteriografia cerebral
+  - Cintilografia cerebral
+  - EEG
+
+**Intervalo entre exames clínicos:**
+- Depende da idade e causa
+- Geralmente 6h entre dois exames clínicos
+
+**Protocolo completo conforme Resolução CFM 2.173/2017**
+
+## Controle Glicêmico em UTI
+
+**Meta:**
+- 140-180 mg/dL (consenso atual)
+- Evitar hipoglicemia (<70 mg/dL)
+
+**Controle Estrito (80-110) NÃO é mais recomendado:**
+- Aumento de hipoglicemias graves
+- Sem benefício de mortalidade
+
+**Insulinoterapia:**
+- Protocolo institucional de infusão contínua
+- Monitorar glicemia capilar a cada 1-4h (conforme estabilidade)
+
+## Transfusão de Hemoderivados
+
+### Concentrado de Hemácias
+
+**Estratégia Restritiva (preferível):**
+- Transfundir se Hb <7 g/dL (pacientes estáveis)
+- Meta: Hb 7-9 g/dL
+
+**Estratégia Liberal:**
+- Transfundir se Hb <10 g/dL
+- Considerar em:
+  - SCA
+  - Hipoxemia grave
+  - Sangramento ativo
+
+### Plasma Fresco Congelado
+
+**Indicações:**
+- Sangramento ativo com INR >1,5-1,8 OU
+- Procedimento invasivo com INR >1,5 OU
+- Deficiência de fatores de coagulação
+- PTT <30% em transfusão maciça
+
+**Dose:** 10-20 mL/kg
+
+### Plaquetas
+
+**Profilática:**
+- <10.000/mm³ (sem sangramento)
+- <50.000/mm³ (procedimento invasivo, sangramento ativo)
+- <100.000/mm³ (neurocirurgia, sangramento SNC)
+
+**Dose:** 1 unidade/10 kg (eleva ~30-50 mil plaquetas)
+
+### Crioprecipitado
+
+**Indicações:**
+- Hipofibrinogenemia (<100-150 mg/dL) com sangramento
+- Doença de von Willebrand (se não disponível DDAVP/concentrado)
+
+**Contém:** Fibrinogênio, fator VIII, vWF, fator XIII
+
+## Tromboembolismo Venoso (TEV)
+
+### Profilaxia
+
+**Risco Moderado:**
+- Heparina 5.000 UI SC 12/12h OU
+- Enoxaparina 40 mg SC/dia
+
+**Alto Risco:**
+- Enoxaparina 40 mg SC/dia OU
+- Heparina 5.000 UI SC 8/8h
+
+**Contraindicação (sangramento ativo):**
+- Compressão pneumática intermitente
+
+**Todos os pacientes de UTI devem receber profilaxia (exceto contraindicação)**
+
+### Tratamento de TVP/TEP
+
+**Anticoagulação plena:**
+- **Heparina não-fracionada**: 80 UI/kg bolus + 18 UI/kg/h (ajustar por TTPa)
+- **Enoxaparina**: 1 mg/kg SC 12/12h
+- Transição para varfarina (INR 2-3) ou DOAC quando estável
+
+**TEP maciço (instabilidade hemodinâmica):**
+- Trombólise: Alteplase 100 mg IV em 2h
+- Embolectomia cirúrgica (se contraindicação à trombólise)
+
+## Cuidados Paliativos em UTI
+
+### Comunicação com Família
+
+- Reunião familiar precoce
+- Linguagem clara, empática
+- Discutir prognóstico, metas de cuidado
+- Diretivas antecipadas de vontade
+
+### Limitação de Suporte
+
+**Decisão compartilhada:**
+- Equipe multidisciplinar + família
+- Baseada em prognóstico, valores do paciente, qualidade de vida
+
+**Ordens de não reanimação (DNR):**
+- Documentar claramente
+- Não significa suspender cuidados
+
+### Controle de Sintomas
+
+**Dispneia:**
+- Morfina
+- O₂ suplementar
+
+**Dor:**
+- Opioides (morfina, fentanil)
+- Escalonar doses
+
+**Agitação/Ansiedade:**
+- Benzodiazepínicos (midazolam)
+
+**Secreções:**
+- Escopolamina
+
+**Conforto:**
+- Higiene, posição confortável
+- Presença familiar
+
+## Referências
+
+- **The ICU Book. Paul Marino. 4ª ed.**
+- **Irwin and Rippe's Intensive Care Medicine. 8ª ed.**
+- **Principles of Critical Care. Jesse Hall. 4ª ed.**
+- **Surviving Sepsis Campaign Guidelines 2021**
+- **ARDSnet Protocol (NIH NHLBI ARDS Network)**
+- **KDIGO Clinical Practice Guidelines - Acute Kidney Injury**
+- **Diretrizes AMIB (Associação de Medicina Intensiva Brasileira)**
+- **PAD Guidelines (Pain, Agitation, Delirium) - SCCM 2018**
+- **Brain Trauma Foundation Guidelines**
+- **Resolução CFM 2.173/2017 (Morte Encefálica)**

@@ -1,8 +1,16 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateNavigationStepDto } from './dto/create-navigation-step.dto';
 import { UpdateNavigationStepDto } from './dto/update-navigation-step.dto';
-import { JourneyStage, NavigationStepStatus } from '@prisma/client';
+import {
+  JourneyStage,
+  NavigationStepStatus,
+  PatientStatus,
+} from '@prisma/client';
 import { AlertsService } from '../alerts/alerts.service';
 import { AlertType, AlertSeverity } from '@prisma/client';
 
@@ -15,6 +23,7 @@ export class OncologyNavigationService {
 
   /**
    * Obtém todas as etapas de navegação de um paciente
+   * Se não houver etapas para todos os estágios da jornada, cria automaticamente as faltantes
    */
   async getPatientNavigationSteps(
     patientId: string,
@@ -32,7 +41,88 @@ export class OncologyNavigationService {
       ],
     });
 
-    return steps;
+    // Verificar se há etapas para todos os estágios da jornada
+    const allStages = [
+      JourneyStage.SCREENING,
+      JourneyStage.DIAGNOSIS,
+      JourneyStage.TREATMENT,
+      JourneyStage.FOLLOW_UP,
+    ];
+
+    const stagesWithSteps = new Set(steps.map((step) => step.journeyStage));
+
+    // Se não houver etapas para todos os estágios, verificar se precisa criar
+    const missingStages = allStages.filter(
+      (stage) => !stagesWithSteps.has(stage)
+    );
+
+    // Se há estágios faltantes e o paciente tem pelo menos uma etapa,
+    // significa que foi criado com a lógica antiga - re-inicializar completamente
+    if (missingStages.length > 0 && steps.length > 0) {
+      // Buscar informações do paciente para re-inicializar
+      const patient = await this.prisma.patient.findFirst({
+        where: {
+          id: patientId,
+          tenantId,
+        },
+        select: {
+          cancerType: true,
+          currentStage: true,
+          cancerDiagnoses: {
+            select: {
+              cancerType: true,
+            },
+            take: 1,
+          },
+        },
+      });
+
+      if (patient) {
+        // Determinar tipo de câncer
+        const cancerTypeRaw =
+          patient.cancerType ||
+          patient.cancerDiagnoses?.[0]?.cancerType ||
+          null;
+
+        if (cancerTypeRaw) {
+          const cancerType = String(cancerTypeRaw).toLowerCase();
+          const currentStage = patient.currentStage || JourneyStage.SCREENING;
+
+          // Re-inicializar todas as etapas (isso vai deletar as antigas e criar novas para todos os estágios)
+          await this.initializeNavigationSteps(
+            patientId,
+            tenantId,
+            cancerType,
+            currentStage
+          );
+
+          // Buscar novamente as etapas após re-inicialização
+          const reinitializedSteps = await this.prisma.navigationStep.findMany({
+            where: {
+              patientId,
+              tenantId,
+            },
+            orderBy: [
+              { journeyStage: 'asc' },
+              { expectedDate: 'asc' },
+              { createdAt: 'asc' },
+            ],
+          });
+
+          // Garantir que journeyStage seja retornado como string
+          return reinitializedSteps.map((step) => ({
+            ...step,
+            journeyStage: String(step.journeyStage),
+          }));
+        }
+      }
+    }
+
+    // Garantir que journeyStage seja retornado como string (Prisma pode retornar como enum)
+    return steps.map((step) => ({
+      ...step,
+      journeyStage: String(step.journeyStage),
+    }));
   }
 
   /**
@@ -55,6 +145,24 @@ export class OncologyNavigationService {
         { createdAt: 'asc' },
       ],
     });
+  }
+
+  /**
+   * Obtém uma etapa específica por ID
+   */
+  async getStepById(stepId: string, tenantId: string): Promise<any> {
+    const step = await this.prisma.navigationStep.findFirst({
+      where: {
+        id: stepId,
+        tenantId,
+      },
+    });
+
+    if (!step) {
+      throw new NotFoundException('Navigation step not found');
+    }
+
+    return step;
   }
 
   /**
@@ -92,8 +200,15 @@ export class OncologyNavigationService {
     });
 
     // Verificar se a etapa já está atrasada ao ser criada
-    if (step.dueDate && step.dueDate < new Date() && !step.isCompleted) {
-      await this.checkAndCreateAlertForStep(step, tenantId);
+    if (step.dueDate && !step.isCompleted) {
+      const stepDueDate = new Date(step.dueDate);
+      stepDueDate.setHours(0, 0, 0, 0);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      if (stepDueDate < today) {
+        await this.checkAndCreateAlertForStep(step, tenantId);
+      }
     }
 
     return step;
@@ -121,14 +236,52 @@ export class OncologyNavigationService {
     const updateData: any = { ...updateDto };
 
     // Se marcando como completa, atualizar campos relacionados
-    if (updateDto.isCompleted && !existingStep.isCompleted) {
-      updateData.status = NavigationStepStatus.COMPLETED;
-      updateData.completedAt = updateDto.completedAt || new Date();
-      updateData.actualDate = updateDto.actualDate || new Date();
+    if (updateDto.isCompleted !== undefined) {
+      if (updateDto.isCompleted && !existingStep.isCompleted) {
+        // Marcando como concluída
+        updateData.status = NavigationStepStatus.COMPLETED;
+        updateData.completedAt = updateDto.completedAt || new Date();
+        // Se actualDate foi fornecido no DTO, usar ele; senão usar completedAt ou new Date()
+        if (updateDto.actualDate) {
+          updateData.actualDate = new Date(updateDto.actualDate);
+        } else if (!existingStep.actualDate) {
+          updateData.actualDate = updateData.completedAt || new Date();
+        }
+        // Se completedBy não foi fornecido, manter o existente ou usar o do updateDto
+        if (!updateData.completedBy && updateDto.completedBy) {
+          updateData.completedBy = updateDto.completedBy;
+        }
+      } else if (!updateDto.isCompleted && existingStep.isCompleted) {
+        // Desmarcando como concluída
+        updateData.status = NavigationStepStatus.PENDING;
+        updateData.completedAt = null;
+        // Só limpar actualDate se não foi fornecido explicitamente no DTO
+        if (updateDto.actualDate === undefined) {
+          updateData.actualDate = null;
+        }
+        updateData.completedBy = null;
+      }
     }
 
-    // Se mudando status para OVERDUE
-    if (updateDto.status === NavigationStepStatus.OVERDUE) {
+    // Se actualDate foi fornecido explicitamente, usar ele (mesmo que não esteja marcando como completa)
+    if (updateDto.actualDate !== undefined) {
+      updateData.actualDate = updateDto.actualDate
+        ? new Date(updateDto.actualDate)
+        : null;
+    }
+
+    // Se dueDate foi fornecido, atualizar
+    if (updateDto.dueDate !== undefined) {
+      updateData.dueDate = updateDto.dueDate
+        ? new Date(updateDto.dueDate)
+        : null;
+    }
+
+    // Se mudando status para OVERDUE (apenas se não estiver marcando/desmarcando como completa)
+    if (
+      updateDto.status === NavigationStepStatus.OVERDUE &&
+      updateDto.isCompleted === undefined
+    ) {
       updateData.status = NavigationStepStatus.OVERDUE;
     }
 
@@ -138,17 +291,44 @@ export class OncologyNavigationService {
     });
 
     // Se a etapa não foi marcada como completa e tem dueDate, verificar se está atrasada
-    if (!updatedStep.isCompleted && updatedStep.dueDate && updatedStep.dueDate < new Date()) {
-      // Atualizar status para OVERDUE se necessário
-      if (updatedStep.status !== NavigationStepStatus.OVERDUE) {
-        await this.prisma.navigationStep.update({
-          where: { id: stepId },
-          data: { status: NavigationStepStatus.OVERDUE },
-        });
-        updatedStep.status = NavigationStepStatus.OVERDUE;
+    // Verificar sempre que dueDate foi atualizada ou quando não acabamos de marcar como concluída
+    if (
+      !updatedStep.isCompleted &&
+      updatedStep.dueDate &&
+      (updateDto.isCompleted !== true || updateDto.dueDate !== undefined)
+    ) {
+      const stepDueDate = new Date(updatedStep.dueDate);
+      stepDueDate.setHours(0, 0, 0, 0);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      if (stepDueDate < today) {
+        // Atualizar status para OVERDUE se necessário (mas não se acabamos de marcar como COMPLETED)
+        if (
+          updatedStep.status !== NavigationStepStatus.OVERDUE &&
+          updateDto.isCompleted !== true
+        ) {
+          await this.prisma.navigationStep.update({
+            where: { id: stepId },
+            data: { status: NavigationStepStatus.OVERDUE },
+          });
+          updatedStep.status = NavigationStepStatus.OVERDUE;
+        }
+        // Verificar e criar alerta se necessário
+        await this.checkAndCreateAlertForStep(updatedStep, tenantId);
+      } else {
+        // Se não está mais atrasada e estava OVERDUE, voltar para PENDING
+        if (
+          updatedStep.status === NavigationStepStatus.OVERDUE &&
+          updateDto.isCompleted !== true
+        ) {
+          await this.prisma.navigationStep.update({
+            where: { id: stepId },
+            data: { status: NavigationStepStatus.PENDING },
+          });
+          updatedStep.status = NavigationStepStatus.PENDING;
+        }
       }
-      // Verificar e criar alerta se necessário
-      await this.checkAndCreateAlertForStep(updatedStep, tenantId);
     }
 
     return updatedStep;
@@ -166,9 +346,24 @@ export class OncologyNavigationService {
   ): Promise<void> {
     // Garantir que currentStage não seja null
     const stage = currentStage || JourneyStage.SCREENING;
-    
+
+    // Buscar paciente para verificar status
+    const patient = await this.prisma.patient.findFirst({
+      where: {
+        id: patientId,
+        tenantId,
+      },
+      select: {
+        status: true,
+      },
+    });
+
+    if (!patient) {
+      throw new NotFoundException(`Patient with ID ${patientId} not found`);
+    }
+
     console.log(
-      `[OncologyNavigation] Inicializando etapas para paciente ${patientId}, tipo: ${cancerType}, estágio: ${stage}`
+      `[OncologyNavigation] Inicializando etapas para paciente ${patientId}, tipo: ${cancerType}, estágio: ${stage}, status: ${patient.status}`
     );
 
     // Remover etapas existentes para este paciente e tipo de câncer
@@ -181,11 +376,16 @@ export class OncologyNavigationService {
       },
     });
 
-    // Obter regras específicas para o tipo de câncer
-    const steps = this.getNavigationStepsForCancerType(
-      cancerType.toLowerCase(),
-      stage
-    );
+    // Se paciente está em tratamento paliativo, usar etapas específicas
+    // Modificado para sempre criar etapas de TODOS os estágios da jornada,
+    // não apenas do estágio atual, para ter visibilidade completa da jornada
+    const steps =
+      patient.status === PatientStatus.PALLIATIVE_CARE
+        ? this.getPalliativeCareSteps(stage)
+        : this.getNavigationStepsForAllStages(
+            cancerType.toLowerCase(),
+            patient.status
+          );
 
     console.log(
       `[OncologyNavigation] Encontradas ${steps.length} etapas para ${cancerType} no estágio ${stage}`
@@ -207,7 +407,7 @@ export class OncologyNavigationService {
     let createdCount = 0;
     for (const stepConfig of steps) {
       try {
-        await this.prisma.navigationStep.create({
+        const step = await this.prisma.navigationStep.create({
           data: {
             tenantId,
             patientId,
@@ -225,6 +425,18 @@ export class OncologyNavigationService {
           },
         });
         createdCount++;
+
+        // Verificar imediatamente se a etapa já está atrasada ao ser criada
+        if (step.dueDate && !step.isCompleted) {
+          const stepDueDate = new Date(step.dueDate);
+          stepDueDate.setHours(0, 0, 0, 0);
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
+
+          if (stepDueDate < today) {
+            await this.checkAndCreateAlertForStep(step, tenantId);
+          }
+        }
       } catch (error) {
         console.error(
           `[OncologyNavigation] Erro ao criar etapa ${stepConfig.stepKey}:`,
@@ -237,6 +449,157 @@ export class OncologyNavigationService {
     console.log(
       `[OncologyNavigation] Criadas ${createdCount} etapas para paciente ${patientId}`
     );
+  }
+
+  /**
+   * Cria apenas as etapas faltantes para um estágio específico da jornada
+   * Não altera ou deleta etapas existentes
+   */
+  async createMissingStepsForStage(
+    patientId: string,
+    tenantId: string,
+    journeyStage: JourneyStage
+  ): Promise<{
+    created: number;
+    skipped: number;
+  }> {
+    // Buscar informações do paciente
+    const patient = await this.prisma.patient.findFirst({
+      where: {
+        id: patientId,
+        tenantId,
+      },
+      select: {
+        cancerType: true,
+        status: true,
+        cancerDiagnoses: {
+          select: {
+            cancerType: true,
+          },
+          where: {
+            isActive: true,
+            isPrimary: true,
+          },
+          take: 1,
+        },
+      },
+    });
+
+    if (!patient) {
+      throw new NotFoundException(`Patient with ID ${patientId} not found`);
+    }
+
+    // Determinar tipo de câncer
+    const cancerTypeRaw =
+      patient.cancerType || patient.cancerDiagnoses?.[0]?.cancerType || null;
+
+    if (!cancerTypeRaw) {
+      throw new BadRequestException(
+        'Patient does not have a cancer type defined'
+      );
+    }
+
+    const cancerType = String(cancerTypeRaw).toLowerCase();
+
+    // Buscar etapas existentes para este estágio
+    const existingSteps = await this.prisma.navigationStep.findMany({
+      where: {
+        patientId,
+        tenantId,
+        journeyStage,
+      },
+      select: {
+        stepKey: true,
+      },
+    });
+
+    const existingStepKeys = new Set(existingSteps.map((s) => s.stepKey));
+
+    // Obter etapas esperadas para este estágio e tipo de câncer
+    let expectedSteps: Array<{
+      journeyStage: JourneyStage;
+      stepKey: string;
+      stepName: string;
+      stepDescription: string;
+      isRequired: boolean;
+      expectedDate?: Date;
+      dueDate?: Date;
+    }> = [];
+
+    if (patient.status === PatientStatus.PALLIATIVE_CARE) {
+      expectedSteps = this.getPalliativeCareSteps(journeyStage);
+    } else {
+      // Usar getNavigationStepsForAllStages e filtrar apenas o estágio solicitado
+      const allSteps = this.getNavigationStepsForAllStages(
+        cancerType,
+        patient.status
+      );
+      expectedSteps = allSteps.filter(
+        (step) => step.journeyStage === journeyStage
+      );
+    }
+
+    // Filtrar apenas as etapas que não existem
+    const missingSteps = expectedSteps.filter(
+      (step) => !existingStepKeys.has(step.stepKey)
+    );
+
+    if (missingSteps.length === 0) {
+      return { created: 0, skipped: existingSteps.length };
+    }
+
+    // Obter journey do paciente
+    const journey = await this.prisma.patientJourney.findUnique({
+      where: { patientId },
+    });
+
+    // Criar apenas as etapas faltantes
+    let createdCount = 0;
+    for (const stepConfig of missingSteps) {
+      try {
+        const step = await this.prisma.navigationStep.create({
+          data: {
+            tenantId,
+            patientId,
+            journeyId: journey?.id,
+            cancerType,
+            journeyStage: stepConfig.journeyStage,
+            stepKey: stepConfig.stepKey,
+            stepName: stepConfig.stepName,
+            stepDescription: stepConfig.stepDescription,
+            isRequired: stepConfig.isRequired ?? true,
+            expectedDate: stepConfig.expectedDate,
+            dueDate: stepConfig.dueDate,
+            status: NavigationStepStatus.PENDING,
+            isCompleted: false,
+          },
+        });
+        createdCount++;
+
+        // Verificar se a etapa já está atrasada ao ser criada
+        if (step.dueDate && !step.isCompleted) {
+          const stepDueDate = new Date(step.dueDate);
+          stepDueDate.setHours(0, 0, 0, 0);
+          const today = new Date();
+          today.setHours(0, 0, 0, 0);
+
+          if (stepDueDate < today) {
+            await this.checkAndCreateAlertForStep(step, tenantId);
+          }
+        }
+      } catch (error) {
+        console.error(
+          `[OncologyNavigation] Erro ao criar etapa ${stepConfig.stepKey}:`,
+          error
+        );
+        // Continuar criando outras etapas mesmo se uma falhar
+      }
+    }
+
+    return {
+      created: createdCount,
+      skipped: existingSteps.length,
+    };
   }
 
   /**
@@ -282,12 +645,6 @@ export class OncologyNavigationService {
 
     for (const patient of patients) {
       try {
-        // Verificar se já tem etapas
-        if (patient.navigationSteps && patient.navigationSteps.length > 0) {
-          skipped++;
-          continue;
-        }
-
         // Determinar tipo de câncer (prioridade: cancerType > primeiro diagnóstico primário)
         const cancerTypeRaw =
           patient.cancerType ||
@@ -299,21 +656,55 @@ export class OncologyNavigationService {
           continue;
         }
 
-        // Converter para minúsculas para garantir consistência
-        const cancerType = String(cancerTypeRaw).toLowerCase();
+        // Verificar se já tem etapas para todos os estágios da jornada
+        const allStages = [
+          JourneyStage.SCREENING,
+          JourneyStage.DIAGNOSIS,
+          JourneyStage.TREATMENT,
+          JourneyStage.FOLLOW_UP,
+        ];
 
-        // Usar currentStage do paciente ou default SCREENING
-        const currentStage = patient.currentStage || JourneyStage.SCREENING;
+        // Buscar todas as etapas do paciente (não apenas uma)
+        const allPatientSteps = await this.prisma.navigationStep.findMany({
+          where: {
+            patientId: patient.id,
+            tenantId,
+          },
+          select: {
+            journeyStage: true,
+          },
+        });
 
-        // Inicializar etapas
-        await this.initializeNavigationSteps(
-          patient.id,
-          tenantId,
-          cancerType,
-          currentStage
+        const stagesWithSteps = new Set(
+          allPatientSteps.map((step) => step.journeyStage)
         );
 
-        initialized++;
+        // Verificar se há estágios faltantes
+        const missingStages = allStages.filter(
+          (stage) => !stagesWithSteps.has(stage)
+        );
+
+        // Se não tem etapas ou tem etapas incompletas, re-inicializar
+        if (allPatientSteps.length === 0 || missingStages.length > 0) {
+          // Converter para minúsculas para garantir consistência
+          const cancerType = String(cancerTypeRaw).toLowerCase();
+
+          // Usar currentStage do paciente ou default SCREENING
+          const currentStage = patient.currentStage || JourneyStage.SCREENING;
+
+          // Re-inicializar todas as etapas (isso vai deletar as antigas e criar novas para todos os estágios)
+          await this.initializeNavigationSteps(
+            patient.id,
+            tenantId,
+            cancerType,
+            currentStage
+          );
+
+          initialized++;
+        } else {
+          // Já tem todas as etapas necessárias
+          skipped++;
+        }
       } catch (error) {
         console.error(
           `Erro ao inicializar etapas para paciente ${patient.id}:`,
@@ -324,6 +715,72 @@ export class OncologyNavigationService {
     }
 
     return { initialized, skipped, errors };
+  }
+
+  /**
+   * Verifica e cria alertas para etapas atrasadas de um paciente específico
+   */
+  async checkOverdueStepsForPatient(
+    patientId: string,
+    tenantId: string
+  ): Promise<{
+    checked: number;
+    markedOverdue: number;
+    alertsCreated: number;
+  }> {
+    const now = new Date();
+    const overdueSteps = await this.prisma.navigationStep.findMany({
+      where: {
+        tenantId,
+        patientId,
+        status: {
+          in: [NavigationStepStatus.PENDING, NavigationStepStatus.IN_PROGRESS],
+        },
+        isCompleted: false,
+        dueDate: {
+          lt: now,
+        },
+      },
+      include: {
+        patient: {
+          select: {
+            id: true,
+            name: true,
+            cancerType: true,
+            currentStage: true,
+          },
+        },
+      },
+    });
+
+    let markedOverdue = 0;
+    let alertsCreated = 0;
+
+    for (const step of overdueSteps) {
+      // Marcar como atrasada se ainda não estiver marcada
+      if (step.status !== NavigationStepStatus.OVERDUE) {
+        await this.prisma.navigationStep.update({
+          where: { id: step.id },
+          data: { status: NavigationStepStatus.OVERDUE },
+        });
+        markedOverdue++;
+      }
+
+      // Verificar e criar alerta
+      const alertCreated = await this.checkAndCreateAlertForStep(
+        step,
+        tenantId
+      );
+      if (alertCreated) {
+        alertsCreated++;
+      }
+    }
+
+    return {
+      checked: overdueSteps.length,
+      markedOverdue,
+      alertsCreated,
+    };
   }
 
   /**
@@ -340,10 +797,7 @@ export class OncologyNavigationService {
       where: {
         tenantId,
         status: {
-          in: [
-            NavigationStepStatus.PENDING,
-            NavigationStepStatus.IN_PROGRESS,
-          ],
+          in: [NavigationStepStatus.PENDING, NavigationStepStatus.IN_PROGRESS],
         },
         isCompleted: false,
         dueDate: {
@@ -403,27 +857,11 @@ export class OncologyNavigationService {
       });
 
       // Criar alerta apenas se não existir um alerta pendente para esta etapa
-      if (!existingAlert) {
-        const daysOverdue = Math.floor(
-          (now.getTime() - step.dueDate!.getTime()) / (1000 * 60 * 60 * 24)
-        );
-
-        await this.alertsService.create(
-          {
-            patientId: step.patientId,
-            type: AlertType.NAVIGATION_DELAY,
-            severity: this.getSeverityForStep(step),
-            message: `Etapa atrasada: ${step.stepName}${step.stepDescription ? ` - ${step.stepDescription}` : ''} (${daysOverdue} ${daysOverdue === 1 ? 'dia' : 'dias'} de atraso)`,
-            context: {
-              stepId: step.id,
-              stepKey: step.stepKey,
-              journeyStage: step.journeyStage,
-              dueDate: step.dueDate,
-              daysOverdue,
-            },
-          },
-          tenantId
-        );
+      const alertCreated = await this.checkAndCreateAlertForStep(
+        step,
+        tenantId
+      );
+      if (alertCreated) {
         alertsCreated++;
       }
     }
@@ -442,14 +880,20 @@ export class OncologyNavigationService {
   private async checkAndCreateAlertForStep(
     step: any,
     tenantId: string
-  ): Promise<void> {
+  ): Promise<boolean> {
     if (!step.dueDate || step.isCompleted) {
-      return;
+      return false;
     }
 
     const now = new Date();
-    if (step.dueDate >= now) {
-      return; // Não está atrasada ainda
+    // Comparar apenas data (sem hora) para evitar problemas de timezone
+    const stepDueDate = new Date(step.dueDate);
+    stepDueDate.setHours(0, 0, 0, 0);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (stepDueDate >= today) {
+      return false; // Não está atrasada ainda
     }
 
     // Verificar se já existe um alerta pendente para esta etapa
@@ -480,34 +924,52 @@ export class OncologyNavigationService {
     // Criar alerta apenas se não existir um alerta pendente para esta etapa
     if (!existingAlert) {
       const daysOverdue = Math.floor(
-        (now.getTime() - step.dueDate.getTime()) / (1000 * 60 * 60 * 24)
+        (today.getTime() - stepDueDate.getTime()) / (1000 * 60 * 60 * 24)
       );
 
-      await this.alertsService.create(
-        {
-          patientId: step.patientId,
-          type: AlertType.NAVIGATION_DELAY,
-          severity: this.getSeverityForStep(step),
-          message: `Etapa atrasada: ${step.stepName}${step.stepDescription ? ` - ${step.stepDescription}` : ''} (${daysOverdue} ${daysOverdue === 1 ? 'dia' : 'dias'} de atraso)`,
-          context: {
-            stepId: step.id,
-            stepKey: step.stepKey,
-            journeyStage: step.journeyStage,
-            dueDate: step.dueDate,
-            daysOverdue,
+      try {
+        await this.alertsService.create(
+          {
+            patientId: step.patientId,
+            type: AlertType.NAVIGATION_DELAY,
+            severity: this.getSeverityForStep(step),
+            message: `Etapa atrasada: ${step.stepName}${step.stepDescription ? ` - ${step.stepDescription}` : ''} (${daysOverdue} ${daysOverdue === 1 ? 'dia' : 'dias'} de atraso)`,
+            context: {
+              stepId: step.id,
+              stepKey: step.stepKey,
+              journeyStage: step.journeyStage,
+              dueDate: step.dueDate?.toISOString(),
+              daysOverdue,
+            },
           },
-        },
-        tenantId
+          tenantId
+        );
+        console.log(
+          `[OncologyNavigation] ✅ Alerta criado para etapa atrasada: ${step.stepName} (${daysOverdue} dias)`
+        );
+        return true;
+      } catch (error) {
+        console.error(
+          `[OncologyNavigation] ❌ Erro ao criar alerta para etapa ${step.id}:`,
+          error
+        );
+        return false;
+      }
+    } else {
+      console.log(
+        `[OncologyNavigation] ⏭️ Alerta já existe para etapa ${step.stepName}, pulando criação`
       );
+      return false;
     }
   }
 
   /**
-   * Retorna as etapas esperadas para cada tipo de câncer em cada fase da jornada
+   * Retorna as etapas esperadas para cada tipo de câncer em TODOS os estágios da jornada
+   * Isso garante visibilidade completa da jornada do paciente
    */
-  private getNavigationStepsForCancerType(
+  private getNavigationStepsForAllStages(
     cancerType: string,
-    currentStage: JourneyStage
+    patientStatus?: PatientStatus
   ): Array<{
     journeyStage: JourneyStage;
     stepKey: string;
@@ -517,6 +979,117 @@ export class OncologyNavigationService {
     expectedDate?: Date;
     dueDate?: Date;
   }> {
+    // Se paciente está em tratamento paliativo, usar etapas específicas
+    if (patientStatus === PatientStatus.PALLIATIVE_CARE) {
+      // Para paliativo, retornar etapas de todos os estágios também
+      const allStages = [
+        JourneyStage.SCREENING,
+        JourneyStage.DIAGNOSIS,
+        JourneyStage.TREATMENT,
+        JourneyStage.FOLLOW_UP,
+      ];
+      const allSteps: Array<{
+        journeyStage: JourneyStage;
+        stepKey: string;
+        stepName: string;
+        stepDescription: string;
+        isRequired: boolean;
+        expectedDate?: Date;
+        dueDate?: Date;
+      }> = [];
+
+      allStages.forEach((stage) => {
+        const steps = this.getPalliativeCareSteps(stage);
+        allSteps.push(...steps);
+      });
+
+      return allSteps;
+    }
+
+    const type = cancerType.toLowerCase();
+    const allStages = [
+      JourneyStage.SCREENING,
+      JourneyStage.DIAGNOSIS,
+      JourneyStage.TREATMENT,
+      JourneyStage.FOLLOW_UP,
+    ];
+
+    const allSteps: Array<{
+      journeyStage: JourneyStage;
+      stepKey: string;
+      stepName: string;
+      stepDescription: string;
+      isRequired: boolean;
+      expectedDate?: Date;
+      dueDate?: Date;
+    }> = [];
+
+    // Coletar etapas de todos os estágios
+    allStages.forEach((stage) => {
+      let steps: Array<{
+        journeyStage: JourneyStage;
+        stepKey: string;
+        stepName: string;
+        stepDescription: string;
+        isRequired: boolean;
+        expectedDate?: Date;
+        dueDate?: Date;
+      }> = [];
+
+      switch (type) {
+        case 'colorectal':
+          steps = this.getColorectalCancerSteps(stage);
+          break;
+        case 'breast':
+          steps = this.getBreastCancerSteps(stage);
+          break;
+        case 'lung':
+          steps = this.getLungCancerSteps(stage);
+          break;
+        case 'prostate':
+          steps = this.getProstateCancerSteps(stage);
+          break;
+        case 'kidney':
+          steps = this.getKidneyCancerSteps(stage);
+          break;
+        case 'bladder':
+          steps = this.getBladderCancerSteps(stage);
+          break;
+        case 'testicular':
+          steps = this.getTesticularCancerSteps(stage);
+          break;
+        default:
+          steps = this.getGenericCancerSteps(stage);
+      }
+
+      allSteps.push(...steps);
+    });
+
+    return allSteps;
+  }
+
+  /**
+   * Retorna as etapas esperadas para cada tipo de câncer em cada fase da jornada
+   * @deprecated Use getNavigationStepsForAllStages para sempre retornar etapas de todos os estágios
+   */
+  private getNavigationStepsForCancerType(
+    cancerType: string,
+    currentStage: JourneyStage,
+    patientStatus?: PatientStatus
+  ): Array<{
+    journeyStage: JourneyStage;
+    stepKey: string;
+    stepName: string;
+    stepDescription: string;
+    isRequired: boolean;
+    expectedDate?: Date;
+    dueDate?: Date;
+  }> {
+    // Se paciente está em tratamento paliativo, usar etapas específicas
+    if (patientStatus === PatientStatus.PALLIATIVE_CARE) {
+      return this.getPalliativeCareSteps(currentStage);
+    }
+
     const type = cancerType.toLowerCase();
 
     switch (type) {
@@ -541,10 +1114,10 @@ export class OncologyNavigationService {
 
   /**
    * Etapas para câncer colorretal
+   * Modificado para sempre retornar etapas do estágio solicitado,
+   * independente do estágio atual do paciente
    */
-  private getColorectalCancerSteps(
-    currentStage: JourneyStage
-  ): Array<{
+  private getColorectalCancerSteps(requestedStage: JourneyStage): Array<{
     journeyStage: JourneyStage;
     stepKey: string;
     stepName: string;
@@ -553,7 +1126,6 @@ export class OncologyNavigationService {
     expectedDate?: Date;
     dueDate?: Date;
   }> {
-
     const steps: Array<{
       journeyStage: JourneyStage;
       stepKey: string;
@@ -565,7 +1137,7 @@ export class OncologyNavigationService {
     }> = [];
 
     // RASTREIO (SCREENING)
-    if (currentStage === JourneyStage.SCREENING) {
+    if (requestedStage === JourneyStage.SCREENING) {
       steps.push({
         journeyStage: JourneyStage.SCREENING,
         stepKey: 'fecal_occult_blood',
@@ -588,10 +1160,7 @@ export class OncologyNavigationService {
     }
 
     // DIAGNÓSTICO (DIAGNOSIS)
-    if (
-      currentStage === JourneyStage.DIAGNOSIS ||
-      currentStage === JourneyStage.SCREENING
-    ) {
+    if (requestedStage === JourneyStage.DIAGNOSIS) {
       steps.push({
         journeyStage: JourneyStage.DIAGNOSIS,
         stepKey: 'colonoscopy_with_biopsy',
@@ -626,7 +1195,8 @@ export class OncologyNavigationService {
         journeyStage: JourneyStage.DIAGNOSIS,
         stepKey: 'staging_ct_thorax',
         stepName: 'TC de Tórax',
-        stepDescription: 'Tomografia de tórax para avaliar metástases pulmonares',
+        stepDescription:
+          'Tomografia de tórax para avaliar metástases pulmonares',
         isRequired: true,
         dueDate: this.addDays(new Date(), 28),
       });
@@ -653,10 +1223,7 @@ export class OncologyNavigationService {
     }
 
     // TRATAMENTO (TREATMENT)
-    if (
-      currentStage === JourneyStage.TREATMENT ||
-      currentStage === JourneyStage.DIAGNOSIS
-    ) {
+    if (requestedStage === JourneyStage.TREATMENT) {
       steps.push({
         journeyStage: JourneyStage.TREATMENT,
         stepKey: 'surgical_evaluation',
@@ -699,10 +1266,7 @@ export class OncologyNavigationService {
     }
 
     // SEGUIMENTO (FOLLOW_UP)
-    if (
-      currentStage === JourneyStage.FOLLOW_UP ||
-      currentStage === JourneyStage.TREATMENT
-    ) {
+    if (requestedStage === JourneyStage.FOLLOW_UP) {
       steps.push({
         journeyStage: JourneyStage.FOLLOW_UP,
         stepKey: 'cea_3months',
@@ -726,8 +1290,7 @@ export class OncologyNavigationService {
         journeyStage: JourneyStage.FOLLOW_UP,
         stepKey: 'ct_abdomen_annual',
         stepName: 'TC Abdome/Pelve Anual',
-        stepDescription:
-          'TC anual para rastreio de recidiva (por 3-5 anos)',
+        stepDescription: 'TC anual para rastreio de recidiva (por 3-5 anos)',
         isRequired: true,
         dueDate: this.addDays(new Date(), 365),
       });
@@ -748,9 +1311,7 @@ export class OncologyNavigationService {
   /**
    * Etapas para câncer de mama
    */
-  private getBreastCancerSteps(
-    currentStage: JourneyStage
-  ): Array<{
+  private getBreastCancerSteps(requestedStage: JourneyStage): Array<{
     journeyStage: JourneyStage;
     stepKey: string;
     stepName: string;
@@ -770,7 +1331,7 @@ export class OncologyNavigationService {
     }> = [];
 
     // RASTREIO (SCREENING)
-    if (currentStage === JourneyStage.SCREENING) {
+    if (requestedStage === JourneyStage.SCREENING) {
       steps.push({
         journeyStage: JourneyStage.SCREENING,
         stepKey: 'mammography',
@@ -791,15 +1352,13 @@ export class OncologyNavigationService {
     }
 
     // DIAGNÓSTICO (DIAGNOSIS)
-    if (
-      currentStage === JourneyStage.DIAGNOSIS ||
-      currentStage === JourneyStage.SCREENING
-    ) {
+    if (requestedStage === JourneyStage.DIAGNOSIS) {
       steps.push({
         journeyStage: JourneyStage.DIAGNOSIS,
         stepKey: 'breast_biopsy',
         stepName: 'Biópsia de Mama',
-        stepDescription: 'Biópsia core ou excisional para confirmação diagnóstica',
+        stepDescription:
+          'Biópsia core ou excisional para confirmação diagnóstica',
         isRequired: true,
         dueDate: this.addDays(new Date(), 14),
       });
@@ -835,7 +1394,8 @@ export class OncologyNavigationService {
         journeyStage: JourneyStage.DIAGNOSIS,
         stepKey: 'bone_scan',
         stepName: 'Cintilografia Óssea',
-        stepDescription: 'Avaliar metástases ósseas (se sintomas ou estágio avançado)',
+        stepDescription:
+          'Avaliar metástases ósseas (se sintomas ou estágio avançado)',
         isRequired: false,
         dueDate: this.addDays(new Date(), 35),
       });
@@ -851,10 +1411,7 @@ export class OncologyNavigationService {
     }
 
     // TRATAMENTO (TREATMENT)
-    if (
-      currentStage === JourneyStage.TREATMENT ||
-      currentStage === JourneyStage.DIAGNOSIS
-    ) {
+    if (requestedStage === JourneyStage.TREATMENT) {
       steps.push({
         journeyStage: JourneyStage.TREATMENT,
         stepKey: 'surgical_evaluation',
@@ -904,7 +1461,8 @@ export class OncologyNavigationService {
         journeyStage: JourneyStage.TREATMENT,
         stepKey: 'radiotherapy',
         stepName: 'Radioterapia',
-        stepDescription: 'RT após cirurgia conservadora ou mastectomia com risco',
+        stepDescription:
+          'RT após cirurgia conservadora ou mastectomia com risco',
         isRequired: false,
         dueDate: this.addDays(new Date(), 120),
       });
@@ -913,7 +1471,8 @@ export class OncologyNavigationService {
         journeyStage: JourneyStage.TREATMENT,
         stepKey: 'hormonal_therapy',
         stepName: 'Hormonioterapia',
-        stepDescription: 'Tamoxifeno ou inibidor de aromatase (se receptor positivo)',
+        stepDescription:
+          'Tamoxifeno ou inibidor de aromatase (se receptor positivo)',
         isRequired: false,
         dueDate: this.addDays(new Date(), 90),
       });
@@ -929,10 +1488,7 @@ export class OncologyNavigationService {
     }
 
     // SEGUIMENTO (FOLLOW_UP)
-    if (
-      currentStage === JourneyStage.FOLLOW_UP ||
-      currentStage === JourneyStage.TREATMENT
-    ) {
+    if (requestedStage === JourneyStage.FOLLOW_UP) {
       steps.push({
         journeyStage: JourneyStage.FOLLOW_UP,
         stepKey: 'mammography_6months',
@@ -967,9 +1523,7 @@ export class OncologyNavigationService {
   /**
    * Etapas para câncer de pulmão
    */
-  private getLungCancerSteps(
-    currentStage: JourneyStage
-  ): Array<{
+  private getLungCancerSteps(requestedStage: JourneyStage): Array<{
     journeyStage: JourneyStage;
     stepKey: string;
     stepName: string;
@@ -989,7 +1543,7 @@ export class OncologyNavigationService {
     }> = [];
 
     // RASTREIO (SCREENING)
-    if (currentStage === JourneyStage.SCREENING) {
+    if (requestedStage === JourneyStage.SCREENING) {
       steps.push({
         journeyStage: JourneyStage.SCREENING,
         stepKey: 'low_dose_ct',
@@ -1001,10 +1555,7 @@ export class OncologyNavigationService {
     }
 
     // DIAGNÓSTICO (DIAGNOSIS)
-    if (
-      currentStage === JourneyStage.DIAGNOSIS ||
-      currentStage === JourneyStage.SCREENING
-    ) {
+    if (requestedStage === JourneyStage.DIAGNOSIS) {
       steps.push({
         journeyStage: JourneyStage.DIAGNOSIS,
         stepKey: 'ct_thorax_contrast',
@@ -1054,17 +1605,15 @@ export class OncologyNavigationService {
         journeyStage: JourneyStage.DIAGNOSIS,
         stepKey: 'brain_mri',
         stepName: 'Ressonância Magnética de Crânio',
-        stepDescription: 'Avaliar metástases cerebrais (se sintomas ou estágio avançado)',
+        stepDescription:
+          'Avaliar metástases cerebrais (se sintomas ou estágio avançado)',
         isRequired: false,
         dueDate: this.addDays(new Date(), 35),
       });
     }
 
     // TRATAMENTO (TREATMENT)
-    if (
-      currentStage === JourneyStage.TREATMENT ||
-      currentStage === JourneyStage.DIAGNOSIS
-    ) {
+    if (requestedStage === JourneyStage.TREATMENT) {
       steps.push({
         journeyStage: JourneyStage.TREATMENT,
         stepKey: 'surgical_evaluation',
@@ -1121,10 +1670,7 @@ export class OncologyNavigationService {
     }
 
     // SEGUIMENTO (FOLLOW_UP)
-    if (
-      currentStage === JourneyStage.FOLLOW_UP ||
-      currentStage === JourneyStage.TREATMENT
-    ) {
+    if (requestedStage === JourneyStage.FOLLOW_UP) {
       steps.push({
         journeyStage: JourneyStage.FOLLOW_UP,
         stepKey: 'ct_thorax_3months',
@@ -1159,9 +1705,7 @@ export class OncologyNavigationService {
   /**
    * Etapas para câncer de próstata
    */
-  private getProstateCancerSteps(
-    currentStage: JourneyStage
-  ): Array<{
+  private getProstateCancerSteps(requestedStage: JourneyStage): Array<{
     journeyStage: JourneyStage;
     stepKey: string;
     stepName: string;
@@ -1181,7 +1725,7 @@ export class OncologyNavigationService {
     }> = [];
 
     // RASTREIO (SCREENING)
-    if (currentStage === JourneyStage.SCREENING) {
+    if (requestedStage === JourneyStage.SCREENING) {
       steps.push({
         journeyStage: JourneyStage.SCREENING,
         stepKey: 'psa_test',
@@ -1202,10 +1746,7 @@ export class OncologyNavigationService {
     }
 
     // DIAGNÓSTICO (DIAGNOSIS)
-    if (
-      currentStage === JourneyStage.DIAGNOSIS ||
-      currentStage === JourneyStage.SCREENING
-    ) {
+    if (requestedStage === JourneyStage.DIAGNOSIS) {
       steps.push({
         journeyStage: JourneyStage.DIAGNOSIS,
         stepKey: 'prostate_biopsy',
@@ -1253,10 +1794,7 @@ export class OncologyNavigationService {
     }
 
     // TRATAMENTO (TREATMENT)
-    if (
-      currentStage === JourneyStage.TREATMENT ||
-      currentStage === JourneyStage.DIAGNOSIS
-    ) {
+    if (requestedStage === JourneyStage.TREATMENT) {
       steps.push({
         journeyStage: JourneyStage.TREATMENT,
         stepKey: 'treatment_decision',
@@ -1295,10 +1833,7 @@ export class OncologyNavigationService {
     }
 
     // SEGUIMENTO (FOLLOW_UP)
-    if (
-      currentStage === JourneyStage.FOLLOW_UP ||
-      currentStage === JourneyStage.TREATMENT
-    ) {
+    if (requestedStage === JourneyStage.FOLLOW_UP) {
       steps.push({
         journeyStage: JourneyStage.FOLLOW_UP,
         stepKey: 'psa_3months',
@@ -1333,9 +1868,7 @@ export class OncologyNavigationService {
   /**
    * Etapas para câncer de rim (renal)
    */
-  private getKidneyCancerSteps(
-    currentStage: JourneyStage
-  ): Array<{
+  private getKidneyCancerSteps(requestedStage: JourneyStage): Array<{
     journeyStage: JourneyStage;
     stepKey: string;
     stepName: string;
@@ -1355,7 +1888,7 @@ export class OncologyNavigationService {
     }> = [];
 
     // RASTREIO (SCREENING)
-    if (currentStage === JourneyStage.SCREENING) {
+    if (requestedStage === JourneyStage.SCREENING) {
       steps.push({
         journeyStage: JourneyStage.SCREENING,
         stepKey: 'abdominal_ultrasound',
@@ -1367,10 +1900,7 @@ export class OncologyNavigationService {
     }
 
     // DIAGNÓSTICO (DIAGNOSIS)
-    if (
-      currentStage === JourneyStage.DIAGNOSIS ||
-      currentStage === JourneyStage.SCREENING
-    ) {
+    if (requestedStage === JourneyStage.DIAGNOSIS) {
       steps.push({
         journeyStage: JourneyStage.DIAGNOSIS,
         stepKey: 'ct_abdomen_contrast',
@@ -1418,10 +1948,7 @@ export class OncologyNavigationService {
     }
 
     // TRATAMENTO (TREATMENT)
-    if (
-      currentStage === JourneyStage.TREATMENT ||
-      currentStage === JourneyStage.DIAGNOSIS
-    ) {
+    if (requestedStage === JourneyStage.TREATMENT) {
       steps.push({
         journeyStage: JourneyStage.TREATMENT,
         stepKey: 'surgical_evaluation',
@@ -1444,7 +1971,8 @@ export class OncologyNavigationService {
         journeyStage: JourneyStage.TREATMENT,
         stepKey: 'targeted_therapy',
         stepName: 'Terapia Alvo',
-        stepDescription: 'Sunitinibe, pazopanibe ou outros (se doença avançada)',
+        stepDescription:
+          'Sunitinibe, pazopanibe ou outros (se doença avançada)',
         isRequired: false,
         dueDate: this.addDays(new Date(), 60),
       });
@@ -1460,10 +1988,7 @@ export class OncologyNavigationService {
     }
 
     // SEGUIMENTO (FOLLOW_UP)
-    if (
-      currentStage === JourneyStage.FOLLOW_UP ||
-      currentStage === JourneyStage.TREATMENT
-    ) {
+    if (requestedStage === JourneyStage.FOLLOW_UP) {
       steps.push({
         journeyStage: JourneyStage.FOLLOW_UP,
         stepKey: 'ct_abdomen_3months',
@@ -1498,9 +2023,7 @@ export class OncologyNavigationService {
   /**
    * Etapas para câncer de bexiga
    */
-  private getBladderCancerSteps(
-    currentStage: JourneyStage
-  ): Array<{
+  private getBladderCancerSteps(requestedStage: JourneyStage): Array<{
     journeyStage: JourneyStage;
     stepKey: string;
     stepName: string;
@@ -1520,7 +2043,7 @@ export class OncologyNavigationService {
     }> = [];
 
     // RASTREIO (SCREENING)
-    if (currentStage === JourneyStage.SCREENING) {
+    if (requestedStage === JourneyStage.SCREENING) {
       steps.push({
         journeyStage: JourneyStage.SCREENING,
         stepKey: 'urine_cytology',
@@ -1532,10 +2055,7 @@ export class OncologyNavigationService {
     }
 
     // DIAGNÓSTICO (DIAGNOSIS)
-    if (
-      currentStage === JourneyStage.DIAGNOSIS ||
-      currentStage === JourneyStage.SCREENING
-    ) {
+    if (requestedStage === JourneyStage.DIAGNOSIS) {
       steps.push({
         journeyStage: JourneyStage.DIAGNOSIS,
         stepKey: 'cystoscopy',
@@ -1583,15 +2103,13 @@ export class OncologyNavigationService {
     }
 
     // TRATAMENTO (TREATMENT)
-    if (
-      currentStage === JourneyStage.TREATMENT ||
-      currentStage === JourneyStage.DIAGNOSIS
-    ) {
+    if (requestedStage === JourneyStage.TREATMENT) {
       steps.push({
         journeyStage: JourneyStage.TREATMENT,
         stepKey: 'intravesical_bcg',
         stepName: 'BCG Intravesical',
-        stepDescription: 'Imunoterapia intravesical (tumores não-musculares invasivos)',
+        stepDescription:
+          'Imunoterapia intravesical (tumores não-musculares invasivos)',
         isRequired: false,
         dueDate: this.addDays(new Date(), 42),
       });
@@ -1625,10 +2143,7 @@ export class OncologyNavigationService {
     }
 
     // SEGUIMENTO (FOLLOW_UP)
-    if (
-      currentStage === JourneyStage.FOLLOW_UP ||
-      currentStage === JourneyStage.TREATMENT
-    ) {
+    if (requestedStage === JourneyStage.FOLLOW_UP) {
       steps.push({
         journeyStage: JourneyStage.FOLLOW_UP,
         stepKey: 'cystoscopy_3months',
@@ -1663,9 +2178,7 @@ export class OncologyNavigationService {
   /**
    * Etapas para câncer de testículo
    */
-  private getTesticularCancerSteps(
-    currentStage: JourneyStage
-  ): Array<{
+  private getTesticularCancerSteps(requestedStage: JourneyStage): Array<{
     journeyStage: JourneyStage;
     stepKey: string;
     stepName: string;
@@ -1685,7 +2198,7 @@ export class OncologyNavigationService {
     }> = [];
 
     // RASTREIO (SCREENING)
-    if (currentStage === JourneyStage.SCREENING) {
+    if (requestedStage === JourneyStage.SCREENING) {
       steps.push({
         journeyStage: JourneyStage.SCREENING,
         stepKey: 'testicular_ultrasound',
@@ -1697,15 +2210,13 @@ export class OncologyNavigationService {
     }
 
     // DIAGNÓSTICO (DIAGNOSIS)
-    if (
-      currentStage === JourneyStage.DIAGNOSIS ||
-      currentStage === JourneyStage.SCREENING
-    ) {
+    if (requestedStage === JourneyStage.DIAGNOSIS) {
       steps.push({
         journeyStage: JourneyStage.DIAGNOSIS,
         stepKey: 'radical_orchiectomy',
         stepName: 'Orquiectomia Radical',
-        stepDescription: 'Remoção do testículo (diagnóstico e tratamento inicial)',
+        stepDescription:
+          'Remoção do testículo (diagnóstico e tratamento inicial)',
         isRequired: true,
         dueDate: this.addDays(new Date(), 7),
       });
@@ -1748,10 +2259,7 @@ export class OncologyNavigationService {
     }
 
     // TRATAMENTO (TREATMENT)
-    if (
-      currentStage === JourneyStage.TREATMENT ||
-      currentStage === JourneyStage.DIAGNOSIS
-    ) {
+    if (requestedStage === JourneyStage.TREATMENT) {
       steps.push({
         journeyStage: JourneyStage.TREATMENT,
         stepKey: 'retroperitoneal_lymph_node_dissection',
@@ -1781,10 +2289,7 @@ export class OncologyNavigationService {
     }
 
     // SEGUIMENTO (FOLLOW_UP)
-    if (
-      currentStage === JourneyStage.FOLLOW_UP ||
-      currentStage === JourneyStage.TREATMENT
-    ) {
+    if (requestedStage === JourneyStage.FOLLOW_UP) {
       steps.push({
         journeyStage: JourneyStage.FOLLOW_UP,
         stepKey: 'tumor_markers_1month',
@@ -1828,9 +2333,7 @@ export class OncologyNavigationService {
   /**
    * Etapas genéricas para tipos de câncer não especificados
    */
-  private getGenericCancerSteps(
-    currentStage: JourneyStage
-  ): Array<{
+  private getGenericCancerSteps(requestedStage: JourneyStage): Array<{
     journeyStage: JourneyStage;
     stepKey: string;
     stepName: string;
@@ -1850,10 +2353,7 @@ export class OncologyNavigationService {
     }> = [];
 
     // DIAGNÓSTICO (DIAGNOSIS)
-    if (
-      currentStage === JourneyStage.DIAGNOSIS ||
-      currentStage === JourneyStage.SCREENING
-    ) {
+    if (requestedStage === JourneyStage.DIAGNOSIS) {
       steps.push({
         journeyStage: JourneyStage.DIAGNOSIS,
         stepKey: 'biopsy',
@@ -1883,10 +2383,7 @@ export class OncologyNavigationService {
     }
 
     // TRATAMENTO (TREATMENT)
-    if (
-      currentStage === JourneyStage.TREATMENT ||
-      currentStage === JourneyStage.DIAGNOSIS
-    ) {
+    if (requestedStage === JourneyStage.TREATMENT) {
       steps.push({
         journeyStage: JourneyStage.TREATMENT,
         stepKey: 'treatment_planning',
@@ -1898,10 +2395,7 @@ export class OncologyNavigationService {
     }
 
     // SEGUIMENTO (FOLLOW_UP)
-    if (
-      currentStage === JourneyStage.FOLLOW_UP ||
-      currentStage === JourneyStage.TREATMENT
-    ) {
+    if (requestedStage === JourneyStage.FOLLOW_UP) {
       steps.push({
         journeyStage: JourneyStage.FOLLOW_UP,
         stepKey: 'follow_up_3months',
@@ -1951,6 +2445,134 @@ export class OncologyNavigationService {
   }
 
   /**
+   * Etapas específicas para pacientes em tratamento paliativo
+   * Focadas em controle de sintomas, conforto e qualidade de vida
+   */
+  private getPalliativeCareSteps(currentStage: JourneyStage): Array<{
+    journeyStage: JourneyStage;
+    stepKey: string;
+    stepName: string;
+    stepDescription: string;
+    isRequired: boolean;
+    expectedDate?: Date;
+    dueDate?: Date;
+  }> {
+    const steps: Array<{
+      journeyStage: JourneyStage;
+      stepKey: string;
+      stepName: string;
+      stepDescription: string;
+      isRequired: boolean;
+      expectedDate?: Date;
+      dueDate?: Date;
+    }> = [];
+
+    // Etapas de cuidados paliativos são aplicáveis independente do estágio da jornada
+    // Mas focamos principalmente em FOLLOW_UP para acompanhamento contínuo
+
+    // Avaliação de sintomas (dor, náusea, dispneia, fadiga)
+    steps.push({
+      journeyStage: JourneyStage.FOLLOW_UP,
+      stepKey: 'palliative_symptom_assessment',
+      stepName: 'Avaliação de Sintomas',
+      stepDescription:
+        'Avaliação completa de sintomas: dor, náusea/vômitos, dispneia, fadiga, constipação, ansiedade, depressão',
+      isRequired: true,
+      dueDate: this.addDays(new Date(), 7), // Reavaliação semanal
+    });
+
+    // Avaliação de suporte familiar/psicossocial
+    steps.push({
+      journeyStage: JourneyStage.FOLLOW_UP,
+      stepKey: 'palliative_family_support_assessment',
+      stepName: 'Avaliação de Suporte Familiar e Psicossocial',
+      stepDescription:
+        'Avaliar necessidade de suporte familiar, recursos disponíveis, sobrecarga do cuidador, necessidade de apoio psicológico',
+      isRequired: true,
+      dueDate: this.addDays(new Date(), 14), // Primeira avaliação em 14 dias
+    });
+
+    // Ajuste de medicação para controle de sintomas
+    steps.push({
+      journeyStage: JourneyStage.FOLLOW_UP,
+      stepKey: 'palliative_medication_review',
+      stepName: 'Revisão e Ajuste de Medicação',
+      stepDescription:
+        'Revisar medicações para controle de sintomas (analgésicos, antieméticos, ansiolíticos), ajustar doses conforme necessidade',
+      isRequired: true,
+      dueDate: this.addDays(new Date(), 7), // Revisão semanal
+    });
+
+    // Avaliação nutricional
+    steps.push({
+      journeyStage: JourneyStage.FOLLOW_UP,
+      stepKey: 'palliative_nutritional_assessment',
+      stepName: 'Avaliação Nutricional',
+      stepDescription:
+        'Avaliar estado nutricional, apetite, capacidade de deglutição, necessidade de suporte nutricional',
+      isRequired: true,
+      dueDate: this.addDays(new Date(), 14), // Primeira avaliação em 14 dias
+    });
+
+    // Cuidados de conforto
+    steps.push({
+      journeyStage: JourneyStage.FOLLOW_UP,
+      stepKey: 'palliative_comfort_care',
+      stepName: 'Cuidados de Conforto',
+      stepDescription:
+        'Avaliar e implementar medidas de conforto: posicionamento, higiene, cuidados de pele, ambiente',
+      isRequired: true,
+      dueDate: this.addDays(new Date(), 3), // Avaliação frequente
+    });
+
+    // Planejamento de cuidados avançados
+    steps.push({
+      journeyStage: JourneyStage.FOLLOW_UP,
+      stepKey: 'palliative_advance_care_planning',
+      stepName: 'Planejamento de Cuidados Avançados',
+      stepDescription:
+        'Discutir diretivas antecipadas de vontade, preferências de cuidados, decisões sobre tratamentos de suporte de vida',
+      isRequired: false, // Opcional mas recomendado
+      dueDate: this.addDays(new Date(), 30), // Inicial em 30 dias
+    });
+
+    // Suporte espiritual (se aplicável)
+    steps.push({
+      journeyStage: JourneyStage.FOLLOW_UP,
+      stepKey: 'palliative_spiritual_support',
+      stepName: 'Avaliação de Necessidades Espirituais',
+      stepDescription:
+        'Avaliar necessidade de suporte espiritual/religioso, se desejado pelo paciente e família',
+      isRequired: false, // Opcional
+      dueDate: this.addDays(new Date(), 30),
+    });
+
+    // Avaliação de qualidade de vida
+    steps.push({
+      journeyStage: JourneyStage.FOLLOW_UP,
+      stepKey: 'palliative_quality_of_life_assessment',
+      stepName: 'Avaliação de Qualidade de Vida',
+      stepDescription:
+        'Aplicar escalas de qualidade de vida (ex: ESAS - Edmonton Symptom Assessment Scale) para monitoramento',
+      isRequired: true,
+      dueDate: this.addDays(new Date(), 7), // Semanal
+    });
+
+    // Coordenação com equipe multidisciplinar
+    steps.push({
+      journeyStage: JourneyStage.FOLLOW_UP,
+      stepKey: 'palliative_multidisciplinary_team',
+      stepName: 'Coordenação com Equipe Multidisciplinar',
+      stepDescription:
+        'Garantir comunicação entre médico, enfermagem, psicologia, nutrição, fisioterapia, assistência social',
+      isRequired: true,
+      dueDate: this.addDays(new Date(), 14), // Reunião quinzenal
+    });
+
+    return steps;
+  }
+
+  /**
    * Helper: adiciona dias a uma data
    */
   private addDays(date: Date, days: number): Date {
@@ -1959,4 +2581,3 @@ export class OncologyNavigationService {
     return result;
   }
 }
-

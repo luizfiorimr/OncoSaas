@@ -1,0 +1,841 @@
+---
+alwaysApply: true
+---
+
+# Oncologia Clínica
+
+## Terminologia Específica
+
+- **Neoplasia**: Crescimento anormal de células (benigna ou maligna)
+- **Carcinoma**: Tumor maligno de origem epitelial
+- **Adenocarcinoma**: Carcinoma de origem glandular
+- **Sarcoma**: Tumor maligno de origem mesenquimal (osso, músculo, tecido conjuntivo)
+- **Linfoma**: Tumor maligno do sistema linfático
+- **Leucemia**: Neoplasia hematológica com células malignas no sangue
+- **Metástase**: Disseminação do tumor para sítios distantes do primário
+- **Estadiamento TNM**: Classificação de extensão do tumor (T=tumor, N=linfonodos, M=metástases)
+- **Graduação histológica (G)**: Grau de diferenciação celular (G1=baixo, G4=alto)
+- **Margem cirúrgica**: Borda do tecido removido (R0=livre, R1=microscópica, R2=macroscópica)
+- **Resposta completa (RC)**: Desaparecimento de todas as lesões mensuráveis
+- **Resposta parcial (RP)**: Redução ≥30% no tamanho das lesões
+- **Doença estável (DE)**: Nem RC nem progressão
+- **Progressão de doença (PD)**: Aumento ≥20% ou novas lesões
+- **Sobrevida livre de progressão (SLP)**: Tempo sem progressão da doença
+- **Sobrevida global (SG)**: Tempo desde diagnóstico até óbito
+- **Sobrevida livre de doença (SLD)**: Tempo sem recidiva após tratamento
+- **Quimioterapia neoadjuvante**: Antes da cirurgia (reduzir tumor)
+- **Quimioterapia adjuvante**: Após cirurgia (reduzir recidiva)
+- **Quimioterapia paliativa**: Tratamento de doença avançada/metastática
+- **Terapia-alvo**: Medicamentos que atacam moléculas específicas do tumor
+- **Imunoterapia**: Tratamento que estimula sistema imune contra o câncer
+- **Toxicidade hematológica**: Neutropenia, anemia, plaquetopenia
+- **Toxicidade não-hematológica**: Náuseas, mucosite, neuropatia, cardiotoxicidade
+- **Síndrome paraneoplásica**: Sintomas causados por substâncias produzidas pelo tumor
+- **Cachexia**: Perda de peso e massa muscular associada ao câncer
+- **Tumor sólido**: Neoplasia formando massa (vs hematológica)
+- **Marcador tumoral**: Substância produzida pelo tumor (ex: PSA, CEA, CA 19-9)
+- **Biomarcador**: Característica mensurável que prediz resposta ao tratamento
+- **MSI-H (Microsatellite Instability-High)**: Alteração genética que prediz resposta à imunoterapia
+- **PD-L1**: Proteína que prediz resposta à imunoterapia anti-PD-1/PD-L1
+- **HER2**: Receptor que prediz resposta a anti-HER2 (câncer de mama/gástrico)
+- **EGFR**: Receptor que prediz resposta a anti-EGFR (câncer de pulmão/colorretal)
+- **Mutação BRAF**: Alteração genética em melanoma e câncer colorretal
+- **Mutação KRAS**: Alteração genética (geralmente resistente a anti-EGFR)
+- **ECOG Performance Status**: Escala de capacidade funcional (0=normal, 4=acamado)
+- **Karnofsky Performance Status**: Escala de capacidade funcional (0-100%)
+- **Comorbidades**: Doenças coexistentes que afetam tratamento e prognóstico
+- **Cuidados paliativos**: Tratamento de sintomas e qualidade de vida (não apenas fim de vida)
+- **Tratamento de suporte**: Medicações para prevenir/tratar toxicidades
+- **Profilaxia de náuseas**: Prevenção de náuseas/vômitos induzidos por quimioterapia
+- **Fator de crescimento**: Medicação que estimula produção de células sanguíneas (G-CSF, eritropoetina)
+- **Port-a-cath**: Cateter venoso central implantado para quimioterapia
+- **Biópsia líquida**: Análise de DNA tumoral no sangue (vs biópsia de tecido)
+- **Sequenciamento genômico**: Análise de mutações genéticas do tumor
+- **Oncologia de precisão**: Tratamento baseado em características genéticas do tumor
+
+## Stack de Habilidades do Oncologista
+
+### Avaliação e Estadiamento
+- **História Clínica Oncológica Completa**: Sintomas, tempo de evolução, fatores de risco, história familiar, comorbidades
+- **Exame Físico Oncológico**: Palpação de massas, linfonodos, hepatomegalia, esplenomegalia, ascite, derrame pleural
+- **Interpretação de Estadiamento TNM**: Por tipo de tumor (AJCC 8ª edição)
+- **Avaliação de Performance Status**: ECOG e Karnofsky (impacta decisão de tratamento)
+- **Avaliação Nutricional**: IMC, perda de peso, albumina, avaliação de risco nutricional
+- **Avaliação de Comorbidades**: Impacto no tratamento e prognóstico
+
+### Interpretação de Exames Oncológicos
+- **Marcadores Tumorais**: PSA (próstata), CEA (colorretal), CA 19-9 (pâncreas), CA 125 (ovário), CA 15-3/CA 27.29 (mama), AFP (fígado), β-HCG (tumores de células germinativas)
+- **Anatomia Patológica**: Interpretação de laudos, graduação histológica, margens cirúrgicas, invasão linfovascular, perineural
+- **Imagens Oncológicas**: TC, RM, PET-CT - avaliação de resposta, progressão, novas lesões
+- **Critérios RECIST 1.1**: Padronização de avaliação de resposta em ensaios clínicos
+- **Biópsia Líquida**: Interpretação de mutações genéticas, carga tumoral circulante
+
+### Quimioterapia e Terapias Sistêmicas
+- **Protocolos de Quimioterapia**: Doses, ciclos, intervalos, vias de administração
+- **Ajuste de Dose**: Por função renal (creatinina, TFG), função hepática, idade, performance status
+- **Terapia-alvo**: Anti-HER2, anti-EGFR, anti-VEGF, inibidores de tirosina-quinase
+- **Imunoterapia**: Anti-PD-1, anti-PD-L1, anti-CTLA-4, CAR-T cells
+- **Hormonioterapia**: Anti-estrogênios, inibidores de aromatase, anti-andrógenos
+- **Terapia Combinada**: Quimioterapia + terapia-alvo, quimioterapia + imunoterapia
+
+### Manejo de Toxicidades
+- **Toxicidade Hematológica**:
+  - Neutropenia febril: Critérios de internação, antibioticoterapia empírica
+  - Anemia: Transfusão (Hb <7-8 g/dL), eritropoetina
+  - Plaquetopenia: Transfusão (<10-20k), sangramento ativo
+- **Náuseas e Vômitos**: Classificação de risco (alto/moderado/baixo), profilaxia (ondansetrona, aprepitanto, dexametasona)
+- **Mucosite**: Prevenção, tratamento tópico e sistêmico
+- **Neuropatia Periférica**: Reconhecimento precoce, ajuste de dose, tratamento sintomático
+- **Cardiotoxicidade**: Monitorização de FE (ecocardiograma), prevenção com dexrazoxano
+- **Nefrotoxicidade**: Hidratação, ajuste de dose, monitorização de função renal
+- **Hepatotoxicidade**: Monitorização de transaminases, bilirrubinas, ajuste de dose
+- **Síndrome de Lise Tumoral**: Prevenção (alopurinol, hidratação), tratamento (rasburicase)
+
+### Cuidados de Suporte
+- **Profilaxia de Infecções**: Antibióticos profiláticos, vacinação (gripe, pneumococo)
+- **Fatores de Crescimento**: G-CSF (filgrastim, pegfilgrastim) para neutropenia
+- **Suporte Nutricional**: Avaliação, suplementação, nutrição enteral/parenteral
+- **Controle de Dor**: Escada analgésica da OMS, opioides, adjuvantes
+- **Cuidados Paliativos**: Tratamento de sintomas, qualidade de vida, comunicação sobre prognóstico
+- **Suporte Psicológico**: Ansiedade, depressão, adaptação ao diagnóstico
+
+### Oncologia Específica por Tipo de Tumor
+
+#### Câncer de Mama
+- **Subtipos Moleculares**: Luminal A, Luminal B, HER2+, triplo negativo
+- **Estadiamento**: TNM, estádios I-IV
+- **Tratamento Local**: Cirurgia (conservadora vs mastectomia), radioterapia
+- **Tratamento Sistêmico**: Quimioterapia neoadjuvante/adjuvante, hormonioterapia, anti-HER2
+- **Metastático**: Primeira linha, segunda linha, subsequentes
+- **Monitorização**: Mamografia, exames físicos, marcadores
+
+#### Câncer de Pulmão
+- **Tipos Histológicos**: Adenocarcinoma, carcinoma escamoso, carcinoma de pequenas células
+- **Biomarcadores**: EGFR, ALK, ROS1, BRAF, KRAS, PD-L1, MSI-H
+- **Estadiamento**: TNM, estádios I-IV
+- **Tratamento Localizado**: Cirurgia, radioterapia, quimiorradioterapia
+- **Metastático**: Terapia-alvo (se mutação), imunoterapia (se PD-L1+), quimioterapia
+- **Carcinoma de Pequenas Células**: Quimiorradioterapia, profilaxia de metástases cerebrais
+
+#### Câncer Colorretal
+- **Estadiamento**: TNM, estádios I-IV
+- **Tratamento Localizado**: Cirurgia, quimioterapia adjuvante (estádio III, alguns II)
+- **Metastático**: Quimioterapia (FOLFOX, FOLFIRI), anti-VEGF (bevacizumabe), anti-EGFR (se KRAS wild-type)
+- **Biomarcadores**: KRAS, NRAS, BRAF, MSI-H, HER2
+- **Metástases Hepáticas**: Ressecção cirúrgica, quimioembolização, ablação
+
+#### Câncer de Próstata
+- **Estadiamento**: TNM, escore de Gleason, PSA
+- **Risco**: Baixo, intermediário, alto (D'Amico)
+- **Tratamento Localizado**: Cirurgia, radioterapia, vigilância ativa (baixo risco)
+- **Metastático**: Deprivação androgênica (LHRH), anti-andrógenos, quimioterapia (docetaxel), novos agentes (abiraterona, enzalutamida)
+
+#### Câncer Gástrico
+- **Tipos Histológicos**: Adenocarcinoma (intestinal vs difuso), linfoma, GIST
+- **Estadiamento**: TNM
+- **Tratamento Localizado**: Cirurgia, quimioterapia adjuvante/perioperatória
+- **Metastático**: Quimioterapia, anti-HER2 (se HER2+), imunoterapia (se MSI-H)
+- **GIST**: Imatinibe (inibidor de tirosina-quinase)
+
+#### Linfomas
+- **Classificação**: Hodgkin vs não-Hodgkin, subtipos histológicos
+- **Estadiamento**: Ann Arbor (I-IV, A/B)
+- **Tratamento**: Quimioterapia (ABVD, R-CHOP), radioterapia, imunoterapia (rituximabe, CAR-T)
+- **Monitorização**: PET-CT, biópsia de medula óssea
+
+#### Leucemias
+- **Leucemia Mieloide Aguda (LMA)**: Indução, consolidação, transplante de medula
+- **Leucemia Linfoide Aguda (LLA)**: Protocolos pediátricos vs adultos, transplante
+- **Leucemia Mieloide Crônica (LMC)**: Imatinibe e outros inibidores de tirosina-quinase
+- **Leucemia Linfoide Crônica (LLC)**: Vigilância ativa, quimioterapia, imunoterapia
+
+### Comunicação e Decisão Compartilhada
+- **Comunicação de Diagnóstico**: Linguagem clara, empática, tempo para processar
+- **Discussão de Prognóstico**: Sobrevida estimada, fatores prognósticos, incertezas
+- **Decisão Compartilhada**: Opções de tratamento, benefícios, riscos, preferências do paciente
+- **Cuidados Paliativos**: Quando introduzir, integração com tratamento curativo
+- **Diretivas Antecipadas**: Discussão de objetivos de cuidado, limitação de tratamento
+
+### Pesquisa e Ensaios Clínicos
+- **Critérios de Elegibilidade**: Performance status, função orgânica, comorbidades
+- **Fases de Ensaios**: Fase I (dose), Fase II (eficácia), Fase III (comparativo)
+- **Quando Oferecer**: Doença avançada sem opções padrão, acesso a novos tratamentos
+
+## Metodologia de Raciocínio Clínico do Oncologista
+
+### 1. Abordagem Inicial - Diagnóstico e Estadiamento
+
+**Princípio Fundamental: DIAGNÓSTICO PRECISO → ESTADIAMENTO COMPLETO → TRATAMENTO INDIVIDUALIZADO**
+
+**Sequência Obrigatória:**
+
+1. **Confirmação Histológica**:
+   - Biópsia obrigatória antes de tratamento (exceto emergências)
+   - Tipo histológico preciso
+   - Graduação (quando aplicável)
+   - Biomarcadores (quando indicado)
+
+2. **Estadiamento Completo (TNM)**:
+   - **T (Tumor)**: Tamanho, invasão local
+   - **N (Linfonodos)**: Comprometimento regional
+   - **M (Metástases)**: Doença à distância
+   - Exames de imagem: TC, RM, PET-CT conforme tipo de tumor
+
+3. **Avaliação de Performance Status**:
+   - ECOG 0-4 (impacta decisão de tratamento)
+   - Karnofsky (alternativa)
+
+4. **Avaliação de Comorbidades**:
+   - Função cardíaca, renal, hepática
+   - Impacto no tratamento
+
+5. **Biomarcadores e Genômica**:
+   - Quando indicado: PD-L1, mutações (EGFR, BRAF, KRAS), MSI-H, HER2, etc.
+   - Guia escolha de tratamento
+
+### 2. Fluxograma Mental de Decisão
+
+```
+PACIENTE COM SUSPEITA/CONFIRMAÇÃO DE CÂNCER
+         ↓
+[CONFIRMAÇÃO HISTOLÓGICA]
+    Biópsia realizada? → NÃO → Solicitar biópsia
+         ↓ SIM
+[TIPO HISTOLÓGICO E GRADUAÇÃO]
+    Carcinoma? Sarcoma? Linfoma? Leucemia?
+         ↓
+[ESTADIAMENTO COMPLETO]
+    TC/RM/PET-CT conforme tipo de tumor
+    Estadiamento TNM
+         ↓
+[DOENÇA LOCALIZADA vs METASTÁTICA?]
+         ↓
+LOCALIZADA:                    METASTÁTICA:
+    - Estádio I-III                - Estádio IV
+    - Tratamento curativo          - Tratamento paliativo
+    - Cirurgia ± QT ± RT           - Terapia sistêmica
+    - Objetivo: cura                - Objetivo: controle + qualidade de vida
+         ↓
+[AVALIAR PERFORMANCE STATUS]
+    ECOG 0-1: Tratamento agressivo
+    ECOG 2: Tratamento modificado
+    ECOG 3-4: Cuidados paliativos
+         ↓
+[AVALIAR BIOMARCADORES]
+    PD-L1? Mutação? MSI-H? HER2?
+    → Guia escolha de tratamento
+         ↓
+[DEFINIR TRATAMENTO]
+    - Protocolo específico
+    - Ajuste de dose (função renal/hepática)
+    - Profilaxia de toxicidades
+         ↓
+[INICIAR TRATAMENTO]
+    - Monitorização de toxicidades
+    - Ajustes conforme necessário
+    - Avaliação de resposta
+         ↓
+[SEGUIMENTO]
+    - Avaliação de resposta (RECIST)
+    - Tratamento de toxicidades
+    - Ajuste de linha de tratamento se progressão
+```
+
+### 3. Perguntas-Chave por Cenário Oncológico
+
+**PACIENTE COM DIAGNÓSTICO NOVO:**
+- Tipo histológico confirmado? (biópsia obrigatória!)
+- Estadiamento completo realizado? (TC, RM, PET-CT conforme tipo)
+- Performance status? (ECOG)
+- Comorbidades que impactam tratamento?
+- Biomarcadores solicitados? (quando indicado)
+- **Buscar em @md/**: "[Tipo de tumor] estadiamento", "[Tipo de tumor] tratamento primeira linha"
+
+**DOENÇA LOCALIZADA - DECISÃO DE TRATAMENTO:**
+- Estádio preciso? (I, II, III)
+- Fatores de risco de recidiva? (margens, linfonodos, graduação)
+- Indicação de quimioterapia adjuvante? (reduz recidiva)
+- Indicação de quimioterapia neoadjuvante? (reduzir tumor antes de cirurgia)
+- Radioterapia indicada?
+- **Buscar em @md/**: "[Tipo de tumor] tratamento localizado", "[Tipo de tumor] quimioterapia adjuvante"
+
+**DOENÇA METASTÁTICA - ESCOLHA DE TRATAMENTO:**
+- Performance status adequado? (ECOG 0-2 para tratamento agressivo)
+- Biomarcadores? (PD-L1, mutações, HER2, MSI-H)
+- Linha de tratamento? (primeira, segunda, subsequente)
+- Toxicidades esperadas vs benefício?
+- Preferências do paciente?
+- **Buscar em @md/**: "[Tipo de tumor] metastático primeira linha", "[Tipo de tumor] biomarcadores"
+
+**AVALIAÇÃO DE RESPOSTA:**
+- Tempo desde início do tratamento? (avaliar após 2-3 ciclos)
+- TC/RM de controle realizada?
+- Critérios RECIST: RC, RP, DE ou PD?
+- Marcadores tumorais: caindo, estáveis ou subindo?
+- Sintomas: melhorando ou piorando?
+- **Buscar em @md/**: "Critérios RECIST avaliação resposta"
+
+**TOXICIDADE DO TRATAMENTO:**
+- Tipo de toxicidade? (hematológica, gastrointestinal, neurológica, cardíaca)
+- Grau (1-4)? (CTCAE - Common Terminology Criteria for Adverse Events)
+- Necessita ajuste de dose? (reduzir, atrasar, suspender)
+- Necessita tratamento de suporte? (G-CSF, transfusão, antieméticos)
+- **Buscar em @md/**: "[Toxicidade] manejo quimioterapia", "Neutropenia febril tratamento"
+
+**PROGRESSÃO DE DOENÇA:**
+- Confirmada por imagem? (novas lesões ou aumento ≥20%)
+- Sintomas piorando?
+- Performance status piorou?
+- Opções de segunda linha disponíveis?
+- Cuidados paliativos indicados?
+- **Buscar em @md/**: "[Tipo de tumor] segunda linha", "Cuidados paliativos oncologia"
+
+### 4. Construção do Plano de Tratamento
+
+**Método do Oncologista:**
+
+1. **Confirmar Diagnóstico**:
+   - Biópsia com tipo histológico
+   - Graduação quando aplicável
+
+2. **Estadiamento Completo**:
+   - TNM preciso
+   - Exames de imagem adequados
+
+3. **Avaliar Fatores Prognósticos**:
+   - Estádio
+   - Performance status
+   - Comorbidades
+   - Biomarcadores
+
+4. **Definir Objetivos**:
+   - **Curativo**: Doença localizada, objetivo de cura
+   - **Paliativo**: Doença metastática, objetivo de controle + qualidade de vida
+
+5. **Escolher Tratamento**:
+   - Baseado em guidelines (NCCN, ESMO, ASCO)
+   - Individualizado por paciente
+   - Considerar benefício vs toxicidade
+
+6. **Preparar Suporte**:
+   - Profilaxia de náuseas
+   - Fatores de crescimento se necessário
+   - Ajuste de comorbidades
+
+7. **Monitorizar**:
+   - Toxicidades (a cada ciclo)
+   - Resposta (após 2-3 ciclos)
+   - Ajustar conforme necessário
+
+**Exemplo - Câncer de Mama Estádio II:**
+
+**Diagnóstico**: Adenocarcinoma de mama, HER2 negativo, receptores hormonais positivos
+**Estadiamento**: T2N1M0 (Estádio IIB)
+**Performance Status**: ECOG 0
+**Objetivo**: Curativo
+
+**Plano**:
+1. Cirurgia (mastectomia ou conservadora + linfonodo sentinela)
+2. Quimioterapia adjuvante (reduz recidiva em estádio II)
+3. Radioterapia (se cirurgia conservadora)
+4. Hormonoterapia (5-10 anos) - tamoxifeno ou inibidor de aromatase
+
+### 5. Critérios de Gravidade - Quando Tratar com Urgência
+
+**EMERGÊNCIAS ONCOLÓGICAS:**
+
+**Síndrome de Compressão Medular:**
+- Déficit neurológico agudo (paraplegia, incontinência)
+- **Tratamento**: Corticosteroides + radioterapia urgente + cirurgia se indicado
+
+**Síndrome da Veia Cava Superior:**
+- Dispneia, edema facial, turgência jugular
+- **Tratamento**: Corticosteroides + quimioterapia/radioterapia conforme tipo de tumor
+
+**Hipercalcemia Maligna:**
+- Confusão, náuseas, constipação, fraqueza
+- **Tratamento**: Hidratação + bifosfonatos (ácido zoledrônico) + calcitonina se grave
+
+**Síndrome de Lise Tumoral:**
+- Hiperuricemia, hipercalemia, hiperfosfatemia, hipocalcemia
+- **Tratamento**: Hidratação + alopurinol/rasburicase + correção de eletrólitos
+
+**Neutropenia Febril:**
+- Febre + neutrófilos <500/mm³
+- **Tratamento**: Antibioticoterapia empírica IV imediata
+
+**Tamponamento Cardíaco:**
+- Derrame pericárdico maligno com comprometimento hemodinâmico
+- **Tratamento**: Pericardiocentese urgente
+
+**Obstrução de Via Aérea:**
+- Tumor comprimindo traqueia/brônquios
+- **Tratamento**: Radioterapia urgente, stent, cirurgia
+
+**Obstrução Intestinal:**
+- Tumor causando obstrução
+- **Tratamento**: Cirurgia ou stent endoscópico
+
+### 6. Integrando Conhecimento dos Livros (@md/)
+
+**QUANDO BUSCAR EM @md/Oncologia (DeVita, Abeloff, ou equivalente):**
+- Protocolos de tratamento específicos por tipo de tumor
+- Toxicidades e manejo
+- Estadiamento TNM por tipo de tumor
+- **Query exemplo**: "Câncer de mama estádio II tratamento", "Neutropenia febril antibioticoterapia"
+
+**QUANDO BUSCAR EM @md/Guidelines (NCCN, ESMO):**
+- Tratamento baseado em evidências
+- Escolha de primeira linha, segunda linha
+- Biomarcadores e tratamento personalizado
+- **Query exemplo**: "NCCN câncer de pulmão não pequenas células primeira linha", "ESMO câncer colorretal metastático"
+
+**ESTRATÉGIA DE BUSCA ESPECÍFICA:**
+
+**Para Tratamento:**
+"[Tipo de tumor] [estádio] tratamento" ou "[Tipo de tumor] metastático primeira linha"
+Ex: "Câncer de mama estádio III tratamento", "Adenocarcinoma de pulmão metastático EGFR mutado"
+
+**Para Toxicidades:**
+"[Toxicidade] quimioterapia manejo" ou "[Medicamento] toxicidade"
+Ex: "Neuropatia periférica quimioterapia", "Cisplatina nefrotoxicidade"
+
+**Para Biomarcadores:**
+"[Tipo de tumor] biomarcadores" ou "[Biomarcador] [tipo de tumor]"
+Ex: "Câncer de pulmão biomarcadores", "PD-L1 câncer de pulmão"
+
+**Para Estadiamento:**
+"[Tipo de tumor] estadiamento TNM" ou "AJCC [tipo de tumor]"
+Ex: "Câncer colorretal estadiamento", "AJCC câncer de mama"
+
+### 7. Exemplos Práticos de Raciocínio Oncológico
+
+**EXEMPLO 1: Câncer de Mama Estádio IIB - Decisão de Tratamento**
+
+**Cenário:**
+Mulher, 52 anos, nódulo de mama esquerda de 3 cm, biópsia: adenocarcinoma, grau 2, receptores hormonais positivos, HER2 negativo, Ki-67 25%. Estadiamento: T2N1M0 (linfonodo axilar positivo). ECOG 0. Sem comorbidades.
+
+**Raciocínio:**
+
+**1. Confirmação Diagnóstica:**
+✓ Biópsia realizada
+✓ Tipo: Adenocarcinoma
+✓ Biomarcadores: RH+, HER2-, Ki-67 25% (intermediário)
+
+**2. Estadiamento:**
+- T2: Tumor 2-5 cm
+- N1: 1-3 linfonodos axilares
+- M0: Sem metástases
+- **Estádio IIB**
+
+**3. Objetivo:**
+- Doença localizada → **Tratamento curativo**
+
+**4. Performance Status:**
+- ECOG 0 → Tratamento agressivo possível
+
+**Buscar em @md/**:
+- "Câncer de mama estádio II tratamento"
+- "Quimioterapia adjuvante câncer de mama indicações"
+
+**Plano de Tratamento:**
+
+**1. Cirurgia:**
+- Mastectomia OU cirurgia conservadora + linfonodo sentinela/biópsia de linfonodo axilar
+- Decisão compartilhada com paciente
+
+**2. Quimioterapia Adjuvante:**
+- **Indicada**: Estádio II com linfonodo positivo
+- **Protocolo**: AC (adriamicina + ciclofosfamida) × 4 ciclos → T (taxol) × 4 ciclos OU TAC × 6 ciclos
+- **Objetivo**: Reduzir risco de recidiva
+
+**3. Radioterapia:**
+- Se cirurgia conservadora: **Obrigatória**
+- Se mastectomia: Considerar se alto risco (tumor >5 cm, múltiplos linfonodos)
+
+**4. Hormonoterapia:**
+- **Indicada**: Receptores hormonais positivos
+- **Opções**:
+  - Pré-menopausa: Tamoxifeno 20 mg/dia por 5-10 anos
+  - Pós-menopausa: Inibidor de aromatase (anastrozol, letrozol, exemestano) por 5-10 anos
+- **Duração**: Mínimo 5 anos, considerar 10 anos
+
+**5. Suporte:**
+- Profilaxia de náuseas: Ondansetrona + dexametasona + aprepitanto (alto risco)
+- G-CSF: Se neutropenia ou risco alto
+
+**Seguimento:**
+- Exame físico a cada 3-6 meses
+- Mamografia anual
+- Marcadores: CA 15-3/CA 27.29 (se elevados no diagnóstico)
+
+---
+
+**EXEMPLO 2: Câncer de Pulmão Não Pequenas Células Metastático**
+
+**Cenário:**
+Homem, 65 anos, tabagista 40 anos-maço, tosse e dispneia há 2 meses. TC tórax: massa pulmonar direita de 5 cm + múltiplas metástases hepáticas e ósseas. Biópsia: adenocarcinoma de pulmão. ECOG 1. Biomarcadores: EGFR negativo, ALK negativo, PD-L1 60%.
+
+**Raciocínio:**
+
+**1. Diagnóstico:**
+✓ Biópsia: Adenocarcinoma
+✓ Estadiamento: T3N2M1c (Estádio IVB - metastático)
+
+**2. Biomarcadores:**
+- EGFR negativo → Não terapia-alvo anti-EGFR
+- ALK negativo → Não terapia-alvo anti-ALK
+- **PD-L1 60%** → **Alto!** → Imunoterapia pode ser primeira linha
+
+**3. Performance Status:**
+- ECOG 1 → Tratamento sistêmico possível
+
+**4. Objetivo:**
+- Doença metastática → **Tratamento paliativo** (controle + qualidade de vida)
+
+**Buscar em @md/**:
+- "Adenocarcinoma de pulmão metastático primeira linha"
+- "Imunoterapia PD-L1 alto câncer de pulmão"
+- "Pembrolizumab câncer de pulmão"
+
+**Plano de Tratamento:**
+
+**Opção 1 - Imunoterapia Isolada (PD-L1 ≥50%):**
+- **Pembrolizumab** 200 mg IV a cada 3 semanas
+- **Vantagens**: Menos toxicidade, resposta duradoura em alguns pacientes
+- **Desvantagens**: Taxa de resposta ~45% (vs ~30% com quimioterapia)
+
+**Opção 2 - Quimioterapia + Imunoterapia:**
+- Carboplatina + pemetrexede + pembrolizumab
+- **Vantagens**: Maior taxa de resposta (~55%)
+- **Desvantagens**: Mais toxicidade
+
+**Decisão Compartilhada:**
+- Se paciente prefere menos toxicidade: Imunoterapia isolada
+- Se paciente aceita mais toxicidade por maior chance de resposta: Quimioterapia + imunoterapia
+
+**Escolha**: Quimioterapia + imunoterapia (maior benefício)
+
+**Protocolo:**
+- **Ciclo 1-4**: Carboplatina AUC 5 + Pemetrexede 500 mg/m² + Pembrolizumab 200 mg (a cada 3 semanas)
+- **Manutenção**: Pemetrexede + Pembrolizumab (até progressão ou 2 anos)
+
+**Suporte:**
+- Profilaxia de náuseas: Ondansetrona + aprepitanto + dexametasona
+- Ácido fólico + vitamina B12 (pemetrexede)
+- Corticosteroides pré-medicação (pembrolizumab - reduz reações)
+
+**Monitorização:**
+- TC tórax/abdome a cada 9 semanas (3 ciclos)
+- Avaliar resposta (RECIST)
+- Toxicidades: pneumonite (imunoterapia), neutropenia, náuseas
+
+**Se Progressão:**
+- Segunda linha: Docetaxel ou outro agente
+- Cuidados paliativos integrados
+
+---
+
+**EXEMPLO 3: Neutropenia Febril em Paciente em Quimioterapia**
+
+**Cenário:**
+Mulher, 58 anos, D8 após ciclo 2 de quimioterapia (AC para câncer de mama). Febre 38,5°C há 2 horas, calafrios, mal-estar. Hemograma: Leucócitos 800/mm³, neutrófilos 200/mm³, plaquetas 120.000/mm³, Hb 9,5 g/dL.
+
+**Raciocínio:**
+
+**1. Diagnóstico:**
+- **Neutropenia febril**: Febre + neutrófilos <500/mm³
+- **Emergência oncológica!** → Risco de sepse grave
+
+**2. Estratificação de Risco:**
+- **Alto risco**: Neutrófilos <100/mm³, instabilidade, comorbidades
+- **Baixo risco**: Neutrófilos 100-500/mm³, estável, sem comorbidades
+
+**Este paciente**: Alto risco (neutrófilos 200, mas instabilidade possível)
+
+**Buscar em @md/**:
+- "Neutropenia febril tratamento"
+- "Antibioticoterapia empírica neutropenia febril"
+
+**Conduta IMEDIATA:**
+
+**1. Internação Hospitalar:**
+- Risco de sepse grave
+- Necessita antibioticoterapia IV
+
+**2. Antibioticoterapia Empírica (iniciar em <1h):**
+- **Piperacilina-tazobactam** 4,5g IV 6/6h OU
+- **Cefepime** 2g IV 8/8h OU
+- **Meropenem** 1g IV 8/8h (se risco muito alto ou resistência conhecida)
+
+**3. Avaliação:**
+- Hemoculturas (2 amostras de sítios diferentes)
+- Urocultura
+- Exame físico completo (foco infeccioso?)
+- RX tórax (pneumonia?)
+
+**4. Monitorização:**
+- Sinais vitais frequentes
+- Hemograma diário
+- Reavaliar em 48-72h
+
+**5. G-CSF:**
+- Filgrastim 5 mcg/kg SC/dia OU pegfilgrastim 6 mg SC dose única
+- Acelera recuperação de neutrófilos
+
+**6. Se Persistência de Febre após 48-72h:**
+- Adicionar cobertura para fungos:
+  - **Voriconazol** ou **Anfotericina B** ou **Caspofungina**
+
+**Alta quando:**
+- Afebril por 24h
+- Neutrófilos >500/mm³ (ou em ascensão consistente)
+- Estável clinicamente
+
+**Prevenção Futura:**
+- G-CSF profilático nos próximos ciclos (reduz risco de neutropenia)
+
+## Protocolos de Tratamento por Tipo de Tumor
+
+### Câncer de Mama
+
+#### Estadiamento TNM (AJCC 8ª edição)
+- **T**: T1 (≤2 cm), T2 (2-5 cm), T3 (>5 cm), T4 (parede torácica/pele)
+- **N**: N0 (sem), N1 (1-3 axilares), N2 (4-9 axilares), N3 (≥10 ou infraclaviculares)
+- **M**: M0 (sem metástases), M1 (com metástases)
+
+#### Tratamento Localizado
+
+**Estádio I-II (Luminal A/B, HER2-, baixo risco):**
+- Cirurgia (conservadora ou mastectomia)
+- Radioterapia (se conservadora)
+- Hormonoterapia (5-10 anos)
+
+**Estádio I-II (Alto risco - linfonodo+, alto Ki-67, triplo negativo):**
+- Cirurgia
+- Quimioterapia neoadjuvante OU adjuvante
+- Radioterapia
+- Hormonoterapia (se RH+)
+
+**Estádio III:**
+- Quimioterapia neoadjuvante (reduzir tumor)
+- Cirurgia
+- Radioterapia
+- Hormonoterapia (se RH+)
+
+#### Tratamento Metastático
+
+**Luminal (RH+, HER2-):**
+- **1ª linha**: Hormonoterapia + CDK4/6 inibidor (palbociclib, ribociclib, abemaciclib)
+- **2ª linha**: Outro agente hormonal
+- **3ª linha**: Quimioterapia (taxanos, antraciclinas)
+
+**HER2+ (qualquer RH):**
+- **1ª linha**: Trastuzumabe + pertuzumabe + quimioterapia (docetaxel)
+- **2ª linha**: T-DM1 (trastuzumabe-emtansina)
+- **3ª linha**: Lapatinibe + capecitabina
+
+**Triplo Negativo:**
+- **1ª linha**: Quimioterapia (taxanos, antraciclinas)
+- **Se PD-L1+**: Atezolizumabe + quimioterapia
+- **2ª linha**: Outro agente quimioterápico
+
+### Câncer de Pulmão Não Pequenas Células
+
+#### Biomarcadores e Tratamento Personalizado
+
+**EGFR Mutado:**
+- **1ª linha**: Osimertinibe (inibidor de EGFR de 3ª geração)
+- **2ª linha**: Quimioterapia
+
+**ALK Rearranjado:**
+- **1ª linha**: Alectinibe ou brigatinibe
+- **2ª linha**: Lorlatinibe
+
+**PD-L1 ≥50% (sem mutação):**
+- **1ª linha**: Pembrolizumab (imunoterapia isolada)
+- **Alternativa**: Quimioterapia + pembrolizumab
+
+**PD-L1 1-49% (sem mutação):**
+- **1ª linha**: Quimioterapia + pembrolizumab
+
+**Sem mutação, PD-L1 <1%:**
+- **1ª linha**: Quimioterapia (carboplatina + pemetrexede)
+
+#### Quimioterapia
+- **Adenocarcinoma**: Carboplatina + Pemetrexede
+- **Carcinoma escamoso**: Carboplatina + Gencitabina
+
+### Câncer Colorretal
+
+#### Tratamento Localizado
+
+**Estádio I-II:**
+- Cirurgia apenas
+
+**Estádio III:**
+- Cirurgia + Quimioterapia adjuvante (FOLFOX ou CAPOX)
+
+**Estádio II de alto risco:**
+- Considerar quimioterapia adjuvante
+
+#### Tratamento Metastático
+
+**KRAS/NRAS Wild-Type:**
+- **1ª linha**: FOLFOX ou FOLFIRI + Bevacizumabe OU Cetuximabe/Panitumumabe (anti-EGFR)
+
+**KRAS/NRAS Mutado:**
+- **1ª linha**: FOLFOX ou FOLFIRI + Bevacizumabe (anti-VEGF)
+
+**BRAF Mutado:**
+- **1ª linha**: Encorafenibe + Binimetinibe + Cetuximabe (terapia-alvo)
+
+**MSI-H (alta instabilidade de microssatélites):**
+- **1ª linha**: Pembrolizumab ou Nivolumabe (imunoterapia)
+
+**2ª linha:**
+- Trocar regime (FOLFOX ↔ FOLFIRI)
+- Adicionar/alterar terapia-alvo
+
+### Câncer de Próstata
+
+#### Classificação de Risco (D'Amico)
+
+**Baixo Risco:**
+- T1-T2a, Gleason ≤6, PSA <10
+- **Tratamento**: Vigilância ativa OU cirurgia OU radioterapia
+
+**Risco Intermediário:**
+- T2b-T2c OU Gleason 7 OU PSA 10-20
+- **Tratamento**: Cirurgia OU radioterapia + hormonoterapia
+
+**Alto Risco:**
+- T3 OU Gleason 8-10 OU PSA >20
+- **Tratamento**: Radioterapia + hormonoterapia OU cirurgia + radioterapia adjuvante
+
+#### Tratamento Metastático
+
+**Hormonossensível:**
+- **1ª linha**: Deprivação androgênica (LHRH análogo: leuprolide, goserelina)
+- **2ª linha**: Docetaxel + deprivação androgênica (se alto volume)
+
+**Castração-Resistente (CRPC):**
+- **1ª linha**: Abiraterona + prednisona OU Enzalutamida
+- **2ª linha**: Docetaxel
+- **3ª linha**: Cabazitaxel ou outros agentes
+
+## Manejo de Toxicidades
+
+### Náuseas e Vômitos
+
+**Classificação de Risco:**
+
+**Alto Risco** (Cisplatina, AC, altas doses de ciclofosfamida):
+- **Profilaxia**: Ondansetrona 8-16 mg IV + Aprepitanto 125 mg VO (dia 1) + 80 mg (dias 2-3) + Dexametasona 12 mg IV (dia 1) + 8 mg VO (dias 2-4)
+
+**Risco Moderado** (Carboplatina, oxaliplatina, irinotecano):
+- **Profilaxia**: Ondansetrona 8 mg IV + Dexametasona 8-12 mg IV
+
+**Baixo Risco** (Taxanos, antimetabólitos):
+- **Profilaxia**: Ondansetrona 8 mg VO ou Metoclopramida 10 mg VO
+
+### Neutropenia Febril
+
+**Definição:**
+- Febre ≥38,3°C OU ≥38°C por >1h
+- Neutrófilos <500/mm³ (ou <1000 com queda esperada)
+
+**Tratamento:**
+- **Antibioticoterapia empírica IV** em <1h:
+  - Piperacilina-tazobactam 4,5g 6/6h OU
+  - Cefepime 2g 8/8h OU
+  - Meropenem 1g 8/8h
+
+**G-CSF:**
+- Filgrastim 5 mcg/kg SC/dia OU
+- Pegfilgrastim 6 mg SC (dose única, 24-48h após quimioterapia)
+
+**Profilaxia:**
+- G-CSF se risco alto de neutropenia (história prévia, protocolo mielossupressor)
+
+### Neuropatia Periférica
+
+**Reconhecimento:**
+- Formigamento, dormência, dor em mãos/pés
+- Piora com agentes: Taxanos, platina, vinca-alcaloides
+
+**Manejo:**
+- Reduzir dose ou atrasar ciclo
+- Tratamento sintomático: Gabapentina, pregabalina, amitriptilina
+- Evitar agravamento (pode ser permanente)
+
+### Cardiotoxicidade
+
+**Agentes Cardiotóxicos:**
+- Antraciclinas (doxorrubicina, epirrubicina)
+- Trastuzumabe (anti-HER2)
+
+**Monitorização:**
+- Ecocardiograma antes e durante tratamento
+- FE <50% ou queda >10%: Suspender/ajustar
+
+**Prevenção:**
+- Dexrazoxano (com antraciclinas em altas doses)
+
+## Cuidados Paliativos em Oncologia
+
+### Princípios
+
+**Não é apenas "fim de vida":**
+- Integrar desde o diagnóstico em doença avançada
+- Tratamento de sintomas + qualidade de vida
+- Pode ser concomitante com tratamento curativo
+
+### Sintomas Comuns
+
+**Dor:**
+- Escada analgésica da OMS
+- Opioides (morfina, fentanil, oxicodona)
+- Adjuvantes (gabapentina, antidepressivos)
+
+**Dispneia:**
+- O₂ suplementar
+- Opioides (reduzem sensação de falta de ar)
+- Corticosteroides (se compressão)
+
+**Náuseas:**
+- Metoclopramida, ondansetrona
+- Corticosteroides
+- Haloperidol (refratária)
+
+**Fadiga:**
+- Exercício físico (quando possível)
+- Correção de anemia
+- Corticosteroides (curto prazo)
+
+**Anorexia/Cachexia:**
+- Suporte nutricional
+- Corticosteroides ou megestrol (estimulam apetite)
+- Aceitar limitações
+
+### Comunicação sobre Prognóstico
+
+- Linguagem clara e empática
+- Tempo para processar informações
+- Discussão de objetivos de cuidado
+- Diretivas antecipadas
+- Suporte psicológico
+
+## Referências
+
+- **DeVita, Hellman, and Rosenberg's Cancer: Principles & Practice of Oncology. 11ª ed.**
+- **Abeloff's Clinical Oncology. 6ª ed.**
+- **NCCN Clinical Practice Guidelines in Oncology** (National Comprehensive Cancer Network)
+- **ESMO Clinical Practice Guidelines** (European Society for Medical Oncology)
+- **ASCO Guidelines** (American Society of Clinical Oncology)
+- **AJCC Cancer Staging Manual. 8ª ed.**
+- **RECIST 1.1 Criteria** (Response Evaluation Criteria in Solid Tumors)
+- **CTCAE v5.0** (Common Terminology Criteria for Adverse Events)
+- **Diretrizes da SBOC** (Sociedade Brasileira de Oncologia Clínica)
+- **Diretrizes da SBM** (Sociedade Brasileira de Mastologia)
+- **UpToDate - Oncology Topics**

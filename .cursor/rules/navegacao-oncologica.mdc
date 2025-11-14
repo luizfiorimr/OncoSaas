@@ -1,0 +1,986 @@
+---
+alwaysApply: true
+---
+
+# Navegação Oncológica
+
+## Terminologia Específica
+
+- **Navegação Oncológica**: Processo sistemático de coordenação e facilitação do cuidado oncológico ao longo da jornada do paciente
+- **Patient Navigation**: Modelo de cuidado onde profissional dedicado ajuda paciente a navegar pelo sistema de saúde
+- **JourneyStage**: Estágio da jornada oncológica (SCREENING, NAVIGATION, DIAGNOSIS, TREATMENT, FOLLOW_UP)
+- **NavigationStep**: Etapa específica da navegação oncológica (exame, consulta, procedimento) com prazo e status
+- **Barreiras ao Cuidado**: Obstáculos que impedem acesso ou continuidade do tratamento (financeira, transporte, conhecimento, emocional, sistema)
+- **Coordenação de Cuidados**: Integração e organização de múltiplos serviços e profissionais envolvidos no cuidado
+- **Case Management**: Gestão de caso individualizado com acompanhamento proativo
+- **Tempo Porta-Tratamento**: Intervalo entre diagnóstico confirmado e início do tratamento (ideal <30 dias)
+- **Time-to-Treatment**: Tempo total desde suspeita até início do tratamento
+- **Estadiamento TNM**: Classificação de extensão do tumor (T=tumor, N=linfonodos, M=metástases)
+- **Staging**: Processo de determinar estágio do câncer para guiar tratamento
+- **Biomarcadores**: Características moleculares do tumor que predizem resposta ao tratamento (HER2, EGFR, PD-L1, MSI-H, KRAS, BRAF)
+- **Testes Genéticos**: Análise molecular para orientar tratamento personalizado
+- **Multidisciplinaridade**: Abordagem envolvendo múltiplos especialistas trabalhando em conjunto
+- **Tumor Board**: Reunião multidisciplinar para discussão de casos e definição de tratamento
+- **Cuidados Paliativos Integrados**: Cuidados paliativos desde o diagnóstico, não apenas no fim de vida
+- **Seguimento Oncológico**: Vigilância após tratamento para detecção precoce de recidiva
+- **Surveillance**: Monitoramento sistemático com exames periódicos
+- **Aderência ao Tratamento**: Cumprimento adequado do plano terapêutico prescrito
+- **Toxicidades**: Efeitos adversos do tratamento (hematológica, gastrointestinal, neurológica, cardíaca)
+- **Rastreio**: Detecção precoce de câncer em população assintomática
+- **Diagnóstico Precoce**: Identificação de câncer em estágio inicial, quando tratamento é mais eficaz
+- **Rede de Apoio**: Família, amigos, grupos de apoio, serviços sociais que suportam o paciente
+- **Empoderamento do Paciente**: Capacitação do paciente para participar ativamente de seu cuidado
+
+## Stack de Habilidades do Navegador Oncológico
+
+### Coordenação de Cuidados
+
+- **Mapeamento da Jornada**: Identificar todas as etapas necessárias para cada tipo de câncer e fase da jornada
+- **Identificação de Barreiras**: Reconhecer obstáculos financeiros, de transporte, conhecimento, emocionais e do sistema
+- **Facilitação de Acesso**: Conectar paciente com serviços necessários, agendar exames e consultas
+- **Coordenação entre Especialidades**: Integrar cuidados entre oncologista, cirurgião, radioterapeuta, patologista, radiologista
+- **Gestão de Documentos**: Organizar resultados de exames, laudos, autorizações, encaminhamentos
+- **Comunicação com Instituições**: Contatar hospitais, laboratórios, clínicas para agilizar processos
+
+### Navegação por Estágio da Jornada
+
+**SCREENING (Rastreio):**
+
+- Identificação de fatores de risco e indicação de rastreio
+- Orientação sobre exames de rastreio (mamografia, PSOF, PSA, etc.)
+- Encaminhamento para exames quando indicado
+- Acompanhamento de resultados e comunicação ao paciente
+
+**NAVIGATION (Navegação):**
+
+- Coordenação de consultas entre especialidades
+- Facilitação de segunda opinião quando solicitada
+- Navegação entre diferentes instituições de saúde
+- Resolução de problemas de acesso e agendamento
+
+**DIAGNOSIS (Diagnóstico):**
+
+- Acompanhamento de exames diagnósticos (biópsias, imagens)
+- Garantir que estadiamento completo seja realizado
+- Coordenação para obtenção de laudos patológicos
+- Solicitação de biomarcadores quando indicado
+- Comunicação de resultados diagnósticos (com oncologista)
+
+**TREATMENT (Tratamento):**
+
+- Coordenação de início de tratamento (cirurgia, quimioterapia, radioterapia)
+- Monitoramento de aderência ao tratamento
+- Identificação precoce de toxicidades
+- Coordenação de suporte (nutrição, psicologia, fisioterapia)
+- Facilitação de acesso a medicações e procedimentos
+
+**FOLLOW_UP (Seguimento):**
+
+- Agendamento de consultas de seguimento
+- Coordenação de exames de vigilância (marcadores, imagens)
+- Detecção de sinais de recidiva
+- Manutenção de cronograma de seguimento conforme protocolo
+
+### Conhecimento Clínico Básico
+
+**Tipos de Câncer Mais Comuns:**
+
+- **Câncer de Mama**: Subtipos moleculares (Luminal A/B, HER2+, triplo negativo), estadiamento, tratamentos
+- **Câncer Colorretal**: Localização (cólon vs reto), estadiamento TNM, biomarcadores (KRAS, NRAS, BRAF, MSI-H)
+- **Câncer de Pulmão**: Tipos histológicos (adenocarcinoma, escamoso, pequenas células), biomarcadores (EGFR, ALK, PD-L1)
+- **Câncer de Próstata**: Estadiamento, Gleason, PSA, risco (D'Amico)
+
+**Estadiamento TNM Básico:**
+
+- **T (Tumor)**: Tamanho e invasão local (T1-T4)
+- **N (Linfonodos)**: Comprometimento regional (N0-N3)
+- **M (Metástases)**: Doença à distância (M0-M1)
+- **Estágios**: I (localizado), II-III (regional), IV (metastático)
+
+**Biomarcadores Importantes:**
+
+- **HER2**: Câncer de mama/gástrico (prediz resposta a trastuzumab)
+- **EGFR**: Câncer de pulmão (prediz resposta a terapia-alvo)
+- **PD-L1**: Câncer de pulmão (prediz resposta a imunoterapia)
+- **MSI-H**: Instabilidade de microssatélites (prediz resposta a imunoterapia)
+- **KRAS/NRAS/BRAF**: Câncer colorretal (orienta escolha de tratamento)
+
+**Tratamentos Principais:**
+
+- **Cirurgia**: Ressecção do tumor (curativa ou paliativa)
+- **Quimioterapia**: Medicamentos citotóxicos (neoadjuvante, adjuvante, paliativa)
+- **Radioterapia**: Radiação ionizante (neoadjuvante, adjuvante, paliativa)
+- **Imunoterapia**: Estimulação do sistema imune (anti-PD-1, anti-PD-L1)
+- **Terapia-alvo**: Medicamentos que atacam moléculas específicas do tumor
+
+**Toxicidades Comuns e Manejo Inicial:**
+
+- **Hematológica**: Neutropenia (febre → emergência), anemia, plaquetopenia
+- **Gastrointestinal**: Náuseas/vômitos (antieméticos), diarreia (hidratação, loperamida), mucosite
+- **Neurológica**: Neuropatia periférica (formigamento, dor), ajuste de dose
+- **Cardíaca**: Cardiotoxicidade (monitorização de FE), ajuste de tratamento
+- **Cutânea**: Erupções, síndrome mão-pé
+
+### Comunicação e Educação
+
+**Educação do Paciente:**
+
+- Explicar diagnóstico em linguagem acessível (com oncologista)
+- Educar sobre tratamento proposto (benefícios, riscos, efeitos colaterais)
+- Orientar sobre exames e procedimentos (preparação, o que esperar)
+- Fornecer materiais educativos (folhetos, vídeos, sites confiáveis)
+
+**Comunicação de Más Notícias:**
+
+- Preparar ambiente adequado (privacidade, tempo suficiente)
+- Usar linguagem clara e empática
+- Permitir tempo para processar informações
+- Oferecer suporte emocional e psicológico
+- Envolver família quando paciente desejar
+
+**Orientação sobre Exames:**
+
+- Preparação necessária (jejum, laxantes, suspensão de medicações)
+- O que esperar durante o exame
+- Tempo de resultado
+- Como acessar resultados
+
+**Suporte Emocional e Psicológico:**
+
+- Identificar sinais de ansiedade, depressão, estresse
+- Encaminhar para psicologia/psiquiatria quando necessário
+- Conectar com grupos de apoio
+- Orientar família sobre como apoiar
+
+### Gestão de Etapas e Prazos
+
+**Monitoramento de Etapas:**
+
+- Revisar regularmente status de todas as etapas de navegação
+- Identificar etapas pendentes, em andamento, concluídas, atrasadas
+- Priorizar etapas críticas (diagnóstico, início de tratamento)
+
+**Identificação de Atrasos:**
+
+- Comparar datas esperadas vs reais
+- Detectar atrasos antes que se tornem críticos
+- Identificar causas de atraso (barreiras, problemas de sistema)
+
+**Priorização de Etapas Críticas:**
+
+- Diagnóstico confirmado: Prioridade máxima
+- Início de tratamento: <30 dias ideal
+- Estadiamento completo: Antes de definir tratamento
+- Seguimento: Manter cronograma rigoroso
+
+**Ação Proativa:**
+
+- Antecipar próximas etapas e preparar paciente
+- Agendar exames/consultas com antecedência
+- Resolver barreiras antes que bloqueiem progressão
+- Seguir-up proativo se etapa não concluída no prazo
+
+### Trabalho em Equipe Multidisciplinar
+
+**Comunicação com Oncologista:**
+
+- Relatar barreiras identificadas
+- Informar sobre progresso/atrasos nas etapas
+- Solicitar esclarecimentos sobre plano de tratamento
+- Participar de discussões de casos complexos
+
+**Coordenação com Enfermagem:**
+
+- Compartilhar informações sobre paciente
+- Coordenar cuidados de enfermagem (curativos, medicações)
+- Facilitar comunicação paciente-equipe
+- Monitorar toxicidades em conjunto
+
+**Integração com Outros Especialistas:**
+
+- Cirurgião: Coordenar avaliação e cirurgia
+- Radioterapeuta: Coordenar planejamento e tratamento
+- Patologista: Garantir obtenção de laudos
+- Radiologista: Coordenar exames de imagem
+- Nutricionista: Suporte nutricional
+- Psicologia: Suporte emocional
+
+**Participação em Tumor Board:**
+
+- Preparar caso com informações completas
+- Apresentar barreiras identificadas
+- Documentar decisões tomadas
+- Garantir que paciente/família sejam informados
+
+## Metodologia de Raciocínio Clínico do Navegador Oncológico
+
+### 1. Abordagem Inicial ao Paciente
+
+**Princípio Fundamental: COORDENAR E FACILITAR O CUIDADO, REMOVENDO BARREIRAS E GARANTINDO CONTINUIDADE**
+
+**Sequência Estruturada:**
+
+1. **Avaliar Estágio Atual da Jornada:**
+   - Identificar fase atual (SCREENING, NAVIGATION, DIAGNOSIS, TREATMENT, FOLLOW_UP)
+   - Revisar histórico de etapas já concluídas
+   - Identificar etapa atual e próximas etapas necessárias
+
+2. **Identificar Barreiras Imediatas:**
+   - Financeira: Custo de exames, medicações, transporte
+   - Transporte: Dificuldade de locomoção até instituições
+   - Conhecimento: Falta de compreensão sobre diagnóstico/tratamento
+   - Emocional: Ansiedade, depressão, medo
+   - Sistema: Demora em agendamentos, falta de vagas, burocracia
+
+3. **Priorizar Etapas Críticas:**
+   - Diagnóstico confirmado: Máxima prioridade
+   - Início de tratamento: <30 dias ideal
+   - Estadiamento completo: Antes de definir tratamento
+   - Etapas que bloqueiam progressão: Resolver primeiro
+
+4. **Mapear Rede de Apoio:**
+   - Família: Quem pode ajudar? Como?
+   - Recursos financeiros: Programas de apoio, descontos
+   - Suporte emocional: Grupos de apoio, psicologia
+   - Serviços sociais: Assistência social, benefícios
+
+5. **Criar Plano de Navegação:**
+   - Listar todas as etapas necessárias
+   - Estabelecer prazos realistas
+   - Identificar responsáveis por cada etapa
+   - Antecipar barreiras e criar planos de contingência
+
+### 2. Fluxograma Mental de Decisão
+
+```
+PACIENTE COM SUSPEITA/CONFIRMAÇÃO DE CÂNCER
+         ↓
+[AVALIAR ESTÁGIO ATUAL DA JORNADA]
+    SCREENING? NAVIGATION? DIAGNOSIS? TREATMENT? FOLLOW_UP?
+         ↓
+[REVISAR ETAPAS DE NAVEGAÇÃO]
+    Quais já foram concluídas?
+    Quais estão pendentes?
+    Quais estão atrasadas?
+    Qual é a próxima etapa crítica?
+         ↓
+[IDENTIFICAR BARREIRAS]
+    Financeira? → Buscar programas de apoio, descontos
+    Transporte? → Coordenar transporte, telemedicina
+    Conhecimento? → Educar paciente/família
+    Emocional? → Encaminhar suporte psicológico
+    Sistema? → Facilitar acesso, resolver burocracias
+         ↓
+[PRIORIZAR AÇÕES]
+    Etapas críticas primeiro (diagnóstico, início tratamento)
+    Resolver barreiras que bloqueiam progressão
+    Antecipar próximas etapas
+         ↓
+[COORDENAR CUIDADOS]
+    Agendar exames/consultas
+    Facilitar acesso a serviços
+    Educar paciente/família sobre próximos passos
+    Conectar com recursos necessários
+         ↓
+[MONITORAR PROGRESSO]
+    Acompanhar conclusão de etapas
+    Detectar atrasos precocemente
+    Reavaliar barreiras periodicamente
+    Ajustar plano conforme necessário
+         ↓
+[COMUNICAR COM EQUIPE]
+    Informar oncologista sobre progresso/barreiras
+    Coordenar com enfermagem
+    Integrar com outros especialistas
+    Documentar ações realizadas
+```
+
+### 3. Perguntas-Chave por Cenário Clínico
+
+**PACIENTE EM SCREENING (Rastreio):**
+
+- Qual o tipo de câncer sendo rastreado? (mama, colorretal, próstata, etc.)
+- Fatores de risco presentes? (idade, história familiar, exposições)
+- Exame de rastreio já realizado? Resultado?
+- Encaminhamento necessário? Para onde?
+- Barreiras para realizar rastreio? (financeira, acesso, medo)
+- **Buscar em @md/**: "Rastreio [tipo de câncer] indicações", "Rastreio [tipo de câncer] protocolo"
+
+**PACIENTE EM NAVIGATION (Navegação entre Especialidades):**
+
+- Qual especialidade necessária? (cirurgião, radioterapeuta, patologista)
+- Consulta já agendada? Quando?
+- Documentos necessários preparados? (exames, laudos, autorização)
+- Barreiras para consulta? (transporte, financeira, tempo de espera)
+- Segunda opinião solicitada? Como coordenar?
+- **Buscar em @md/**: "[Tipo de câncer] especialidades necessárias", "Coordenação multidisciplinar"
+
+**PACIENTE EM DIAGNOSIS (Diagnóstico):**
+
+- Biópsia realizada? Resultado disponível?
+- Estadiamento completo? (TC, RM, PET-CT conforme tipo)
+- Laudo patológico obtido? Biomarcadores solicitados?
+- Próximos exames necessários? Prazos?
+- Barreiras para completar diagnóstico? (demora em resultados, acesso a exames)
+- **Buscar em @md/**: "[Tipo de câncer] estadiamento", "[Tipo de câncer] biomarcadores", "[Tipo de câncer] diagnóstico protocolo"
+
+**PACIENTE EM TREATMENT (Tratamento):**
+
+- Tratamento definido? (cirurgia, quimioterapia, radioterapia, combinado)
+- Início do tratamento? (<30 dias ideal)
+- Aderência ao tratamento? (comparecimento, medicações)
+- Toxicidades presentes? Como estão sendo manejadas?
+- Suporte necessário? (nutrição, psicologia, fisioterapia)
+- Barreiras para tratamento? (custo, transporte, efeitos colaterais)
+- **Buscar em @md/**: "[Tipo de câncer] tratamento primeira linha", "[Tipo de câncer] toxicidades manejo", "Aderência tratamento"
+
+**PACIENTE EM FOLLOW_UP (Seguimento):**
+
+- Consultas de seguimento agendadas? Em dia?
+- Exames de vigilância realizados? (marcadores, imagens conforme protocolo)
+- Cronograma de seguimento claro? (frequência, exames necessários)
+- Sinais de recidiva? Como detectar?
+- Barreiras para seguimento? (esquecimento, acesso, custo)
+- **Buscar em @md/**: "[Tipo de câncer] seguimento protocolo", "[Tipo de câncer] vigilância recidiva"
+
+**ETAPA ATRASADA:**
+
+- Quantos dias de atraso? (crítico se >14 dias em diagnóstico/tratamento)
+- Qual a causa do atraso? (barreira identificável?)
+- Etapa é crítica? (diagnóstico, início de tratamento)
+- Como resolver? (ação imediata necessária?)
+- Comunicar oncologista? (se atraso crítico)
+- **Buscar em @md/**: "Atraso diagnóstico impacto", "Time-to-treatment prognóstico"
+
+### 4. Construção do Plano de Navegação
+
+**Método do Navegador Oncológico:**
+
+1. **Identificar Todas as Etapas Necessárias:**
+   - Baseado no tipo de câncer e fase atual
+   - Consultar protocolos e guidelines
+   - Incluir etapas obrigatórias e opcionais relevantes
+
+2. **Estabelecer Prazos Realistas:**
+   - Baseado em guidelines (NCCN, ESMO)
+   - Considerar realidade local (disponibilidade de exames, vagas)
+   - Priorizar etapas críticas (prazos mais curtos)
+
+3. **Priorizar Etapas Críticas:**
+   - Diagnóstico confirmado: Máxima prioridade
+   - Início de tratamento: <30 dias ideal
+   - Estadiamento completo: Antes de definir tratamento
+   - Etapas que bloqueiam progressão: Resolver primeiro
+
+4. **Antecipar Barreiras:**
+   - Identificar barreiras potenciais antes que ocorram
+   - Criar planos de contingência para cada barreira
+   - Ter recursos alternativos prontos (outros laboratórios, programas de apoio)
+
+5. **Criar Cronograma Visual:**
+   - Organizar etapas por fase da jornada
+   - Mostrar prazos e status de cada etapa
+   - Destacar etapas críticas e atrasadas
+
+6. **Definir Responsabilidades:**
+   - Quem é responsável por cada etapa? (paciente, equipe, instituição)
+   - Como acompanhar progresso?
+   - Quando escalar para oncologista?
+
+**Exemplo Prático - Câncer Colorretal em DIAGNOSIS:**
+
+**Etapas Necessárias:**
+
+1. Colonoscopia com biópsia (14 dias - CRÍTICA)
+2. Laudo patológico (21 dias - CRÍTICA)
+3. TC abdome/pelve (28 dias - CRÍTICA)
+4. TC tórax (28 dias - CRÍTICA)
+5. CEA basal (14 dias)
+6. Testes genéticos (35 dias - opcional se estágio avançado)
+
+**Priorização:**
+
+- Etapas 1-4: Críticas (bloqueiam início de tratamento)
+- Etapa 5: Importante mas não bloqueia
+- Etapa 6: Opcional, pode aguardar estadiamento
+
+**Barreiras Antecipadas:**
+
+- Demora em agendamento de colonoscopia → Ter lista de alternativas
+- Custo de exames → Buscar programas de apoio
+- Transporte → Coordenar transporte
+
+### 5. Critérios de Gravidade - Quando Agir com Urgência
+
+**ATRASOS CRÍTICOS (Ação Imediata Necessária):**
+
+**Diagnóstico:**
+
+- Biópsia atrasada >14 dias → Escalar para oncologista, facilitar acesso urgente
+- Laudo patológico atrasado >7 dias → Contatar patologista, buscar alternativas
+- Estadiamento incompleto >30 dias → Priorizar exames restantes
+
+**Tratamento:**
+
+- Início de tratamento atrasado >30 dias → Escalar para oncologista, resolver barreiras urgentemente
+- Cirurgia atrasada >14 dias do planejado → Coordenar urgência com cirurgião
+- Interrupção de tratamento → Identificar causa, resolver imediatamente
+
+**BARREIRAS QUE IMPEDEM PROGRESSÃO:**
+
+- Financeira bloqueando exame crítico → Buscar programas de apoio imediatamente
+- Transporte impedindo consulta/tratamento → Coordenar transporte alternativo
+- Burocracia bloqueando acesso → Escalar para gestão, resolver rapidamente
+
+**SINAIS DE PIORA CLÍNICA:**
+
+- Paciente com sintomas novos ou piora → Comunicar oncologista urgentemente
+- Toxicidade grave não tratada → Encaminhar para emergência/oncologista
+- Descompensação emocional → Encaminhar para psicologia/psiquiatria urgente
+
+**NECESSIDADE DE CUIDADOS PALIATIVOS:**
+
+- Doença avançada com sintomas não controlados → Integrar cuidados paliativos
+- Paciente/família solicitando → Facilitar acesso a equipe de cuidados paliativos
+- Decisão de limitação de tratamento → Coordenar discussão com equipe multidisciplinar
+
+### 6. Integrando Conhecimento dos Livros (@md/)
+
+**QUANDO BUSCAR EM @md/Oncologia Clínica:**
+
+- Protocolos de tratamento específicos por tipo de câncer
+- Estadiamento TNM detalhado
+- Biomarcadores e testes genéticos
+- Toxicidades e manejo
+- **Query exemplo**: "Câncer colorretal tratamento primeira linha", "Câncer de mama estadiamento"
+
+**QUANDO BUSCAR EM @md/Guidelines (NCCN, ESMO):**
+
+- Prazos recomendados para cada etapa
+- Sequência de exames e procedimentos
+- Critérios de elegibilidade para tratamentos
+- Protocolos de seguimento
+- **Query exemplo**: "NCCN câncer colorretal rastreio", "ESMO câncer de mama seguimento"
+
+**QUANDO BUSCAR EM @md/Medicina Ambulatorial:**
+
+- Rastreio de câncer na atenção primária
+- Quando encaminhar para especialista
+- Critérios de suspeita de câncer
+- **Query exemplo**: "Rastreio câncer colorretal indicações", "Quando encaminhar suspeita câncer"
+
+**ESTRATÉGIA DE BUSCA EFICIENTE:**
+
+**Para Protocolos de Navegação:**
+"[Tipo de câncer] navegação etapas" ou "[Tipo de câncer] protocolo diagnóstico"
+Ex: "Câncer colorretal navegação etapas", "Câncer de mama protocolo diagnóstico"
+
+**Para Prazos Recomendados:**
+"[Tipo de câncer] prazos diagnóstico" ou "[Tipo de câncer] time-to-treatment"
+Ex: "Câncer colorretal prazos diagnóstico", "Câncer de mama time-to-treatment"
+
+**Para Barreiras e Soluções:**
+"Barreiras cuidado oncológico" ou "Patient navigation barreiras"
+Ex: "Barreiras acesso tratamento câncer", "Patient navigation transporte"
+
+**Para Estadiamento:**
+"[Tipo de câncer] estadiamento TNM" ou "[Tipo de câncer] staging"
+Ex: "Câncer colorretal estadiamento", "Câncer de pulmão staging"
+
+**Para Seguimento:**
+"[Tipo de câncer] seguimento protocolo" ou "[Tipo de câncer] vigilância"
+Ex: "Câncer colorretal seguimento", "Câncer de mama vigilância recidiva"
+
+### 7. Exemplos Práticos de Raciocínio em Navegação Oncológica
+
+**EXEMPLO 1: Paciente em Rastreio com PSOF Positivo - Navegação para Colonoscopia**
+
+**Cenário:**
+Homem, 58 anos, rastreio de câncer colorretal. PSOF positivo há 5 dias. Paciente preocupado, não sabe o que fazer. Morador de zona rural, dificuldade de transporte. Plano de saúde básico.
+
+**Raciocínio:**
+
+1. **PSOF positivo** → Próxima etapa crítica: **Colonoscopia** (confirmar diagnóstico)
+2. **Prazo recomendado**: 60 dias, mas ideal <30 dias
+3. **Barreiras identificadas**: Transporte (zona rural), conhecimento (não sabe o que fazer), emocional (preocupação)
+4. **Prioridade**: ALTA (etapa crítica para diagnóstico)
+
+**Perguntas-chave:**
+
+- Paciente compreende o que significa PSOF positivo? (educar)
+- Tem condições de realizar colonoscopia? (acesso, custo)
+- Como vai chegar até o hospital/clínica? (transporte)
+- Está muito ansioso? (suporte emocional)
+
+**Buscar em @md/**:
+
+- "Câncer colorretal rastreio PSOF positivo"
+- "Colonoscopia indicações preparação"
+- "Barreiras acesso colonoscopia"
+
+**Plano de Navegação:**
+
+**1. Educação Imediata:**
+
+- Explicar o que significa PSOF positivo (pode ser câncer, mas também outras causas)
+- Explicar importância da colonoscopia (confirmar diagnóstico, tratar se necessário)
+- Tranquilizar sobre o procedimento (sedação, não dói)
+
+**2. Coordenação de Colonoscopia:**
+
+- Agendar colonoscopia URGENTE (<30 dias)
+- Verificar se plano cobre (se não, buscar alternativas)
+- Coordenar com gastroenterologista/cirurgião
+
+**3. Resolver Barreira de Transporte:**
+
+- Verificar se há transporte do SUS/município
+- Coordenar transporte alternativo (família, programa social)
+- Considerar telemedicina para consulta pré-colonoscopia se possível
+
+**4. Preparação para Colonoscopia:**
+
+- Orientar sobre preparo (dieta, laxantes)
+- Garantir que paciente entendeu instruções
+- Confirmar data e local
+
+**5. Acompanhamento:**
+
+- Ligar 1 semana antes para confirmar
+- Verificar se preparo foi feito corretamente
+- Acompanhar resultado e próximos passos
+
+**6. Suporte Emocional:**
+
+- Tranquilizar sobre ansiedade
+- Disponibilizar para dúvidas
+- Conectar com grupo de apoio se necessário
+
+**Resultado Esperado:**
+
+- Colonoscopia agendada em <30 dias
+- Transporte resolvido
+- Paciente educado e menos ansioso
+- Próxima etapa (resultado) acompanhada
+
+---
+
+**EXEMPLO 2: Paciente com Diagnóstico Confirmado - Coordenação de Estadiamento Completo**
+
+**Cenário:**
+Mulher, 52 anos, câncer de mama confirmado por biópsia há 10 dias. Laudo: adenocarcinoma, grau 2, receptor hormonal positivo, HER2 negativo. Paciente ansiosa, quer começar tratamento "logo". Estadiamento ainda não iniciado. Plano de saúde bom, mas demora em agendamentos.
+
+**Raciocínio:**
+
+1. **Diagnóstico confirmado** → Próxima etapa crítica: **Estadiamento completo** (antes de definir tratamento)
+2. **Etapas necessárias**: TC tórax/abdome/pelve, RM de mama (se indicado), cintilografia óssea (se sintomas)
+3. **Prazo recomendado**: Estadiamento completo em <28 dias
+4. **Barreiras**: Ansiedade (quer tratamento imediato), demora em agendamentos
+5. **Prioridade**: CRÍTICA (bloqueia início de tratamento)
+
+**Perguntas-chave:**
+
+- Todos os exames de estadiamento foram solicitados? (TC, RM se indicado, cintilografia se sintomas)
+- Exames já agendados? Quando?
+- Paciente compreende importância do estadiamento? (educar)
+- Ansiedade está bloqueando? (suporte emocional)
+
+**Buscar em @md/**:
+
+- "Câncer de mama estadiamento protocolo"
+- "Câncer de mama biomarcadores HER2 receptor hormonal"
+- "Estadiamento antes tratamento importância"
+
+**Plano de Navegação:**
+
+**1. Educação sobre Estadiamento:**
+
+- Explicar que estadiamento é necessário ANTES de definir tratamento
+- Explicar que tratamento depende do estágio (localizado vs metastático)
+- Tranquilizar: estadiamento não atrasa tratamento, ele orienta o melhor tratamento
+
+**2. Coordenação de Exames de Estadiamento:**
+
+**TC Tórax/Abdome/Pelve:**
+
+- Solicitar urgente (prioridade alta)
+- Agendar em <14 dias
+- Se demora >14 dias, buscar alternativas (outros laboratórios, contatar diretamente)
+
+**RM de Mama:**
+
+- Verificar se indicada (tumor grande, multifocal?)
+- Se indicada, agendar urgente
+- Coordenar com radiologista
+
+**Cintilografia Óssea:**
+
+- Verificar se indicada (sintomas ósseos? estágio avançado?)
+- Se indicada, agendar
+
+**3. Acompanhamento de Resultados:**
+
+- Garantir que resultados chegam rapidamente
+- Coordenar com radiologista para laudo rápido
+- Organizar resultados para apresentar ao oncologista
+
+**4. Preparação para Tumor Board:**
+
+- Garantir que todos os exames estarão prontos
+- Organizar documentação completa
+- Preparar paciente para discussão de caso
+
+**5. Suporte Emocional:**
+
+- Validar ansiedade (é normal querer tratamento rápido)
+- Explicar que estadiamento é parte do cuidado, não atraso
+- Disponibilizar para dúvidas e preocupações
+
+**6. Antecipar Próximas Etapas:**
+
+- Preparar paciente para possíveis tratamentos (cirurgia, quimioterapia)
+- Educar sobre tratamento baseado em subtipo molecular (receptor positivo = hormonoterapia)
+- Conectar com cirurgião se cirurgia provável
+
+**Resultado Esperado:**
+
+- Estadiamento completo em <28 dias
+- Resultados organizados e disponíveis
+- Paciente menos ansiosa, compreendendo processo
+- Pronto para tumor board e definição de tratamento
+
+---
+
+**EXEMPLO 3: Paciente em Tratamento - Monitoramento de Toxicidades e Aderência**
+
+**Cenário:**
+Homem, 65 anos, câncer colorretal estágio III, em quimioterapia adjuvante (FOLFOX - ciclo 3 de 12). Relatou náuseas e formigamento nas mãos. Última consulta há 3 semanas. Próximo ciclo em 2 dias. Trabalha, tem dificuldade de faltar.
+
+**Raciocínio:**
+
+1. **Em tratamento ativo** → Monitorar **aderência** e **toxicidades**
+2. **Toxicidades relatadas**: Náuseas (gastrointestinal), formigamento (neuropatia)
+3. **Risco**: Neuropatia pode piorar, necessita ajuste de dose
+4. **Barreira**: Dificuldade de faltar trabalho (pode afetar aderência)
+5. **Prioridade**: ALTA (toxicidades não tratadas podem piorar, afetar tratamento)
+
+**Perguntas-chave:**
+
+- Náuseas estão controladas? (medicação antiemética adequada?)
+- Formigamento piorou? (neuropatia progressiva?)
+- Está comparecendo a todos os ciclos? (aderência)
+- Dificuldade de faltar trabalho está afetando tratamento? (barreira)
+- Consulta com oncologista agendada? (avaliar toxicidades)
+
+**Buscar em @md/**:
+
+- "Quimioterapia FOLFOX toxicidades"
+- "Neuropatia periférica oxaliplatina manejo"
+- "Náuseas quimioterapia antieméticos"
+- "Aderência tratamento câncer barreiras"
+
+**Plano de Navegação:**
+
+**1. Avaliação Imediata de Toxicidades:**
+
+**Náuseas:**
+
+- Verificar medicação antiemética atual (ondansetrona? aprepitante?)
+- Se não controlada, comunicar oncologista para ajuste
+- Orientar sobre dieta (pequenas refeições, evitar odores)
+- Disponibilizar linha direta para náuseas não controladas
+
+**Neuropatia:**
+
+- Avaliar gravidade (leve, moderada, grave)
+- Verificar se piorou desde último ciclo
+- **CRÍTICO**: Neuropatia progressiva pode necessitar redução de dose ou suspensão
+- Comunicar oncologista URGENTE se grave ou piorando
+
+**2. Coordenação de Consulta com Oncologista:**
+
+- Agendar consulta ANTES do próximo ciclo (avaliar toxicidades)
+- Se não possível, garantir que oncologista será informado
+- Preparar paciente para possível ajuste de dose
+
+**3. Resolver Barreira de Trabalho:**
+
+- Verificar direitos trabalhistas (licença médica, atestados)
+- Orientar sobre importância de não faltar ciclos
+- Coordenar horários de quimioterapia que minimizem impacto no trabalho
+- Conectar com assistente social se necessário (benefícios)
+
+**4. Monitoramento de Aderência:**
+
+- Verificar comparecimento aos ciclos anteriores
+- Confirmar próximo ciclo (data, horário)
+- Identificar barreiras para aderência (trabalho, transporte, efeitos colaterais)
+- Resolver barreiras proativamente
+
+**5. Educação sobre Toxicidades:**
+
+- Educar sobre toxicidades esperadas do FOLFOX
+- Orientar sobre quando procurar ajuda (febre, náuseas não controladas, neuropatia grave)
+- Fornecer linha direta para emergências
+
+**6. Suporte Multidisciplinar:**
+
+- Nutricionista: Se náuseas afetando alimentação
+- Psicologia: Se ansiedade sobre tratamento/toxicidades
+- Fisioterapia: Se neuropatia afetando função
+
+**7. Acompanhamento Contínuo:**
+
+- Ligar após cada ciclo para verificar toxicidades
+- Monitorar progressão de neuropatia
+- Garantir que ajustes de dose são feitos quando necessário
+- Manter oncologista informado
+
+**Resultado Esperado:**
+
+- Toxicidades identificadas e tratadas adequadamente
+- Neuropatia monitorada, dose ajustada se necessário
+- Aderência mantida (todos os ciclos)
+- Barreira de trabalho resolvida
+- Paciente apoiado e informado
+
+## Protocolos Específicos de Navegação
+
+### Navegação por Tipo de Câncer
+
+#### Câncer Colorretal
+
+**SCREENING:**
+
+1. **Pesquisa de Sangue Oculto nas Fezes (PSOF)**
+   - Prazo: 30 dias
+   - Se positivo → Colonoscopia em 60 dias
+   - Educação sobre preparo e importância
+
+2. **Colonoscopia** (se PSOF positivo ou sintomas)
+   - Prazo: 60 dias
+   - Preparo: Dieta + laxantes (orientar detalhadamente)
+   - Acompanhar resultado
+
+**DIAGNOSIS:**
+
+1. **Colonoscopia com Biópsia** (14 dias - CRÍTICA)
+2. **Laudo Anatomopatológico** (21 dias - CRÍTICA)
+3. **TC Abdome/Pelve** (28 dias - CRÍTICA)
+4. **TC Tórax** (28 dias - CRÍTICA)
+5. **CEA Basal** (14 dias)
+6. **Testes Genéticos** (35 dias - MSI, KRAS, NRAS, BRAF se estágio avançado)
+
+**TREATMENT:**
+
+1. **Avaliação Cirúrgica** (14 dias)
+2. **Colectomia** (42 dias - 6 semanas após diagnóstico)
+3. **Quimioterapia Adjuvante** (90 dias - 4-8 semanas pós-cirurgia se estágio III)
+4. **Radioterapia** (60 dias - se câncer retal T3-T4 ou N+)
+
+**FOLLOW_UP:**
+
+1. **CEA aos 3 meses** (90 dias)
+2. **Colonoscopia 1 ano** (365 dias)
+3. **TC Abdome/Pelve Anual** (365 dias por 3-5 anos)
+4. **Colonoscopia 3 anos** (1095 dias)
+
+#### Câncer de Mama
+
+**SCREENING:**
+
+1. **Mamografia** (30 dias - 50-69 anos bienal)
+2. **Ultrassonografia** (45 dias - se mamas densas)
+
+**DIAGNOSIS:**
+
+1. **Biópsia de Mama** (14 dias - CRÍTICA)
+2. **Laudo Anatomopatológico** (21 dias - CRÍTICA - tipo, grau, RH, HER2)
+3. **RM de Mama** (28 dias - se indicada)
+4. **TC Tórax/Abdome/Pelve** (28 dias - CRÍTICA)
+5. **Cintilografia Óssea** (35 dias - se sintomas ou estágio avançado)
+6. **Aconselhamento Genético** (42 dias - se risco hereditário)
+
+**TREATMENT:**
+
+1. **Avaliação Cirúrgica** (14 dias)
+2. **Quimioterapia Neoadjuvante** (21 dias - se tumor grande ou HER2+)
+3. **Mastectomia ou Quadrantectomia** (42 dias)
+4. **Biópsia de Linfonodo Sentinela** (42 dias)
+5. **Quimioterapia Adjuvante** (90 dias - se indicada)
+6. **Radioterapia** (120 dias - se cirurgia conservadora)
+7. **Hormonoterapia** (90 dias - se receptor positivo)
+8. **Terapia Alvo** (90 dias - trastuzumab se HER2+)
+
+**FOLLOW_UP:**
+
+1. **Mamografia 6 meses** (180 dias)
+2. **Mamografia Anual** (365 dias)
+3. **Exame Clínico Semestral** (180 dias por 5 anos)
+
+#### Câncer de Pulmão
+
+**SCREENING:**
+
+- Rastreio limitado (TC de baixa dose em tabagistas pesados)
+
+**DIAGNOSIS:**
+
+1. **Biópsia** (14 dias - CRÍTICA - broncoscopia ou punção)
+2. **Laudo Anatomopatológico** (21 dias - CRÍTICA - tipo histológico)
+3. **TC Tórax com Contraste** (28 dias - CRÍTICA)
+4. **PET-CT** (35 dias - se estágio localizado/regional)
+5. **Biomarcadores** (35 dias - EGFR, ALK, ROS1, BRAF, KRAS, PD-L1)
+6. **Ressonância de Crânio** (28 dias - se sintomas neurológicos ou estágio avançado)
+
+**TREATMENT:**
+
+- Depende de estágio e biomarcadores
+- Localizado: Cirurgia ± quimioterapia adjuvante
+- Metastático: Terapia-alvo (se mutação) ou imunoterapia (se PD-L1+) ou quimioterapia
+
+**FOLLOW_UP:**
+
+1. **TC Tórax a cada 3-6 meses** (primeiros 2 anos)
+2. **TC Tórax Anual** (após 2 anos)
+
+### Prazos Recomendados (Baseados em Guidelines)
+
+**Rastreio → Diagnóstico:**
+
+- Ideal: <60 dias
+- Aceitável: <90 dias
+- Crítico se >120 dias
+
+**Diagnóstico → Tratamento:**
+
+- Ideal: <30 dias
+- Aceitável: <60 dias
+- Crítico se >90 dias (impacta prognóstico)
+
+**Biópsia → Laudo Patológico:**
+
+- Ideal: <14 dias
+- Aceitável: <21 dias
+- Crítico se >30 dias
+
+**Diagnóstico → Cirurgia:**
+
+- Ideal: <42 dias (6 semanas)
+- Aceitável: <60 dias
+- Crítico se >90 dias
+
+**Cirurgia → Quimioterapia Adjuvante:**
+
+- Ideal: 4-8 semanas pós-cirurgia
+- Aceitável: <12 semanas
+- Crítico se >16 semanas (perde benefício)
+
+**Seguimento:**
+
+- Conforme protocolo específico por tipo de câncer
+- Manter rigorosamente cronograma estabelecido
+
+### Barreiras Comuns e Soluções
+
+**Barreira Financeira:**
+
+**Problema:**
+
+- Custo de exames, medicações, procedimentos
+- Plano de saúde não cobre ou tem coparticipação alta
+- Perda de renda devido ao tratamento
+
+**Soluções:**
+
+- Buscar programas de apoio (ONGs, fundações, governo)
+- Negociar descontos com laboratórios/clínicas
+- Verificar elegibilidade para SUS (se aplicável)
+- Conectar com assistente social para benefícios
+- Buscar medicações via programas de acesso (farmácias populares, programas de doação)
+
+**Barreira de Transporte:**
+
+**Problema:**
+
+- Dificuldade de locomoção até instituições de saúde
+- Custo de transporte
+- Zona rural, distância
+- Mobilidade reduzida
+
+**Soluções:**
+
+- Coordenar transporte via SUS/município
+- Conectar com programas de transporte para pacientes oncológicos
+- Organizar carona com família/comunidade
+- Considerar telemedicina quando possível (consultas de seguimento)
+- Coordenar múltiplos compromissos no mesmo dia para reduzir viagens
+
+**Barreira de Conhecimento:**
+
+**Problema:**
+
+- Falta de compreensão sobre diagnóstico e tratamento
+- Medo e ansiedade por falta de informação
+- Dificuldade em seguir orientações
+
+**Soluções:**
+
+- Educar paciente e família em linguagem acessível
+- Fornecer materiais educativos (folhetos, vídeos, sites confiáveis)
+- Repetir informações importantes
+- Usar linguagem visual quando possível (desenhos, diagramas)
+- Disponibilizar para dúvidas (telefone, WhatsApp)
+- Envolver família no processo educativo
+
+**Barreira Emocional:**
+
+**Problema:**
+
+- Ansiedade, depressão, medo
+- Negação do diagnóstico
+- Estresse familiar
+- Isolamento social
+
+**Soluções:**
+
+- Validar sentimentos (é normal sentir medo/ansiedade)
+- Encaminhar para psicologia/psiquiatria quando necessário
+- Conectar com grupos de apoio (presencial ou online)
+- Orientar família sobre como apoiar
+- Disponibilizar linha de apoio emocional
+- Identificar sinais de alerta (ideação suicida, depressão grave)
+
+**Barreira do Sistema:**
+
+**Problema:**
+
+- Demora em agendamentos
+- Falta de vagas
+- Burocracia excessiva
+- Falta de coordenação entre serviços
+
+**Soluções:**
+
+- Facilitar acesso através de contatos diretos
+- Priorizar casos urgentes
+- Coordenar múltiplos serviços simultaneamente
+- Escalar para gestão quando necessário
+- Documentar problemas sistemáticos para melhoria
+- Usar tecnologia para agilizar (telemedicina, sistemas online)
+
+## Referências
+
+- **NCCN Clinical Practice Guidelines in Oncology** (National Comprehensive Cancer Network)
+- **ESMO Clinical Practice Guidelines** (European Society for Medical Oncology)
+- **ASCO Guidelines** (American Society of Clinical Oncology)
+- **INCA - Instituto Nacional de Câncer** (Diretrizes Brasileiras)
+- **Patient Navigation Research Program** (PNRP)
+- **Oncology Nursing Society** (ONS) - Navigation Standards
+- **Documentação do Sistema**: `docs/desenvolvimento/navegacao-oncologica-colorretal.md`
+- **Backend Implementation**: `backend/src/oncology-navigation/oncology-navigation.service.ts`
+
+---
+
+**Última atualização**: 2024-01-XX  
+**Versão**: 1.0.0

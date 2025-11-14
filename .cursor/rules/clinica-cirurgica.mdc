@@ -1,0 +1,1044 @@
+---
+alwaysApply: true
+---
+
+# Clínica Cirúrgica
+
+## Terminologia Específica
+
+- **Abdome agudo**: Síndrome clínica de dor abdominal súbita que pode necessitar tratamento cirúrgico
+- **Peritonite**: Inflamação do peritônio
+- **Íleo paralítico**: Ausência de movimentos peristálticos
+- **Obstrução intestinal**: Bloqueio mecânico do trânsito intestinal
+- **Sinal de Blumberg**: Descompressão brusca positiva (peritonite)
+- **Sinal de Murphy**: Dor à palpação profunda do hipocôndrio direito durante inspiração (colecistite)
+- **Sinal de Rovsing**: Dor em FID à palpação de FIE (apendicite)
+- **Sinal de Psoas**: Dor à extensão do quadril direito (apendicite retrocecal)
+- **Sinal de Obturador**: Dor à rotação interna do quadril flexionado (apendicite pélvica)
+- **Sinal de McBurney**: Ponto de máxima dor na apendicite (1/3 lateral da linha umbigo-EIAS)
+- **Ascite**: Acúmulo de líquido livre na cavidade peritoneal
+- **Hemoperitônio**: Sangue livre na cavidade peritoneal
+- **Pneumoperitônio**: Ar livre na cavidade peritoneal (perfuração víscera oca)
+- **Víscera oca**: Estômago, intestino, vesícula, bexiga
+- **Víscera sólida**: Fígado, baço, pâncreas, rins
+- **Anastomose**: Conexão cirúrgica entre estruturas tubulares
+- **Deiscência**: Abertura de sutura cirúrgica
+- **Evisceração**: Exteriorização de vísceras através de ferida operatória
+- **Fístula**: Comunicação anormal entre duas superfícies epitelizadas
+
+## Stack de Habilidades do Cirurgião
+
+### Avaliação e Decisão Cirúrgica
+- **Indicação Operatória**: Quando operar vs tratamento conservador
+- **Timing Cirúrgico Ótimo**: Urgência, emergência, eletivo
+- **Via de Acesso**: Aberta vs laparoscópica vs robótica (vantagens/desvantagens)
+- **Planejamento Cirúrgico**: Posição do paciente, incisão, instrumental necessário
+
+### Procedimentos Cirúrgicos Comuns
+- **Laparotomia Exploradora**: Indicações, incisões (mediana, paramediana, subcostal)
+- **Laparoscopia Diagnóstica/Terapêutica**: Técnica, conversão para laparotomia
+- **Apendicectomia**: Aberta e laparoscópica
+- **Colecistectomia**: Laparoscópica (técnica crítica de visualização)
+- **Herniorrafia**: Inguinal, umbilical, incisional - com e sem tela
+- **Ressecções Intestinais**: Intestino delgado, colectomia, anastomoses
+
+### Drenagens e Acessos
+- **Drenagem Torácica**: Indicações, técnica (2º EIC linha hemiclavicular, 5º EIC linha axilar média), manejo do dreno
+- **Drenagem Abdominal**: Drenos de Blake, Penrose, sistema fechado
+- **Acessos Vasculares Centrais**: Jugular interna, subclávia, femoral - técnica, ultrassom-guiado
+
+### Suturas e Técnicas de Anastomose
+- **Tipos de Fios**: Absorvíveis vs não-absorvíveis, monofilamento vs multifilamento
+- **Técnicas de Sutura**: Simples, contínua, subcuticular, pontos separados, Donati
+- **Anastomoses Intestinais**: Término-terminal, latero-lateral, grampeadores
+- **Fechamento de Parede Abdominal**: Planos anatômicos, técnica de Mass closure
+
+### Hemostasia Cirúrgica
+- **Controle de Sangramento Ativo**: Compressão, clampagem, ligadura
+- **Eletrocautério**: Mono vs bipolar, corte vs coagulação
+- **Ligaduras Vasculares**: Transfixação, clips metálicos, clips de polímero
+- **Hemostáticos Tópicos**: Gelfoam, surgicel, cola de fibrina
+
+### Avaliação Pré-Operatória
+- **Estratificação de Risco ASA**: I a VI, significado prognóstico
+- **Índice de Risco de Lee (RCRI)**: Risco cardiovascular perioperatório
+- **Preparo Intestinal**: Quando indicado (colorretal), PEG vs Fleet
+- **Antibioticoprofilaxia**: Tempo adequado (30-60 min pré-incisão), escolha do antibiótico
+- **Consentimento Informado**: Riscos, benefícios, alternativas, complicações
+- **Jejum**: Sólidos 8h, líquidos claros 2h
+
+### Manejo Pós-Operatório
+- **Manejo de Drenos**: Débito esperado, aspecto, quando retirar
+- **Curativos**: Simples vs complexos, VAC therapy
+- **Nutrição Pós-Op**: Quando iniciar dieta, progressão, nutrição enteral/parenteral
+- **Reconhecer Complicações Precoces**: ISC, deiscência, fístula, abscesso, íleo, TEV
+- **Controle de Dor**: Analgesia multimodal, evitar opioides excessivos
+- **Mobilização Precoce**: Prevenir TEV, atelectasia, íleo
+
+### Interpretação de Imagem Cirúrgica
+- **TC Abdome**: Pneumoperitônio, coleções intra-abdominais, obstrução intestinal, isquemia
+- **USG FAST**: Líquido livre (trauma), colecistite (Murphy ultrassonográfico)
+- **RX Simples de Abdome**: Níveis hidroaéreos, distensão de alças, ar livre
+
+### Trauma - ATLS
+- **Avaliação ABCDE**: Priorização, primary survey, secondary survey
+- **Controle de Hemorragia**: Compressão, torniquete, tamponamento, cirurgia
+- **Damage Control Surgery**: Controlar sangramento/contaminação, não reparar definitivo
+- **Laparotomia de Trauma**: Indicações, exploração sistemática de 4 quadrantes
+- **Politrauma**: Tríade da morte (hipotermia, acidose, coagulopatia)
+
+### Urgências Cirúrgicas Abdominais
+- **Abdome Agudo**: Classificação (inflamatório, perfurativo, obstrutivo, vascular, hemorrágico)
+- **Hemorragia Digestiva Alta**: Endoscopia precoce, quando operar
+- **Obstrução Intestinal**: Tratamento conservador vs cirúrgico, reconhecer estrangulamento
+- **Peritonite**: Generalizada vs localizada, origem, tratamento
+- **Isquemia Mesentérica**: Diagnóstico precoce (dor desproporcional), CT angio
+
+### Oncologia Cirúrgica Básica
+- **Ressecções Oncológicas**: Conceito de margens livres, ressecção R0/R1/R2
+- **Estadiamento**: TNM básico, quando solicitar PET-CT
+- **Linfonodos Sentinela**: Mama, melanoma
+- **Quando Referenciar**: Tumores complexos, necessidade de neoadjuvância
+
+### Nutrição Cirúrgica
+- **Avaliação Nutricional Pré-Op**: Albumina, linfócitos, NRS-2002
+- **Suporte Nutricional**: Quando iniciar (desnutridos, cirurgias grandes)
+- **Via Preferencial**: Enteral > parenteral
+- **Imunonutrição**: Arginina, glutamina, ômega-3 em cirurgias grandes
+
+### Manejo de Feridas Complexas
+- **Tipos de Cicatrização**: 1ª intenção, 2ª intenção, 3ª intenção (fechamento tardio)
+- **Curativos Avançados**: Hidrogel, hidrocoloide, alginato
+- **Terapia VAC** (Vacuum-Assisted Closure): Indicações, técnica
+- **Desbridamento**: Cirúrgico, enzimático, autolítico
+
+## Metodologia de Raciocínio Clínico do Cirurgião
+
+### 1. Abordagem Inicial - Avaliar Abdome Agudo
+
+**Sequência Obrigatória:**
+
+1. **Estabilidade Hemodinâmica PRIMEIRO**:
+   - Sinais vitais (PA, FC, perfusão)
+   - Se instável → ressuscitar ANTES de investigar
+   - Dois acessos calibrosos, cristaloide, tipagem sanguínea
+
+2. **Classificar o Tipo de Abdome Agudo**:
+   - **Inflamatório**: febre, leucocitose, dor localizada (apendicite, colecistite, diverticulite)
+   - **Perfurativo**: dor súbita, abdome em tábua, pneumoperitônio (úlcera perfurada)
+   - **Obstrutivo**: distensão, vômitos, RHA aumentados depois ausentes, níveis hidroaéreos
+   - **Vascular**: dor desproporcional, acidose, sem irritação peritoneal inicial (isquemia mesentérica)
+   - **Hemorrágico**: choque, FAST positivo (trauma, gravidez ectópica, cisto roto)
+
+3. **Decidir: CIRURGIA ou CONSERVADOR?**
+
+**Indicação Cirúrgica ABSOLUTA:**
+- Peritonite difusa
+- Pneumoperitônio (perfuração)
+- Instabilidade hemodinâmica com FAST positivo
+- Sinais de estrangulamento (obstrução)
+- Isquemia intestinal
+
+**Tratamento Conservador (com vigilância):**
+- Apendicite com abscesso localizado (drenagem percutânea)
+- Obstrução intestinal parcial sem estrangulamento
+- Diverticulite não complicada
+- Pancreatite (maioria)
+
+### 2. Fluxograma Mental de Decisão
+
+```
+PACIENTE COM DOR ABDOMINAL AGUDA
+         ↓
+[ESTABILIDADE?]
+    INSTÁVEL → ABC → Ressuscitar → FAST → Cirurgia de emergência
+         ↓ ESTÁVEL
+[SINAIS DE PERITONITE?]
+    - Descompressão brusca +
+    - Abdome em tábua
+    - Defesa involuntária
+         ↓ SIM
+[PERITONITE DIFUSA vs LOCALIZADA?]
+    DIFUSA → Cirurgia urgente
+    LOCALIZADA → TC → Avaliar causa
+         ↓ NÃO (sem peritonite)
+[CLASSIFICAR O TIPO]
+    Inflamatório? Obstrutivo? Vascular?
+         ↓
+[EXAME DE IMAGEM]
+    - USG (se suspeita de colecistite, apendicite em crianças/mulheres)
+    - TC abdome (maioria dos casos, melhor exame)
+    - RX simples (obstrução, pneumoperitônio)
+         ↓
+[DIAGNÓSTICO CONFIRMADO]
+         ↓
+[CIRÚRGICO vs CONSERVADOR?]
+         ↓
+    CIRÚRGICO:                  CONSERVADOR:
+    - Timing? (urgência)        - Suporte clínico
+    - Via? (aberta/lap)         - Vigilância estrita
+    - Preparo? (ATB)            - Reavaliar em 12-24h
+    - Centro cirúrgico          - Se piora → cirurgia
+         ↓
+[PÓS-OPERATÓRIO]
+    - Vigilância de complicações
+    - Manejo de drenos
+    - Nutrição
+    - Profilaxia de TVP
+```
+
+### 3. Perguntas-Chave por Cenário Cirúrgico
+
+**DOR EM FID (Suspeita de APENDICITE):**
+- Migrou de periumbilical? (clássico)
+- Anorexia? (quase sempre presente)
+- Febre baixa? (37,5-38,5°C)
+- Tempo de evolução? (<72h típico)
+- **Escore de Alvarado**: Calcular (≥7 = cirurgia)
+- **Buscar em @md/**: "Apendicite aguda Alvarado", "Apendicite diagnóstico"
+
+**DOR EM HD (Suspeita de COLECISTITE):**
+- Dor pós-prandial? (após alimentos gordurosos)
+- Náuseas/vômitos?
+- Febre?
+- História de cólica biliar prévia?
+- **Sinal de Murphy** presente?
+- **Buscar em @md/**: "Colecistite aguda Tóquio", "Colecistite tratamento"
+
+**DOR EPIGÁSTRICA SÚBITA (Suspeita de PERFURAÇÃO):**
+- Início súbito? ("em facada")
+- Dor intensa desde o início?
+- História de úlcera péptica?
+- Uso de AINEs?
+- Abdome em tábua?
+- **Buscar em @md/**: "Úlcera péptica perfurada", "Pneumoperitônio"
+
+**DOR ABDOMINAL + DISTENSÃO (Suspeita de OBSTRUÇÃO):**
+- Parada de eliminação de gases/fezes?
+- Vômitos: precoces ou tardios? (delgado vs cólon)
+- Cirurgia abdominal prévia? (aderências)
+- Hérnia irredutível? (estrangulamento)
+- Ruídos hidroaéreos: aumentados ou ausentes?
+- **Buscar em @md/**: "Obstrução intestinal causas", "Obstrução intestinal tratamento"
+
+**PÓS-OPERATÓRIO COM FEBRE (POD 3-5):**
+- Quando começou? (timing sugere causa)
+- POD 1-2: atelectasia
+- POD 3-5: ITU, pneumonia
+- POD 5-7: ISC, abscesso intra-abdominal
+- POD >7: TVP, TEP
+- Outros sintomas: tosse (pneumonia), dor em ferida (ISC), dor em panturrilha (TVP)
+- **Buscar em @md/**: "Febre pós-operatória causas", "Infecção de sítio cirúrgico"
+
+### 4. Construção do Diagnóstico Diferencial
+
+**Dor Abdominal - Por Localização:**
+
+**Hipocôndrio Direito:**
+1. Colecistite/coledocolitíase
+2. Hepatite aguda
+3. Pneumonia basal direita
+4. Pielonefrite direita
+
+**Epigástrio:**
+1. Úlcera péptica (perfurada ou não)
+2. Pancreatite aguda
+3. IAM inferior (pensar sempre!)
+4. Gastrite
+
+**Fossa Ilíaca Direita:**
+1. Apendicite aguda
+2. Diverticulite cecal (raro)
+3. Doença inflamatória pélvica
+4. Gravidez ectópica
+5. Cisto ovariano roto/torcido
+6. Cálculo ureteral direito
+
+**Fossa Ilíaca Esquerda:**
+1. Diverticulite sigmóidea
+2. Colite isquêmica
+3. Causas ginecológicas
+
+**Difusa:**
+1. Peritonite (perfuração, isquemia)
+2. Obstrução intestinal
+3. Gastroenterite aguda
+4. Isquemia mesentérica
+
+**Método de Priorização:**
+1. Mais comum NA FAIXA ETÁRIA
+2. Compatível com TEMPO DE EVOLUÇÃO
+3. Compatível com EXAME FÍSICO
+4. **NÃO ESQUECER GRAVES**: Perfuração, isquemia, gravidez ectópica
+
+### 5. Critérios de Gravidade - Quando Operar URGENTE?
+
+**INDICAÇÕES ABSOLUTAS DE CIRURGIA URGENTE:**
+
+**Peritonite Difusa:**
+- Abdome em tábua
+- Descompressão brusca positiva
+- Ausência de RHA (íleo paralítico)
+
+**Pneumoperitônio:**
+- Ar livre no RX (perfuração de víscera oca)
+- Exceção: pós-operatório recente
+
+**Instabilidade Hemodinâmica:**
+- Choque com FAST positivo (hemoperitônio)
+- Sangramento ativo intra-abdominal
+
+**Sinais de Estrangulamento:**
+- Obstrução intestinal + sinais de isquemia
+- Hérnia irredutível + sinais de sofrimento
+- Dor contínua, febre, leucocitose, acidose
+
+**Isquemia Mesentérica:**
+- Dor desproporcional ao exame
+- Acidose metabólica
+- Lactato elevado
+- CT angio: oclusão arterial
+
+**INDICAÇÕES RELATIVAS (urgência vs eletivo):**
+- Apendicite não complicada (pode aguardar 12-24h)
+- Colecistite não complicada (pode aguardar até 72h)
+- Obstrução parcial sem estrangulamento (tentar conservador 48-72h)
+
+### 6. Integrando Conhecimento dos Livros (@md/)
+
+**QUANDO BUSCAR EM @md/Sabiston ou Schwartz:**
+- Fisiopatologia de doenças cirúrgicas
+- Técnicas cirúrgicas específicas
+- Complicações pós-operatórias
+
+**QUANDO BUSCAR EM @md/Semiologia:**
+- Exame do abdome agudo
+- Sinais clássicos (Murphy, Blumberg, Rovsing, etc.)
+- Técnica de palpação
+
+**ESTRATÉGIA DE BUSCA ESPECÍFICA:**
+
+**Pré-Operatório:**
+"Classificação ASA", "Índice de Lee", "Antibioticoprofilaxia em [tipo de cirurgia]"
+
+**Diagnóstico:**
+"[Doença] diagnóstico diferencial", "Apendicite Alvarado", "Colecistite Tóquio"
+
+**Tratamento:**
+"[Doença] indicação cirúrgica", "Pancreatite Ranson", "Obstrução intestinal conservador"
+
+**Pós-Operatório:**
+"Complicações pós-operatórias", "Febre pós-operatória", "Íleo paralítico"
+
+### 7. Exemplos Práticos de Raciocínio Cirúrgico
+
+**EXEMPLO 1: Paciente com Dor em FID**
+
+**Cenário:**
+Mulher, 28 anos, dor abdominal há 12h, iniciou periumbilical, migrou para FID. Anorexia, náuseas, 1 episódio de vômito. Febre 37,8°C. Exame: dor à palpação em FID, Blumberg +, Rovsing +.
+
+**Raciocínio:**
+1. **Dor migratória + anorexia + febre baixa + sinais localizados** → APENDICITE AGUDA!
+2. **Clássico demais para ser outra coisa**
+3. **Calcular Alvarado para confirmar**
+
+**Escore de Alvarado:**
+- Migração para FID: 1
+- Anorexia: 1
+- Náusea/vômito: 1
+- Dor em FID: 2
+- Descompressão dolorosa: 2
+- Febre >37,3: 1
+- Leucócitos >10k: solicitar (assumir 2)
+- Desvio esquerda: solicitar (assumir 1)
+→ **Total ≥7-8** = cirurgia indicada!
+
+**DD importantes (principalmente em mulher):**
+- Diverticulite de Meckel
+- Doença inflamatória pélvica
+- Gravidez ectópica (SEMPRE fazer beta-HCG!)
+- Cisto ovariano (torção, rotura)
+
+**Buscar em @md/**:
+- "Apendicite aguda diagnóstico"
+- "Escore de Alvarado"
+
+**Propedêutica:**
+- Hemograma (leucocitose com desvio?)
+- Beta-HCG (excluir gravidez!)
+- USG (se dúvida) ou TC abdome (gold standard)
+
+**Conduta:**
+- Apendicectomia (laparoscópica preferível)
+- Antibiótico: Cefoxitina 2g ou ceftriaxona 1g + metronidazol 500mg (dose única pré-op)
+- Se perfurada/abscesso: ATB por 5-7 dias no pós-op
+
+---
+
+**EXEMPLO 2: Paciente com Dor Súbita + Abdome em Tábua**
+
+**Cenário:**
+Homem, 52 anos, dor epigástrica súbita há 2h, intensa, "em facada". História de úlcera péptica, usa omeprazol irregularmente. Exame: abdome em tábua, Blumberg ++/4+, RHA ausentes. PA 100/60, FC 110.
+
+**Raciocínio:**
+1. **Dor súbita + história de úlcera + abdome em tábua** → PERFURAÇÃO!
+2. **Peritonite química** (suco gástrico) → irritação grave
+3. **Instabilidade leve** → hipovolemia relativa (3º espaço)
+
+**Perguntas-chave:**
+- Uso de AINEs recentemente?
+- Melena/hematêmese prévia?
+- Quanto tempo de dor? (<6h melhor prognóstico)
+
+**Exame físico:**
+- Sinal de Jobert? (desaparecimento da macicez hepática)
+- Abdome: em tábua, dor difusa, RHA ausentes
+
+**Buscar em @md/**:
+- "Úlcera péptica perfurada tratamento"
+- "Peritonite diagnóstico"
+
+**Propedêutica RÁPIDA:**
+- RX tórax/abdome em PÉ: pneumoperitônio (ar livre subdiafragmático) - sensibilidade 75%
+- TC abdome se disponível (sensibilidade >95%)
+- Hemograma, amilase (DD com pancreatite)
+- Gasometria se instabilidade
+
+**Conduta:**
+- **Cirurgia urgente** (não emergente - pode preparar)
+- Ressuscitação pré-op:
+  - Cristaloide IV (RL ou SF 0,9%)
+  - Corrigir hipovolemia
+  - SNG (descompressão)
+  - Antibiótico IV (ceftriaxona + metronidazol)
+  - Analgesia adequada
+- Cirurgia:
+  - Rafia da perfuração (patch de Graham com omento)
+  - Lavagem exaustiva da cavidade (4-6L SF)
+  - Drenagem
+- Pós-op:
+  - IBP IV (pantoprazol 40mg 12/12h)
+  - ATB por 5-7 dias
+  - Teste e tratar H. pylori após alta
+
+---
+
+**EXEMPLO 3: Pós-Operatório com Febre POD 6**
+
+**Cenário:**
+Homem, 65 anos, POD 6 de colectomia por câncer. Evoluindo bem até ontem. Hoje febre 38,5°C, dor abdominal difusa, taquicardia 110 bpm.
+
+**Raciocínio:**
+1. **POD 6 + febre + dor abdominal** → pensar em **ABSCESSO INTRA-ABDOMINAL** ou **DEISCÊNCIA DE ANASTOMOSE**
+2. **Timing compatível** (complicações infecciosas POD 5-7)
+3. **Pós colectomia** → risco aumentado (anastomose colônica)
+
+**DD por Timing (5 W's das febres pós-op):**
+- **W**ind (POD 1-2): Atelectasia
+- **W**ater (POD 3-5): ITU
+- **W**ound (POD 5-7): ISC
+- **W**alk (POD 7-10): TVP
+- **W**onder drugs (qualquer momento): Reação medicamentosa
+
+**POD 6 → Pensar em:**
+1. Abscesso intra-abdominal (anastomose, coleção)
+2. ISC profunda
+3. Deiscência de anastomose
+4. Pneumonia
+5. ITU (se sonda vesical)
+
+**Perguntas-chave:**
+- Dreno: débito? aspecto? (purulento? fecaloide?)
+- Ferida operatória: sinais flogísticos? drenagem?
+- Aceitação de dieta? Vômitos? (íleo? obstrução?)
+- Eliminação de gases/fezes?
+- Dor em panturrilhas? (TVP)
+
+**Exame físico:**
+- Sinais vitais (instabilidade?)
+- Ferida operatória (eritema, secreção, deiscência?)
+- Abdome: dor difusa ou localizada? Peritonite?
+- Dreno: aspecto da drenagem
+
+**Buscar em @md/**:
+- "Complicações pós-operatórias abdominais"
+- "Abscesso intra-abdominal pós-operatório"
+- "Deiscência de anastomose"
+
+**Propedêutica:**
+- Hemograma (leucocitose?)
+- PCR (elevação)
+- TC abdome com contraste IV e oral:
+  - Coleção intra-abdominal?
+  - Extravasamento de contraste? (deiscência)
+  - Ar livre? (perfuração)
+- Hemocultura (se instabilidade)
+
+**Conduta:**
+Se abscesso localizado + estável:
+- Drenagem percutânea guiada por TC/USG
+- ATB (ceftriaxona + metronidazol ou pip-tazo)
+
+Se peritonite/instabilidade/deiscência:
+- **Reoperação urgente**
+- Lavagem, drenagem, avaliar anastomose
+- Pode necessitar estomia (se deiscência)
+
+## Classificação ASA (American Society of Anesthesiologists)
+
+**Estratificação de Risco Anestésico:**
+
+- **ASA I**: Paciente saudável, sem doenças sistêmicas
+- **ASA II**: Doença sistêmica leve sem limitação funcional
+  - Exemplos: HAS controlada, DM controlado, tabagismo, obesidade (IMC 30-40), gestação
+- **ASA III**: Doença sistêmica grave com limitação funcional
+  - Exemplos: HAS não controlada, DM com complicações, DPOC, obesidade mórbida (IMC ≥40), doença cardíaca estável, IRC (diálise)
+- **ASA IV**: Doença sistêmica grave com ameaça constante à vida
+  - Exemplos: IAM recente, AVC recente, sepse, ICC descompensada
+- **ASA V**: Paciente moribundo com expectativa de morte nas próximas 24h sem cirurgia
+  - Exemplos: Ruptura de aneurisma de aorta, trauma massivo, hemorragia intracraniana
+- **ASA VI**: Paciente com morte cerebral para doação de órgãos
+
+**Sufixo E**: Adicionado para cirurgias de emergência (ex: ASA 2E)
+
+## Avaliação Pré-Operatória
+
+### Índice de Risco Cardíaco de Lee (RCRI - Revised Cardiac Risk Index)
+
+**Fatores de Risco (1 ponto cada):**
+1. Cirurgia de alto risco (intraperitoneal, intratorácica, vascular suprainguinal)
+2. Doença arterial coronariana
+3. Insuficiência cardíaca congestiva
+4. Doença cerebrovascular
+5. Diabetes em uso de insulina
+6. Creatinina pré-operatória >2 mg/dL
+
+**Risco de Evento Cardíaco Maior:**
+- **0 fatores**: 0,4% de risco
+- **1 fator**: 1% de risco
+- **2 fatores**: 2,4% de risco
+- **≥3 fatores**: 5,4% de risco
+
+### Exames Pré-Operatórios
+
+**Rotina Básica (individualizar):**
+- Hemograma (se cirurgia com possível perda sanguínea ou anemia suspeitada)
+- Coagulograma (se uso de anticoagulantes, hepatopatia, ou história de sangramento)
+- Glicemia (diabéticos)
+- Creatinina (idosos, nefropatas, uso de nefrotóxicos)
+- ECG (homens >40 anos, mulheres >50 anos, ou cardiopatas)
+- RX tórax (doença pulmonar, cardíaca, ou cirurgia torácica/abdominal alta)
+
+**Não solicitar exames de rotina indiscriminadamente em pacientes jovens e hígidos**
+
+### Jejum Pré-Operatório
+
+**Diretrizes Atuais:**
+- **Sólidos**: 6-8 horas
+- **Líquidos claros**: 2 horas
+- **Leite/fórmulas**: 6 horas
+- **Refeição gordurosa**: 8 horas
+
+## Antibioticoprofilaxia Cirúrgica
+
+### Princípios Gerais
+- Administrar 30-60 min antes da incisão
+- Manter nível sérico adequado durante cirurgia
+- Suspender em 24h (maioria dos casos)
+- Escolher antibiótico baseado em flora esperada
+
+### Cirurgias Limpas (Classe I)
+- **Definição**: Sem inflamação, sem abertura de víscera oca
+- **Profilaxia**: Geralmente não necessária
+- **Exceção**: Próteses, cardíaca, ortopédica, neurocirurgia
+- **Antibiótico**: Cefazolina 1-2g IV
+
+### Cirurgias Limpa-Contaminadas (Classe II)
+- **Definição**: Abertura de víscera oca com contaminação mínima
+- **Profilaxia**: Recomendada
+- **Exemplos**: Gastrintestinal, biliar, ginecológica
+- **Antibióticos**:
+  - Gastroduodenal: Cefazolina 1-2g
+  - Colorretal/apendicectomia: Cefoxitina 1-2g OU Ceftriaxona 1g + metronidazol 500 mg
+
+### Cirurgias Contaminadas (Classe III)
+- **Definição**: Inflamação aguda, contaminação grosseira
+- **Profilaxia/Tratamento**: Antibioticoterapia por 5-7 dias
+- **Exemplos**: Peritonite, abscessos
+
+### Cirurgias Sujas/Infectadas (Classe IV)
+- **Definição**: Presença de pus, perfuração
+- **Tratamento**: Antibioticoterapia plena por 7-14 dias
+
+## Abdome Agudo
+
+### Classificação Fisiopatológica
+
+**1. Abdome Agudo Inflamatório:**
+- Apendicite aguda
+- Colecistite aguda
+- Pancreatite aguda
+- Diverticulite aguda
+- Doença inflamatória pélvica
+
+**2. Abdome Agudo Perfurativo:**
+- Úlcera péptica perfurada
+- Divertículo perfurado
+- Perfuração de cólon (CA, trauma)
+
+**3. Abdome Agudo Obstrutivo:**
+- Obstrução intestinal (aderências, hérnias, tumores)
+- Volvos
+
+**4. Abdome Agudo Vascular:**
+- Isquemia mesentérica
+- Ruptura de aneurisma de aorta abdominal
+
+**5. Abdome Agudo Hemorrágico:**
+- Gravidez ectópica rota
+- Ruptura de cisto ovariano
+- Trauma abdominal
+
+### Sinais de Irritação Peritoneal
+- Dor à descompressão brusca (Blumberg positivo)
+- Defesa muscular (contratura involuntária)
+- Abdome em tábua (peritonite difusa)
+- Ausência de ruídos hidroaéreos (íleo paralítico)
+
+## Apendicite Aguda
+
+### Quadro Clínico Clássico
+1. Dor periumbilical migratória para FID (6-8h)
+2. Anorexia, náuseas, vômitos
+3. Febre baixa (37,5-38,5°C)
+4. Sinais localizados em FID:
+   - Dor à palpação no ponto de McBurney
+   - Sinal de Blumberg positivo
+   - Sinal de Rovsing positivo
+
+### Escore de Alvarado
+**Sintomas (1 ponto cada):**
+- Dor migratória para FID
+- Anorexia
+- Náusea/vômito
+
+**Sinais (2 pontos cada):**
+- Dor em FID
+- Descompressão dolorosa
+- Febre >37,3°C
+
+**Laboratório:**
+- Leucocitose >10.000 (2 pontos)
+- Desvio à esquerda (1 ponto)
+
+**Pontuação:**
+- **≤4**: Baixa probabilidade
+- **5-6**: Possível, observar
+- **7-8**: Provável, considerar cirurgia
+- **9-10**: Muito provável, cirurgia
+
+### Exames de Imagem
+- **USG**: Primeira escolha em crianças e mulheres jovens
+- **TC abdome**: Maior sensibilidade/especificidade (>95%)
+  - Apêndice espessado (>6 mm)
+  - Borramento da gordura periapendicular
+  - Apendicolito
+
+### Tratamento
+- **Apendicectomia**: Videolaparoscópica ou aberta
+- **Antibioticoterapia**:
+  - Não complicada: Cefoxitina ou ceftriaxona + metronidazol (24h)
+  - Complicada (perfuração, abscesso): 5-7 dias
+
+## Colecistite Aguda
+
+### Fisiopatologia
+- Obstrução do ducto cístico por cálculo
+- Inflamação da parede da vesícula
+- Pode evoluir para necrose, perfuração
+
+### Quadro Clínico
+- Dor em hipocôndrio direito/epigástrio (>6h)
+- Náuseas e vômitos
+- Febre
+- **Sinal de Murphy**: Dor à palpação profunda do HD durante inspiração profunda
+
+### Diagnóstico
+- **Tríade**: Dor, febre, leucocitose
+- **USG** (exame de escolha):
+  - Cálculos na vesícula
+  - Espessamento da parede (>4 mm)
+  - Líquido perivesicular
+  - Sinal de Murphy ultrassonográfico
+
+### Classificação de Tóquio
+**Gravidade:**
+- **Grau I (leve)**: Sem disfunção orgânica
+- **Grau II (moderada)**: Leucocitose >18.000, massa palpável, >72h de sintomas
+- **Grau III (grave)**: Disfunção orgânica (cardiovascular, neurológica, respiratória, renal, hepática, hematológica)
+
+### Tratamento
+- **Suporte**: Jejum, hidratação venosa, analgesia
+- **Antibiótico**:
+  - Leve: Ceftriaxona 1-2g/dia
+  - Moderada/Grave: Piperacilina-tazobactam OU ceftriaxona + metronidazol
+- **Colecistectomia**:
+  - Precoce (72h): Recomendada em pacientes de baixo risco
+  - Tardia (6-8 semanas): Se alto risco cirúrgico ou complicações locais
+
+## Pancreatite Aguda
+
+### Etiologia
+- Cálculo biliar (40%)
+- Álcool (30%)
+- Outras: hipertrigliceridemia, medicamentos, trauma, CPRE, idiopática
+
+### Diagnóstico (2 de 3 critérios)
+1. Dor abdominal característica (epigástrica, irradiando para dorso)
+2. Amilase/lipase >3x o valor normal
+3. Achados de imagem (TC, USG) compatíveis
+
+### Critérios de Gravidade - Atlanta Revisada
+
+**Classificação:**
+- **Leve**: Sem falência orgânica, sem complicações
+- **Moderadamente grave**: Falência orgânica transitória (<48h) OU complicações locais
+- **Grave**: Falência orgânica persistente (>48h)
+
+### Escore de Ranson (11 critérios)
+
+**Na admissão (5 critérios):**
+- Idade >55 anos
+- Leucócitos >16.000/mm³
+- Glicose >200 mg/dL
+- LDH >350 UI/L
+- AST >250 UI/L
+
+**Em 48 horas (6 critérios):**
+- Queda do hematócrito >10%
+- Aumento da ureia >5 mg/dL
+- Cálcio <8 mg/dL
+- PaO₂ <60 mmHg
+- Déficit de base >4 mEq/L
+- Sequestro hídrico >6 L
+
+**Mortalidade:**
+- 0-2: <1%
+- 3-4: 15%
+- 5-6: 40%
+- >6: >99%
+
+### Tratamento
+- **Suporte**:
+  - Jejum oral
+  - Hidratação vigorosa (250-500 mL/h de Ringer Lactato)
+  - Analgesia (evitar morfina, preferir meperidina ou fentanil)
+  - Correção hidroeletrolítica
+  
+- **Nutrição**:
+  - Leve: Via oral liberada se tolerância
+  - Moderada/Grave: Nutrição enteral precoce (24-48h)
+  
+- **Antibiótico**: NÃO usar profilaticamente
+  - Indicação: Necrose infectada, colangite
+
+- **CPRE**: Indicada em colangite ou obstrução biliar
+
+## Obstrução Intestinal
+
+### Etiologia
+**Intestino Delgado:**
+- Aderências pós-operatórias (60%)
+- Hérnias (20%)
+- Tumores, doença de Crohn, volvo
+
+**Intestino Grosso:**
+- Câncer colorretal (60%)
+- Volvos (10-15%)
+- Diverticulite
+
+### Quadro Clínico
+- **Dor abdominal**: Tipo cólica, intermitente
+- **Distensão abdominal**
+- **Vômitos**: Precoces (delgado), tardios (cólon)
+- **Parada de eliminação de fezes e flatos**
+- **Ruídos hidroaéreos**: Aumentados (fase inicial) ou ausentes (íleo paralítico)
+
+### Exames de Imagem
+- **RX simples de abdome** (decúbito + ortostase):
+  - Distensão de alças
+  - Níveis hidroaéreos
+  - Ausência de gás no reto
+  
+- **TC abdome**:
+  - Identifica local e causa
+  - Avalia viabilidade intestinal
+  - Detecta complicações (perfuração, isquemia)
+
+### Tratamento
+**Conservador (obstrução parcial, sem sinais de estrangulamento):**
+- Jejum absoluto
+- Sonda nasogástrica descompressiva
+- Hidratação venosa
+- Correção hidroeletrolítica
+- Observação clínica
+
+**Cirúrgico (obstrução completa, sinais de estrangulamento):**
+- Sinais de indicação cirúrgica:
+  - Peritonite
+  - Pneumoperitônio
+  - Sinais de isquemia (acidose, leucocitose, febre, dor contínua)
+  - Falha do tratamento conservador (48-72h)
+
+## Hérnias
+
+### Tipos
+- **Inguinal**: Direta (fraqueza da parede) ou indireta (através do anel inguinal interno)
+- **Femoral**: Através do canal femoral (mais comum em mulheres)
+- **Umbilical**: Através do anel umbilical
+- **Incisional**: Em cicatriz cirúrgica prévia
+- **Epigástrica**: Linha alba acima do umbigo
+
+### Classificação Clínica
+- **Redutível**: Retorna espontaneamente ou com manobra
+- **Irredutível/Encarcerada**: Não retorna à cavidade (aderências, edema)
+- **Estrangulada**: Comprometimento vascular, necessita cirurgia urgente
+
+### Sinais de Estrangulamento
+- Dor intensa e contínua
+- Hérnia tensa, não redutível
+- Sinais de obstrução intestinal
+- Sinais de peritonite
+- **Tratamento**: Cirurgia de urgência
+
+### Tratamento Eletivo
+- Herniorrafia com ou sem tela
+- Técnica videolaparoscópica: Indicada em hérnias inguinais bilaterais ou recidivadas
+
+## Úlcera Péptica Perfurada
+
+### Quadro Clínico
+- Dor abdominal súbita, intensa, difusa
+- Abdome em tábua (peritonite química)
+- Sinal de Jobert (desaparecimento da macicez hepática)
+- Pneumoperitônio (ar livre subdiafragmático no RX)
+
+### Diagnóstico
+- **RX tórax/abdome em ortostase**: Pneumoperitônio (sensibilidade ~75%)
+- **TC abdome**: Maior sensibilidade (>95%)
+
+### Tratamento
+- **Cirúrgico**:
+  - Rafia da perfuração (patch de Graham com omento)
+  - Lavagem da cavidade
+  - Drenagem
+  
+- **Pós-operatório**:
+  - IBP venoso (pantoprazol 40 mg 12/12h)
+  - Antibiótico (ceftriaxona + metronidazol) por 5-7 dias
+  - Investigar e tratar H. pylori após alta
+
+## Hemorragia Digestiva Alta (HDA)
+
+### Definição
+- Sangramento proximal ao ligamento de Treitz
+
+### Causas
+- Úlcera péptica (50%)
+- Varizes esofágicas (20%)
+- Gastrite erosiva (20%)
+- Síndrome de Mallory-Weiss (laceração esofagogástrica por vômitos)
+- Neoplasias
+
+### Apresentação Clínica
+- **Hematêmese**: Vômito com sangue
+- **Melena**: Fezes escuras, pastosas, fétidas
+- **Enterorragia**: Fezes com sangue vivo (sangramento maciço)
+
+### Estratificação de Risco - Escore de Glasgow-Blatchford
+
+**Parâmetros:**
+- Ureia, hemoglobina, PA sistólica, FC
+- Melena, síncope, hepatopatia, IC
+
+**Pontuação ≥1**: Alto risco, necessita intervenção
+
+### Manejo
+**Ressuscitação:**
+- Dois acessos venosos calibrosos
+- Expansão volêmica (cristaloides)
+- Transfusão se Hb <7 g/dL (alvo 7-9 g/dL)
+- Plaquetas se <50.000/mm³
+- Plasma fresco se INR >1,5
+
+**Medicações:**
+- **IBP**: Omeprazol 80 mg bolus + 8 mg/h em BIC
+- **Octreotide** (se varizes): 50 mcg bolus + 50 mcg/h
+- **Antibiótico** (se cirrose): Ceftriaxona 1g/dia
+
+**EDA:**
+- Indicada em <24h (preferencialmente 12-24h)
+- Terapêutica endoscópica conforme achado
+
+### Classificação de Forrest (Úlcera Péptica)
+
+**Alto risco de ressangramento:**
+- **Ia**: Sangramento ativo em jato
+- **Ib**: Sangramento ativo em babação
+- **IIa**: Vaso visível sem sangramento
+
+**Baixo risco:**
+- **IIb**: Coágulo aderido
+- **IIc**: Base com hematina
+- **III**: Base limpa
+
+## Doença Diverticular
+
+### Diverticulose
+- Protrusões saculares da mucosa através da parede muscular
+- Mais comum no sigmóide
+- Assintomática na maioria dos casos
+
+### Diverticulite Aguda
+
+**Classificação de Hinchey:**
+- **Estágio 0**: Diverticulite não complicada
+- **Estágio Ia**: Abscesso pericólico (<4 cm)
+- **Estágio Ib**: Abscesso pélvico (>4 cm)
+- **Estágio II**: Abscesso à distância
+- **Estágio III**: Peritonite purulenta
+- **Estágio IV**: Peritonite fecal
+
+**Quadro Clínico:**
+- Dor em FIE (sigmóide)
+- Febre, leucocitose
+- Alteração do hábito intestinal
+
+**Diagnóstico:**
+- **TC abdome com contraste** (exame de escolha)
+
+**Tratamento:**
+
+- **Não complicada (ambulatorial):**
+  - Dieta líquida/pastosa
+  - Antibiótico VO por 7-10 dias:
+    - Ciprofloxacino 500 mg 12/12h + metronidazol 500 mg 8/8h OU
+    - Amoxicilina-clavulanato 875/125 mg 12/12h
+
+- **Complicada (internação):**
+  - Jejum, hidratação IV
+  - Antibiótico IV: Ceftriaxona 1-2g/dia + metronidazol 500 mg 8/8h
+  - Drenagem percutânea se abscesso >4 cm
+  - Cirurgia se perfuração livre, peritonite, falha tratamento clínico
+
+## Complicações Pós-Operatórias
+
+### Infecção de Sítio Cirúrgico (ISC)
+
+**Classificação:**
+- **Superficial**: Pele e subcutâneo (30 dias)
+- **Profunda**: Fáscia e músculo (30 dias ou 1 ano se prótese)
+- **Órgão/Cavidade**: Órgão/espaço manipulado (30 dias ou 1 ano se prótese)
+
+**Fatores de Risco:**
+- Cirurgia contaminada/suja
+- Obesidade, DM, imunossupressão
+- Duração prolongada da cirurgia
+- Hipotermia, hipóxia
+
+**Tratamento:**
+- Drenagem (se coleção)
+- Antibiótico conforme cultura
+- Cuidados locais
+
+### Deiscência de Sutura
+
+**Fatores de Risco:**
+- Desnutrição, hipoalbuminemia
+- Obesidade
+- Idade avançada
+- Uso de corticoides
+- Infecção
+- Tensão excessiva na sutura
+- Tosse, vômitos, distensão abdominal
+
+**Prevenção:**
+- Técnica cirúrgica adequada
+- Controle de fatores de risco
+- Faixa abdominal em pacientes de risco
+
+**Tratamento:**
+- Deiscência superficial: Curativos, cicatrização por segunda intenção
+- Deiscência profunda/evisceração: Reabordagem cirúrgica urgente
+
+### Íleo Paralítico Pós-Operatório
+
+**Duração Fisiológica:**
+- Intestino delgado: 24h
+- Estômago: 24-48h
+- Cólon: 48-72h
+
+**Causas de Íleo Prolongado:**
+- Peritonite, abscessos intra-abdominais
+- Distúrbios eletrolíticos (hipocalemia, hipomagnesemia)
+- Medicações (opioides, anticolinérgicos)
+- Manipulação intestinal excessiva
+
+**Tratamento:**
+- Correção de distúrbios eletrolíticos
+- Mobilização precoce
+- Redução de opioides
+- SNG se vômitos
+- Considerar neostigmine (0,5-1 mg IV) em casos refratários
+
+### Trombose Venosa Profunda (TVP) e Tromboembolismo Pulmonar (TEP)
+
+**Profilaxia (conforme risco):**
+
+**Baixo risco:**
+- Deambulação precoce
+- Hidratação adequada
+
+**Risco moderado:**
+- Heparina não-fracionada 5.000 UI SC 8/8h ou 12/12h OU
+- Enoxaparina 40 mg SC/dia
+
+**Alto risco:**
+- Enoxaparina 40 mg SC/dia
+- Considerar compressão pneumática intermitente
+
+**Duração:** Iniciar pré-operatório e manter até deambulação plena
+
+## Trauma Abdominal
+
+### FAST (Focused Assessment with Sonography for Trauma)
+
+**Avaliação ultrassonográfica de 4 áreas:**
+1. Espaço hepatorrenal (Morrison)
+2. Espaço esplenorrenal
+3. Pelve
+4. Pericárdio
+
+**Positivo**: Líquido livre (sugere hemoperitônio)
+
+### Indicações de Laparotomia Exploradora
+- Instabilidade hemodinâmica com FAST positivo
+- Peritonite
+- Evisceração
+- Pneumoperitônio
+- Ferimento transfixante
+
+### Trauma Hepático/Esplênico
+- Maioria: Tratamento conservador não-operatório (se estável)
+- Monitorização em UTI/leito monitorizado
+- Indicação cirúrgica: Instabilidade hemodinâmica persistente
+
+## Referências
+
+- **Sabiston - Tratado de Cirurgia. 20ª ed.**
+- **Schwartz - Princípios de Cirurgia. 10ª ed.**
+- **Townsend - Sabiston Textbook of Surgery**
+- **ATLS - Advanced Trauma Life Support. 10ª ed.**
+- **Diretrizes da WSES (World Society of Emergency Surgery)**
+- **Tokyo Guidelines (Colecistite e Colangite)**
+- **Diretrizes da Sociedade Brasileira de Coloproctologia**

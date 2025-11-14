@@ -5,6 +5,7 @@ import {
   IsDateString,
   IsEnum,
   IsObject,
+  IsArray,
 } from 'class-validator';
 import { NavigationStepStatus } from '@prisma/client';
 
@@ -28,6 +29,26 @@ export class UpdateNavigationStepDto {
   @IsDateString()
   @IsOptional()
   actualDate?: string;
+
+  @IsDateString()
+  @IsOptional()
+  dueDate?: string; // Data limite para gerar alarmes de atraso
+
+  @IsString()
+  @IsOptional()
+  institutionName?: string; // Instituição de saúde onde foi realizada
+
+  @IsString()
+  @IsOptional()
+  professionalName?: string; // Profissional que realizou
+
+  @IsString()
+  @IsOptional()
+  result?: string; // Resultado da etapa
+
+  @IsArray()
+  @IsOptional()
+  findings?: string[]; // Lista de achados/alterações
 
   @IsObject()
   @IsOptional()

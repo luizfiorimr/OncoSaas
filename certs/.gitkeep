@@ -1,0 +1,3 @@
+# Este diretório contém certificados SSL autoassinados gerados localmente
+# Execute: npm run generate-certs
+

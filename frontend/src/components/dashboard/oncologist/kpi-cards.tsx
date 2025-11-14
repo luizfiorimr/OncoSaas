@@ -1,15 +1,16 @@
 'use client';
 
 import { DashboardMetrics } from '@/lib/api/dashboard';
-import { AlertTriangle, Users, Bell, Clock, MessageSquare, CheckCircle2 } from 'lucide-react';
+import { AlertTriangle, Users, Bell, Clock, MessageSquare, CheckCircle2, CalendarX, Activity, Stethoscope, Dna, Target } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface KPICardsProps {
   metrics: DashboardMetrics | undefined;
   isLoading?: boolean;
+  onCardClick?: (filterType: string, filterValue?: any) => void;
 }
 
-export function KPICards({ metrics, isLoading }: KPICardsProps) {
+export function KPICards({ metrics, isLoading, onCardClick }: KPICardsProps) {
   if (!metrics) {
     return null;
   }
@@ -38,6 +39,9 @@ export function KPICards({ metrics, isLoading }: KPICardsProps) {
       bgColor: 'bg-red-50',
       borderColor: 'border-red-200',
       badge: metrics.criticalPatientsCount > 0,
+      clickable: true,
+      filterType: 'priority',
+      filterValue: { minScore: 75 },
     },
     {
       title: 'Total de Pacientes',
@@ -46,6 +50,7 @@ export function KPICards({ metrics, isLoading }: KPICardsProps) {
       color: 'text-blue-600',
       bgColor: 'bg-blue-50',
       borderColor: 'border-blue-200',
+      clickable: false,
     },
     {
       title: 'Alertas Pendentes',
@@ -61,6 +66,9 @@ export function KPICards({ metrics, isLoading }: KPICardsProps) {
         medium: metrics.mediumAlertsCount,
         low: metrics.lowAlertsCount,
       },
+      clickable: true,
+      filterType: 'alerts',
+      filterValue: { hasAlerts: true },
     },
     {
       title: 'Tempo Médio de Resposta',
@@ -71,6 +79,7 @@ export function KPICards({ metrics, isLoading }: KPICardsProps) {
       color: 'text-purple-600',
       bgColor: 'bg-purple-50',
       borderColor: 'border-purple-200',
+      clickable: false,
     },
     {
       title: 'Mensagens Não Assumidas',
@@ -80,6 +89,9 @@ export function KPICards({ metrics, isLoading }: KPICardsProps) {
       bgColor: 'bg-yellow-50',
       borderColor: 'border-yellow-200',
       badge: metrics.unassumedMessagesCount > 0,
+      clickable: true,
+      filterType: 'messages',
+      filterValue: { hasUnassumedMessages: true },
     },
     {
       title: 'Casos Resolvidos Hoje',
@@ -88,19 +100,152 @@ export function KPICards({ metrics, isLoading }: KPICardsProps) {
       color: 'text-green-600',
       bgColor: 'bg-green-50',
       borderColor: 'border-green-200',
+      clickable: false,
+    },
+    {
+      title: 'Etapas Atrasadas',
+      value: metrics.overdueStepsCount,
+      icon: CalendarX,
+      color: 'text-red-600',
+      bgColor: 'bg-red-50',
+      borderColor: 'border-red-200',
+      badge: metrics.overdueStepsCount > 0,
+      clickable: true,
+      filterType: 'overdueSteps',
+      filterValue: { hasOverdueSteps: true },
+    },
+    // Métricas Clínicas Críticas
+    {
+      title: 'Time-to-Treatment',
+      value: metrics.averageTimeToTreatmentDays !== null
+        ? `${metrics.averageTimeToTreatmentDays} dias`
+        : 'N/A',
+      subtitle: metrics.averageTimeToTreatmentDays !== null && metrics.averageTimeToTreatmentDays > 30
+        ? 'Meta: <30 dias'
+        : undefined,
+      icon: Activity,
+      color: metrics.averageTimeToTreatmentDays !== null && metrics.averageTimeToTreatmentDays > 30
+        ? 'text-red-600'
+        : metrics.averageTimeToTreatmentDays !== null && metrics.averageTimeToTreatmentDays > 20
+        ? 'text-orange-600'
+        : 'text-green-600',
+      bgColor: metrics.averageTimeToTreatmentDays !== null && metrics.averageTimeToTreatmentDays > 30
+        ? 'bg-red-50'
+        : metrics.averageTimeToTreatmentDays !== null && metrics.averageTimeToTreatmentDays > 20
+        ? 'bg-orange-50'
+        : 'bg-green-50',
+      borderColor: metrics.averageTimeToTreatmentDays !== null && metrics.averageTimeToTreatmentDays > 30
+        ? 'border-red-200'
+        : metrics.averageTimeToTreatmentDays !== null && metrics.averageTimeToTreatmentDays > 20
+        ? 'border-orange-200'
+        : 'border-green-200',
+      badge: metrics.averageTimeToTreatmentDays !== null && metrics.averageTimeToTreatmentDays > 30,
+      clickable: false,
+    },
+    {
+      title: 'Time-to-Diagnosis',
+      value: metrics.averageTimeToDiagnosisDays !== null
+        ? `${metrics.averageTimeToDiagnosisDays} dias`
+        : 'N/A',
+      subtitle: metrics.averageTimeToDiagnosisDays !== null && metrics.averageTimeToDiagnosisDays > 60
+        ? 'Meta: <60 dias'
+        : undefined,
+      icon: Stethoscope,
+      color: metrics.averageTimeToDiagnosisDays !== null && metrics.averageTimeToDiagnosisDays > 60
+        ? 'text-red-600'
+        : metrics.averageTimeToDiagnosisDays !== null && metrics.averageTimeToDiagnosisDays > 45
+        ? 'text-orange-600'
+        : 'text-green-600',
+      bgColor: metrics.averageTimeToDiagnosisDays !== null && metrics.averageTimeToDiagnosisDays > 60
+        ? 'bg-red-50'
+        : metrics.averageTimeToDiagnosisDays !== null && metrics.averageTimeToDiagnosisDays > 45
+        ? 'bg-orange-50'
+        : 'bg-green-50',
+      borderColor: metrics.averageTimeToDiagnosisDays !== null && metrics.averageTimeToDiagnosisDays > 60
+        ? 'border-red-200'
+        : metrics.averageTimeToDiagnosisDays !== null && metrics.averageTimeToDiagnosisDays > 45
+        ? 'border-orange-200'
+        : 'border-green-200',
+      badge: metrics.averageTimeToDiagnosisDays !== null && metrics.averageTimeToDiagnosisDays > 60,
+      clickable: false,
+    },
+    {
+      title: 'Estadiamento Completo',
+      value: `${metrics.stagingCompletePercentage}%`,
+      subtitle: 'Antes do tratamento',
+      icon: Target,
+      color: metrics.stagingCompletePercentage >= 90
+        ? 'text-green-600'
+        : metrics.stagingCompletePercentage >= 75
+        ? 'text-orange-600'
+        : 'text-red-600',
+      bgColor: metrics.stagingCompletePercentage >= 90
+        ? 'bg-green-50'
+        : metrics.stagingCompletePercentage >= 75
+        ? 'bg-orange-50'
+        : 'bg-red-50',
+      borderColor: metrics.stagingCompletePercentage >= 90
+        ? 'border-green-200'
+        : metrics.stagingCompletePercentage >= 75
+        ? 'border-orange-200'
+        : 'border-red-200',
+      badge: metrics.stagingCompletePercentage < 75,
+      clickable: false,
+    },
+    {
+      title: 'Biomarcadores Pendentes',
+      value: metrics.pendingBiomarkersCount,
+      subtitle: 'Aguardando resultados',
+      icon: Dna,
+      color: 'text-purple-600',
+      bgColor: 'bg-purple-50',
+      borderColor: 'border-purple-200',
+      badge: metrics.pendingBiomarkersCount > 0,
+      clickable: true,
+      filterType: 'biomarkers',
+      filterValue: { hasPendingBiomarkers: true },
+    },
+    {
+      title: 'Taxa de Adesão',
+      value: `${metrics.treatmentAdherencePercentage}%`,
+      subtitle: 'Tratamento conforme planejado',
+      icon: CheckCircle2,
+      color: metrics.treatmentAdherencePercentage >= 80
+        ? 'text-green-600'
+        : metrics.treatmentAdherencePercentage >= 60
+        ? 'text-orange-600'
+        : 'text-red-600',
+      bgColor: metrics.treatmentAdherencePercentage >= 80
+        ? 'bg-green-50'
+        : metrics.treatmentAdherencePercentage >= 60
+        ? 'bg-orange-50'
+        : 'bg-red-50',
+      borderColor: metrics.treatmentAdherencePercentage >= 80
+        ? 'border-green-200'
+        : metrics.treatmentAdherencePercentage >= 60
+        ? 'border-orange-200'
+        : 'border-red-200',
+      badge: metrics.treatmentAdherencePercentage < 60,
+      clickable: false,
     },
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-7 gap-4">
       {cards.map((card, index) => {
         const Icon = card.icon;
         return (
           <div
             key={index}
+            onClick={() => {
+              if (card.clickable && onCardClick) {
+                onCardClick(card.filterType!, card.filterValue);
+              }
+            }}
             className={cn(
               'bg-white rounded-lg border p-4 relative',
-              card.borderColor
+              card.borderColor,
+              card.clickable && 'cursor-pointer hover:shadow-md transition-shadow'
             )}
           >
             {card.badge && (
@@ -114,6 +259,9 @@ export function KPICards({ metrics, isLoading }: KPICardsProps) {
             <div className="mt-2">
               <p className="text-sm text-gray-600 mb-1">{card.title}</p>
               <p className="text-2xl font-bold text-gray-900">{card.value}</p>
+              {card.subtitle && (
+                <p className="text-xs text-gray-500 mt-1">{card.subtitle}</p>
+              )}
               {card.breakdown && (
                 <div className="mt-2 text-xs text-gray-500 space-y-1">
                   <div className="flex justify-between">

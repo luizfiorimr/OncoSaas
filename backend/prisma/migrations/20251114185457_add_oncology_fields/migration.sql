@@ -1,0 +1,33 @@
+-- AlterTable
+ALTER TABLE "cancer_diagnoses" ADD COLUMN     "afpBaseline" DOUBLE PRECISION,
+ADD COLUMN     "alkRearrangement" TEXT,
+ADD COLUMN     "brafMutation" TEXT,
+ADD COLUMN     "ca125Baseline" DOUBLE PRECISION,
+ADD COLUMN     "ca153Baseline" DOUBLE PRECISION,
+ADD COLUMN     "ca199Baseline" DOUBLE PRECISION,
+ADD COLUMN     "ceaBaseline" DOUBLE PRECISION,
+ADD COLUMN     "egfrMutation" TEXT,
+ADD COLUMN     "erStatus" TEXT,
+ADD COLUMN     "gleasonScore" TEXT,
+ADD COLUMN     "grade" TEXT,
+ADD COLUMN     "hcgBaseline" DOUBLE PRECISION,
+ADD COLUMN     "her2Status" TEXT,
+ADD COLUMN     "histologicalType" TEXT,
+ADD COLUMN     "ki67Percentage" DOUBLE PRECISION,
+ADD COLUMN     "krasMutation" TEXT,
+ADD COLUMN     "mStage" TEXT,
+ADD COLUMN     "msiStatus" TEXT,
+ADD COLUMN     "nStage" TEXT,
+ADD COLUMN     "nrasMutation" TEXT,
+ADD COLUMN     "pdl1Expression" DOUBLE PRECISION,
+ADD COLUMN     "prStatus" TEXT,
+ADD COLUMN     "psaBaseline" DOUBLE PRECISION,
+ADD COLUMN     "ros1Rearrangement" TEXT,
+ADD COLUMN     "tStage" TEXT;
+
+-- AlterTable
+ALTER TABLE "patients" ADD COLUMN     "alcoholHistory" TEXT,
+ADD COLUMN     "comorbidities" JSONB,
+ADD COLUMN     "familyHistory" JSONB,
+ADD COLUMN     "occupationalExposure" TEXT,
+ADD COLUMN     "smokingHistory" TEXT;

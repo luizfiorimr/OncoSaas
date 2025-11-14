@@ -1,0 +1,61 @@
+{
+  "name": "medsaas-oncologia",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Plataforma de Otimização de Processos Oncológicos",
+  "scripts": {
+    "dev": "concurrently \"cd frontend && npm run dev\" \"cd backend && npm run start:dev\"",
+    "dev:https": "concurrently \"cd frontend && npm run dev:https\" \"cd backend && npm run start:dev:https\"",
+    "generate-certs": "node scripts/generate-ssl-certs.js",
+    "build": "npm run frontend:build && npm run backend:build",
+    "start": "concurrently \"cd frontend && npm start\" \"cd backend && npm start\"",
+    "lint": "npm run frontend:lint && npm run backend:lint",
+    "format": "prettier --write \"**/*.{ts,tsx,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,json,md}\"",
+    "backend:dev": "cd backend && npm run start:dev",
+    "backend:build": "cd backend && npm run build",
+    "backend:test": "cd backend && npm test",
+    "backend:lint": "cd backend && npm run lint",
+    "frontend:dev": "cd frontend && npm run dev",
+    "frontend:build": "cd frontend && npm run build",
+    "frontend:start": "cd frontend && npm start",
+    "frontend:lint": "cd frontend && npm run lint",
+    "frontend:test": "cd frontend && npm test",
+    "ai:dev": "cd ai-service && uvicorn main:app --reload --port 8001",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "docker:logs": "docker-compose logs -f",
+    "docker:ps": "docker-compose ps",
+    "db:migrate": "cd backend && npx prisma migrate dev",
+    "db:generate": "cd backend && npx prisma generate",
+    "db:studio": "cd backend && npx prisma studio",
+    "prepare": "husky install",
+    "validate": "bash scripts/validate-setup.sh || node scripts/validate-setup.js"
+  },
+  "dependencies": {
+    "next": "^14.2.33",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "typescript": "^5.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.12",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "14.2.5",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.2",
+    "prettier": "^3.6.2"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
+  }
+}

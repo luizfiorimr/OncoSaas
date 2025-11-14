@@ -1,0 +1,506 @@
+<!-- 8936a4b7-14da-4a3d-ad73-2a3b342aeddf c0ad78e1-686b-4266-aa33-30cecb78d43a -->
+# Plataforma de Otimização de Processos Oncológicos - Plano Atualizado
+
+## Principais Atualizações
+
+- **Agente de IA no WhatsApp**: Coleta de dados clínicos via conversas naturais (texto e áudio)
+- **Equipe de Enfermagem**: Monitora gestão completa dos pacientes, recebe alertas, intervém quando necessário
+- **Dashboard Focado**: Visualização de conversas, histórico, alertas em tempo real
+
+## 1. Product Discovery e Definição do Produto
+
+### 1.1 Definição do MVP
+
+**Features Core:**
+
+- **Navegação de Pacientes**: Dashboard para rastrear pacientes em cada etapa da jornada oncológica
+- **Priorização com IA**: Sistema de scoring para identificar casos que precisam atenção imediata
+- **Agente de IA no WhatsApp**: Coleta de dados clínicos remotos via conversas naturais (questionários EORTC, PRO-CTCAE, ESAS)
+- **Dashboard para Enfermagem**: Monitoramento completo da gestão dos pacientes, visualização de conversas, alertas
+- **Integração com EHR/PMS**: Conexão via HL7/FHIR para sincronizar dados de prontuários existentes
+- **Alertas Inteligentes**: Sistema de alertas para equipe de enfermagem quando paciente precisa de intervenção (sintomas críticos detectados pelo agente)
+
+### 1.2 Personas Principais
+
+- **Oncologista Clínico**: Usa priorização de casos e revisa pacientes críticos
+- **Coordenador de Navegação**: Gerencia fluxo de pacientes entre especialidades
+- **Equipe de Enfermagem**: Monitora gestão completa do paciente, recebe alertas do agente de IA, intervém quando necessário, visualiza conversas WhatsApp
+- **Paciente**: Interage com agente de IA no WhatsApp para reportar sintomas e receber orientações básicas
+
+### 1.3 Jobs-to-be-Done
+
+1. "Quando um paciente precisa de atenção urgente, quero ser notificado imediatamente pela equipe de enfermagem"
+2. "Como enfermeira, quero monitorar todos os pacientes e ver suas conversas com o agente para saber quando intervir"
+3. "Quero coletar dados de sintomas do paciente via WhatsApp sem precisar que ele venha à clínica"
+4. "Quero acompanhar onde cada paciente está na jornada oncológica sem ter que ligar para outros departamentos"
+
+## 2. Arquitetura Técnica e Desenvolvimento
+
+### 2.1 Stack Tecnológico
+
+- **Frontend**: Next.js 14 (React) com TypeScript
+- **Backend**: Node.js com Express ou NestJS
+- **Banco de Dados**: PostgreSQL (multi-tenant)
+- **IA/ML**: Python (FastAPI) para modelos de priorização e agente conversacional
+- **Agente WhatsApp**: Integração com WhatsApp Business API (via parceiro como Evolution API ou diretamente)
+- **Integração**: HL7 MLLP e FHIR REST API
+- **Infraestrutura**: AWS (EC2, RDS, S3) ou GCP
+- **Autenticação**: OAuth 2.0 / JWT com MFA
+- **Mensageria**: Redis/RabbitMQ para filas de mensagens WhatsApp
+- **STT (Speech-to-Text)**: Para processar áudios do WhatsApp (Google Cloud Speech-to-Text ou AWS Transcribe)
+
+### 2.2 Arquitetura Multi-Tenant
+
+- Schema por tenant (hospitais/clínicas isolados)
+- Criptografia de dados sensíveis (dados de saúde = LGPD crítico)
+- Auditoria completa (logs de quem acessou o quê e quando)
+- Armazenamento de conversas WhatsApp criptografadas
+
+### 2.3 Integração HL7/FHIR
+
+- **HL7 v2**: ADT (Admit/Discharge/Transfer), ORU (Observations), MDM (Medical Documents)
+- **FHIR Resources**: Patient, Observation, Condition, Procedure, MedicationStatement
+- **Sincronização**: Bidirecional (puxar dados do EHR, enviar dados coletados pelo agente)
+- **Mapeamento**: Dados estruturados do agente → FHIR Observation
+
+### 2.4 Segurança e Compliance
+
+- Criptografia em trânsito (TLS 1.3) e em repouso (AES-256)
+- Logs de auditoria imutáveis (retenção 5 anos)
+- Backup automático diário com georedundância
+- Controle de acesso baseado em roles (RBAC)
+- MFA obrigatório para profissionais de saúde
+- Conversas WhatsApp armazenadas com criptografia end-to-end
+- Consentimento explícito do paciente para interação via WhatsApp
+
+## 3. IA e Machine Learning
+
+### 3.1 Modelo de Priorização de Casos
+
+**Entrada:**
+
+- Dados clínicos (estadiamento, tipo de câncer, comorbidades)
+- Sintomas reportados pelo paciente via WhatsApp (escala de 0-10)
+- Tempo desde última consulta
+- Resultados de exames recentes
+- Score de fragilidade/performance status
+- Histórico de conversas com agente
+
+**Saída:**
+
+- Score de prioridade (0-100)
+- Categoria: Crítico, Alto, Médio, Baixo
+- Razão da priorização (explicabilidade)
+
+**Técnica:**
+
+- Modelo ensemble (Random Forest + Gradient Boosting)
+- Treinamento com dados históricos de pacientes oncológicos
+- Validação clínica com oncologistas
+
+### 3.2 Agente Conversacional de IA no WhatsApp
+
+**Arquitetura do Agente:**
+
+- **LLM Base**: GPT-4 ou Claude (via API) com fine-tuning para contexto oncológico
+- **RAG**: Base de conhecimento com guidelines NCCN, ASCO, ESMO e questionários validados (EORTC QLQ-C30, PRO-CTCAE, ESAS)
+- **Context Management**: Manter contexto da conversa, histórico do paciente, tipo de câncer, tratamento atual
+- **Guardrails**: Validação de respostas, prevenção de alucinações, detecção de urgência
+- **STT**: Processamento de áudios do WhatsApp (Google Cloud Speech-to-Text ou AWS Transcribe)
+
+**Fluxo de Conversa:**
+
+1. Agente inicia conversa (template aprovado pelo WhatsApp Business)
+2. Pergunta sobre sintomas principais de forma conversacional (escalonamento inteligente)
+3. Processa texto livre e áudio do paciente
+4. Detecta sintomas críticos → alerta enfermagem em tempo real
+5. Armazena dados estruturados no EHR via FHIR
+6. Enfermagem pode assumir conversa se necessário (handoff manual)
+
+**Questionários Adaptativos via Chat:**
+
+- EORTC QLQ-C30 (qualidade de vida) entregue como conversa natural
+- PRO-CTCAE (sintomas relacionados ao tratamento)
+- ESAS (Escala de Sintomas de Edmonton)
+- Questionários customizados por tipo de câncer
+
+**Detecção de Sintomas Críticos:**
+
+- Febre >38°C
+- Dispneia severa
+- Sangramento ativo
+- Dor intensa (escala 8-10/10)
+- Náuseas/vômitos persistentes
+- Sinais de infecção
+
+**Processamento:**
+
+- NLP para extrair informações de texto livre e áudio
+- Mapeamento de respostas conversacionais para escalas padronizadas
+- Detecção de urgência em tempo real
+- Alertas automáticos para equipe de enfermagem se sintoma grave
+
+### 3.3 Integração WhatsApp Business API
+
+**Requisitos:**
+
+- Conta WhatsApp Business API (via parceiro ou diretamente)
+- Aprovação de templates de mensagens (para iniciar conversas)
+- Webhook para receber mensagens
+- Envio de mensagens (texto, áudio, imagens)
+- Rate limiting (respeitar limites do WhatsApp)
+
+**Templates Aprovados:**
+
+- "Olá [Nome], como você está se sentindo hoje? Podemos conversar sobre seus sintomas?"
+- "Lembrete: Precisamos saber como você está se sentindo esta semana. Responda quando puder."
+
+## 4. Dashboard para Equipe de Enfermagem
+
+### 4.1 Painel de Monitoramento
+
+**Lista de Pacientes:**
+
+- Ordenada por prioridade (score de IA)
+- Status de coleta de dados (última interação com agente)
+- Indicadores visuais: verde (ok), amarelo (atenção), vermelho (crítico)
+
+**Filtros:**
+
+- Por tipo de câncer
+- Por estágio
+- Por tratamento atual
+- Por último contato (últimas 24h, 7 dias, 30 dias)
+- Por status de alerta
+
+**Visualização de Conversas:**
+
+- Histórico completo de interações paciente-agente via WhatsApp
+- Timeline de conversas (data/hora)
+- Resumo de sintomas reportados
+- Dados estruturados extraídos (scores, escalas)
+
+### 4.2 Alertas em Tempo Real
+
+**Tipos de Alertas:**
+
+- Sintomas críticos detectados pelo agente
+- Pacientes que não responderam ao agente (≥3 dias)
+- Atrasos em consultas ou exames
+- Mudanças significativas em scores de sintomas (piora súbita)
+- Novos pacientes adicionados ao sistema
+
+**Notificações:**
+
+- Push notifications no dashboard
+- Email para enfermagem (opcional)
+- SMS para casos críticos (opcional)
+
+### 4.3 Intervenção Manual
+
+**Funcionalidades:**
+
+- Botão "Assumir Conversa" para enfermagem entrar na conversa WhatsApp
+- Chat integrado no dashboard (enfermagem pode responder paciente diretamente)
+- Marcação de conversas (resolvido, pendente, urgente)
+- Notas da equipe sobre interações
+
+**Workflow:**
+
+1. Enfermagem recebe alerta de sintoma crítico
+2. Visualiza conversa completa no dashboard
+3. Decide intervir manualmente
+4. Assume conversa no WhatsApp ou liga para paciente
+5. Marca caso como resolvido
+
+### 4.4 Métricas e Analytics
+
+**Métricas de Engajamento:**
+
+- Taxa de resposta ao agente (% de pacientes que respondem)
+- Tempo médio de resposta do paciente
+- Número de conversas por paciente/mês
+- Adesão a questionários (EORTC, PRO-CTCAE)
+
+**Métricas Clínicas:**
+
+- Número de alertas gerados
+- Tempo médio de resposta da equipe a alertas
+- Sintomas mais reportados
+- Tendência de sintomas ao longo do tempo
+
+**Métricas de Operação:**
+
+- Tempo médio de diagnóstico
+- Satisfação do paciente (survey)
+- Redução de idas à clínica (comparativo antes/depois)
+
+## 5. Estratégia de Vendas e Marketing
+
+### 5.1 Modelo de Vendas B2B
+
+**Funil de Vendas:**
+
+1. **Lead Generation**: Inbound (conteúdo sobre oncologia + tecnologia), Outbound (cold email para oncologistas e coordenadores de enfermagem)
+2. **Qualificação**: BANT (Budget, Authority, Need, Timeline)
+3. **Demo**: Apresentação customizada mostrando:
+
+   - Agente de IA no WhatsApp em ação
+   - Dashboard de enfermagem com alertas
+   - Integração com EHR
+
+4. **Proposta**: Pricing baseado em número de pacientes/mês
+5. **Fechamento**: Contrato anual com onboarding
+
+### 5.2 Pricing Strategy
+
+**Modelo:**
+
+- **Tier 1**: Até 100 pacientes/mês - R$ 5.000/mês
+- **Tier 2**: 101-500 pacientes/mês - R$ 15.000/mês
+- **Tier 3**: 500+ pacientes/mês - R$ 30.000/mês + R$ 30/paciente adicional
+- **Setup**: Taxa única de integração R$ 20.000 (inclui configuração WhatsApp Business API)
+
+**Custos Adicionais:**
+
+- WhatsApp Business API: ~R$ 0,10-0,15 por conversa (conversas iniciadas pela empresa)
+- APIs de IA (GPT-4/Claude): ~R$ 0,50-1,00 por conversa completa
+- STT (áudio): ~R$ 0,02 por minuto de áudio
+
+### 5.3 Marketing de Conteúdo
+
+- E-books: "Guia de Navegação Oncológica", "IA em Oncologia: Como WhatsApp está revolucionando o acompanhamento"
+- Webinars: Cases de sucesso, demonstração ao vivo do agente
+- Blog: Artigos sobre tecnologia em oncologia, compliance LGPD, WhatsApp Business em saúde
+- Compliance: Respeitar Resolução CFM 2.227/2018 (telemedicina)
+
+## 6. Estratégia de Negócio e Fundraising
+
+### 6.1 Modelo de Negócio
+
+- **B2B Primário**: Venda para hospitais/clínicas oncológicas
+- **B2B2C Secundário**: Hospital contrata, paciente interage via WhatsApp (sem necessidade de app)
+- **Expansão**: Parcerias com planos de saúde (redução de custos)
+
+### 6.2 Value Proposition
+
+**Para Hospitais:**
+
+- Redução de readmissões (detecção precoce de complicações)
+- Melhor coordenação (dashboard centralizado)
+- Satisfação do paciente (acompanhamento mais próximo)
+- Redução de custos (menos idas à clínica)
+
+**Para Equipe de Enfermagem:**
+
+- Monitoramento centralizado de todos os pacientes
+- Alertas inteligentes (não precisa checar manualmente)
+- Visualização de conversas (contexto completo)
+- Intervenção proativa (detecção precoce)
+
+**Para Pacientes:**
+
+- Menos idas à clínica (acompanhamento remoto)
+- Acompanhamento mais próximo (conversas semanais)
+- Detecção precoce de complicações
+- Facilidade (WhatsApp, sem necessidade de app)
+
+**ROI:**
+
+- Redução de 20-30% em custos de readmissão
+- Aumento de 15% em eficiência da equipe de enfermagem
+- Redução de 40% em ligações telefônicas de acompanhamento
+
+### 6.3 Roadmap de Expansão
+
+**Fase 1 (MVP - 6 meses):**
+
+- Navegação + Priorização + Agente WhatsApp para coleta de dados
+- Dashboard para enfermagem com monitoramento e alertas
+- Integração com 1-2 EHRs principais
+- Integração WhatsApp Business API
+
+**Fase 2 (12 meses):**
+
+- RAG para suporte à decisão (agente pode consultar guidelines)
+- Integração com mais EHRs
+- Analytics avançado (dashboards executivos)
+- Suporte a múltiplos idiomas (português, espanhol)
+
+**Fase 3 (18 meses):**
+
+- Expansão para outros tipos de câncer (começar com mama, pulmão, colorretal)
+- Parcerias com planos de saúde
+- Certificação ANVISA (SaMD Classe II)
+- Agente multi-canal (WhatsApp, SMS, Telegram)
+
+## 7. Análise Financeira e Operações
+
+### 7.1 Unit Economics (Estimativa)
+
+- **CAC**: R$ 15.000 (ciclo de vendas 3-6 meses)
+- **LTV**: R$ 180.000 (cliente médio, 3 anos de retenção)
+- **LTV:CAC**: 12:1 (excelente)
+- **Churn**: 5-10% ao ano (saúde = alta retenção)
+
+**Custos Variáveis por Paciente:**
+
+- WhatsApp API: ~R$ 2-3/mês (20-30 conversas/mês)
+- APIs de IA: ~R$ 10-15/mês (conversas completas)
+- STT (áudio): ~R$ 1-2/mês
+- **Total variável**: ~R$ 13-20/paciente/mês
+
+### 7.2 Financial Model (Ano 1)
+
+- **Receita**: R$ 600k (10 clientes, médio R$ 5k/mês)
+- **Custos Fixos**: R$ 300k (infra, desenvolvimento, vendas)
+- **Custos Variáveis**: R$ 100k (APIs, WhatsApp)
+- **Total Custos**: R$ 400k
+- **Break-even**: Mês 8-10
+- **Runway**: 18-24 meses com seed de R$ 2M
+
+### 7.3 Compliance e Legal
+
+- **LGPD**: DPO designado, consentimento explícito, portabilidade, armazenamento de conversas
+- **ANVISA**: Classificação como SaMD (avaliar necessidade de registro)
+- **WhatsApp Business**: Aprovação de templates, política de privacidade
+- **Contratos**: SLAs (99.9% uptime), termos de uso, políticas de privacidade
+- **Seguro**: Seguro de responsabilidade civil (cyber + erro médico)
+
+## 8. Riscos e Mitigações
+
+**Risco 1**: Resistência de médicos a usar novo sistema
+
+- **Mitigação**: Onboarding robusto, treinamento, suporte dedicado
+
+**Risco 2**: Integração complexa com EHRs legados
+
+- **Mitigação**: Parcerias com integradores, suporte técnico especializado
+
+**Risco 3**: Compliance regulatório (ANVISA, LGPD)
+
+- **Mitigação**: Consultoria desde o início, validação jurídica
+
+**Risco 4**: Churn se IA não entregar valor real
+
+- **Mitigação**: Validação clínica rigorosa, métricas de sucesso claras
+
+**Risco 5**: Agente de IA no WhatsApp com respostas inadequadas ou erros
+
+- **Mitigação**: Guardrails rigorosos, validação de respostas, supervisão humana (enfermagem pode assumir), testes extensivos antes do lançamento
+
+**Risco 6**: Custos de APIs de IA (GPT-4/Claude) podem ser altos em escala
+
+- **Mitigação**: Otimização de prompts, cache de respostas, consideração de modelos open-source (Llama, Mistral) para casos não-críticos
+
+**Risco 7**: WhatsApp Business API pode ter limitações ou mudanças de política
+
+- **Mitigação**: Diversificação de canais (SMS, Telegram como backup), monitoramento de mudanças de política
+
+## 9. Próximos Passos Imediatos
+
+1. **Product Discovery**: 10 entrevistas com oncologistas, coordenadores de enfermagem e enfermeiros oncológicos
+2. **Arquitetura Inicial**: Definir stack, estrutura de dados, arquitetura do agente WhatsApp
+3. **Protótipo de IA**: 
+
+   - Modelo de priorização básico
+   - Agente conversacional básico (teste com dados sintéticos)
+
+4. **MVP Scope**: Feature freeze para v1.0 (navegação, priorização, agente WhatsApp, dashboard enfermagem)
+5. **Compliance**: Consultoria jurídica (LGPD, ANVISA, WhatsApp Business, aprovação de templates)
+6. **Seed Round**: Preparar pitch deck, identificar investidores healthtech
+
+## 10. Estrutura de Dados e Features Detalhadas
+
+### 10.1 Jornada do Paciente (Workflow)
+
+1. **Rastreio**: Identificação de risco, agendamento de exames
+2. **Navegação**: Roteamento entre especialidades (cirurgia, radioterapia, quimio)
+3. **Diagnóstico**: Acompanhamento de resultados, estadiamento
+4. **Tratamento**: Protocolo definido, monitoramento de efeitos adversos
+5. **Seguimento**: Consultas periódicas, exames de controle
+6. **Acompanhamento Remoto via WhatsApp**: 
+
+   - Agente inicia conversa semanal
+   - Coleta sintomas de forma conversacional
+   - Detecta urgências → alerta enfermagem
+   - Dados estruturados → EHR
+
+### 10.2 Fluxo de Dados do Agente WhatsApp
+
+```
+Paciente envia mensagem (texto/áudio)
+    ↓
+Webhook recebe mensagem
+    ↓
+Agente processa (LLM + RAG)
+    ↓
+Detecta sintoma crítico?
+    SIM → Alerta enfermagem em tempo real
+    NÃO → Continua conversa
+    ↓
+Extrai dados estruturados (sintomas, escalas, scores)
+    ↓
+Armazena no banco de dados
+    ↓
+Envia para EHR via FHIR (Observation)
+    ↓
+Atualiza score de priorização
+    ↓
+Enfermagem visualiza no dashboard
+```
+
+### 10.3 Handoff Manual (Enfermagem Assume Conversa)
+
+```
+Enfermagem recebe alerta
+    ↓
+Visualiza conversa completa no dashboard
+    ↓
+Clica "Assumir Conversa"
+    ↓
+Sistema muda contexto: Agente → Enfermagem
+    ↓
+Enfermagem responde paciente via dashboard (integração WhatsApp)
+    ↓
+Marca caso como resolvido
+    ↓
+Volta para agente automático (se necessário)
+```
+
+### To-dos
+
+- [ ] Executar 10 entrevistas de Product Discovery usando guia criado (docs/product-discovery/guia-entrevistas.md)
+- [ ] Sintetizar insights das entrevistas e atualizar mapa de dores
+- [ ] Priorizar features finais do MVP baseado em validação
+- [ ] Contratar consultoria jurídica especializada em healthtech para LGPD, ANVISA SaMD e compliance
+- [ ] Preparar documentação inicial de compliance (políticas de privacidade, termos de uso)
+- [ ] Setup inicial do projeto: repositório Git, estrutura de pastas (Next.js + NestJS)
+- [ ] Configurar PostgreSQL multi-tenant com schemas por tenant
+- [ ] Implementar autenticação básica (JWT + OAuth 2.0)
+- [ ] Configurar ambiente de desenvolvimento (Docker Compose)
+- [ ] Setup CI/CD (GitHub Actions)
+- [ ] Implementar CRUD de pacientes (NestJS + Prisma)
+- [ ] Implementar serviço de navegação de pacientes (jornada oncológica)
+- [ ] Desenvolver modelo de ML de priorização (Python/FastAPI): dataset sintético, treinamento, API de inferência
+- [ ] Implementar integração WhatsApp Business API (webhook, fila de mensagens)
+- [ ] Implementar agente conversacional básico (LLM + RAG)
+- [ ] Implementar processamento de áudio (STT) para mensagens de voz
+- [ ] Implementar detecção de sintomas críticos e sistema de alertas
+- [ ] Implementar integração FHIR básica (pull de pacientes, push de observações)
+- [ ] Implementar dashboard de navegação (lista de pacientes, filtros)
+- [ ] Implementar visualização de conversas WhatsApp (histórico completo)
+- [ ] Implementar sistema de alertas em tempo real (WebSocket)
+- [ ] Implementar intervenção manual (enfermagem assume conversa)
+- [ ] Implementar tela de métricas e analytics básico
+- [ ] Implementar autenticação e autorização no frontend (NextAuth.js)
+- [ ] Integrar frontend com backend (APIs REST)
+- [ ] Testes end-to-end (E2E) das features principais
+- [ ] Testes de performance e otimização
+- [ ] Testes de segurança (penetration testing básico)
+- [ ] Ajustes de UX baseado em feedback interno
+- [ ] Finalizar documentação de compliance (LGPD, ANVISA)
+- [ ] Submeter templates WhatsApp Business para aprovação Meta
+- [ ] Contratar seguros necessários (E&O, Cyber Liability)
+- [ ] Preparar apresentação final do pitch deck (PowerPoint/PDF)
+- [ ] Identificar e contatar 3-5 hospitais piloto para validação

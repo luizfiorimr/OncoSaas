@@ -1,0 +1,121 @@
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
+import { MessagesService } from './messages.service';
+import { CreateMessageDto } from './dto/create-message.dto';
+import { UpdateMessageDto } from './dto/update-message.dto';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { TenantGuard } from '../auth/guards/tenant.guard';
+import { RolesGuard } from '../auth/guards/roles.guard';
+import { Roles } from '../auth/decorators/roles.decorator';
+import { CurrentUser } from '../auth/decorators/current-user.decorator';
+import { UserRole } from '@prisma/client';
+
+@Controller('messages')
+@UseGuards(JwtAuthGuard, TenantGuard, RolesGuard)
+export class MessagesController {
+  constructor(private readonly messagesService: MessagesService) {}
+
+  @Get()
+  @Roles(
+    UserRole.ADMIN,
+    UserRole.ONCOLOGIST,
+    UserRole.NURSE,
+    UserRole.COORDINATOR
+  )
+  findAll(@CurrentUser() user: any, @Query('patientId') patientId?: string) {
+    return this.messagesService.findAll(user.tenantId, patientId);
+  }
+
+  @Get('unassumed/count')
+  @Roles(
+    UserRole.ADMIN,
+    UserRole.ONCOLOGIST,
+    UserRole.NURSE,
+    UserRole.COORDINATOR
+  )
+  getUnassumedCount(@CurrentUser() user: any) {
+    return this.messagesService.getUnassumedCount(user.tenantId);
+  }
+
+  @Get('conversation/:patientId')
+  @Roles(
+    UserRole.ADMIN,
+    UserRole.ONCOLOGIST,
+    UserRole.NURSE,
+    UserRole.COORDINATOR
+  )
+  getConversation(
+    @Param('patientId') patientId: string,
+    @CurrentUser() user: any,
+    @Query('limit') limit?: string
+  ) {
+    return this.messagesService.getConversation(
+      patientId,
+      user.tenantId,
+      limit ? parseInt(limit, 10) : 50
+    );
+  }
+
+  @Get(':id')
+  @Roles(
+    UserRole.ADMIN,
+    UserRole.ONCOLOGIST,
+    UserRole.NURSE,
+    UserRole.COORDINATOR
+  )
+  findOne(@Param('id') id: string, @CurrentUser() user: any) {
+    return this.messagesService.findOne(id, user.tenantId);
+  }
+
+  @Post()
+  @Roles(
+    UserRole.ADMIN,
+    UserRole.COORDINATOR,
+    UserRole.NURSE,
+    UserRole.ONCOLOGIST
+  ) // Permite enfermeiros e oncologistas enviarem mensagens quando assumem conversa
+  create(@Body() createMessageDto: CreateMessageDto, @CurrentUser() user: any) {
+    // Se processedBy é NURSING, adicionar assumedBy automaticamente
+    if (
+      createMessageDto.processedBy === 'NURSING' &&
+      !createMessageDto.assumedBy
+    ) {
+      createMessageDto.assumedBy = user.id;
+    }
+    return this.messagesService.create(createMessageDto, user.tenantId);
+  }
+
+  @Patch(':id')
+  @Roles(
+    UserRole.ADMIN,
+    UserRole.ONCOLOGIST,
+    UserRole.NURSE,
+    UserRole.COORDINATOR
+  )
+  update(
+    @Param('id') id: string,
+    @Body() updateMessageDto: UpdateMessageDto,
+    @CurrentUser() user: any
+  ) {
+    return this.messagesService.update(id, updateMessageDto, user.tenantId);
+  }
+
+  @Patch(':id/assume')
+  @Roles(
+    UserRole.ADMIN,
+    UserRole.ONCOLOGIST,
+    UserRole.NURSE,
+    UserRole.COORDINATOR
+  )
+  assumeConversation(@Param('id') id: string, @CurrentUser() user: any) {
+    return this.messagesService.assumeConversation(id, user.tenantId, user.id);
+  }
+}

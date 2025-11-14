@@ -1,0 +1,20 @@
+[MASTER]
+# Python code to execute, usually for sys.path manipulation
+init-hook='import sys; sys.path.append(".")'
+
+[MESSAGES CONTROL]
+# Disable specific warnings
+disable=C0111,missing-docstring,too-few-public-methods
+
+[FORMAT]
+# Maximum number of characters on a single line
+max-line-length=88
+
+[BASIC]
+# Good variable names
+good-names=i,j,k,ex,Run,_,id,pk,db
+
+[TYPECHECK]
+# Ignore imports
+ignored-modules=fastapi,pydantic,uvicorn
+

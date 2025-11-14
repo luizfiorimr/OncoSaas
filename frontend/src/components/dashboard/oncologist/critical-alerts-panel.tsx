@@ -24,11 +24,12 @@ export function CriticalAlertsPanel({
   const [dismissedAlerts, setDismissedAlerts] = useState<Set<string>>(new Set());
   const [isExpanded, setIsExpanded] = useState(true); // Expandido por padrão para alertas críticos
 
-  // Filtrar apenas alertas críticos
+  // Filtrar alertas críticos e de alta severidade (incluindo NAVIGATION_DELAY)
+  // Etapas de diagnóstico/tratamento atrasadas podem ser HIGH ou CRITICAL
   const criticalAlerts =
     alerts?.filter(
       (alert) =>
-        alert.severity === 'CRITICAL' &&
+        (alert.severity === 'CRITICAL' || alert.severity === 'HIGH') &&
         alert.status === 'PENDING' &&
         !dismissedAlerts.has(alert.id)
     ) || [];

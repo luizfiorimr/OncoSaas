@@ -1,0 +1,1202 @@
+---
+alwaysApply: true
+---
+
+# Medicina de Emergência
+
+## Terminologia Específica
+
+- **PCR**: Parada Cardiorrespiratória
+- **RCP**: Ressuscitação Cardiopulmonar
+- **BVM**: Bolsa-válvula-máscara
+- **IOT**: Intubação Orotraqueal
+- **Via Aérea Definitiva**: Tubo orotraqueal com cuff insuflado
+- **Cricotireoidostomia**: Via aérea cirúrgica de emergência
+- **Pneumotórax hipertensivo**: Ar sob pressão no espaço pleural, desviando mediastino
+- **Tamponamento cardíaco**: Acúmulo de líquido no pericárdio comprometendo enchimento
+- **Choque**: Perfusão tecidual inadequada
+- **FAST**: Focused Assessment with Sonography for Trauma
+- **eFAST**: FAST estendido (inclui pulmões)
+- **Tríade da morte**: Hipotermia + acidose + coagulopatia
+- **Regra dos 9 de Wallace**: Cálculo de superfície corporal queimada
+- **Síndrome Compartimental**: Aumento da pressão em compartimento fechado (isquemia)
+
+## Stack de Habilidades do Emergencista
+
+### Via Aérea Avançada
+- **IOT Convencional e Difícil**: Laringoscopia direta/vídeo, Mallampati, LEMON score
+- **Cricotireoidostomia**: Técnica cirúrgica de emergência, quando indicada
+- **Manejo de Via Aérea Difícil**: Algoritmo da ASA, plano A/B/C/D
+- **BVM (Bolsa-Válvula-Máscara)**: Técnica de 2 mãos, vedação adequada
+- **Dispositivos Supraglóticos**: Máscara laríngea, tubo laríngeo
+- **Ventilação de Resgate**: Jet ventilation, oxigenação apneica
+
+### Reanimação Cardiopulmonar Avançada
+- **RCP de Alta Qualidade**: Compressões 100-120/min, profundidade 5-6cm, minimizar interrupções
+- **Desfibrilação**: Bifásica (120-200J), monofásica (360J), timing ideal
+- **Cardioversão Sincronizada**: Indicações, energia adequada por ritmo
+- **Marca-Passo Transcutâneo**: Técnica, captura, indicações em bradicardia sintomática
+- **ECMO em PCR** (eCPR): Conceitos, quando considerar em centros especializados
+
+### Acesso Vascular Rápido em Emergência
+- **Periférico Calibroso**: Técnica, vias preferenciais (fossa antecubital), calibre 14-16G
+- **Acesso Central**: Jugular interna, subclávia, femoral - técnica, ultrassom-guiado
+- **Intraósseo**: Adulto (úmero proximal, tíbia) e pediátrico (tíbia proximal), técnica
+- **Dissecção Venosa**: Safena magna, quando considerar
+
+### Procedimentos de Emergência
+- **Drenagem Torácica**: Pneumotórax, hemotórax - técnica, posição, tamanho do dreno
+- **Pericardiocentese**: Tamponamento cardíaco, técnica subxifóide
+- **Redução de Fraturas/Luxações**: Ombro, cotovelo, quadril, dedos - técnicas específicas
+- **Sutura de Ferimentos Complexos**: Escalpe, face, mãos, tendões
+- **Fasciotomia**: Síndrome compartimental, técnica
+
+### Triagem e Gestão de Fluxo
+- **Triagem de Manchester**: 5 categorias, discriminadores, tempo de atendimento
+- **START (Simple Triage And Rapid Treatment)**: Triagem em desastres/múltiplas vítimas
+- **Priorização Rápida**: Reconhecer paciente crítico em segundos
+- **Gestão de Superlotação**: Otimizar fluxo, quando transferir
+
+### Ultrassom Point-of-Care (POCUS)
+- **FAST**: 4 janelas (pericárdica, hepatorrenal, esplenorrenal, pélvica) - líquido livre
+- **eFAST**: FAST + pulmão bilateral (pneumotórax, hemotórax)
+- **Avaliação Cardíaca**: Fração de ejeção visual, derrame pericárdico, tamponamento
+- **Avaliação Vascular**: TVP, guia para acesso central
+- **Avaliação Pulmonar**: Pneumotórax (sinal do deslizamento), consolidação (hepatização)
+
+### Sedação e Analgesia de Emergência
+- **Sequência Rápida de Intubação (RSI)**: Pré-oxigenação, indução, bloqueio neuromuscular, IOT
+- **Drogas para RSI**: Etomidato, propofol, cetamina + succinilcolina ou rocurônio
+- **Sedação Procedural**: Propofol, cetamina, fentanil + midazolam
+- **Controle de Dor Aguda**: Opioides IV (morfina, fentanil), bloqueios regionais
+- **Analgesia Multimodal**: Combinar classes para reduzir opioides
+
+### Interpretação Rápida de Imagens
+- **ECG Emergencial**: IAMCST (critérios), arritmias malignas (FV, TV, bloqueios), hipercalemia
+- **RX Trauma**: Pneumotórax, hemotórax, fraturas, pneumoperitônio, alargamento de mediastino
+- **TC Crânio Emergencial**: Hematomas (extradural, subdural, intraparenquimatoso), AVC, herniação
+- **TC Tórax/Abdome**: Dissecção de aorta, TEP, trauma de órgãos sólidos
+
+### Protocolos Padronizados
+- **ACLS Completo**: Algoritmos de PCR (FV/TVSP, AESP/assistolia), taquiarritmias, bradicardias
+- **ATLS Completo**: ABCDE, trauma, choque hemorrágico (classes I-IV), FAST
+- **PALS**: RCP pediátrica, doses peso-ajustadas, reconhecimento de choque
+- **Protocolo de AVC**: Janela 4,5h, critérios trombólise, contraindicações
+- **Protocolo de Sepse**: Pacote de 1 hora, antibiótico empírico
+- **Protocolos de Trauma**: Cranioencefálico, torácico, abdominal, raquimedular
+
+### Toxicologia Clínica
+- **Intoxicações Comuns**: Paracetamol (NAC), antidepressivos tricíclicos, benzodiazepínicos, opioides, organofosforados
+- **Antídotos**: Naloxone, flumazenil, NAC, atropina, gluconato de cálcio
+- **Descontaminação**: Carvão ativado (quando e quanto), lavagem gástrica (raramente)
+- **Quando Chamar Toxicologista**: Intoxicação grave, múltiplas drogas, antídoto não disponível
+
+### Emergências Obstétricas
+- **Pré-eclâmpsia/Eclâmpsia**: Sulfato de magnésio (4g ataque + 1g/h), anti-hipertensivos, quando interromper gestação
+- **Descolamento de Placenta**: Reconhecer, ressuscitação materna, interrupção urgente
+- **Parto de Emergência**: Quando não dá tempo de ir ao centro obstétrico
+
+### Emergências Pediátricas
+- **Reconhecimento de Choque**: Sinais precoces (taquicardia, enchimento capilar >2s), tardios (hipotensão)
+- **Convulsão Febril**: Simples vs complexa, quando investigar
+- **Desidratação**: Plano A/B/C, sinais de gravidade, quando reidratar IV
+- **Obstrução de Via Aérea**: Corpo estranho, crupe, epiglotite, bronquiolite
+
+### Comunicação em Situações de Crise
+- **Más Notícias**: Protocolo SPIKES, empatia, clareza
+- **Comunicação com Família**: Situações graves, PCR, morte inesperada
+- **Conflitos**: Família exaltada, demandas impossíveis, limitação de recursos
+- **Documentação**: Registro detalhado em situações médico-legais
+
+### Gestão de Desastres e Múltiplas Vítimas
+- **Triage em Massa**: START, SALT
+- **Coordenação**: Sistema de comando de incidentes
+- **Recursos Limitados**: Priorização, quando transferir
+- **Comunicação**: Rádio, cadeia de comando
+
+## Metodologia de Raciocínio Clínico do Emergencista
+
+### 1. Abordagem Inicial - Sempre ABCDE!
+
+**Princípio Fundamental: ESTABILIZAR ANTES DE DIAGNOSTICAR**
+
+**A - Airway (Via Aérea):**
+- Está pérvia? Risco de obstrução?
+- Proteção adequada? (Glasgow ≤8 = IOT)
+- Necessita via aérea definitiva?
+
+**B - Breathing (Respiração):**
+- FR, SpO₂, expansibilidade, ausculta
+- Diagnósticos imediatos de morte: pneumotórax hipertensivo, hemotórax maciço
+- O₂ suplementar, VNI se necessário
+
+**C - Circulation (Circulação):**
+- PA, FC, perfusão (TEC, extremidades)
+- Reconhecer choque (hipovolêmico, cardiogênico, distributivo, obstrutivo)
+- Acesso venoso, cristaloide, hemoderivados
+- FAST se trauma
+
+**D - Disability (Neurológico):**
+- Glasgow, pupilas
+- Glicemia (sempre!)
+- Sinais de herniação
+
+**E - Exposure (Exposição):**
+- Exame completo (incluindo dorso)
+- Prevenir hipotermia (importante em trauma/sepse)
+
+**Após ABCDE:** Anamnese detalhada, exames, tratamento definitivo
+
+### 2. Fluxograma Mental de Decisão
+
+```
+PACIENTE NA EMERGÊNCIA
+         ↓
+[TRIAGEM] → Manchester → Vermelho/Laranja/Amarelo/Verde/Azul
+         ↓
+[ABCDE - PRIMARY SURVEY]
+    Ameaça à vida? → SIM → Intervir IMEDIATAMENTE
+         ↓ NÃO (Estável)
+[ANAMNESE + EXAME FÍSICO SECUNDÁRIO]
+         ↓
+[PENSAR "WORST-CASE SCENARIO"]
+    - Posso estar perdendo algo grave?
+    - IAM? AVC? Dissecção de aorta? Sepse? AAA roto?
+         ↓
+[DIAGNÓSTICO DIFERENCIAL]
+    - Priori zar GRAVES primeiro
+    - Depois comuns
+         ↓
+[PROPEDÊUTICA RÁPIDA]
+    - ECG <10min (dor torácica)
+    - TC sem contraste <25min (AVC)
+    - FAST (trauma)
+    - Exames laboratoriais essenciais
+         ↓
+[PROTOCOLOS PADRONIZADOS]
+    - ACLS? ATLS? AVC? Sepse?
+    - Seguir guidelines estrita
+         ↓
+[DECISÃO DE DESTINO]
+    - Alta? Observação? Internação? UTI? Centro cirúrgico?
+    - Critérios bem definidos
+         ↓
+[COMUNICAÇÃO]
+    - Orientações de alta claras
+    - Sinais de retorno
+    - Documentação completa
+```
+
+### 3. Perguntas-Chave por Cenário de Emergência
+
+**DOR TORÁCICA NA EMERGÊNCIA:**
+- **SEMPRE descartar graves primeiro**: IAM, dissecção, TEP, pneumotórax
+- Início súbito ou gradual?
+- Características: aperto (isquêmico), rasgando para dorso (dissecção), pleurítica (TEP/pneumonia)
+- Fatores de risco CV?
+- ECG em <10 minutos!
+- **Escore HEART**: Strategy rápida
+- **Buscar em @md/**: "IAMCST tratamento", "Dissecção de aorta", "Escore HEART"
+
+**DISPNEIA AGUDA COM INSTABILIDADE:**
+- **Pensar em causas de morte iminente**: EAP, pneumotórax hipertensivo, TEP maciço, tamponamento
+- SpO₂? PAS? Perfusão?
+- Início súbito? (pneumotórax, TEP)
+- Sibilância? (broncoespasmo)
+- Estertores? (EAP)
+- Ausência de MV unilateral? (pneumotórax)
+- **Buscar em @md/**: "Edema agudo de pulmão", "Pneumotórax hipertensivo ATLS"
+
+**REBAIXAMENTO DE CONSCIÊNCIA:**
+- Glasgow? Pupilas?
+- Glicemia SEMPRE (hipoglicemia é causa reversível #1)
+- Sinais de trauma? (hematoma)
+- Febre? Rigidez de nuca? (meningite)
+- História de epilepsia? (pós-ictal)
+- Drogas/álcool?
+- **Buscar em @md/**: "Coma causas", "Glasgow interpretação"
+
+**POLITRAUMA:**
+- **ATLS rigoroso**: ABCDE, primary survey
+- Mecanismo? (altura, velocidade, ejeção do veículo)
+- Instabilidade hemodinâmica? → FAST → se positivo: cirurgia
+- Déficit neurológico? → TC crânio urgente
+- Fraturas? Hemorragia externa?
+- **Buscar em @md/**: "ATLS protocolo completo", "Choque hemorrágico classes"
+
+**CONVULSÃO ATIVA (Estado de Mal):**
+- Duração >5 min?
+- Primeira crise ou epilepsia conhecida?
+- Febre? (meningite, encefalite)
+- Trauma? (hematoma)
+- Glicemia!
+- **Protocolo escalonado**: BZD → fenitoína → anestésicos
+- **Buscar em @md/**: "Estado de mal epiléptico tratamento"
+
+### 4. Construção do Diagnóstico Diferencial - Graves Primeiro!
+
+**Princípio do Emergencista: WORST-CASE SCENARIO**
+
+**Sempre perguntar: "O que NÃO posso perder?"**
+
+**Exemplo - Dor Torácica:**
+
+**GRAVES (descartar primeiro):**
+1. **IAM**: ECG, troponina, escore HEART
+2. **Dissecção de aorta**: Dor rasgando para dorso, pulsos assimétricos, alargamento de mediastino
+3. **TEP**: Wells, D-dímero, AngioTC
+4. **Pneumotórax hipertensivo**: Clínico! Desvio de traqueia, ausência de MV, hipertimpanismo
+5. **Tamponamento cardíaco**: Tríade de Beck, FAST
+
+**Após descartar graves:**
+6. Pericardite (dor pleurítica, atrito)
+7. Pneumonia (febre, tosse)
+8. DRGE (pirose, queimação)
+9. Costocondrite (dor à palpação)
+
+**Método:**
+1. Lista de "não posso perder"
+2. Descartar sistematicamente com exames rápidos
+3. Só então considerar diagnósticos benignos
+
+### 5. Critérios de Gravidade - Reconhecer o Paciente Crítico
+
+**SINAIS DE MORTE IMINENTE:**
+- **Obstrução completa de VA**: Estridor, cianose, incapacidade de falar
+- **Insuficiência respiratória grave**: FR >35 ou <10, SpO₂ <85%, cianose
+- **Choque descompensado**: PAS <70, alteração de consciência, anúria
+- **Rebaixamento profundo**: Glasgow ≤8 sem proteção de via aérea
+
+**SINAIS DE ALERTA (Intervenção Urgente):**
+- PA <90/60 ou >220/120 mmHg
+- FC <40 ou >150 bpm
+- FR <10 ou >30 ipm
+- SpO₂ <90%
+- Glasgow <13
+- Dor intensa (escala >8)
+- Sangramento ativo não controlado
+
+**DECISÃO DE DESTINO:**
+
+**UTI:**
+- Necessidade de vasopressor
+- Ventilação mecânica
+- Monitorização invasiva
+- Instabilidade persistente
+
+**Internação:**
+- Necessita tratamento IV prolongado
+- Instabilidade leve que responde a tratamento
+- Observação >24h
+- Investigação complexa
+
+**Alta:**
+- Estável após tratamento
+- Diagnóstico claro
+- Seguimento ambulatorial adequado
+- Orientações compreendidas
+
+### 6. Integrando Conhecimento dos Livros (@md/)
+
+**QUANDO BUSCAR EM @md/Tintinalli ou Rosen:**
+- Protocolos de emergência específicos
+- Doses de medicações em emergência
+- Algoritmos de decisão
+
+**QUANDO BUSCAR EM @md/ACLS/ATLS/PALS:**
+- Reanimação cardiopulmonar
+- Trauma
+- Emergências pediátricas
+
+**ESTRATÉGIA DE BUSCA RÁPIDA:**
+
+**Protocolos:**
+"[Protocolo] completo" - Ex: "ACLS FV/TVSP", "ATLS choque hemorrágico"
+
+**Doses:**
+"[Medicação] dose emergência" - Ex: "Adrenalina dose PCR", "Amiodarona dose"
+
+**Critérios:**
+"[Doença] critérios" - Ex: "Trombólise AVC critérios"
+
+**Scores:**
+"[Score] cálculo" - Ex: "Glasgow cálculo", "HEART score"
+
+### 7. Exemplos Práticos de Raciocínio em Emergência
+
+**EXEMPLO 1: Dor Torácica - Raciocínio em Tempo Real**
+
+**Cenário:**
+Homem, 58 anos, dor torácica em aperto há 40 minutos, sudorese, náusea. HAS, DM, tabagista.
+
+**Raciocínio (primeiros 30 segundos):**
+- **Dor torácica típica + FR CV** → **SCA até prova em contrário!**
+- **AÇÃO IMEDIATA**: Monitor, O₂, acesso venoso, AAS 200mg mastigar, ECG <10min
+
+**ECG em 5 minutos:**
+- Supra de ST em V1-V4 → **IAMCST de parede anterior!**
+
+**Decisão instantânea:**
+- **Tempo de dor: 40min** → dentro de janela (< 12h)
+- **Sem contraindicações** (sem AVC recente, cirurgia, sangramento)
+- **REPERFUSÃO URGENTE**: ICP <90min ou fibrinólise se ICP >120min
+
+**Buscar em @md/**:
+- "IAMCST tratamento reperfusão"
+- "Terapia adjuvante IAM"
+
+**Ações simultâneas:**
+- AAS 200mg + clopidogrel 600mg (dupla antiagregação)
+- Heparina não-fracionada (60 UI/kg bolus)
+- Atorvastatina 80mg
+- Betabloqueador se não contraindicado
+- Morfina 2-4mg IV (analgesia)
+- Acionar hemodinâmica/transferir
+
+**Tempo porta-balão: <90 minutos é CRÍTICO!**
+
+---
+
+**EXEMPLO 2: Politrauma - Sequência ATLS**
+
+**Cenário:**
+Vítima de colisão de moto, alta velocidade. Chega com colar cervical. PA 90/60, FC 130, FR 28, Glasgow 10, múltiplas escoriações.
+
+**PRIMARY SURVEY (simultâneo):**
+
+**A + C-spine:**
+- Via aérea pérvia? Sim, mas Glasgow 10 → risco!
+- Colar cervical mantido
+
+**B:**
+- FR 28, SpO₂ 88% AA → O₂ máscara 15L
+- Ausculta: MV presente bilateral
+- Expansibilidade: simétrica
+
+**C:**
+- **PA 90/60 + FC 130** → **CHOQUE CLASSE III** (perda 30-40%)
+- Dois acessos calibrosos (14G ou 16G)
+- Cristaloide 1L rápido
+- Tipagem sanguínea + prova cruzada
+- **FAST**: Positivo em Morrison (líquido livre) → **HEMOPERITÔNIO!**
+
+**D:**
+- Glasgow 10 (3-4-3)
+- Pupilas: isocóricas e fotorreagentes
+
+**E:**
+- Múltiplas escoriações
+- Abdome: distendido, doloroso
+- Pelve: estável
+- Extremidades: sem deformidades grosseiras
+
+**Raciocínio:**
+1. **Choque classe III + FAST positivo** → **Trauma abdominal com sangramento ativo!**
+2. **Glasgow 10** → não obedece comandos → IOT antes de TC
+3. **Decisão**: **LAPAROTOMIA EXPLORADORA urgente** (instabilidade + FAST+)
+
+**Buscar em @md/**:
+- "ATLS choque hemorrágico"
+- "Trauma abdominal FAST"
+- "Transfusão maciça protocolo"
+
+**Ações imediatas:**
+- Ressuscitação agressiva: cristaloide + hemácias (protocolo 1:1:1)
+- Ácido tranexâmico 1g IV (dentro de 3h do trauma)
+- IOT (Glasgow 10 + vai para cirurgia)
+- Avisar centro cirúrgico: laparotomia de trauma
+- NÃO fazer TC (paciente instável + diagnóstico claro pelo FAST)
+- Damage control surgery: controlar hemorragia, não fazer reparo definitivo
+
+---
+
+**EXEMPLO 3: AVC Agudo - Corrida contra o Relógio**
+
+**Cenário:**
+Mulher, 68 anos, trazida por familiar. Há 2 horas apresentou fraqueza em hemicorpo direito + dificuldade para falar. Lúcida. HAS, em uso de AAS.
+
+**Raciocínio:**
+- **Déficit focal agudo** → **AVC!**
+- **Tempo: 2 horas** → **DENTRO DA JANELA DE TROMBÓLISE (<4,5h)!**
+- **TEMPO É CÉREBRO**: cada minuto conta!
+
+**Escala de Cincinnati (rápida):**
+- Assimetria facial: SIM (canto da boca caído à direita)
+- Fraqueza de membros: SIM (não sustenta braço direito)
+- Alteração da fala: SIM (disartria)
+→ **3/3 positivos** = AVC muito provável
+
+**Ações imediatas (primeiros 10 minutos):**
+1. Anotar **hora EXATA do início** dos sintomas
+2. Monitor, O₂, acesso venoso, glicemia
+3. **TC crânio SEM contraste** (<25 minutos!) - DESCARTAR HEMORRAGIA
+4. Colher exames: hemograma, coagulograma, função renal
+5. Acionar neurologista/equipe de AVC
+
+**Buscar em @md/**:
+- "AVC isquêmico trombólise critérios"
+- "Alteplase contraindicações"
+
+**Critérios de INCLUSÃO para trombólise:**
+✓ Início <4,5h
+✓ Déficit mensurável
+✓ TC sem hemorragia
+✓ Idade ≥18 anos
+
+**Critérios de EXCLUSÃO (principais):**
+- PA >185/110 mmHg refratária
+- Glicemia <50 mg/dL
+- Plaquetas <100.000
+- INR >1,7 ou uso de DOAC <48h
+- Hemorragia intracraniana prévia
+- AVC ou TCE <3 meses
+
+**Se ELEGÍVEL:**
+- **Alteplase 0,9 mg/kg** (máx 90mg): 10% bolus + 90% em 1h
+- Controle pressórico rigoroso: PAS <180, PAD <105
+- Monitorização neurológica a cada 15min nas primeiras 2h
+- NÃO passar SNG, SVD, acesso central nas primeiras 24h
+- TC controle em 24h
+
+**Se NÃO elegível:**
+- AAS 200mg (se não usou)
+- Controle pressórico permissivo (tratar se >220/120)
+- Investigar etiologia
+- Prevenção secundária
+
+## Triagem de Manchester
+
+### Categorias de Prioridade
+
+**🔴 Emergente (Vermelho) - Atendimento Imediato:**
+- Via aérea comprometida
+- Respiração inadequada
+- Choque
+- Dor torácica sugestiva de SCA
+- Rebaixamento do nível de consciência (Glasgow ≤12)
+- Convulsão ativa
+- Hemorragia grave
+
+**🟠 Muito Urgente (Laranja) - Atendimento em até 10 minutos:**
+- Dor intensa (escala ≥8)
+- Alteração de sinais vitais moderada
+- Sangramento não controlado
+- História de alto risco (ex: mecanismo de trauma)
+
+**🟡 Urgente (Amarelo) - Atendimento em até 60 minutos:**
+- Dor moderada (escala 4-7)
+- Vômitos persistentes
+- História recente
+- Criança febril <3 meses
+
+**🟢 Pouco Urgente (Verde) - Atendimento em até 120 minutos:**
+- Problemas recentes (dias)
+- Sintomas leves
+
+**🔵 Não Urgente (Azul) - Atendimento em até 240 minutos:**
+- Problemas crônicos
+- Sem risco imediato
+
+## Protocolos ACLS (Advanced Cardiac Life Support)
+
+### Suporte Básico de Vida (BLS)
+
+**Sequência CAB:**
+1. **C**irculação (compressões torácicas)
+2. **A**irway (via aérea)
+3. **B**reathing (ventilação)
+
+**Compressões Torácicas:**
+- Frequência: 100-120/min
+- Profundidade: 5-6 cm (adultos)
+- Permitir retorno completo do tórax
+- Minimizar interrupções (<10s)
+- Trocar socorrista a cada 2 minutos
+
+**Ventilações:**
+- Razão compressão:ventilação = **30:2** (sem via aérea avançada)
+- 1 ventilação a cada 6 segundos (10/min) com via aérea avançada
+- Duração: 1 segundo por ventilação
+- Volume suficiente para elevar o tórax
+
+### Ritmos de PCR
+
+**Chocáveis (FV/TVSP):**
+- Fibrilação Ventricular
+- Taquicardia Ventricular Sem Pulso
+
+**Não-Chocáveis (AESP/Assistolia):**
+- Atividade Elétrica Sem Pulso
+- Assistolia
+
+### Algoritmo FV/TVSP
+
+**Choque:**
+- Bifásico: 120-200 J (conforme fabricante)
+- Monofásico: 360 J
+- Retomar RCP imediatamente após choque (2 min)
+
+**Medicações:**
+
+**Vasopressor:**
+- **Adrenalina**: 1 mg IV/IO a cada 3-5 minutos
+
+**Antiarrítmico (após 1º choque):**
+- **Amiodarona**: 300 mg IV bolus (1ª dose), 150 mg (2ª dose) OU
+- **Lidocaína**: 1-1,5 mg/kg (1ª dose), 0,5-0,75 mg/kg (2ª dose)
+
+**Sequência:**
+1. RCP 2 min
+2. Checar ritmo
+3. Choque (se FV/TV)
+4. RCP imediata 2 min
+5. Adrenalina após 2º choque
+6. Amiodarona após 3º choque
+7. Repetir ciclo
+
+### Algoritmo AESP/Assistolia
+
+**Medicações:**
+- **Adrenalina**: 1 mg IV/IO a cada 3-5 minutos (iniciar no 1º ciclo)
+
+**Causas Reversíveis (5 H's e 5 T's):**
+
+**5 H's:**
+- **H**ipovolemia
+- **H**ipóxia
+- **H**+ (acidose)
+- **H**ipo/hipercalemia
+- **H**ipotermia
+
+**5 T's:**
+- **T**ensão no tórax (pneumotórax hipertensivo)
+- **T**amponamento cardíaco
+- **T**óxicos/drogas
+- **T**rombose coronária (IAM)
+- **T**romboembolismo pulmonar (TEP)
+
+### Cuidados Pós-PCR
+
+**Meta de Oxigenação:**
+- SpO₂: 92-98%
+- Evitar hiperoxia (lesão por reperfusão)
+
+**Hemodinâmica:**
+- PAS >90 mmHg ou PAM >65 mmHg
+- Vasopressor se necessário (noradrenalina)
+
+**Controle de Temperatura:**
+- Hipotermia terapêutica: 32-36°C por 24h (pacientes comatosos)
+- Prevenir hipertermia
+
+**Glicemia:**
+- Alvo: 140-180 mg/dL
+
+**Prognóstico:**
+- Evitar decisões precoces (<72h)
+- Avaliar função neurológica após estabilização
+
+## ATLS (Advanced Trauma Life Support)
+
+### Avaliação Inicial
+
+**ABCDE:**
+- **A**irway + controle de coluna cervical
+- **B**reathing + ventilação
+- **C**irculation + controle de hemorragia
+- **D**isability (avaliação neurológica)
+- **E**xposure (exposição com controle de hipotermia)
+
+### A - Via Aérea com Proteção Cervical
+
+**Indicações de Via Aérea Definitiva:**
+- Apneia
+- Proteção de via aérea (Glasgow ≤8)
+- Trauma maxilofacial grave
+- Hemorragia maciça orofaríngea
+- Obstrução ou risco de obstrução
+
+**Colar Cervical:**
+- Manter imobilização em todos os traumas com mecanismo significativo
+- Remover apenas após excluir lesão (clínica + imagem)
+
+### B - Respiração e Ventilação
+
+**Lesões com Risco Imediato de Morte:**
+
+**Pneumotórax Hipertensivo:**
+- Diagnóstico clínico:
+  - Desvio de traqueia
+  - Hipertimpanismo
+  - Ausência de MV
+  - Turgência jugular
+  - Hipotensão, taquicardia
+- **Tratamento**: Descompressão imediata com agulha (2º EIC, linha hemiclavicular) → drenagem torácica
+
+**Hemotórax Maciço:**
+- Diagnóstico: Macicez, ausência de MV, choque
+- **Tratamento**: Drenagem torácica (dreno 36-40F)
+- Indicação cirúrgica:
+  - Débito inicial >1500 mL
+  - Débito >200 mL/h por 2-4h
+
+**Tórax Instável:**
+- Múltiplas fraturas de costelas adjacentes
+- Segmento flutuante (movimento paradoxal)
+- **Tratamento**: Analgesia, suporte ventilatório
+
+**Pneumotórax Aberto:**
+- Ferida aspirativa de tórax
+- **Tratamento**: Curativo de 3 pontas + drenagem torácica
+
+### C - Circulação e Controle de Hemorragia
+
+**Classes de Choque Hemorrágico:**
+
+**Classe I** (perda <15%):
+- FC <100 bpm
+- PA normal
+- Sem necessidade de reposição imediata
+
+**Classe II** (perda 15-30%):
+- FC 100-120 bpm
+- PA normal/reduzida
+- Cristaloide
+
+**Classe III** (perda 30-40%):
+- FC 120-140 bpm
+- PAS reduzida
+- Cristaloide + considerar hemácias
+
+**Classe IV** (perda >40%):
+- FC >140 bpm
+- PAS muito reduzida
+- Hemácias + protocolo de transfusão maciça
+
+**Protocolo de Transfusão Maciça:**
+- Razão 1:1:1 (hemácias:plasma:plaquetas)
+- Ácido tranexâmico: 1g IV em 10 min (dentro de 3h do trauma)
+- Meta: Hb 7-9 g/dL, plaquetas >50.000, INR <1,5
+
+**Controle de Hemorragia:**
+- Compressão direta
+- Torniquete (extremidades)
+- Tamponamento (cavidades)
+- Cirurgia (controle de danos)
+
+### D - Avaliação Neurológica
+
+**Escala de Coma de Glasgow:**
+
+**Abertura Ocular (1-4):**
+- 4: Espontânea
+- 3: Ao comando verbal
+- 2: À dor
+- 1: Ausente
+
+**Resposta Verbal (1-5):**
+- 5: Orientado
+- 4: Confuso
+- 3: Palavras inapropriadas
+- 2: Sons incompreensíveis
+- 1: Ausente
+
+**Resposta Motora (1-6):**
+- 6: Obedece comandos
+- 5: Localiza dor
+- 4: Retirada à dor
+- 3: Flexão anormal (decorticação)
+- 2: Extensão anormal (descerebração)
+- 1: Ausente
+
+**Interpretação:**
+- **13-15**: Leve
+- **9-12**: Moderado
+- **≤8**: Grave (indicação de IOT)
+
+**Pupilas:**
+- Avaliar tamanho, simetria e reatividade
+- Anisocoria >1 mm: Suspeitar herniação
+
+### E - Exposição e Controle de Hipotermia
+
+- Remover todas as roupas
+- Examinar completamente (incluindo dorso)
+- Aquecer paciente (mantas térmicas, fluidos aquecidos)
+- Prevenir hipotermia (<35°C)
+
+### FAST (Focused Assessment with Sonography for Trauma)
+
+**4 Janelas:**
+1. Pericárdica (subxifóide)
+2. Hepatorrenal (Morrison)
+3. Esplenorrenal
+4. Pélvica (suprapúbica)
+
+**Objetivo:** Detectar líquido livre (sangue)
+
+**eFAST:** Adiciona avaliação pulmonar bilateral
+
+### Trauma Cranioencefálico (TCE)
+
+**Classificação:**
+- Leve: Glasgow 13-15
+- Moderado: Glasgow 9-12
+- Grave: Glasgow ≤8
+
+**Indicações de TC Crânio (TCE leve):**
+- Escore Canadian CT Head Rule ou New Orleans Criteria
+- Glasgow <15 após 2h
+- Suspeita de fratura de base de crânio
+- Vômitos >2 episódios
+- Idade >65 anos
+- Amnésia >30 min
+- Mecanismo perigoso
+
+**Manejo TCE Grave:**
+- Via aérea definitiva (IOT)
+- Manter PPC >60 mmHg (PPC = PAM - PIC)
+- Evitar hipotensão (PAS >90) e hipóxia (SpO₂ >90%)
+- Elevar cabeceira 30°
+- Normocarbia (pCO₂ 35-40 mmHg)
+- Manitol 0,25-1 g/kg IV ou salina hipertônica 3% (se hipertensão intracraniana)
+- Neurocirurgia urgente se indicado
+
+**Indicações Neurocirúrgicas:**
+- Hematoma extradural >30 mL ou espessura >15 mm
+- Hematoma subdural >10 mm ou desvio >5 mm
+- Lesão com efeito de massa e deterioração neurológica
+
+## PALS (Pediatric Advanced Life Support)
+
+### RCP Pediátrica
+
+**Compressões:**
+- **Lactentes** (<1 ano): 2 dedos ou 2 polegares (técnica de abraço)
+- **Crianças** (1-8 anos): 1 ou 2 mãos
+- Profundidade: 1/3 do diâmetro AP do tórax (4 cm lactente, 5 cm criança)
+- Frequência: 100-120/min
+
+**Ventilação:**
+- Razão:
+  - 1 socorrista: 30:2
+  - 2 socorristas: 15:2
+
+**Medicações:**
+- **Adrenalina**: 0,01 mg/kg (0,1 mL/kg de 1:10.000) IV/IO
+  - Máximo: 1 mg
+  - Repetir a cada 3-5 min
+
+- **Amiodarona**: 5 mg/kg IV/IO (para FV/TVSP)
+
+**Doses de Choque:**
+- 1º choque: 2 J/kg
+- Subsequentes: 4 J/kg (máx 10 J/kg ou dose adulto)
+
+### Reconhecimento de Choque em Pediatria
+
+**Sinais Precoces:**
+- Taquicardia
+- Enchimento capilar prolongado (>2s)
+- Extremidades frias
+- Pulsos periféricos diminuídos
+- Alteração do nível de consciência
+
+**Sinais Tardios:**
+- Hipotensão (sinal tardio em crianças!)
+- Oligúria/anúria
+- Acidose metabólica
+
+**Reposição Volêmica:**
+- Bolus: 20 mL/kg de cristaloide (SF 0,9% ou Ringer)
+- Repetir até 60 mL/kg se necessário
+- Reavaliar após cada bolus
+
+## Emergências Cardiológicas
+
+### Síndrome Coronariana Aguda - Fluxograma
+
+**Dor Torácica Suspeita:**
+1. ECG em <10 minutos
+2. AAS 200 mg mastigado
+3. Nitroglicerina SL (se PAS >90 mmHg)
+
+**ECG com Supra de ST:**
+- **IAMCST** → Reperfusão urgente
+
+**ECG sem Supra:**
+- Troponina
+  - Positiva: IAMSST
+  - Negativa: Angina instável ou não cardíaca
+
+### IAMCST - Tratamento
+
+**Critérios ECG:**
+- Supra de ST ≥1 mm em 2 derivações contíguas (membros)
+- Supra de ST ≥2 mm em 2 derivações contíguas (precordiais)
+- BRE novo ou presumivelmente novo
+
+**Reperfusão:**
+- **ICP primária**: Ideal <90 min (primeiro contato médico-balão)
+- **Fibrinólise**: Se ICP >120 min
+  - Contraindicações: Cirurgia/trauma recente, AVC hemorrágico prévio, sangramento ativo
+
+**Terapia Adjuvante:**
+- **AAS**: 200-300 mg VO (mastigar)
+- **Antiplaquetário P2Y12**:
+  - Clopidogrel: 300-600 mg VO OU
+  - Ticagrelor: 180 mg VO (preferível se ICP)
+- **Anticoagulação**:
+  - Heparina não-fracionada: 60 UI/kg bolus (máx 4000 UI) + 12 UI/kg/h OU
+  - Enoxaparina: 30 mg IV + 1 mg/kg SC 12/12h
+- **Betabloqueador**: Se sem contraindicação (IC, broncoespasmo, bloqueio AV)
+- **Estatina**: Atorvastatina 80 mg
+- **IECA**: Iniciar em 24h (principalmente se FE reduzida)
+
+### Edema Agudo de Pulmão (EAP)
+
+**Quadro Clínico:**
+- Dispneia intensa
+- Ortopneia
+- Estertores crepitantes difusos
+- SpO₂ reduzida
+- RX: Infiltrado bilateral, redistribuição vascular, derrame pleural
+
+**Tratamento:**
+1. **Posição sentada**
+2. **O₂** (alvo SpO₂ >90%)
+   - VNI (CPAP/BiPAP) se insuficiência respiratória
+3. **Furosemida**: 40-80 mg IV (dose maior se uso crônico)
+4. **Nitroglicerina**: 0,4 mg SL ou 10-20 mcg/min IV (se PAS >110 mmHg)
+5. **Morfina**: 2-4 mg IV (reduz ansiedade e pré-carga) - usar com cautela
+6. **Identificar e tratar causa**
+
+**Critérios de IOT:**
+- Hipoxemia refratária
+- Rebaixamento do nível de consciência
+- Fadiga respiratória
+- Parada respiratória iminente
+
+### Taquiarritmias
+
+**Taquicardia com Pulso:**
+
+**1. Paciente Estável:**
+- Monitorização, O₂, acesso venoso
+- ECG 12 derivações
+- Identificar ritmo
+
+**QRS Estreito (<0,12s):**
+- **Taquicardia Sinusal**: Tratar causa
+- **FA/Flutter**: Controle de frequência ou ritmo
+- **TSV paroxística**: Manobras vagais → adenosina
+
+**QRS Largo (≥0,12s):**
+- **TV**: Amiodarona ou cardioversão
+- **TSV com aberrância**: Adenosina (se regularidade)
+
+**2. Paciente Instável:**
+- Sinais: Hipotensão, alteração consciência, dor torácica, IC aguda
+- **Cardioversão elétrica sincronizada**:
+  - FA: 120-200 J
+  - Flutter/TSV: 50-100 J
+  - TV: 100 J
+
+**Adenosina:**
+- 6 mg IV rápido + flush 20 mL SF
+- Se não responder: 12 mg
+- Pode repetir 12 mg mais 1 vez
+- Avisar paciente sobre sensação desconfortável
+
+**Amiodarona:**
+- 150 mg IV em 10 min
+- Pode repetir a cada 10 min
+- Manutenção: 1 mg/min por 6h, depois 0,5 mg/min
+
+### Bradicardias
+
+**Sintomática:**
+- Hipotensão
+- Alteração do nível de consciência
+- Dor torácica
+- ICC aguda
+
+**Tratamento:**
+
+**1ª linha - Atropina:**
+- 0,5 mg IV
+- Repetir a cada 3-5 min (máx 3 mg)
+
+**Se refratária:**
+- **Marca-passo transcutâneo** OU
+- **Infusão de adrenalina**: 2-10 mcg/min OU
+- **Infusão de dopamina**: 2-20 mcg/kg/min
+
+**Marca-passo transvenoso:** Definitivo temporário (consultar cardiologia)
+
+## Emergências Neurológicas
+
+### Acidente Vascular Cerebral (AVC)
+
+**Escala de Cincinnati (Triagem pré-hospitalar):**
+1. Assimetria facial
+2. Fraqueza de membros
+3. Alteração da fala
+
+**NIHSS** (National Institutes of Health Stroke Scale): 0-42 pontos
+
+**Diagnóstico:**
+- **TC crânio sem contraste** (excluir hemorragia)
+- Tempo é cérebro!
+
+**AVC Isquêmico - Trombólise:**
+
+**Critérios de Inclusão:**
+- Início dos sintomas <4,5 horas
+- Déficit neurológico mensurável
+- Idade ≥18 anos
+
+**Contraindicações Absolutas:**
+- Hemorragia intracraniana prévia
+- AVC ou TCE <3 meses
+- PAS >185 ou PAD >110 mmHg (refratária)
+- Sangramento ativo
+- Glicemia <50 mg/dL
+- Plaquetas <100.000
+- INR >1,7, uso de DOAC <48h
+
+**Alteplase (rt-PA):**
+- Dose: 0,9 mg/kg (máx 90 mg)
+- 10% em bolus, restante em 1 hora
+- Não puncionar artérias, não passar SNG/SVD/acesso central
+- Monitorar neuro a cada 15 min nas primeiras 2h
+
+**Manejo Geral:**
+- Controle pressórico (permissivo):
+  - Sem trombólise: Tratar se PAS >220 ou PAD >120
+  - Com trombólise: Manter PAS <180 e PAD <105
+- Glicemia: 140-180 mg/dL
+- Temperatura: Tratar febre
+- Cabeceira 30°
+- Tromboprofilaxia (heparina SC após 24h se trombolisado)
+
+### Crise Convulsiva e Estado de Mal Epiléptico
+
+**Estado de Mal Epiléptico:**
+- Convulsão >5 minutos OU
+- ≥2 crises sem recuperação da consciência
+
+**Tratamento Escalonado:**
+
+**0-5 min:**
+- Manter via aérea, O₂
+- Acesso venoso, glicemia
+- Tiamina 100 mg IV + glicose 50% 50 mL (se hipoglicemia)
+
+**5-10 min:**
+- **Benzodiazepínico**:
+  - Midazolam 10 mg IM (ou 0,2 mg/kg) OU
+  - Diazepam 10 mg IV lento (ou 0,15 mg/kg) OU
+  - Lorazepam 4 mg IV (0,1 mg/kg)
+- Pode repetir 1x após 5 min
+
+**10-30 min (Status refratário):**
+- **Fenitoína**: 20 mg/kg IV (máx 50 mg/min)
+  - Monitorar PA e ECG OU
+- **Ácido valproico**: 20-40 mg/kg IV em 10 min
+
+**>30 min (Status superrefratário):**
+- UTI + IOT
+- **Propofol** OU **Midazolam** em infusão contínua
+- EEG contínuo
+
+## Emergências Metabólicas
+
+### Cetoacidose Diabética (CAD)
+
+**Critérios Diagnósticos:**
+- Glicemia >250 mg/dL
+- pH <7,3 ou bicarbonato <18 mEq/L
+- Cetonemia/cetonúria positiva
+
+**Tratamento:**
+
+**1. Hidratação:**
+- SF 0,9% 1L na 1ª hora
+- Depois: 250-500 mL/h conforme volemia
+
+**2. Insulina:**
+- Bolus: 0,1 UI/kg IV OU iniciar direto infusão
+- Infusão contínua: 0,1 UI/kg/h (5-10 UI/h)
+- Quando glicemia <250: Reduzir para 0,05 UI/kg/h E iniciar SG 5%
+
+**3. Potássio:**
+- Repor ANTES de iniciar insulina se K+ <3,3 mEq/L
+- Adicionar KCl na hidratação:
+  - K+ 3,3-5,2: Adicionar 20-30 mEq/L
+  - K+ >5,2: Não repor inicialmente
+
+**4. Bicarbonato:**
+- Controverso
+- Considerar se pH <6,9: 100 mEq em 400 mL H₂O (2h)
+
+**Metas:**
+- Reduzir glicemia 50-75 mg/dL/h
+- Corrigir acidose em 12-24h
+- Transição para insulina SC quando pH >7,3 e bicarbonato >15
+
+### Estado Hiperglicêmico Hiperosmolar (EHH)
+
+**Critérios:**
+- Glicemia >600 mg/dL
+- Osmolaridade efetiva >320 mOsm/kg
+- pH >7,3, bicarbonato >18 (sem acidose significativa)
+- Ausência/mínima cetonemia
+
+**Tratamento:**
+- Similar à CAD, mas hidratação mais vigorosa
+- Insulina em doses menores (0,05 UI/kg/h)
+- Redução gradual da glicemia (<100 mg/dL/h)
+- Risco de edema cerebral
+
+### Hipoglicemia
+
+**Definição:** <70 mg/dL
+
+**Sintomas:**
+- Autonômicos: Sudorese, tremor, palpitação, fome
+- Neuroglicemicoabaixo: Confusão, convulsão, coma
+
+**Tratamento:**
+
+**Consciente, via oral:**
+- 15-20g de carboidratos simples (suco, refrigerante, balas)
+- Reavaliar em 15 min
+
+**Inconsciente ou sem acesso oral:**
+- **Glicose 50%**: 25-50 mL (12,5-25g) IV OU
+- **Glucagon**: 1 mg IM/SC
+
+**Pós-tratamento:**
+- Alimentação complexa após recuperação
+- Identificar causa (excesso de insulina, jejum, álcool)
+
+## Intoxicações
+
+### Abordagem Geral
+
+**Estabilização:**
+- Via aérea, respiração, circulação
+- Glicemia, temperatura
+- ECG, monitorização
+
+**Descontaminação:**
+- **Carvão ativado**: 1 g/kg (máx 50g) VO/SNG
+  - Indicação: <1-2h da ingestão (substâncias adsorvíveis)
+  - Contraindicação: Rebaixamento sem IOT, substâncias cáusticas, hidrocarbonetos
+- **Lavagem gástrica**: Raramente indicada
+
+**Antídotos Específicos:**
+- Naloxone (opioides)
+- Flumazenil (benzodiazepínicos) - usar com cautela
+- N-acetilcisteína (paracetamol)
+- Atropina (organofosforados)
+
+### Intoxicação por Paracetamol
+
+**Dose Tóxica:** >150 mg/kg ou >7,5g em adultos
+
+**Apresentação:**
+- Fase I (0-24h): Assintomático ou náuseas leves
+- Fase II (24-72h): Dor abdominal, elevação de transaminases
+- Fase III (72-96h): Hepatotoxicidade (icterícia, coagulopatia, encefalopatia)
+- Fase IV: Recuperação ou morte
+
+**Diagnóstico:**
+- Dosar nível sérico 4h após ingestão
+- Nomograma de Rumack-Matthew
+
+**Tratamento:**
+- **N-acetilcisteína** (NAC):
+  - Dose de ataque: 150 mg/kg IV em 1h
+  - Manutenção: 50 mg/kg em 4h, depois 100 mg/kg em 16h
+  - Iniciar se nível tóxico no nomograma ou se ingestão >150 mg/kg e NAC disponível <8h
+
+## Queimaduras
+
+### Avaliação da Superfície Corporal Queimada (SCQ)
+
+**Regra dos 9 de Wallace (adultos):**
+- Cabeça e pescoço: 9%
+- Cada membro superior: 9% (18% total)
+- Tronco anterior: 18%
+- Tronco posterior: 18%
+- Cada membro inferior: 18% (36% total)
+- Genitália: 1%
+
+**Regra da Palma da Mão:** 1% SCQ
+
+### Classificação por Profundidade
+
+**1º Grau:**
+- Eritema, dor
+- Apenas epiderme
+- Não conta para SCQ
+
+**2º Grau Superficial:**
+- Flictenas, base rósea/úmida
+- Derme superficial
+- Dor intensa
+
+**2º Grau Profundo:**
+- Base esbranquiçada
+- Derme profunda
+
+**3º Grau:**
+- Indolor (terminações nervosas destruídas)
+- Aspecto carbonizado ou branco nacarado
+- Todas as camadas da pele
+
+### Critérios de Internação
+
+- 2º grau >10% SCQ (criança) ou >20% (adulto)
+- 3º grau >5% SCQ
+- Face, mãos, pés, genitália, períneo, articulações
+- Queimadura circular de extremidades/tórax
+- Queimadura elétrica
+- Queimadura química
+- Trauma inalatório
+- Comorbidades
+
+### Tratamento
+
+**Reposição Volêmica - Fórmula de Parkland:**
+- **Volume (mL) = 4 × peso (kg) × %SCQ**
+- 50% do volume na 1ª 8h
+- 50% restante nas 16h seguintes
+- Usar Ringer Lactato
+- Ajustar conforme débito urinário (0,5-1 mL/kg/h)
+
+**Cuidados Locais:**
+- Retirar roupas e joias
+- Lavar com SF 0,9%
+- Curativo com sulfadiazina de prata 1%
+- Profilaxia de tétano
+
+**Analgesia:**
+- Morfina 0,05-0,1 mg/kg IV
+
+**Trauma Inalatório:**
+- Suspeitar: Queimadura facial, pelos nasais chamuscados, escarro carbonáceo
+- IOT precoce (edema de via aérea)
+
+## Referências
+
+- **ACLS Provider Manual. American Heart Association. 2020**
+- **ATLS - Advanced Trauma Life Support. 10ª ed. American College of Surgeons. 2018**
+- **PALS Provider Manual. American Heart Association. 2020**
+- **Tintinalli's Emergency Medicine: A Comprehensive Study Guide. 9ª ed.**
+- **Rosen's Emergency Medicine: Concepts and Clinical Practice. 10ª ed.**
+- **Diretrizes da American Stroke Association**
+- **Neurocritical Care Society Guidelines**
+- **Protocolo Gerenciado de Sepse - ILAS (Instituto Latino-Americano de Sepse)**

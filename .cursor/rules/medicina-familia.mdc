@@ -1,0 +1,820 @@
+---
+alwaysApply: true
+---
+
+# Medicina de Família e Comunidade
+
+## Terminologia Específica
+
+- **APS**: Atenção Primária à Saúde
+- **ESF**: Estratégia Saúde da Família
+- **ACS**: Agente Comunitário de Saúde
+- **Territorialização**: Delimitação da área de atuação da equipe
+- **Longitudinalidade**: Acompanhamento contínuo do paciente ao longo do tempo
+- **Integralidade**: Abordagem holística do indivíduo
+- **NASF**: Núcleo Ampliado de Saúde da Família
+- **Puericultura**: Acompanhamento do crescimento e desenvolvimento infantil
+- **Climatério**: Período de transição entre fase reprodutiva e não reprodutiva
+- **Rastreamento**: Detecção precoce de doenças em população assintomática
+
+## Stack de Habilidades do Médico de Família
+
+### Habilidades Clínicas Essenciais
+- **Acompanhamento Longitudinal**: Cuidado contínuo ao longo da vida, conhecendo história e contexto do paciente
+- **Prevenção Quaternária**: Evitar intervenções médicas desnecessárias e iatrogenia
+- **Abordagem Familiar**: Entender dinâmica familiar, genograma, impacto da doença na família
+- **Medicina Centrada na Pessoa**: Decisões compartilhadas, respeitando valores e preferências do paciente
+
+### Procedimentos Ambulatoriais
+- **Suturas**: Simples, contínuas, subcuticulares para ferimentos de pequeno/médio porte
+- **Curativos**: Simples e complexos, escolha de coberturas
+- **Infiltrações**: Articulares (joelho, ombro), bursas, trigger points
+- **DIU**: Inserção e remoção de dispositivo intrauterino
+- **Criocauterização**: Verrugas, molusco contagioso, condilomas
+- **Drenagem de Abscessos**: Pequenos abscessos cutâneos
+- **Remoção de Corpos Estranhos**: Farpas, anzóis, etc.
+- **Cauterização Química**: Lesões de pele benignas
+
+### Consultas Especializadas
+- **Pré-natal Completo**: Acompanhamento gestacional de baixo risco, identificar alto risco
+- **Puericultura**: Crescimento, desenvolvimento, marcos motores/cognitivos, orientação parental
+- **Climatério**: Manejo de sintomas, TRH quando indicada, prevenção de osteoporose
+- **Saúde do Homem**: Rastreio de CA próstata, disfunção erétil, andropausa
+- **Saúde do Adolescente**: Confidencialidade, desenvolvimento puberal, saúde mental, DST
+- **Geriatria**: Avaliação geriátrica ampla, polifarmácia, fragilidade, quedas
+
+### Rastreamentos Oncológicos e Preventivos
+- **Câncer de Mama**: Mamografia 50-69 anos (bienal), exame clínico anual >40 anos
+- **Câncer de Colo**: Citopatológico 25-64 anos (anual, depois trienal)
+- **Câncer Colorretal**: Pesquisa de sangue oculto ou colonoscopia 50-75 anos
+- **Câncer de Próstata**: Decisão compartilhada, PSA + toque retal 50-75 anos
+- **Osteoporose**: Densitometria em mulheres ≥65 anos
+- **Glaucoma**: Tonometria em grupos de risco
+- **Rastreio Cardiovascular**: PA anual, perfil lipídico conforme idade/risco
+
+### Manejo de Doenças Crônicas
+- **Hipertensão Arterial**: Estratificação de risco, metas pressóricas, ajuste de anti-hipertensivos
+- **Diabetes Mellitus tipo 2**: Metformina primeira linha, escalação terapêutica, rastreio de complicações
+- **DPOC**: Diagnóstico por espirometria, broncodilatadores, vacinação
+- **Asma**: Classificação de gravidade/controle, corticoide inalatório
+- **Depressão**: Rastreio com PHQ-9, ISRS, psicoterapia, quando referenciar
+- **Ansiedade**: GAD-7, abordagem inicial, benzodiazepínicos com cautela
+- **Hipotireoidismo**: Levotiroxina, ajuste por TSH
+- **Dislipidemia**: Estatinas, metas de LDL conforme risco
+
+### Urgências e Situações Agudas
+- **Crise Hipertensiva**: Diferenciar urgência de emergência, captopril sublingual
+- **Hipoglicemia**: Glicose oral ou IV, ajuste de hipoglicemiantes
+- **Crise Asmática**: Beta-2 inalatório, corticoide sistêmico
+- **Infecções Comuns**: ITU, pneumonia, sinusite, faringite - critérios para ATB
+- **Traumas Leves**: Entorses, contusões, fraturas simples
+
+### Saúde Mental na APS
+- **Rastreio**: PHQ-9 (depressão), GAD-7 (ansiedade), CAGE (álcool)
+- **Abordagem Inicial**: Psicoeducação, ativação comportamental, higiene do sono
+- **Farmacoterapia Básica**: ISRS (sertralina, fluoxetina, escitalopram)
+- **Quando Referenciar**: Ideação suicida, psicose, transtorno bipolar, refratariedade
+
+### Gestão e Coordenação de Cuidado
+- **Referenciamento Adequado**: Quando e para quem encaminhar
+- **Matriciamento**: Discussão de casos com especialistas
+- **Trabalho em Equipe**: ESF multiprofissional (enfermeiro, ACS, dentista)
+- **Rede de Apoio**: NASF, CAPS, assistência social
+
+### Educação em Saúde
+- **Grupos Educativos**: Hipertensos, diabéticos, gestantes, tabagismo
+- **Visitas Domiciliares**: Acamados, puerpério, idosos vulneráveis
+- **Ações Comunitárias**: Campanhas de vacinação, prevenção, promoção de saúde
+- **Prevenção**: Primária, secundária, terciária e quaternária
+
+### Interpretação de Exames
+- **Laboratoriais Básicos**: Hemograma, ureia/creatinina, glicemia, lipidograma, TSH, HbA1c
+- **ECG**: Ritmo, eixo, hipertrofias, isquemia, IAM
+- **RX Tórax**: Cardiomegalia, infiltrados, derrame pleural
+- **Espirometria Simples**: Padrão obstrutivo/restritivo, resposta a broncodilatador
+- **USG Obstétrico**: IG, vitalidade fetal, morfológico básico
+
+### Prescrição Racional de Medicamentos
+- **Evitar Polifarmácia**: Revisar necessidade de cada medicação
+- **Desprescrição em Idosos**: Critérios de Beers, retirada gradual
+- **Medicina Baseada em Evidências**: NNT, NNH, decisão compartilhada
+- **Ajuste para Comorbidades**: Função renal, hepática, interações
+
+## Metodologia de Raciocínio Clínico do Médico de Família
+
+### 1. Abordagem Inicial ao Paciente
+
+**Método SOAP (Subjetivo, Objetivo, Avaliação, Plano):**
+
+**S - Subjetivo:**
+- História completa: queixa principal, HDA, revisão de sistemas
+- Contexto biopsicossocial: família, trabalho, moradia, rede de apoio
+- Medicações em uso, alergias, comorbidades
+- Hábitos de vida: tabagismo, álcool, atividade física, dieta
+
+**O - Objetivo:**
+- Sinais vitais: PA, FC, FR, temperatura, peso, altura, IMC
+- Exame físico direcionado pela queixa
+- Exames complementares disponíveis
+
+**A - Avaliação:**
+- Hipóteses diagnósticas priorizadas por probabilidade
+- Considerar diagnósticos diferenciais relevantes
+- Estratificação de risco e gravidade
+
+**P - Plano:**
+- Exames complementares necessários (ser racional!)
+- Tratamento farmacológico e não-farmacológico
+- Orientações e educação em saúde
+- Seguimento: quando retornar, critérios de piora
+- Referenciamento se necessário
+
+**Princípios Fundamentais:**
+1. **Longitudinalidade**: Usar conhecimento prévio do paciente
+2. **Integralidade**: Ver pessoa como um todo, não apenas sintomas
+3. **Coordenação**: Integrar informações de outros profissionais
+4. **Centrado na Pessoa**: Decisões compartilhadas, respeitar autonomia
+
+### 2. Fluxograma Mental de Decisão
+
+```
+PACIENTE CHEGA NA CONSULTA
+         ↓
+[GRAVIDADE?] → SINAIS DE ALARME? → SIM → Estabilizar/Referenciar urgente
+         ↓ NÃO
+[AGUDO vs CRÔNICO?]
+         ↓
+    AGUDO (<4 semanas)              CRÔNICO (>3 meses)
+         ↓                                  ↓
+Sintomas constitucionais?          Acompanhamento de doença conhecida?
+Red flags?                                  ↓
+         ↓                            SIM → Avaliar controle
+[DIAGNÓSTICO DIFERENCIAL]                Ajustar tratamento
+    - Mais comum primeiro                Rastrear complicações
+    - Considerar gravidade                      ↓
+         ↓                            NÃO → Investigar nova queixa
+[NECESSITA EXAMES?]                           ↓
+    - Mudar conduta? → SIM        [NECESSITA ESPECIALISTA?]
+    - Não → Tratar empiricamente      - Critérios bem definidos
+         ↓                              - Tentar manejo na APS primeiro
+[PODE TRATAR NA APS?]                         ↓
+    SIM → Prescrever/Orientar          [SEGUIMENTO]
+    NÃO → Referenciar adequadamente    - Agendar retorno
+         ↓                              - Orientar sinais de alerta
+[EDUCAÇÃO + PREVENÇÃO]                 - Registrar em prontuário
+    - Orientações sobre a doença
+    - Modificação de hábitos
+    - Rastreamentos indicados
+```
+
+### 3. Perguntas-Chave por Cenário Clínico
+
+**DISPNEIA:**
+- Início súbito ou progressivo? (agudo → IC, pneumonia, TEP; crônico → DPOC, asma)
+- Aos esforços ou repouso? (gravidade)
+- Ortopneia, DPN? (IC)
+- Febre, tosse produtiva? (pneumonia)
+- Dor torácica? (SCA, TEP, pneumotórax)
+- História de tabagismo? (DPOC, câncer)
+- **Buscar em @md/**: Semiologia (ausculta pulmonar), Medicina Ambulatorial (DPOC, IC)
+
+**DOR TORÁCICA:**
+- Características: aperto, queimação, pontada?
+- Irradia para braço/mandíbula? (SCA)
+- Piora com inspiração? (pleural, pericardite)
+- Piora com alimentação? (DRGE)
+- Fatores de risco cardiovascular? (Framingham)
+- **Buscar em @md/**: Semiologia (exame cardiovascular), protocolos de SCA
+
+**DOR ABDOMINAL:**
+- Localização: epigástrio, HD, FID, FIE, difusa?
+- Migratória? (apendicite: periumbilical → FID)
+- Vômitos, diarreia, febre? (gastroenterite, colecistite)
+- Sinais de peritonite? (descompressão brusca)
+- **Buscar em @md/**: Semiologia (abdome agudo)
+
+**CEFALEIA:**
+- Primeira vez ou recorrente?
+- Pior cefaleia da vida? (hemorragia subaracnóidea)
+- Febre, rigidez de nuca? (meningite)
+- Déficit neurológico? (AVC, tumor)
+- Padrão: tensional, enxaqueca, em salvas?
+- **Buscar em @md/**: Red flags de cefaleia secundária
+
+### 4. Construção do Diagnóstico Diferencial
+
+**Estratégia:**
+1. **Listar hipóteses por probabilidade**:
+   - Comum first (cavalos, não zebras)
+   - Depois considerar graves/urgentes
+   - Por último, raras
+
+2. **Priorizar por critério VINDICATE:**
+   - **V**ascular
+   - **I**nflamatório/Infeccioso
+   - **N**eoplásico
+   - **D**egenerativo
+   - **I**atrogênico/Intoxicação
+   - **C**ongênito
+   - **A**utoimune
+   - **T**raumático
+   - **E**ndócrino/metabólico
+
+3. **Usar probabilidade pré-teste**:
+   - Paciente de 25 anos com dor torácica → DRGE >> SCA
+   - Paciente de 65 anos, diabético, com dor torácica → SCA >> DRGE
+
+4. **Descartar graves primeiro**:
+   - Sempre pensar: "Posso estar perdendo algo grave/urgente?"
+
+### 5. Critérios de Gravidade e Red Flags
+
+**SINAIS VITAIS ALTERADOS:**
+- PA <90/60 ou >180/120 mmHg
+- FC <50 ou >120 bpm
+- FR <10 ou >24 ipm
+- Temperatura <35°C ou >39,5°C
+- SpO₂ <90%
+
+**RED FLAGS POR SISTEMA:**
+
+**Cardiovascular:**
+- Dor torácica típica em repouso
+- Síncope
+- Edema agudo de pulmão
+- Sinais de IC descompensada
+
+**Respiratório:**
+- Dispneia em repouso
+- Cianose
+- Estridor
+- Hemoptise maciça
+
+**Neurológico:**
+- Rebaixamento de consciência
+- Déficit neurológico focal agudo
+- Pior cefaleia da vida
+- Convulsão de início recente
+
+**Abdominal:**
+- Abdome em tábua (peritonite)
+- Dor intensa com instabilidade hemodinâmica
+- Hematêmese ou melena
+- Icterícia + febre (colangite)
+
+**Geral:**
+- Perda de peso não intencional >5% em 6 meses
+- Febre persistente sem foco
+- Sangramento ativo importante
+- Alteração aguda do estado mental
+
+**QUANDO REFERENCIAR URGENTE:**
+- Qualquer red flag acima
+- Suspeita de IAM, AVC, abdome agudo cirúrgico
+- Instabilidade hemodinâmica
+- Necessidade de procedimento urgente
+
+### 6. Integrando Conhecimento dos Livros (@md/)
+
+**QUANDO BUSCAR EM @md/Semiologia Médica - Porto:**
+- Dúvida sobre técnica de exame físico
+- Interpretação de achados semiológicos
+- Sinais clássicos de doenças (Murphy, Blumberg, etc.)
+- **Query exemplo**: "Como realizar ausculta cardíaca completa?"
+
+**QUANDO BUSCAR EM @md/Medicina Ambulatorial - Duncan:**
+- Protocolos de manejo de doenças crônicas (HAS, DM)
+- Rastreamentos (quando iniciar, periodicidade)
+- Abordagem de problemas comuns na APS
+- **Query exemplo**: "Protocolo de manejo de diabetes tipo 2 na atenção primária"
+
+**ESTRATÉGIA DE BUSCA EFICIENTE:**
+1. **Seja específico**: "Tratamento de pneumonia comunitária" > "pneumonia"
+2. **Use contexto**: "Manejo de HAS em idoso" > "hipertensão"
+3. **Busque protocolo**: "Protocolo de rastreamento de câncer de mama"
+4. **Busque scores**: "Escore de Framingham para risco cardiovascular"
+
+**SITUAÇÕES ESPECÍFICAS:**
+
+**Paciente com HAS não controlada:**
+→ Buscar em Medicina Ambulatorial: "Hipertensão arterial tratamento"
+→ Verificar: meta pressórica, medicações de 1ª linha, quando associar drogas
+
+**Criança com atraso no desenvolvimento:**
+→ Buscar em Medicina Ambulatorial: "Marcos do desenvolvimento infantil"
+→ Buscar em Semiologia: "Exame neurológico pediátrico"
+
+**Gestante com sangramento:**
+→ Buscar em Medicina Ambulatorial: "Sangramento no primeiro trimestre"
+→ Red flags: gravidez ectópica, abortamento
+
+### 7. Exemplos Práticos de Raciocínio Clínico
+
+**EXEMPLO 1: Paciente com Tosse Crônica**
+
+**Cenário:**
+Mulher, 45 anos, tosse há 3 meses, pior à noite, sem febre, não fumante.
+
+**Raciocínio:**
+1. **Tosse crônica** (>8 semanas) → DD principais: DRGE, gotejamento pós-nasal, asma
+2. **Pior à noite** → sugere DRGE ou asma
+3. **Sem febre** → menos provável infecção
+4. **Não fumante** → DPOC menos provável
+
+**Perguntas-chave:**
+- Pirose/regurgitação? (DRGE)
+- Rinorreia/obstrução nasal? (gotejamento pós-nasal)
+- Chiado no peito? (asma)
+- Exposições ocupacionais?
+
+**Buscar em @md/**:
+- "Tosse crônica diagnóstico diferencial"
+- "Doença do refluxo gastroesofágico sintomas"
+
+**Conduta:**
+- Se suspeita de DRGE: Teste terapêutico com IBP 4-8 semanas
+- Se suspeita de asma: Espirometria, teste com beta-2
+- Seguimento em 4-8 semanas
+
+---
+
+**EXEMPLO 2: Idoso com Quedas de Repetição**
+
+**Cenário:**
+Homem, 78 anos, 3 quedas nos últimos 6 meses, toma 8 medicações.
+
+**Raciocínio:**
+1. **Múltiplas quedas** → avaliar causas multifatoriais
+2. **Idoso + polifarmácia** → risco aumentado
+3. **Abordagem sistemática**: AVA (Avaliação geriátrica ampla)
+
+**Perguntas-chave:**
+- Como foram as quedas? (síncope vs instabilidade)
+- Medicações: hipotensores, benzodiazepínicos, hipoglicemiantes?
+- Alterações visuais?
+- Ambiente domiciliar seguro?
+
+**Exame físico direcionado:**
+- Hipotensão ortostática (medir PA deitado e em pé)
+- Teste de Timed Up and Go (>20s = alto risco)
+- Força muscular de MMII
+- Acuidade visual
+
+**Buscar em @md/**:
+- "Avaliação geriátrica ampla"
+- "Quedas em idosos prevenção"
+- "Critérios de Beers medicações"
+
+**Conduta:**
+- Revisar medicações (desprescrição)
+- Corrigir hipotensão ortostática
+- Encaminhar para fisioterapia (fortalecimento)
+- Orientar modificações ambientais
+- Vitamina D se deficiente
+- Seguimento mensal
+
+---
+
+**EXEMPLO 3: Adolescente com Dor Abdominal Recorrente**
+
+**Cenário:**
+Menina, 15 anos, dor abdominal periumbilical há 3 meses, sem perda de peso, alterna constipação e diarreia.
+
+**Raciocínio:**
+1. **Dor crônica funcional** vs **orgânica**
+2. **Sem red flags** (sem perda de peso, sangramento) → provável funcional
+3. **Alternância de hábito intestinal** → sugestivo de SII
+4. **Adolescente** → considerar aspectos psicossociais, ansiedade
+
+**Perguntas-chave:**
+- Relação com estresse/escola?
+- Sangue nas fezes? (DII)
+- Emagrecimento? (alarme)
+- Sintomas noturnos? (orgânico)
+- História familiar de DII, doença celíaca?
+
+**Exame físico:**
+- Abdome: dor à palpação sem defesa/descompressão
+- Crescimento adequado (curva de peso/altura)
+
+**Buscar em @md/**:
+- "Síndrome do intestino irritável"
+- "Dor abdominal funcional em adolescentes"
+- "Red flags dor abdominal crônica"
+
+**Conduta:**
+- Tranquilizar (provavelmente SII)
+- Orientar dieta (reduzir FODMAPs, aumentar fibras)
+- Avaliar componente ansioso
+- Exames apenas se red flags: hemograma, PCR, calprotectina fecal
+- Seguimento em 4-8 semanas
+- Se não melhorar → considerar gastroenterologista
+
+## Protocolos de Hipertensão Arterial
+
+### Diagnóstico
+- **Critérios**: PA ≥140/90 mmHg em pelo menos 2 medidas em dias diferentes
+- **MAPA/MRPA**: Indicados para confirmar diagnóstico e avaliar hipertensão do avental branco
+- **Classificação**:
+  - Normal: <120/80 mmHg
+  - Pré-hipertensão: 120-139/80-89 mmHg
+  - HAS Estágio 1: 140-159/90-99 mmHg
+  - HAS Estágio 2: 160-179/100-109 mmHg
+  - HAS Estágio 3: ≥180/110 mmHg
+
+### Estratificação de Risco Cardiovascular
+- **Escore de Framingham**: Risco de evento cardiovascular em 10 anos
+- **Fatores de risco**: Tabagismo, DM, dislipidemia, história familiar, idade, obesidade
+
+### Tratamento Não-Farmacológico
+- Dieta DASH (rica em frutas, vegetais, laticínios desnatados)
+- Redução de sódio (<2g/dia)
+- Exercício físico regular (150min/semana atividade moderada)
+- Controle de peso (IMC <25 kg/m²)
+- Cessação do tabagismo
+- Redução do consumo de álcool
+
+### Tratamento Farmacológico - 1ª Linha
+1. **Diuréticos Tiazídicos**
+   - Hidroclorotiazida: 12,5-25 mg/dia
+   - Clortalidona: 12,5-25 mg/dia (preferencial)
+   
+2. **IECA (Inibidores da ECA)**
+   - Enalapril: 5-40 mg/dia (1-2x/dia)
+   - Captopril: 25-150 mg/dia (2-3x/dia)
+   - Ramipril: 2,5-10 mg/dia
+   
+3. **BRA (Bloqueadores do Receptor de Angiotensina)**
+   - Losartana: 25-100 mg/dia
+   - Valsartana: 80-320 mg/dia
+   
+4. **Bloqueadores de Canal de Cálcio**
+   - Anlodipino: 2,5-10 mg/dia
+   - Nifedipino: 30-60 mg/dia (liberação prolongada)
+
+### Metas de Tratamento
+- Geral: <140/90 mmHg
+- DM ou DRC: <130/80 mmHg
+- Idosos >80 anos: <150/90 mmHg
+- Proteinúria >1g/dia: <130/80 mmHg
+
+## Protocolos de Diabetes Mellitus
+
+### Diagnóstico
+- **Glicemia de jejum** ≥126 mg/dL (2 ocasiões)
+- **HbA1c** ≥6,5%
+- **TOTG 75g** ≥200 mg/dL (2h)
+- **Glicemia aleatória** ≥200 mg/dL + sintomas
+
+### Rastreamento
+- Iniciar aos 45 anos em todos
+- Antes dos 45 se: IMC ≥25 + fator de risco adicional
+- Repetir a cada 3 anos se normal
+
+### Metas Glicêmicas
+- **HbA1c**: <7% (individualizar: 6,5-8%)
+- **Glicemia de jejum**: 80-130 mg/dL
+- **Glicemia pós-prandial**: <180 mg/dL
+
+### Tratamento - Algoritmo
+
+**1ª Linha: Metformina**
+- Dose inicial: 500-850 mg/dia com refeição
+- Titulação: Aumentar 500 mg a cada 1-2 semanas
+- Dose máxima: 2.550 mg/dia (dividida em 2-3 tomadas)
+- Contraindicações: TFG <30 mL/min, hepatopatia grave
+
+**2ª Linha (se HbA1c >7% após 3 meses):**
+- **Sulfoniluréias**:
+  - Glibenclamida: 2,5-20 mg/dia (evitar em idosos)
+  - Gliclazida: 30-120 mg/dia (preferencial)
+  
+- **Inibidores DPP-4**:
+  - Sitagliptina: 100 mg/dia
+  - Vildagliptina: 50 mg 2x/dia
+  
+- **iSGLT2** (se DCV ou DRC):
+  - Dapagliflozina: 10 mg/dia
+  - Empagliflozina: 10-25 mg/dia
+
+**Insulinização:**
+- Indicações: HbA1c >9%, sintomas de hiperglicemia, falha com 2-3 ADOs
+- **Insulina basal** (NPH ou glargina):
+  - Dose inicial: 0,1-0,2 UI/kg/dia ao deitar
+  - Titulação: Ajustar 2-4 UI a cada 3 dias conforme glicemia de jejum
+
+## Saúde da Mulher
+
+### Pré-Natal
+
+**Calendário de Consultas (mínimo 6):**
+- Até 28 semanas: mensais
+- 28-36 semanas: quinzenais
+- Após 36 semanas: semanais
+
+**Rotina da 1ª Consulta:**
+- Anamnese completa + antecedentes obstétricos
+- Exame físico + ginecológico
+- Cálculo IG pela DUM ou USG
+- Exames laboratoriais:
+  - Hemograma, tipagem sanguínea, Coombs indireto
+  - Glicemia de jejum, TOTG (24-28 semanas)
+  - Sorologia: HIV, VDRL, toxoplasmose, hepatites B e C
+  - EAS + urocultura
+  - TSH (se disponível)
+  - Citopatológico (se necessário)
+
+**Suplementação:**
+- Ácido fólico: 400 mcg/dia (até 12 semanas)
+- Sulfato ferroso: 40 mg Fe elementar/dia (após 20 semanas)
+
+**Vacinas:**
+- dTpa: entre 20-36 semanas (preferencialmente 27-36)
+- Influenza: qualquer trimestre (período de campanha)
+- Hepatite B: se não imunizada
+
+### Rastreamento de Câncer de Colo Uterino
+- **Idade**: 25-64 anos
+- **Periodicidade**: Anual (2 primeiros exames), depois trienal se normais
+- **Método**: Citopatologia oncótica (Papanicolau)
+- **Encerrar**: Após 64 anos com 2 exames negativos nos últimos 5 anos
+
+### Rastreamento de Câncer de Mama
+- **Mamografia**: 50-69 anos, bienal
+- **Alto risco**: Iniciar aos 35 anos, anual
+- **Exame clínico**: Anual em todas as mulheres >40 anos
+- **Autoexame**: Não recomendado como método de rastreamento
+
+## Saúde da Criança - Puericultura
+
+### Calendário de Consultas
+- **1ª semana de vida**
+- **1 mês**
+- **2, 4, 6, 9, 12 meses**
+- **15, 18 meses**
+- **2 anos**
+- **Anual**: 3-9 anos
+- **Semestral**: adolescentes
+
+### Avaliação de Crescimento
+- **Peso, estatura, PC** (até 2 anos)
+- **IMC**: >2 anos
+- **Curvas OMS**: Perímetro cefálico, peso/idade, estatura/idade, IMC/idade
+
+### Marcos do Desenvolvimento
+**3 meses:**
+- Sustenta cabeça
+- Sorriso social
+- Segue objetos
+
+**6 meses:**
+- Senta com apoio
+- Transfere objetos
+- Vocaliza
+
+**9 meses:**
+- Senta sem apoio
+- Pinça inferior
+- Estranhamento
+
+**12 meses:**
+- Anda com apoio
+- Pinça superior
+- Fala 1-2 palavras
+
+**18 meses:**
+- Anda sozinho
+- Rabisca
+- 6-10 palavras
+
+**2 anos:**
+- Corre
+- Torre de 4 cubos
+- Frases de 2 palavras
+
+### Calendário Vacinal (PNI - 2024)
+
+**Ao nascer:**
+- BCG (dose única)
+- Hepatite B (1ª dose)
+
+**2 meses:**
+- Penta (DTP+Hib+HepB) - 1ª dose
+- VIP (pólio inativada) - 1ª dose
+- Pneumo 10 - 1ª dose
+- Rotavírus - 1ª dose
+
+**3 meses:**
+- Meningo C - 1ª dose
+
+**4 meses:**
+- Penta - 2ª dose
+- VIP - 2ª dose
+- Pneumo 10 - 2ª dose
+- Rotavírus - 2ª dose
+
+**5 meses:**
+- Meningo C - 2ª dose
+
+**6 meses:**
+- Penta - 3ª dose
+- VIP - 3ª dose
+
+**9 meses:**
+- Febre amarela - dose inicial
+
+**12 meses:**
+- Tríplice viral (SCR) - 1ª dose
+- Pneumo 10 - reforço
+- Meningo C - reforço
+
+**15 meses:**
+- VOP (pólio oral) - reforço
+- DTP - 1º reforço
+- Hepatite A
+- Tetra viral (SCRV)
+
+**4 anos:**
+- VOP - 2º reforço
+- DTP - 2º reforço
+
+**Adolescentes (9-14 anos):**
+- HPV: 2 doses (0 e 6 meses)
+- Meningo ACWY: dose única
+
+## Saúde do Idoso
+
+### Avaliação Geriátrica Ampla (AGA)
+
+**1. Estado Funcional:**
+- **AVD Básicas (Katz)**: banho, vestuário, higiene, transferência, continência, alimentação
+- **AVD Instrumentais (Lawton)**: telefone, compras, preparo de alimentos, tarefas domésticas, transporte, medicações, finanças
+
+**2. Cognição:**
+- **Mini-Exame do Estado Mental (MEEM)**:
+  - Orientação temporal (5 pontos)
+  - Orientação espacial (5 pontos)
+  - Memória imediata (3 pontos)
+  - Atenção e cálculo (5 pontos)
+  - Memória de evocação (3 pontos)
+  - Linguagem (8 pontos)
+  - Praxia construtiva (1 ponto)
+- **Pontos de corte**: Ajustados por escolaridade
+
+**3. Humor:**
+- **Escala de Depressão Geriátrica (GDS-15)**
+- Pontuação ≥6: sugestivo de depressão
+
+**4. Mobilidade:**
+- **Teste de Levantar e Caminhar (Timed Up and Go)**:
+  - <10s: normal
+  - 10-20s: risco intermediário de quedas
+  - >20s: alto risco de quedas
+
+**5. Nutrição:**
+- **Mini Avaliação Nutricional (MAN)**
+- IMC em idosos: 22-27 kg/m² (ideal)
+
+**6. Risco de Quedas:**
+- História de quedas no último ano
+- Medicamentos (≥4 aumenta risco)
+- Alterações visuais
+- Alterações de marcha/equilíbrio
+
+### Prescrição Medicamentosa no Idoso
+
+**Critérios de Beers (evitar se possível):**
+- Benzodiazepínicos de meia-vida longa
+- Anticolinérgicos (amitriptilina, prometazina)
+- Dipirona em altas doses
+- AINEs de uso crônico
+- Digoxina >0,125 mg/dia
+- Amiodarona como 1ª linha
+- Glibenclamida (risco de hipoglicemia)
+
+**Princípios:**
+- "Start low, go slow" - iniciar doses baixas e titular lentamente
+- Revisar medicações regularmente (desprescrição)
+- Evitar polifarmácia (≥5 medicamentos)
+- Atentar para interações medicamentosas
+
+## Rastreamentos
+
+### Rastreamento Cardiovascular
+- **PA**: Anual em adultos >18 anos
+- **Perfil lipídico**: 
+  - Homens: 35-75 anos
+  - Mulheres: 45-75 anos
+  - Repetir a cada 5 anos se normal
+
+### Rastreamento de Câncer Colorretal
+- **Idade**: 50-75 anos
+- **Métodos**:
+  - Pesquisa de sangue oculto fecal: anual
+  - Colonoscopia: a cada 10 anos
+  - Retossigmoidoscopia: a cada 5 anos
+
+### Rastreamento de Câncer de Próstata
+- **Controverso**: Decisão compartilhada
+- **Idade**: 50-75 anos (45 se alto risco)
+- **PSA** + toque retal
+
+### Rastreamento de Osteoporose
+- **Densitometria óssea**: Mulheres ≥65 anos
+- Antes dos 65 se fatores de risco
+
+## Abordagem de Problemas Comuns
+
+### Dor Lombar Aguda (< 6 semanas)
+
+**Red Flags (necessitam investigação):**
+- Idade <20 ou >50 anos (1ª apresentação)
+- Trauma significativo
+- Dor em repouso ou noturna
+- Febre, perda de peso
+- História de câncer
+- Uso de corticoides
+- Déficit neurológico importante
+- Incontinência urinária/fecal recente
+- Anestesia em sela
+
+**Manejo (sem red flags):**
+- Orientação: manter atividades (evitar repouso prolongado)
+- Analgesia: paracetamol, dipirona
+- AINEs: ibuprofeno 400-600 mg 3x/dia (curto prazo)
+- Relaxante muscular: ciclobenzaprina 5-10 mg à noite (7-14 dias)
+- Retorno se não melhorar em 4 semanas
+
+### Infecção de Vias Aéreas Superiores (IVAS)
+
+**Resfriado Comum:**
+- Duração: 7-10 dias
+- Tratamento sintomático
+- Antibiótico NÃO indicado
+
+**Faringite:**
+- **Escore de Centor** (cada item = 1 ponto):
+  - Febre >38°C
+  - Ausência de tosse
+  - Linfonodomegalia cervical
+  - Exsudato em amígdalas
+- **Pontuação 3-4**: Considerar teste rápido ou ATB empírico
+- **Tratamento**: Amoxicilina 500 mg 3x/dia por 10 dias
+
+**Sinusite Bacteriana Aguda:**
+- Indicação de ATB:
+  - Sintomas graves (febre >39°C, dor intensa)
+  - Piora após 5-7 dias
+  - Persistência >10 dias sem melhora
+- **Tratamento**: Amoxicilina 500 mg 3x/dia por 7-10 dias
+
+### Infecção do Trato Urinário
+
+**ITU Não Complicada (mulher jovem):**
+- **1ª linha**: Nitrofurantoína 100 mg 6/6h por 5 dias
+- **Alternativas**:
+  - Sulfametoxazol-trimetoprim 800/160 mg 12/12h por 3 dias
+  - Fosfomicina 3g dose única
+
+**Cistite em Homem / ITU Complicada:**
+- **Tratamento**: 7-10 dias
+- Considerar urocultura pré-tratamento
+
+**Pielonefrite:**
+- **Ambulatorial**: Ciprofloxacino 500 mg 12/12h por 7-14 dias
+- **Internação**: Sintomas graves, instabilidade, vômitos
+
+## Medicações Essenciais na APS
+
+### Analgésicos/Antipiréticos
+- Paracetamol: 500-1000 mg 6/6h (máx 4g/dia)
+- Dipirona: 500-1000 mg 6/6h (máx 4g/dia)
+
+### Anti-inflamatórios
+- Ibuprofeno: 400-600 mg 8/8h
+- Naproxeno: 500 mg 12/12h
+- Diclofenaco: 50 mg 8/8h
+
+### Antibióticos
+- Amoxicilina: 500 mg 8/8h
+- Azitromicina: 500 mg 1x/dia por 3 dias
+- Cefalexina: 500 mg 6/6h
+- Ciprofloxacino: 500 mg 12/12h
+- Sulfametoxazol-trimetoprim: 800/160 mg 12/12h
+
+### Outros
+- Omeprazol: 20 mg/dia em jejum
+- Metoclopramida: 10 mg 8/8h
+- Prednisona: 5-60 mg/dia (conforme indicação)
+- Soro oral: reidratação
+
+## Referências
+
+- **Cadernos de Atenção Básica - Ministério da Saúde**
+- **PROMEF - Programa de Atualização em Medicina de Família e Comunidade**
+- **Tratado de Medicina de Família e Comunidade - SBMFC**
+- **Duncan BB, Schmidt MI, Giugliani ERJ. Medicina Ambulatorial - Condutas de Atenção Primária Baseadas em Evidências. 5ª ed.**
+- **UpToDate**
+- **Diretrizes Brasileiras de Hipertensão - SBC**
+- **Diretrizes SBD - Diabetes Mellitus**
+- **Protocolos de Encaminhamento - PMAQ**
