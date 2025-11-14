@@ -1,6 +1,8 @@
-# Plataforma de Otimização de Processos Oncológicos
+# OncoSaas - Plataforma de Navegação Oncológica
 
-SaaS multi-tenant para otimização de processos oncológicos com agente de IA conversacional no WhatsApp, priorização inteligente de casos e dashboard para equipe de enfermagem.
+SaaS multi-tenant para navegação oncológica com agente de IA conversacional no WhatsApp, priorização inteligente de casos, sistema de alertas e dashboard para equipe de enfermagem.
+
+[![GitHub](https://img.shields.io/badge/GitHub-OncoSaas-blue)](https://github.com/luizfiorimr/OncoSaas)
 
 ## 🚀 Status do Projeto
 
@@ -8,13 +10,48 @@ SaaS multi-tenant para otimização de processos oncológicos com agente de IA c
 - ✅ Stack tecnológico definido (Next.js, NestJS, FastAPI)
 - ✅ Documentação completa criada
 - ✅ Setup de desenvolvimento configurado
-- ✅ Modelos de IA e agente WhatsApp estruturados
+- ✅ **Sistema de Navegação Oncológica** implementado (câncer colorretal)
+- ✅ **Sistema de Alertas** automáticos para atrasos e etapas pendentes
+- ✅ **Dashboard para Enfermagem** com visualização de pacientes e priorização
+- ✅ **Agente de IA WhatsApp** estruturado para conversação com pacientes
+- ✅ **Modelos de Priorização** (XGBoost) para classificação de urgência
+- ✅ **Integração FHIR/HL7** para interoperabilidade
 - ⏳ Em desenvolvimento ativo
+
+## 📋 Funcionalidades Principais
+
+### 🧭 Navegação Oncológica
+
+- Coordenação completa da jornada do paciente (rastreio → diagnóstico → tratamento → seguimento)
+- Etapas automáticas baseadas no tipo de câncer
+- Detecção de atrasos e alertas proativos
+- Suporte para múltiplos tipos de câncer (colorretal, mama, pulmão, próstata, etc.)
+
+### 🤖 Agente de IA WhatsApp
+
+- Conversação natural com pacientes via WhatsApp Business API
+- Triagem inicial e coleta de informações
+- Orientação sobre exames e procedimentos
+- Integração com sistema de navegação oncológica
+
+### 📊 Dashboard e Priorização
+
+- Visualização consolidada de todos os pacientes
+- Priorização inteligente baseada em IA (XGBoost)
+- Alertas em tempo real via WebSocket
+- Filtros e buscas avançadas
+
+### 🚨 Sistema de Alertas
+
+- Alertas automáticos para etapas atrasadas
+- Notificações de exames pendentes
+- Alertas de estadiamento incompleto
+- Avisos de atraso no tratamento
 
 ## Estrutura do Projeto
 
 ```
-MEDSAAS/
+OncoSaas/
 ├── frontend/              # Next.js 14 (React + TypeScript)
 ├── backend/               # NestJS (Node.js + TypeScript)
 ├── ai-service/            # Python FastAPI (IA/ML)
@@ -31,19 +68,30 @@ MEDSAAS/
 - **WhatsApp**: WhatsApp Business API
 - **Integração**: HL7/FHIR
 
-## Documentação
+## 📚 Documentação
 
 Consulte a documentação completa em `docs/`:
 
-- Product Discovery
-- Arquitetura Técnica
-- IA e Machine Learning
-- Chat
-- Compliance e Legal
-- MVP Scope
-- Pitch Deck
-- **Desenvolvimento**: Regras de modularidade e boas práticas (`.cursor/rules/desenvolvimento-modular.mdc`)
-- **Templates**: Exemplos práticos de código (`docs/desenvolvimento/templates-e-exemplos.md`)
+### Documentação Técnica
+
+- **Arquitetura**: Stack tecnológico, estrutura de dados, integrações HL7/FHIR
+- **IA e Machine Learning**: Modelos de priorização, agente WhatsApp, RAG
+- **Desenvolvimento**: Setup, comandos úteis, templates e exemplos
+- **Navegação Oncológica**: Implementação, regras por tipo de câncer, protocolos
+
+### Documentação de Produto
+
+- **Product Discovery**: Pesquisas, personas, jobs-to-be-done
+- **MVP Scope**: Features do MVP, roadmap
+- **Pitch Deck**: Apresentação para investidores
+- **Compliance**: Checklist LGPD, ANVISA, segurança
+
+### Guias de Desenvolvimento
+
+- **Regras de Desenvolvimento**: `.cursor/rules/desenvolvimento-modular.mdc`
+- **Padrões Frontend**: `.cursor/rules/frontend-padroes.mdc`
+- **Padrões Backend**: `.cursor/rules/backend-padroes.mdc`
+- **Navegação Oncológica**: `.cursor/rules/navegacao-oncologica.mdc`
 
 ## Desenvolvimento
 
@@ -105,11 +153,18 @@ cd backend && npm run test:cov # Com cobertura
 - [Estado Atual e Próximos Passos](docs/desenvolvimento/estado-atual-proximos-passos.md) ⭐ **COMEÇE AQUI**
 - [Setup de Configuração](docs/desenvolvimento/setup-configuracao.md)
 - [Comandos Úteis](docs/desenvolvimento/comandos-uteis.md)
+- [Navegação Oncológica - Implementação](docs/desenvolvimento/navegacao-oncologica-implementacao.md)
+- [Navegação Oncológica - Câncer Colorretal](docs/desenvolvimento/navegacao-oncologica-colorretal.md)
 - [Regras Gerais de Desenvolvimento](.cursor/rules/desenvolvimento-modular.mdc)
 - [Padrões Frontend (Next.js)](.cursor/rules/frontend-padroes.mdc)
 - [Padrões Backend (NestJS)](.cursor/rules/backend-padroes.mdc)
 - [Atualizações em Tempo Real (WebSocket)](docs/arquitetura/realtime-updates.md)
 
-## Licença
+## 🔗 Links Úteis
+
+- **Repositório GitHub**: [github.com/luizfiorimr/OncoSaas](https://github.com/luizfiorimr/OncoSaas)
+- **Documentação Completa**: Ver pasta `docs/`
+
+## 📝 Licença
 
 Proprietário - Todos os direitos reservados
