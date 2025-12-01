@@ -70,28 +70,79 @@ OncoSaas/
 
 ## 📚 Documentação
 
-Consulte a documentação completa em `docs/`:
+**[📖 Índice Completo da Documentação](docs/INDEX.md)** ⭐ **COMECE AQUI**
 
-### Documentação Técnica
+**[📊 Visão Geral da Documentação](docs/DOCUMENTATION_OVERVIEW.md)** - Status e resumo de toda documentação
 
-- **Arquitetura**: Stack tecnológico, estrutura de dados, integrações HL7/FHIR
-- **IA e Machine Learning**: Modelos de priorização, agente WhatsApp, RAG
-- **Desenvolvimento**: Setup, comandos úteis, templates e exemplos
-- **Navegação Oncológica**: Implementação, regras por tipo de câncer, protocolos
+### 📖 Documentos Essenciais
 
-### Documentação de Produto
+#### Para Desenvolvedores
 
-- **Product Discovery**: Pesquisas, personas, jobs-to-be-done
-- **MVP Scope**: Features do MVP, roadmap
-- **Pitch Deck**: Apresentação para investidores
-- **Compliance**: Checklist LGPD, ANVISA, segurança
+1. **[🏗️ Arquitetura do Sistema](docs/ARCHITECTURE.md)**
+   - Componentes principais (Frontend, Backend, AI Service, Database)
+   - Fluxo de dados entre componentes
+   - Multi-tenancy (schema por tenant)
+   - Decisões de design
 
-### Guias de Desenvolvimento
+2. **[📡 Referência da API](docs/API_REFERENCE.md)**
+   - Todos os endpoints REST
+   - Eventos WebSocket
+   - Autenticação e autorização
+   - Exemplos de payloads
 
-- **Regras de Desenvolvimento**: `.cursor/rules/desenvolvimento-modular.mdc`
-- **Padrões Frontend**: `.cursor/rules/frontend-padroes.mdc`
-- **Padrões Backend**: `.cursor/rules/backend-padroes.mdc`
-- **Navegação Oncológica**: `.cursor/rules/navegacao-oncologica.mdc`
+3. **[🔧 Solução de Problemas](docs/TROUBLESHOOTING.md)**
+   - Erros comuns e soluções
+   - Debugging de API, WebSocket, banco de dados
+   - Performance e otimização
+
+4. **[🚀 Guia de Deployment](docs/DEPLOYMENT.md)**
+   - Deploy em produção (Vercel, Railway, AWS)
+   - CI/CD com GitHub Actions
+   - Monitoramento e logs
+   - Backup e restore
+
+5. **[🔒 Segurança](docs/SECURITY.md)**
+   - Arquitetura de segurança (4 camadas)
+   - Autenticação JWT e RBAC
+   - Criptografia e proteção de dados
+   - Compliance (LGPD, HIPAA)
+
+6. **[🤝 Como Contribuir](CONTRIBUTING.md)**
+   - Workflow de desenvolvimento
+   - Padrões de código
+   - Processo de code review
+   - Testes
+
+#### Para Product Managers
+
+- **[Product Discovery](docs/product-discovery/)** - Pesquisas, personas, jobs-to-be-done
+- **[Navegação Oncológica](docs/desenvolvimento/navegacao-oncologica-colorretal.md)** - Protocolos clínicos
+- **[Dashboard de Enfermagem](docs/dashboard-enfermagem/)** - Interface e funcionalidades
+- **[Sistema de Alertas](docs/sistema-alertas/)** - Tipos de alertas e priorização
+
+#### Para DevOps/Infra
+
+- **[Deployment](docs/DEPLOYMENT.md)** - Infraestrutura completa
+- **[Arquitetura](docs/ARCHITECTURE.md)** - Componentes e dependências
+- **[Banco de Dados](docs/banco-dados/)** - Schema, queries, backup
+
+### 🗂️ Documentação por Categoria
+
+- **🏗️ Arquitetura**: Stack, estrutura de dados, integrações HL7/FHIR
+- **💻 Desenvolvimento**: Setup, comandos, navegação oncológica, estrutura de projetos
+- **🗄️ Banco de Dados**: Modelo de dados, schema Prisma, queries, performance
+- **🚨 Alertas**: Arquitetura, tipos, priorização
+- **🤖 IA/ML**: Modelo de priorização, agente WhatsApp, RAG
+- **📊 Dashboard**: Requisitos, funcionalidades, wireframes
+- **📈 Product**: Canvas, personas, jobs-to-be-done
+- **⚖️ Compliance**: LGPD, ANVISA, CFM telemedicina
+
+### 📋 Guias de Desenvolvimento
+
+- **[Regras Gerais](.cursor/rules/desenvolvimento-modular.mdc)** - Modularidade, multi-tenancy, boas práticas
+- **[Padrões Frontend](.cursor/rules/frontend-padroes.mdc)** - Next.js 14, React, TypeScript
+- **[Padrões Backend](.cursor/rules/backend-padroes.mdc)** - NestJS, Prisma, WebSocket
+- **[Navegação Oncológica](.cursor/rules/navegacao-oncologica.mdc)** - Raciocínio clínico, protocolos
 
 ## Desenvolvimento
 
@@ -148,17 +199,12 @@ cd backend && npm test    # Rodar testes
 cd backend && npm run test:cov # Com cobertura
 ```
 
-**Documentação completa:**
+**Primeiros passos:**
 
-- [Estado Atual e Próximos Passos](docs/desenvolvimento/estado-atual-proximos-passos.md) ⭐ **COMEÇE AQUI**
-- [Setup de Configuração](docs/desenvolvimento/setup-configuracao.md)
-- [Comandos Úteis](docs/desenvolvimento/comandos-uteis.md)
-- [Navegação Oncológica - Implementação](docs/desenvolvimento/navegacao-oncologica-implementacao.md)
-- [Navegação Oncológica - Câncer Colorretal](docs/desenvolvimento/navegacao-oncologica-colorretal.md)
-- [Regras Gerais de Desenvolvimento](.cursor/rules/desenvolvimento-modular.mdc)
-- [Padrões Frontend (Next.js)](.cursor/rules/frontend-padroes.mdc)
-- [Padrões Backend (NestJS)](.cursor/rules/backend-padroes.mdc)
-- [Atualizações em Tempo Real (WebSocket)](docs/arquitetura/realtime-updates.md)
+1. **[Estado Atual e Próximos Passos](docs/desenvolvimento/estado-atual-proximos-passos.md)** ⭐ **COMEÇE AQUI**
+2. **[Setup de Desenvolvimento](docs/desenvolvimento/setup-desenvolvimento.md)** - Configuração completa
+3. **[Arquitetura](docs/ARCHITECTURE.md)** - Entender como o sistema funciona
+4. **[API Reference](docs/API_REFERENCE.md)** - Conhecer todos os endpoints
 
 ## 🔗 Links Úteis
 
