@@ -70,25 +70,57 @@ OncoSaas/
 
 ## 📚 Documentação
 
-Consulte a documentação completa em `docs/`:
+### ⚡ Início Rápido
 
-### Documentação Técnica
+- **[Quick Start](docs/QUICK_START.md)** - Comece em 5 minutos ⭐
+- **[Documentação Completa](docs/README.md)** - Índice geral da documentação
 
-- **Arquitetura**: Stack tecnológico, estrutura de dados, integrações HL7/FHIR
-- **IA e Machine Learning**: Modelos de priorização, agente WhatsApp, RAG
-- **Desenvolvimento**: Setup, comandos úteis, templates e exemplos
-- **Navegação Oncológica**: Implementação, regras por tipo de câncer, protocolos
+### 🏗️ Arquitetura e Design
 
-### Documentação de Produto
+- **[Arquitetura do Sistema](docs/arquitetura/README.md)** - Visão geral da arquitetura
+- **[Stack Tecnológico](docs/arquitetura/stack-tecnologico.md)** - Tecnologias utilizadas
+- **[Estrutura de Dados](docs/arquitetura/estrutura-dados.md)** - Modelos e schema
+- **[Integração HL7/FHIR](docs/arquitetura/integracao-hl7-fhir.md)** - Interoperabilidade
+- **[Atualizações em Tempo Real](docs/arquitetura/realtime-updates.md)** - WebSocket
 
-- **Product Discovery**: Pesquisas, personas, jobs-to-be-done
-- **MVP Scope**: Features do MVP, roadmap
-- **Pitch Deck**: Apresentação para investidores
-- **Compliance**: Checklist LGPD, ANVISA, segurança
+### 💻 Desenvolvimento
 
-### Guias de Desenvolvimento
+- **[Guia Completo de Desenvolvimento](docs/desenvolvimento/GUIA_COMPLETO.md)** - Guia abrangente ⭐
+- **[Estado Atual e Próximos Passos](docs/desenvolvimento/estado-atual-proximos-passos.md)** - O que está implementado
+- **[Setup de Configuração](docs/desenvolvimento/setup-configuracao.md)** - Variáveis de ambiente
+- **[Comandos Úteis](docs/desenvolvimento/comandos-uteis.md)** - Referência rápida
+- **[Templates e Exemplos](docs/desenvolvimento/templates-e-exemplos.md)** - Código de referência
 
-- **Regras de Desenvolvimento**: `.cursor/rules/desenvolvimento-modular.mdc`
+### 📡 API
+
+- **[Documentação da API](docs/API/README.md)** - Endpoints REST e WebSocket
+- **[Testar Endpoints](docs/desenvolvimento/testar-endpoints.md)** - Como testar APIs
+
+### 🚀 Deployment
+
+- **[Guia de Deployment](docs/DEPLOYMENT.md)** - Deploy em diferentes ambientes
+- **[HTTPS Setup](docs/desenvolvimento/https-setup.md)** - Configuração SSL local
+
+### 🔒 Segurança e Compliance
+
+- **[Segurança e Compliance](docs/SEGURANCA.md)** - LGPD, ANVISA, segurança técnica
+- **[Checklist Compliance](docs/compliance-legal/checklist-compliance.md)** - Checklist completo
+
+### 🧭 Funcionalidades
+
+- **[Navegação Oncológica](docs/desenvolvimento/navegacao-oncologica-implementacao.md)** - Implementação
+- **[Sistema de Alertas](docs/sistema-alertas/como-funcionam-alertas.md)** - Como funcionam
+- **[Agente WhatsApp](docs/arquitetura/agente-whatsapp.md)** - Arquitetura do agente
+
+### 📋 Produto e Negócio
+
+- **[MVP Features](docs/mvp-scope/mvp-features.md)** - Escopo do MVP
+- **[Product Discovery](docs/product-discovery/)** - Pesquisas e personas
+- **[Pitch Deck](docs/pitch-deck/pitch-deck-seed-round.md)** - Apresentação investidores
+
+### 📖 Guias de Desenvolvimento (Regras)
+
+- **Regras Gerais**: `.cursor/rules/desenvolvimento-modular.mdc`
 - **Padrões Frontend**: `.cursor/rules/frontend-padroes.mdc`
 - **Padrões Backend**: `.cursor/rules/backend-padroes.mdc`
 - **Navegação Oncológica**: `.cursor/rules/navegacao-oncologica.mdc`
