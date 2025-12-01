@@ -72,6 +72,13 @@ OncoSaas/
 
 Consulte a documentação completa em `docs/`:
 
+#### Documentação por Módulo e APIs
+
+- [Frontend (Next.js 14)](docs/desenvolvimento/frontend-modulo.md) — arquitetura, hooks e comunicação com o backend/Socket.IO.
+- [Backend (NestJS)](docs/desenvolvimento/backend-modulo.md) — módulos, guards multi-tenant, integrações e infraestrutura.
+- [AI Service (FastAPI)](docs/desenvolvimento/ai-service-modulo.md) — modelo de priorização e agente conversacional.
+- [Catálogo de APIs HTTP/WebSocket](docs/desenvolvimento/backend-api.md) — rotas REST por recurso e eventos Socket.IO.
+
 ### Documentação Técnica
 
 - **Arquitetura**: Stack tecnológico, estrutura de dados, integrações HL7/FHIR
