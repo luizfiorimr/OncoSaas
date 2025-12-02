@@ -416,15 +416,362 @@ async function main() {
     }
   }
 
+  // Criar diagnósticos de câncer com biomarcadores (para pacientes em tratamento e seguimento)
+  const patientsWithDiagnosis = patients.filter(
+    (p) => p.currentStage === 'TREATMENT' || p.currentStage === 'FOLLOW_UP'
+  );
+
+  for (const patient of patientsWithDiagnosis) {
+    const isPalliative = patient.id === palliativePatient.id;
+    const isTreatment = patient.currentStage === 'TREATMENT';
+
+    // Biomarcadores por tipo de câncer
+    const biomarkers: any = {};
+
+    if (patient.cancerType === 'breast') {
+      biomarkers.her2Status = 'positivo';
+      biomarkers.erStatus = 'positivo';
+      biomarkers.prStatus = 'positivo';
+      biomarkers.ki67Percentage = 25;
+    } else if (patient.cancerType === 'lung') {
+      biomarkers.egfrMutation = 'mutado';
+      biomarkers.alkRearrangement = 'negativo';
+      biomarkers.pdl1Expression = 60;
+    } else if (patient.cancerType === 'colorectal') {
+      biomarkers.krasMutation = 'wild-type';
+      biomarkers.brafMutation = 'wild-type';
+      biomarkers.msiStatus = 'MSS';
+    } else if (patient.cancerType === 'prostate') {
+      biomarkers.psaBaseline = 15.5;
+      biomarkers.gleasonScore = '3+4=7';
+    }
+
+    const existingDiagnosis = await prisma.cancerDiagnosis.findFirst({
+      where: { tenantId: tenant.id, patientId: patient.id },
+    });
+
+    if (!existingDiagnosis) {
+      await prisma.cancerDiagnosis.create({
+        data: {
+          tenantId: tenant.id,
+          patientId: patient.id,
+          cancerType: patient.name,
+          diagnosisDate: isTreatment
+            ? new Date('2024-02-01')
+            : isPalliative
+              ? new Date('2023-07-15')
+              : new Date('2023-07-05'),
+          diagnosisConfirmed: true,
+          stage: isTreatment ? 'IIIA' : isPalliative ? 'IV' : 'II',
+          tStage: isTreatment ? 'T3' : isPalliative ? 'T4' : 'T2',
+          nStage: isTreatment ? 'N1' : isPalliative ? 'N2' : 'N0',
+          mStage: isPalliative ? 'M1' : 'M0',
+          grade: 'G2',
+          ...biomarkers,
+          isPrimary: true,
+          isActive: true,
+        },
+      });
+    }
+  }
+
+  console.log(`✅ Diagnósticos de câncer criados para ${patientsWithDiagnosis.length} pacientes`);
+
+  // Criar tratamentos (para pacientes em tratamento ativo)
+  const patientsInTreatment = patients.filter((p) => p.currentStage === 'TREATMENT');
+
+  for (const patient of patientsInTreatment.slice(0, 3)) {
+    // Apenas alguns para exemplo
+    const diagnosis = await prisma.cancerDiagnosis.findFirst({
+      where: { tenantId: tenant.id, patientId: patient.id },
+    });
+
+    if (diagnosis) {
+      const existingTreatment = await prisma.treatment.findFirst({
+        where: { tenantId: tenant.id, patientId: patient.id },
+      });
+
+      if (!existingTreatment) {
+        await prisma.treatment.create({
+          data: {
+            tenantId: tenant.id,
+            patientId: patient.id,
+            diagnosisId: diagnosis.id,
+            treatmentType: 'CHEMOTHERAPY',
+            treatmentName: 'FOLFOX',
+            protocol: 'Protocolo FOLFOX modificado',
+            line: 1,
+            intent: 'CURATIVE',
+            startDate: new Date('2024-03-01'),
+            plannedEndDate: new Date('2024-08-01'),
+            currentCycle: 3,
+            totalCycles: 8,
+            cyclesCompleted: 2,
+            status: 'ACTIVE',
+            isActive: true,
+            frequency: 'A cada 21 dias',
+            administrationRoute: 'IV',
+            medications: [
+              { name: 'Oxaliplatina', dose: '85 mg/m²', route: 'IV' },
+              { name: '5-Fluorouracil', dose: '400 mg/m²', route: 'IV' },
+              { name: 'Leucovorin', dose: '400 mg/m²', route: 'IV' },
+            ],
+            toxicities: [
+              {
+                type: 'Neuropatia periférica',
+                grade: 1,
+                date: new Date('2024-04-01'),
+              },
+              { type: 'Náuseas', grade: 2, date: new Date('2024-03-15') },
+            ],
+            response: 'PARTIAL_RESPONSE',
+            responseDate: new Date('2024-05-15'),
+            responseNotes: 'Redução de 40% no tamanho do tumor',
+          },
+        });
+      }
+    }
+  }
+
+  console.log('✅ Tratamentos de exemplo criados para 3 pacientes');
+
+  // Criar questionários padrão
+  const questionnaireEORTC = await prisma.questionnaire.upsert({
+    where: { code: 'EORTC-QLQ-C30' },
+    update: {},
+    create: {
+      tenantId: tenant.id,
+      code: 'EORTC-QLQ-C30',
+      name: 'EORTC QLQ-C30',
+      description: 'Questionário de Qualidade de Vida da EORTC',
+      type: 'EORTC_QLQ_C30',
+      isActive: true,
+      structure: {
+        version: '3.0',
+        sections: [
+          {
+            id: 'physical',
+            name: 'Função Física',
+            questions: [
+              {
+                id: 'q1',
+                text: 'Você tem dificuldade para fazer atividades pesadas?',
+                type: 'scale',
+                scale: { min: 1, max: 4 },
+              },
+            ],
+          },
+        ],
+      },
+    },
+  });
+
+  const questionnaireESAS = await prisma.questionnaire.upsert({
+    where: { code: 'ESAS' },
+    update: {},
+    create: {
+      tenantId: tenant.id,
+      code: 'ESAS',
+      name: 'ESAS (Edmonton Symptom Assessment System)',
+      description: 'Escala de Avaliação de Sintomas de Edmonton',
+      type: 'ESAS',
+      isActive: true,
+      structure: {
+        version: '1.0',
+        questions: [
+          { id: 'pain', text: 'Dor', scale: { min: 0, max: 10 } },
+          { id: 'tiredness', text: 'Cansaço', scale: { min: 0, max: 10 } },
+          { id: 'nausea', text: 'Náusea', scale: { min: 0, max: 10 } },
+        ],
+      },
+    },
+  });
+
+  console.log('✅ Questionários padrão criados:', 2);
+
+  // Criar respostas a questionários (para paciente em tratamento)
+  if (treatmentPatient) {
+    const existingResponse = await prisma.questionnaireResponse.findFirst({
+      where: {
+        tenantId: tenant.id,
+        patientId: treatmentPatient.id,
+        questionnaireId: questionnaireESAS.id,
+      },
+    });
+
+    if (!existingResponse) {
+      await prisma.questionnaireResponse.create({
+        data: {
+          tenantId: tenant.id,
+          patientId: treatmentPatient.id,
+          questionnaireId: questionnaireESAS.id,
+          responses: {
+            pain: 6,
+            tiredness: 7,
+            nausea: 8,
+          },
+          completedAt: new Date('2024-12-10T10:00:00Z'),
+          appliedBy: 'AGENT',
+        },
+      });
+      console.log('✅ Resposta a questionário ESAS criada');
+    } else {
+      console.log('✅ Resposta a questionário ESAS já existe');
+    }
+  }
+
+  // Criar observações clínicas (FHIR)
+  if (treatmentPatient) {
+    const existingObservation = await prisma.observation.findFirst({
+      where: {
+        tenantId: tenant.id,
+        patientId: treatmentPatient.id,
+        code: '72514-3',
+      },
+    });
+
+    if (!existingObservation) {
+      await prisma.observation.create({
+        data: {
+          tenantId: tenant.id,
+          patientId: treatmentPatient.id,
+          code: '72514-3',
+          display: 'Pain severity',
+          valueQuantity: 7,
+          unit: 'score',
+          effectiveDateTime: new Date('2024-12-10T10:00:00Z'),
+          status: 'final',
+          syncedToEHR: false,
+        },
+      });
+      console.log('✅ Observação clínica (Pain severity) criada');
+    } else {
+      console.log('✅ Observação clínica já existe');
+    }
+  }
+
+  // Criar notas internas
+  if (diagnosisPatient) {
+    const existingNote = await prisma.internalNote.findFirst({
+      where: {
+        tenantId: tenant.id,
+        patientId: diagnosisPatient.id,
+      },
+    });
+
+    if (!existingNote) {
+      await prisma.internalNote.create({
+        data: {
+          tenantId: tenant.id,
+          patientId: diagnosisPatient.id,
+          authorId: nurse.id,
+          content:
+            'Paciente aguardando resultado de biópsia. Família demonstrou ansiedade. Solicitei suporte psicológico.',
+        },
+      });
+      console.log('✅ Nota interna criada');
+    } else {
+      console.log('✅ Nota interna já existe');
+    }
+  }
+
+  // Criar etapas de navegação oncológica (para paciente em diagnóstico)
+  if (diagnosisPatient) {
+    const existingSteps = await prisma.navigationStep.findMany({
+      where: {
+        tenantId: tenant.id,
+        patientId: diagnosisPatient.id,
+      },
+    });
+
+    if (existingSteps.length === 0) {
+      await prisma.navigationStep.createMany({
+        data: [
+          {
+            tenantId: tenant.id,
+            patientId: diagnosisPatient.id,
+            cancerType: 'colorectal',
+            journeyStage: 'DIAGNOSIS',
+            stepKey: 'colonoscopy',
+            stepName: 'Colonoscopia',
+            stepDescription: 'Colonoscopia com biópsia',
+            status: 'COMPLETED',
+            isRequired: true,
+            isCompleted: true,
+            completedAt: new Date('2024-11-20'),
+            expectedDate: new Date('2024-11-15'),
+            actualDate: new Date('2024-11-20'),
+            result: 'Lesão identificada',
+            findings: ['Lesão de 3cm em sigmóide', 'Biópsia realizada'],
+          },
+          {
+            tenantId: tenant.id,
+            patientId: diagnosisPatient.id,
+            cancerType: 'colorectal',
+            journeyStage: 'DIAGNOSIS',
+            stepKey: 'pathology',
+            stepName: 'Resultado de Anatomopatológico',
+            stepDescription: 'Laudo de anatomopatológico',
+            status: 'IN_PROGRESS',
+            isRequired: true,
+            isCompleted: false,
+            expectedDate: new Date('2024-12-05'),
+            dueDate: new Date('2024-12-10'),
+          },
+          {
+            tenantId: tenant.id,
+            patientId: diagnosisPatient.id,
+            cancerType: 'colorectal',
+            journeyStage: 'DIAGNOSIS',
+            stepKey: 'ct_abdomen',
+            stepName: 'TC de Abdome e Pelve',
+            stepDescription: 'Tomografia para estadiamento',
+            status: 'PENDING',
+            isRequired: true,
+            isCompleted: false,
+            expectedDate: new Date('2024-12-15'),
+            dueDate: new Date('2024-12-20'),
+          },
+        ],
+      });
+      console.log('✅ Etapas de navegação criadas para paciente em diagnóstico:', 3);
+    } else {
+      console.log(`✅ Etapas de navegação já existem: ${existingSteps.length}`);
+    }
+  }
+
   console.log('');
   console.log('🎉 Seed concluído com sucesso!');
   console.log('');
   console.log('📋 Credenciais de teste:');
-  console.log('  Email: admin@hospitalteste.com');
-  console.log('  Senha: senha123');
+  console.log('  📧 Admin:');
+  console.log('    Email: admin@hospitalteste.com');
+  console.log('    Senha: senha123');
   console.log('');
-  console.log('  Email: enfermeira@hospitalteste.com');
-  console.log('  Senha: senha123');
+  console.log('  👨‍⚕️ Oncologista:');
+  console.log('    Email: oncologista@hospitalteste.com');
+  console.log('    Senha: senha123');
+  console.log('');
+  console.log('  👩‍⚕️ Enfermeira:');
+  console.log('    Email: enfermeira@hospitalteste.com');
+  console.log('    Senha: senha123');
+  console.log('');
+  console.log('  👔 Coordenador:');
+  console.log('    Email: coordenador@hospitalteste.com');
+  console.log('    Senha: senha123');
+  console.log('');
+  console.log('📊 Dados criados:');
+  console.log(`  - ${patients.length} pacientes`);
+  console.log(`  - ${patients.length} jornadas de paciente`);
+  console.log(`  - ${patientsWithDiagnosis.length} diagnósticos de câncer`);
+  console.log('  - 3 tratamentos ativos');
+  console.log('  - 2 questionários (EORTC, ESAS)');
+  console.log('  - 1 resposta a questionário');
+  console.log('  - 1 observação clínica (FHIR)');
+  console.log('  - 1 nota interna');
+  console.log('  - 3 etapas de navegação');
+  console.log('  - 2 mensagens de exemplo');
+  console.log('  - 1 alerta crítico');
   console.log('');
 }
 

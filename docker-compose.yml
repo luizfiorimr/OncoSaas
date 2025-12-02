@@ -1,52 +1,166 @@
+version: '3.8'
+
 services:
+  # ==============================================================================
+  # PostgreSQL - Banco de Dados Principal
+  # ==============================================================================
   postgres:
     image: postgres:15-alpine
     container_name: medsaas-postgres
-    environment:
-      POSTGRES_USER: medsaas
-      POSTGRES_PASSWORD: medsaas_dev
-      POSTGRES_DB: medsaas_development
+    restart: unless-stopped
     ports:
-      - '5433:5432' # Porta externa 5433 para evitar conflito com medassist-postgres
+      - "5433:5432"  # Porta 5433 no host para evitar conflitos com instalação local
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: medsaas_oncologia
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U medsaas']
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - medsaas-network
 
+  # ==============================================================================
+  # Redis - Cache e Message Broker
+  # ==============================================================================
   redis:
     image: redis:7-alpine
     container_name: medsaas-redis
+    restart: unless-stopped
     ports:
-      - '6379:6379'
+      - "6379:6379"
     volumes:
       - redis_data:/data
+    command: redis-server --appendonly yes
     healthcheck:
-      test: ['CMD', 'redis-cli', 'ping']
+      test: ["CMD", "redis-cli", "ping"]
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - medsaas-network
 
+  # ==============================================================================
+  # RabbitMQ - Message Queue
+  # ==============================================================================
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: medsaas-rabbitmq
-    environment:
-      RABBITMQ_DEFAULT_USER: medsaas
-      RABBITMQ_DEFAULT_PASS: medsaas_dev
+    restart: unless-stopped
     ports:
-      - '5672:5672'
-      - '15672:15672'
+      - "5672:5672"   # AMQP protocol
+      - "15672:15672" # Management UI
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
     healthcheck:
-      test: ['CMD', 'rabbitmq-diagnostics', 'ping']
-      interval: 10s
-      timeout: 5s
+      test: ["CMD", "rabbitmq-diagnostics", "ping"]
+      interval: 30s
+      timeout: 10s
       retries: 5
+    networks:
+      - medsaas-network
 
+  # ==============================================================================
+  # Backend - NestJS API
+  # ==============================================================================
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: medsaas-backend
+    restart: unless-stopped
+    ports:
+      - "3002:3002"
+    environment:
+      NODE_ENV: development
+      PORT: 3002
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/medsaas_oncologia
+      REDIS_URL: redis://redis:6379
+      RABBITMQ_URL: amqp://admin:admin@rabbitmq:5672
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+      - /app/dist
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+    networks:
+      - medsaas-network
+    command: npm run start:dev
+
+  # ==============================================================================
+  # Frontend - Next.js
+  # ==============================================================================
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: medsaas-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: development
+      NEXT_PUBLIC_API_URL: http://localhost:3002
+      NEXT_PUBLIC_WS_URL: ws://localhost:3002
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - /app/.next
+    depends_on:
+      - backend
+    networks:
+      - medsaas-network
+    command: npm run dev
+
+  # ==============================================================================
+  # AI Service - FastAPI
+  # ==============================================================================
+  ai-service:
+    build:
+      context: ./ai-service
+      dockerfile: Dockerfile
+    container_name: medsaas-ai-service
+    restart: unless-stopped
+    ports:
+      - "8001:8001"
+    environment:
+      PYTHONUNBUFFERED: 1
+      BACKEND_URL: http://backend:3002
+    volumes:
+      - ./ai-service:/app
+    depends_on:
+      - backend
+      - redis
+    networks:
+      - medsaas-network
+    command: uvicorn main:app --host 0.0.0.0 --port 8001 --reload
+
+# ==============================================================================
+# Volumes - Persistência de Dados
+# ==============================================================================
 volumes:
   postgres_data:
+    driver: local
   redis_data:
+    driver: local
   rabbitmq_data:
+    driver: local
+
+# ==============================================================================
+# Networks - Rede Interna
+# ==============================================================================
+networks:
+  medsaas-network:
+    driver: bridge
