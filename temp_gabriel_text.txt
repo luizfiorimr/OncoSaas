@@ -1,0 +1,52 @@
+GABRIEL PANDOLFI CORREA DOS SANTOS
+Av. Carlos Moreira Lima 588, Vitória-ES
+CIENTISTA  DA COMPUTAÇÃO COM EXPERIÊNCIA EM ANÁLISE DE DADOS, MANIPULAÇÃO DE DADOS,
+MODELOS DE MACHINE LEARNING, ESTATÍSTICA INFERENCIAL E DESCRITIVA. HÁBIL NAS LINGUAGENS DE
+PROGRAMAÇÃO PYTHON E SQL. PERFIL COMUNICATIVO, PROATIVO, INTERESSADO, CAPAZ DE
+CUMPRIR PRAZOS E SOLUCIONAR PROBLEMAS DE FORMA INOVADORA. FLUENTE EM INGLÊS E INICIANTE
+EM ESPANHOL
+(27) 99736-0148
+gabrielpandolficorreasantos@estudante.ufscar.br
+PERFIL PESSOAL
+EXPERIÊNCIA PROFISSIONAL
+FORMAÇÃO ACADÊMICA E CERTIFICAÇÕES
+Bacharelado em Ciência da Computação (2019-2025)
+Universidade Federal de São Carlos (UFSCar)
+Quero Ser Data Analytics (Ago 2023 - Dez 2023)
+Ada Tech
+gabriel-pandolfi-correasantos
+1.Cientista de Dados JR (Compras e Patrimônio) 
+Bradesco - Ago. de 2025 - Atual
+PLN com foco em Análise de Sentimentos e NPS de Compras; Modelagem e Análise de dados em
+Databricks; Automação de Fluxos Financeiros para redução de orçamento e consulta de processos
+financeiros com LLM’S (Bridge Bradesco); Painéis Financeiros.
+2.Cientista de Dados JR (Pricing) 
+RD Saúde (Raia Drogasil) Out. de 2024 – Ago. de 2025
+Modelagem e Análise de dados; Desenvolvimento de Modelos de Machine Learning, Series
+Temporais e Modelos de Forecasting, Econometria – Pricing E-commerce; Pricing Lojas Físicas.
+  3.Trainee - Analista de BI (Advanced Analytics)
+RD Saúde (Raia Drogasil) Ago. de 2023 – Out. de 2024
+Análise, Modelagem de dados; ETL(DBT); Desenvolvimento de Modelos de Machine Learning,
+Series Temporais com foco em Experiência Marketplace 3P - Seller/Cliente
+PROJETOS E PRODUTOS DE DADOS
+1.Combate de Preços do Concorrente (RD Saúde)
+a.Análise das séries de preços do concorrente(SKU’s), mapeamento das séries defasadas de preços
+(atraso ou adiantamento) e uso de Informação Mútua Normalizada para entender o dia mais
+provável de mudança de preço do concorrente como instrumento de estratégia de maximização
+de indicadores.
+2.Sugestão de melhor dia para entrega de Produtos 3P (RD Saúde)
+a.Desenvolvimento de um modelo probabilístico baseado de Distribuição de Poisson para sugerir o
+melhor dia de entrega de produtos no E-commerce (distorção entre prazos sugeridos e prazos
+reais - impacto negativo na conversão de vendas e outros KPI’s)
+HABILIDADES
+Desenvolvimento de projetos de ML End-to-End
+Conhecimento Estatístico
+Databricks
+Versionamento de arquivos (Github;Gitlab)
+Domínio de Ferramentas de Datavis (PowerBI,Metabase)
+Programação e Modelagem de Banco de Dados
+Compreensão de Ferramentas de Cloud(AWS)
+Domínio Pacote Office
+Domínio de Kedro, Streamlit
+@gabrielpandolficorreasantos
+

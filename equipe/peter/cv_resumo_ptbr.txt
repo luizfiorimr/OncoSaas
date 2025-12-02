@@ -1,0 +1,9 @@
+PEDRO FERNANDES - Eng. Software Full-stack (Backend, E-commerce, Ads)
+
+EXPERIÊNCIA: Upwork (EUA) - Sênior (out/2023-presente): Serviço de stats (>99,9% uptime, 100M+ registros). Lançamentos +$5M/ano. Turbo Partners (BR) - Líder Técnico (jul/2022-set/2023): App Shopify comercial. Clientes internacionais. OKRs/KPIs. Bliss Apps/J.P. Morgan (PT) - Full Stack (out/2022-jun/2023): Gateway empresarial (C#, Angular). Prosperi (BR) - Dev (out/2021-out/2022): Frontend SaaS (React, C#, Python). UI library 2x velocidade. Wikisoft (EUA) - Full Stack (mai/2020-jun/2021): Plataforma social (React, JS, Python).
+
+FORMAÇÃO: TU Delft (NL) - BSc Computação (2018-2021). Algoritmos, design, sistemas.
+
+HABILIDADES: JS, Java, Python, SQL | React, Vue, Spring | Docker, K8s, GitHub Actions, Firebase, Redis | AWS (certificado) | Postgres, MongoDB, GraphQL | Cert: AWS, Shopify
+
+PROJETOS: Dashboard Campanhas - Dados (Facebook, Google, TikTok) para Shopify. ROI unificado. React, Node, Python, Postgres. SaaS DTC. .
