@@ -9,6 +9,13 @@ Guia rápido de comandos para desenvolvimento diário.
 ### Iniciar Serviços
 
 ```bash
+# Todos juntos (Frontend + Backend + AI)
+npm run dev
+npm run dev:https          # versão com HTTPS para Meta/WhatsApp
+
+# Produção (Next + Nest + Uvicorn)
+npm run start
+
 # Frontend (Next.js)
 cd frontend && npm run dev
 
@@ -16,7 +23,7 @@ cd frontend && npm run dev
 cd backend && npm run start:dev
 
 # AI Service (FastAPI)
-cd ai-service && uvicorn main:app --reload --port 8001
+cd ai-service && python3 -m uvicorn main:app --reload --port 8001
 
 # Todos via Docker Compose
 docker-compose up -d

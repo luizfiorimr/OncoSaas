@@ -105,22 +105,50 @@ Consulte a documentação completa em `docs/`:
 ### Setup Inicial
 
 ```bash
-# 1. Instalar dependências
+# 1. Dependências (raiz + cada serviço)
 npm install
+cd frontend && npm install
 cd backend && npm install
 cd ai-service && pip install -r requirements.txt
 
-# 2. Configurar variáveis de ambiente
+# 2. Variáveis de ambiente
 cp .env.example .env
-# Editar .env com suas configurações
+# Edite o arquivo com as credenciais locais (Postgres, APIs, etc.)
 
-# 3. Configurar Husky (Git hooks)
-npm run prepare
+# 3. Infra local (PostgreSQL, Redis, RabbitMQ)
+npm run docker:up   # equivale a docker-compose up -d
 
-# 4. Iniciar ambiente de desenvolvimento
-docker-compose up -d
+# 4. Aplicar migrations
+npm run db:migrate
+
+# 5. Ambiente de desenvolvimento (Frontend + Backend + AI Service)
 npm run dev
 ```
+
+> `npm run dev` agora sobe os três serviços simultaneamente.  
+> Se `OPENAI_API_KEY`/`ANTHROPIC_API_KEY` não estiverem definidos, o AI Service responde com mensagens mockadas
+> (útil para desenvolvimento). Para trabalhar com WhatsApp Embedded Signup/Meta, use `npm run dev:https`.
+
+⚙️ **Husky**: após instalar as dependências, execute `npm run prepare` para reinstalar os Git hooks (pre-commit/pre-push).
+
+📘 Guia completo (pré-requisitos, troubleshooting e deploy):  
+`docs/desenvolvimento/setup-e-deploy.md`
+
+### Deploy Local/Produção
+
+```bash
+# 1. Build
+npm run build  # Next.js + NestJS
+
+# 2. Aplicar migrations em modo não-destrutivo
+cd backend && npx prisma migrate deploy
+
+# 3. Iniciar serviços em modo produção
+npm run start  # next start + nest start + uvicorn
+```
+
+Para executar os processos em background em servidores, utilize um process manager (PM2, systemd, etc.).  
+O AI Service também pode ser iniciado isoladamente via `npm run ai:dev` caso precise depurar somente o modelo.
 
 ### Ferramentas de Qualidade
 

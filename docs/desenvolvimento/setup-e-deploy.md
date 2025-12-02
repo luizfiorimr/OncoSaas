@@ -1,0 +1,168 @@
+# Guia de Setup e Deploy
+
+> Última atualização: 2025-12-02
+
+Este documento consolida todo o processo de preparação do ambiente de desenvolvimento e do deploy local/produção do OncoSaas. Siga os passos abaixo na ordem indicada para evitar erros comuns.
+
+---
+
+## 1. Pré-requisitos
+
+| Ferramenta     | Versão mínima                        | Como verificar           |
+| -------------- | ------------------------------------ | ------------------------ |
+| Node.js        | 18.x                                 | `node -v`                |
+| npm            | 9.x                                  | `npm -v`                 |
+| Python         | 3.11+ (comando `python3`)            | `python3 --version`      |
+| pip            | 23+                                  | `pip --version`          |
+| Docker         | 24+                                  | `docker --version`       |
+| Docker Compose | plugin integrado ou `docker-compose` | `docker compose version` |
+
+> **Importante**: os scripts utilizam `python3`. Em ambientes Windows, garanta que o comando `python3` esteja mapeado (ou ajuste manualmente o script `ai:dev`).
+
+---
+
+## 2. Variáveis de Ambiente
+
+1. Copie o exemplo: `cp .env.example .env`
+2. Ajuste as credenciais locais (Postgres/Redis/RabbitMQ já vêm preenchidos para uso com o `docker-compose`).
+3. Para habilitar o agente de IA real, configure `OPENAI_API_KEY` e/ou `ANTHROPIC_API_KEY`.
+4. Configure os endpoints de WhatsApp/FHIR conforme necessário.
+
+> Sem as chaves de LLM, o AI Service sobe em modo _mock_, respondendo com mensagens padrão para facilitar o desenvolvimento.
+
+---
+
+## 3. Instalação de Dependências
+
+```bash
+# Raiz (scripts utilitários)
+npm install
+
+# Frontend (Next.js)
+cd frontend && npm install
+
+# Backend (NestJS)
+cd ../backend && npm install
+
+# AI Service (FastAPI)
+cd ../ai-service && pip install -r requirements.txt
+
+# Voltar à raiz
+cd ..
+```
+
+Após a primeira instalação, execute `npm run prepare` para ativar os hooks do Husky.
+
+---
+
+## 4. Infraestrutura Local (Postgres/Redis/RabbitMQ)
+
+```bash
+npm run docker:up        # equivale a docker-compose up -d
+npm run docker:ps        # verifica se os containers estão saudáveis
+```
+
+> Se preferir controlar manualmente, use os comandos diretos do Docker Compose (`docker-compose up -d`, `docker-compose logs -f`, etc.).
+
+---
+
+## 5. Banco de Dados
+
+1. Gere/atualize o cliente Prisma: `npm run db:generate`
+2. Aplique migrations em modo dev: `npm run db:migrate`
+3. Para produção, execute `cd backend && npx prisma migrate deploy` (modo idempotente).
+
+---
+
+## 6. Ambiente de Desenvolvimento
+
+```bash
+npm run dev         # Frontend + Backend + AI Service
+```
+
+- O Frontend sobe em `http://localhost:3000`
+- O Backend (NestJS) expõe `http://localhost:3002` e `ws://localhost:3002`
+- O AI Service responde em `http://localhost:8001/health`
+- Dependências (Postgres/Redis/RabbitMQ) ficam nos ports definidos em `docker-compose.yml`
+
+Outros cenários:
+
+- `npm run dev:https`: mesmo fluxo anterior, mas com certificados locais para Embedded Signup (consulte `README-HTTPS.md`).
+- `npm run backend:dev` / `npm run frontend:dev` / `npm run ai:dev`: iniciam cada serviço isoladamente.
+
+### Verificações rápidas
+
+| Serviço  | URL                            | O que esperar             |
+| -------- | ------------------------------ | ------------------------- |
+| Backend  | `http://localhost:3002/health` | `{ "status": "ok" }`      |
+| AI       | `http://localhost:8001/health` | `{ "status": "ok", ... }` |
+| Frontend | `http://localhost:3000`        | Tela de login             |
+
+---
+
+## 7. Deploy Local / Produção
+
+1. **Build**
+   ```bash
+   npm run build   # next build + nest build
+   ```
+2. **Migrations (modo seguro)**
+   ```bash
+   cd backend && npx prisma migrate deploy
+   ```
+3. **Start**
+   ```bash
+   npm run start   # next start + nest start + uvicorn main:app --host 0.0.0.0 --port 8001
+   ```
+4. (Opcional) Configure um process manager (PM2, systemd, Supervisor) para manter os processos ativos.
+
+> Para ambientes cloud/Kubernetes, considere criar arquivos específicos de deploy (Dockerfile/K8s). Atualmente o `docker-compose` contempla apenas as dependências (Postgres/Redis/RabbitMQ).
+
+---
+
+## 8. Troubleshooting
+
+| Problema                                               | Sintoma                                    | Solução                                                                                                |
+| ------------------------------------------------------ | ------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `pip install` falha com `scikit-learn==1.4.1`          | Python 3.12 não possui wheels para `1.4.1` | Atualizado para `scikit-learn==1.4.1.post1` (compatível). Reinstale `pip install -r requirements.txt`. |
+| `uvicorn: command not found` ao rodar `npm run ai:dev` | Scripts do pip ficam em `~/.local/bin`     | O script agora usa `python3 -m uvicorn ...`, eliminando a dependência do PATH.                         |
+| `OPENAI_API_KEY não configurada` interrompia o boot    | AI Service não subia sem chave             | O agente agora funciona em modo _mock_ e loga um aviso. Configure a chave para ter respostas reais.    |
+| `npm run dev` não iniciava todos os serviços           | Era necessário abrir 3 terminais           | O script foi atualizado para levantar Frontend, Backend e AI Service em paralelo.                      |
+| Esquecimento de instalar o Frontend                    | `npm run dev` falhava por falta de deps    | Lembre-se do passo `cd frontend && npm install`. O README e este guia foram atualizados.               |
+
+---
+
+## 9. Fluxo Resumido
+
+```bash
+# 0. Pré-requisitos (Node 18+, python3, Docker, etc.)
+# 1. Configurar .env
+cp .env.example .env
+
+# 2. Instalar dependências
+npm install
+cd frontend && npm install
+cd ../backend && npm install
+cd ../ai-service && pip install -r requirements.txt
+cd .. && npm run prepare
+
+# 3. Infra + migrations
+npm run docker:up
+npm run db:migrate
+
+# 4. Desenvolvimento
+npm run dev
+
+# 5. Deploy
+npm run build
+cd backend && npx prisma migrate deploy && cd ..
+npm run start
+```
+
+---
+
+Dúvidas adicionais? Consulte também:
+
+- `docs/desenvolvimento/comandos-uteis.md`
+- `docs/desenvolvimento/https-setup.md`
+- `README-HTTPS.md`

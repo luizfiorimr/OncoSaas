@@ -5,6 +5,7 @@ Agente conversacional de IA para WhatsApp
 from typing import Dict, List, Optional
 from openai import OpenAI
 from anthropic import Anthropic
+import logging
 import os
 
 
@@ -20,19 +21,35 @@ class WhatsAppAgent:
     ):
         self.provider = provider
         self.model = model
+        self.client = None
+        self.disabled_reason: Optional[str] = None
+        self.logger = logging.getLogger(__name__)
         
         if provider == "openai":
             api_key = os.getenv("OPENAI_API_KEY")
             if not api_key:
-                raise ValueError("OPENAI_API_KEY não configurada")
-            self.client = OpenAI(api_key=api_key)
+                self.disabled_reason = "OPENAI_API_KEY não configurada"
+                self.logger.warning(
+                    "OPENAI_API_KEY não configurada. "
+                    "O agente WhatsApp vai responder com mensagens mockadas."
+                )
+            else:
+                self.client = OpenAI(api_key=api_key)
         elif provider == "anthropic":
             api_key = os.getenv("ANTHROPIC_API_KEY")
             if not api_key:
-                raise ValueError("ANTHROPIC_API_KEY não configurada")
-            self.client = Anthropic(api_key=api_key)
+                self.disabled_reason = "ANTHROPIC_API_KEY não configurada"
+                self.logger.warning(
+                    "ANTHROPIC_API_KEY não configurada. "
+                    "O agente WhatsApp vai responder com mensagens mockadas."
+                )
+            else:
+                self.client = Anthropic(api_key=api_key)
         else:
             raise ValueError(f"Provider não suportado: {provider}")
+    
+    def _is_llm_available(self) -> bool:
+        return self.client is not None
     
     def _get_system_prompt(self, patient_context: Dict) -> str:
         """
@@ -103,6 +120,22 @@ Tratamento atual: {patient_context.get('treatment', 'Não especificado')}
         # Adicionar mensagem atual
         messages.append({"role": "user", "content": message})
         
+        # Detectar sintomas críticos
+        critical_symptoms = self._detect_critical_symptoms(message)
+        
+        # Extrair dados estruturados
+        structured_data = self._extract_structured_data(message)
+
+        if not self._is_llm_available():
+            agent_response = self._fallback_response(patient_context, message)
+            return {
+                "response": agent_response,
+                "critical_symptoms": critical_symptoms,
+                "structured_data": structured_data,
+                "should_alert": len(critical_symptoms) > 0,
+                "llm_available": False,
+            }
+        
         # Chamar LLM
         if self.provider == "openai":
             response = self.client.chat.completions.create(
@@ -120,18 +153,31 @@ Tratamento atual: {patient_context.get('treatment', 'Não especificado')}
             )
             agent_response = response.content[0].text
         
-        # Detectar sintomas críticos
-        critical_symptoms = self._detect_critical_symptoms(message)
-        
-        # Extrair dados estruturados
-        structured_data = self._extract_structured_data(message)
-        
         return {
             "response": agent_response,
             "critical_symptoms": critical_symptoms,
             "structured_data": structured_data,
             "should_alert": len(critical_symptoms) > 0,
+            "llm_available": True,
         }
+
+    def _fallback_response(self, patient_context: Dict, message: str) -> str:
+        """
+        Retorna resposta mockada quando LLM não está configurado.
+        """
+        name = patient_context.get("name", "paciente")
+        disclaimer = (
+            "O agente inteligente ainda não está configurado neste ambiente. "
+            "Sua mensagem foi registrada e um membro da equipe será notificado."
+        )
+        guidance = (
+            "Para habilitar o agente, configure as variáveis OPENAI_API_KEY ou "
+            "ANTHROPIC_API_KEY no arquivo .env."
+        )
+        return (
+            f"Olá {name}! {disclaimer}\n\n"
+            f"Mensagem recebida: \"{message}\"\n\n{guidance}"
+        )
     
     def _detect_critical_symptoms(self, message: str) -> List[str]:
         """
