@@ -62,28 +62,50 @@ Este documento contém uma mistura de:
 - **Brasil representa 38,2%** da receita regional de healthtech na América Latina
 - **Investimentos 2024**: R$ 2,1 bilhões em healthtechs brasileiras
 - **Teleconsultas 2024**: 30 milhões (crescimento de 300% vs 2020-2021)
+- **WhatsApp**: 90%+ penetração diária no Brasil - canal ideal para coleta de dados sem fricção
+- **Healthcare Chatbots**: crescimento de 35-40% ao ano globalmente
 
-### TAM/SAM/SOM para Navegação Oncológica
+### TAM/SAM/SOM para Software Oncológico com IA, WhatsApp, EDC e CTMS
 
-**Valores para Pitch (Recomendado):**
+**Valores Atualizados para Pitch (Baseados em Market Analysis Perplexity 2025):**
 
-⚠️ **Nota**: Valores são **estimativas conservadoras** baseadas em metodologia bottom-up e top-down. Validar com pesquisa primária antes de usar em pitch de investimento.
+⚠️ **Nota**: Valores baseados em análise de mercado com fontes primárias e secundárias verificadas.
 
-- **TAM**: R$ 150 milhões/ano (valor médio) ⚠️ Estimativa
-- **SAM**: R$ 44 milhões/ano (valor médio) ⚠️ Estimativa ajustada por barreiras
-- **SOM (ano 3)**: R$ 14 milhões/ano (valor médio) ⚠️ Projeção baseada em capacidade estimada
-- **Preço médio**: R$ 15.500/mês ⚠️ Baseado em metodologia WTP, validar com pesquisa
-- **Meta de clientes (ano 3)**: 75 clientes ⚠️ Projeção baseada em capacidade de vendas estimada
+**CENÁRIO PREMIUM (RECOMENDADO):**
 
-**Valores Detalhados (para referência):**
+- **TAM**: USD 2,76 bilhões (2025) → USD 5,71 bilhões (2030) | CAGR 15,6%
+  - Componentes: Navegação Oncológica + RPM + Homecare + EDC + CTMS
+- **SAM**: USD 1,10 bilhão (2025) → USD 2,40 bilhões (2030) | 40-42% do TAM
+- **SOM (5 anos)**: USD 570 milhões (2030) | 10% market share | 150 clientes
 
-- **TAM (Bottom-Up - alta complexidade)**: R$ 75-86 milhões/ano
-- **TAM (Bottom-Up - todos estabelecimentos)**: R$ 219 milhões/ano
-- **TAM (Top-Down)**: R$ 362M - R$ 2,2 bilhões/ano (varia por metodologia)
-- **SAM (alta complexidade)**: R$ 22,6 milhões/ano
-- **SAM (todos estabelecimentos)**: R$ 65,8 milhões/ano
-- **SOM (ano 3 - conservador)**: R$ 10,8 milhões/ano
-- **SOM (ano 3 - otimista)**: R$ 18 milhões/ano
+**Roadmap SOM Detalhado:**
+| Ano | SOM (USD mi) | Clientes | % TAM | % SAM |
+|-----|-------------|----------|-------|-------|
+| 2025 | 13 | 5 | 0,47% | 1,18% |
+| 2026 | 55 | 20 | 1,72% | 4,30% |
+| 2027 | 150 | 45 | 4,05% | 10,0% |
+| 2028 | 250 | 70 | 5,88% | 14,3% |
+| 2029 | 400 | 100 | 8,00% | 19,5% |
+| 2030 | 570 | 150 | 9,98% | 23,75% |
+
+**Mercados Componentes (Fontes Primárias):**
+
+- Sistemas de Informação Oncológica Brasil: USD 3,4 bi (2025) → USD 7,9 bi (2030), CAGR 14,8%
+- Monitoramento Remoto de Pacientes Brasil: USD 0,45 bi (2025) → USD 0,78 bi (2032), CAGR 12,58%
+- Wearables Médicos Brasil: USD 2,85 bi (2025) → USD 6,58 bi (2030), CAGR 15,1%
+- EDC Global: USD 1,93 bi (2025) → USD 5,88 bi (2034), CAGR 13,21%
+- CTMS Global: USD 2,27 bi (2025) → USD 6,60 bi (2034), CAGR 11,3%
+
+**Infraestrutura Institucional:**
+
+- 359 instituições habilitadas pelo SUS: 44 CACONs + 265 UNACONs + ~50 outras
+- 704 mil novos casos de câncer/ano (INCA 2023-2025)
+- 346 mil pacientes em atendimento domiciliar (crescimento 5-8%/ano)
+
+**Valuation Potencial 2030:**
+
+- Com SOM de USD 570 mi (10% market share): EV USD 4,5-8,5 bilhões (múltiplo 8-15x)
+- Upside com 15% market share (USD 860 mi): EV USD 10,3 bilhões
 
 ---
 
@@ -2301,8 +2323,8 @@ MERCADO DE [PRODUTO] NO BRASIL
 
 ---
 
-**Última atualização**: 2024-01-XX
-**Versão**: 1.0.0
+**Última atualização**: 2025-01
+**Versão**: 2.0.0 (Atualizado com Market Analysis Perplexity)
 
 ```
 

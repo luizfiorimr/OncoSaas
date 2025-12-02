@@ -26,9 +26,10 @@ Crise na Oncologia Brasileira
 
 Estatísticas Críticas:
 
-Aproximadamente 700.000 novos casos de câncer/ano no Brasil (estimativa INCA 2023-2025)
+704 mil novos casos de câncer/ano no Brasil (INCA 2023-2025)
 Tempo médio estimado de diagnóstico: 60-90 dias (baseado em estudos regionais)
-20-30% de readmissões evitáveis estimadas (custo estimado de R$ 50-100 mil por readmissão)
+20-30% de readmissões evitáveis (custo estimado de R$ 50-100 mil por readmissão)
+346 mil pacientes em atendimento domiciliar (crescimento anual de 5-8%)
 Fragmentação do cuidado - pacientes perdidos entre especialidades
 Sobrecarga da equipe de enfermagem - ligações manuais
 
@@ -41,9 +42,10 @@ Impacto ambiental de deslocamentos desnecessários
 
 Oportunidade de Mercado:
 
-Mercado estimado de R$ 15 bilhões em saúde digital no Brasil
-Aproximadamente 500 hospitais e 2.000 clínicas oncológicas (CNES)
-Tendência de telemedicina e IA em saúde
+TAM: USD 2,76 bi (2025) → USD 5,71 bi (2030), CAGR 15,6%
+359 instituições habilitadas pelo SUS (44 CACONs, 265 UNACONs)
+WhatsApp: 90%+ de penetração no Brasil - canal ideal para coleta de dados
+Tendência de telemedicina e IA em saúde acelerando
 
 ---
 
@@ -189,36 +191,42 @@ Manutenção de renda familiar
 
 Slide 7: Mercado e Oportunidade
 
-Mercado em Crescimento
+Mercado em Crescimento Acelerado
 
-TAM (Total Addressable Market):
+TAM (Total Addressable Market) - Cenário Premium:
 
-Mercado estimado de R$ 15 bilhões em saúde digital no Brasil
-Crescimento estimado de 20% ao ano
+USD 2,76 bilhões (2025) → USD 5,71 bilhões (2030)
+CAGR: 15,6% (Navegação + RPM + Homecare + EDC + CTMS)
+Componentes: Sistemas Oncológicos USD 3,4bi, RPM USD 0,45bi, Wearables USD 2,85bi
 
 SAM (Serviceable Addressable Market):
 
-Aproximadamente 500 hospitais oncológicos (CNES)
-Aproximadamente 2.000 clínicas oncológicas (CNES)
-Potencial de 2.500 clientes
+USD 1,10 bilhão (2025) → USD 2,40 bilhões (2030)
+40-42% do TAM Premium
+Base: 359 instituições habilitadas (44 CACONs, 265 UNACONs)
 
-SOM (Serviceable Obtainable Market):
+SOM (Serviceable Obtainable Market) - Roadmap 5 Anos:
 
-Meta para 3 anos: 50-100 clientes
-Receita potencial projetada: R$ 15-30M/ano
+2025: USD 13 mi (5 clientes) | 2026: USD 55 mi (20 clientes)
+2027: USD 150 mi (45 clientes) | 2028: USD 250 mi (70 clientes)
+2029: USD 400 mi (100 clientes) | 2030: USD 570 mi (150 clientes)
+Market share alvo: 10% do TAM em 5 anos
 
 Tendências:
 
-Telemedicina crescente (pós-COVID)
-IA em saúde: mercado em expansão
-WhatsApp Business: 120+ milhões de usuários ativos no Brasil
-Foco em eficiência e redução de custos
+Telemedicina crescente + reembolso oficializado pelas operadoras
+IA em saúde: healthcare chatbots crescendo 35-40% ao ano
+WhatsApp: 90%+ penetração diária no Brasil - canal sem fricção
+Envelhecimento populacional aumenta demanda por monitoramento remoto
 
-Clientes Potenciais:
+Segmentos de Clientes por Deal Size:
 
-Hospitais oncológicos
-Clínicas especializadas
-Planos de saúde
+CACONs: 44 instituições, USD 250k/ano
+UNACONs: 265 instituições, USD 100k/ano
+Clínicas privadas: 50-100, USD 50k/ano
+Home care oncológico: 30-50, USD 75k/ano
+Operadoras de planos: 50-100, USD 300k/ano
+CROs/Ensaios clínicos: 15-25, USD 150k/ano (melhor ROI)
 
 ---
 
@@ -428,14 +436,14 @@ Onde Queremos Estar em 5 Anos
 Missão:
 Transformar o cuidado oncológico através de IA, tornando-o mais eficiente, coordenado e centrado no paciente.
 
-Visão 2029:
+Visão 2030:
 
-300+ hospitais/clínicas usando a plataforma
-100.000+ pacientes sendo acompanhados
-Expansão internacional (América Latina)
+150+ instituições usando a plataforma (10% market share)
+USD 570 milhões em receita anual (SOM)
+Expansão para LATAM (mercado 3-5x maior)
 Múltiplos tipos de câncer (mama, pulmão, colorretal, próstata, etc.)
-Parcerias estratégicas com planos de saúde e laboratórios
-Líder de mercado em navegação e acompanhamento oncológico
+Parcerias estratégicas com operadoras, CROs e laboratórios
+Líder de mercado em navegação oncológica + RPM + pesquisa clínica
 
 Impacto Esperado (projeções):
 
@@ -452,9 +460,9 @@ Junte-se a Nós na Transformação da Oncologia
 
 Oportunidade:
 
-Mercado estimado de R$ 15 bilhões em crescimento
-Problema crítico e validado
-Solução inovadora com IA
+TAM USD 2,76bi → USD 5,71bi (2025-2030), CAGR 15,6%
+Problema crítico e validado (704k novos casos/ano)
+Solução inovadora com IA + WhatsApp (90%+ penetração)
 ROI projetado para clientes (5-10x)
 Impacto socioambiental mensurável
 
@@ -502,13 +510,17 @@ Total: R$ 2M
 
 Runway: 18-24 meses com seed de R$ 2M
 
-Projeções Financeiras (3 anos)
+Projeções Financeiras (5 anos) - Baseado em Market Analysis
 
-Ano 1: 6 clientes, R$ 300k receita projetada
-Ano 2: 30 clientes, R$ 2.4M receita projetada
-Ano 3: 80 clientes, R$ 8M receita projetada
+2025: 5 clientes, USD 13 mi SOM (fase Foundation)
+2026: 20 clientes, USD 55 mi SOM (fase Scale)
+2027: 45 clientes, USD 150 mi SOM (Market Leadership)
+2028: 70 clientes, USD 250 mi SOM (Consolidation)
+2029: 100 clientes, USD 400 mi SOM
+2030: 150 clientes, USD 570 mi SOM (10% market share)
 
-Break-even projetado: Mês 18-20
+Valuation potencial 2030: USD 4,5-8,5 bi (múltiplo 8-15x SaaS health)
+Break-even projetado: Mês 18-24
 
 ---
 

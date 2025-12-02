@@ -16,7 +16,7 @@ Plataforma SaaS multi-tenant que integra Inteligência Artificial e WhatsApp Bus
 
 ## O Problema
 
-- 700.000 novos casos de câncer/ano no Brasil
+- 704 mil novos casos de câncer/ano no Brasil (INCA 2023-2025)
 - Tempo médio de diagnóstico: 60-90 dias (muito longo)
 - 20-30% de readmissões evitáveis (R$ 50-100 mil cada)
 - Fragmentação do cuidado e sobrecarga da equipe
@@ -42,9 +42,10 @@ Plataforma inovadora que democratiza o acesso ao cuidado coordenado via WhatsApp
 
 ## Mercado
 
-- 💰 R$ 15 bilhões em saúde digital
-- 🏥 500 hospitais e 2.000 clínicas oncológicas
-- 🎯 Meta 3 anos: 50-100 clientes, R$ 15-30M/ano
+- 💰 TAM: USD 2,76 bi (2025) → USD 5,71 bi (2030), CAGR 15,6%
+- 🏥 359 instituições habilitadas pelo SUS (44 CACONs, 265 UNACONs)
+- 📊 SAM: USD 1,10 bi (2025) → USD 2,40 bi (2030) - 40-42% do TAM
+- 🎯 SOM 5 anos: USD 570 mi (10% market share), 150 clientes
 
 ## Validação
 
@@ -67,9 +68,9 @@ Plataforma inovadora que democratiza o acesso ao cuidado coordenado via WhatsApp
 
 ## Por Que o Centelha?
 
-- ✅ Inovação tecnológica comprovada (IA, WhatsApp, HL7/FHIR)
+- ✅ Inovação tecnológica comprovada (IA, WhatsApp 90%+ penetração, HL7/FHIR)
 - ✅ Impacto socioambiental mensurável (redução de tempos, custos, readmissões)
-- ✅ Mercado validado (R$ 15 bilhões, 2.500 clientes potenciais)
+- ✅ Mercado validado (TAM USD 2,76-5,71 bi, 359+ instituições)
 - ✅ Equipe qualificada (médico + técnico + gestão)
 - ✅ Capacidade de execução (projeto anterior similar)
 

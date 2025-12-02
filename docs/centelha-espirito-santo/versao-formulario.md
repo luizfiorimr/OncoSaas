@@ -7,16 +7,16 @@
 ## 1. OPORTUNIDADE (987 caracteres)
 
 ```
-O Brasil enfrenta crise na oncologia: 700.000 novos casos/ano com tempo médio de diagnóstico de 60-90 dias, comprometendo prognósticos. A fragmentação do cuidado resulta em pacientes perdidos entre especialidades, readmissões evitáveis (20-30%) custando R$ 50-100 mil cada, e sobrecarga da equipe de enfermagem.
+O Brasil enfrenta crise na oncologia: 704 mil novos casos/ano com tempo médio de diagnóstico de 60-90 dias, comprometendo prognósticos. A fragmentação do cuidado resulta em pacientes perdidos entre especialidades, readmissões evitáveis (20-30%) custando R$ 50-100 mil cada, e sobrecarga da equipe de enfermagem.
 
 O problema socioambiental é crítico: inacessibilidade ao cuidado oncológico de qualidade para população vulnerável, desperdício de recursos públicos, sobrecarga do SUS e impacto ambiental de deslocamentos desnecessários.
 
-Oportunidade de mercado: 500 hospitais e 2.000 clínicas oncológicas (R$ 15 bilhões em saúde digital), com tendência de telemedicina e IA em saúde.
+Oportunidade de mercado: TAM de USD 2,76 bilhões (2025) crescendo para USD 5,71 bilhões (2030) no Brasil. 359 instituições habilitadas (44 CACONs, 265 UNACONs), com tendência de telemedicina e IA em saúde.
 
 Nossa solução inovadora democratiza o acesso ao cuidado coordenado via WhatsApp, reduzindo custos do sistema de saúde e melhorando desfechos clínicos.
 ```
 
-**Contagem:** 987 caracteres ✅
+**Contagem:** ~990 caracteres ✅
 
 ---
 
@@ -27,7 +27,7 @@ Plataforma SaaS multi-tenant integrando IA e WhatsApp Business API para transfor
 
 Viabilidade técnica: Stack validado (Next.js, NestJS, Python FastAPI, PostgreSQL), integração HL7/FHIR, arquitetura multi-tenant escalável. Validação: 10+ entrevistas com oncologistas/enfermeiros confirmaram dores e necessidade da solução. Pilotos planejados com 3-5 hospitais (Q2 2024).
 
-Mercado: 500 hospitais e 2.000 clínicas oncológicas (R$ 15 bilhões em saúde digital). Clientes potenciais: serviços oncológicos, planos de saúde. Escalabilidade: arquitetura multi-tenant permite crescimento sem custos proporcionais. Resultados esperados: redução de 30% em tempo de diagnóstico, 20-30% em readmissões, 40% em ligações telefônicas.
+Mercado: TAM USD 2,76 bi (2025) → USD 5,71 bi (2030). 359 instituições oncológicas habilitadas (CACONs/UNACONs). Clientes: hospitais, clínicas, operadoras, home care, CROs. Escalabilidade: arquitetura multi-tenant. Resultados esperados: redução de 30% em tempo de diagnóstico, 20-30% em readmissões, 70-80% em carga de triagem manual.
 ```
 
 **Contagem:** Verificar no formulário (aproximadamente 1.000 caracteres) ✅
