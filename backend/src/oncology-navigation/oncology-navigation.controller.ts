@@ -11,6 +11,7 @@ import {
   UploadedFile,
   BadRequestException,
   ParseUUIDPipe,
+  ParseEnumPipe,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
@@ -58,7 +59,7 @@ export class OncologyNavigationController {
   @Get('patients/:patientId/steps/:journeyStage')
   async getStepsByStage(
     @Param('patientId', ParseUUIDPipe) patientId: string,
-    @Param('journeyStage') journeyStage: JourneyStage,
+    @Param('journeyStage', new ParseEnumPipe(JourneyStage)) journeyStage: JourneyStage,
     @Request() req: any
   ) {
     return this.navigationService.getStepsByJourneyStage(
@@ -233,7 +234,7 @@ export class OncologyNavigationController {
   @Roles(UserRole.ADMIN, UserRole.COORDINATOR, UserRole.ONCOLOGIST)
   async createMissingStepsForStage(
     @Param('patientId', ParseUUIDPipe) patientId: string,
-    @Param('journeyStage') journeyStage: JourneyStage,
+    @Param('journeyStage', new ParseEnumPipe(JourneyStage)) journeyStage: JourneyStage,
     @Request() req: any
   ) {
     const result = await this.navigationService.createMissingStepsForStage(
