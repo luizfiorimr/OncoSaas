@@ -37,12 +37,25 @@ export class MessagesController {
     @Query('limit') limit?: string,
     @Query('offset') offset?: string
   ) {
+    // Validar e converter limit/offset com fallback seguro
+    let parsedLimit: number | undefined;
+    if (limit) {
+      const parsed = parseInt(limit, 10);
+      parsedLimit = !isNaN(parsed) && parsed > 0 ? parsed : undefined;
+    }
+    
+    let parsedOffset: number | undefined;
+    if (offset) {
+      const parsed = parseInt(offset, 10);
+      parsedOffset = !isNaN(parsed) && parsed >= 0 ? parsed : undefined;
+    }
+
     return this.messagesService.findAll(
       user.tenantId,
       patientId,
       {
-        limit: limit ? parseInt(limit, 10) : undefined,
-        offset: offset ? parseInt(offset, 10) : undefined,
+        limit: parsedLimit,
+        offset: parsedOffset,
       }
     );
   }
@@ -70,10 +83,17 @@ export class MessagesController {
     @CurrentUser() user: any,
     @Query('limit') limit?: string
   ) {
+    // Validar e converter limit com fallback seguro
+    let parsedLimit = 50; // Default
+    if (limit) {
+      const parsed = parseInt(limit, 10);
+      parsedLimit = !isNaN(parsed) && parsed > 0 ? Math.min(parsed, 500) : 50;
+    }
+
     return this.messagesService.getConversation(
       patientId,
       user.tenantId,
-      limit ? parseInt(limit, 10) : 50
+      parsedLimit
     );
   }
 
