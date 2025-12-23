@@ -11,6 +11,7 @@
 ### 1. Autenticação
 
 #### POST /api/v1/auth/login
+
 - **Status**: ✅ Funcionando
 - **Teste**: Login com `admin@hospitalteste.com` / `senha123`
 - **Resultado**: Token JWT gerado com sucesso
@@ -21,12 +22,14 @@
 ### 2. Pacientes
 
 #### GET /api/v1/patients
+
 - **Status**: ✅ Funcionando
 - **Resultado**: Retorna lista de pacientes com contadores (`_count`)
 - **Dados retornados**: 12 pacientes no banco de teste
 - **Inclui**: Relacionamentos com mensagens, alertas e observações
 
 #### GET /api/v1/patients/:id
+
 - **Status**: ✅ Funcionando
 - **Resultado**: Retorna paciente específico com mensagens e alertas
 - **Inclui**: Últimas 10 mensagens e alertas não resolvidos
@@ -36,6 +39,7 @@
 ### 3. Observações Clínicas (FHIR)
 
 #### POST /api/v1/observations
+
 - **Status**: ✅ Funcionando
 - **Teste**: Criar observação de dor (LOINC 72514-3)
 - **Resultado**: Observação criada com sucesso
@@ -52,16 +56,19 @@
   ```
 
 #### GET /api/v1/observations
+
 - **Status**: ✅ Funcionando
 - **Filtros**: `?patientId={id}` e `?code={loinc-code}`
 - **Resultado**: Lista observações com dados do paciente
 
 #### GET /api/v1/observations/unsynced
+
 - **Status**: ✅ Funcionando
 - **Resultado**: Retorna apenas observações com `syncedToEHR: false`
 - **Uso**: Para sincronização com EHR externo
 
 #### GET /api/v1/observations/:id
+
 - **Status**: ✅ Funcionando
 - **Resultado**: Retorna observação específica com dados do paciente
 
@@ -70,12 +77,14 @@
 ### 4. Mensagens WhatsApp
 
 #### GET /api/v1/messages
+
 - **Status**: ✅ Funcionando
 - **Resultado**: Retorna lista de mensagens com dados do paciente
 - **Dados retornados**: 2 mensagens de teste no banco
 - **Inclui**: Informações do paciente (id, name, phone)
 
 #### GET /api/v1/messages/unassumed/count
+
 - **Status**: ✅ Funcionando
 - **Resultado**: Retorna contagem de mensagens não assumidas
 - **Teste**: Retornou `1` mensagem não assumida
@@ -85,14 +94,16 @@
 ### 5. Alertas
 
 #### GET /api/v1/alerts
+
 - **Status**: ✅ Funcionando
 - **Resultado**: Retorna lista de alertas ordenados por severidade
 - **Dados retornados**: 3 alertas críticos no banco
 - **Inclui**: Dados do paciente e contexto do alerta
 
 #### POST /api/v1/alerts
+
 - **Status**: ✅ Funcionando (após correções)
-- **Correções aplicadas**: 
+- **Correções aplicadas**:
   1. Removido campo `source` (não existe no DTO)
   2. Alterado `type: "SYMPTOM"` para `type: "CRITICAL_SYMPTOM"`
   3. Alterado validação de `context` de `@IsString()` para `@IsObject()` no DTO
@@ -117,6 +128,7 @@
 ### 6. Health Check
 
 #### GET /api/v1/health
+
 - **Status**: ✅ Funcionando
 - **Resultado**: Retorna status do serviço
 - **Resposta**:
@@ -124,7 +136,7 @@
   {
     "status": "ok",
     "timestamp": "2025-11-12T23:28:52.235Z",
-    "service": "medsaas-backend",
+    "service": "ONCONAV-backend",
     "version": "0.1.0"
   }
   ```
@@ -145,23 +157,29 @@
 ## 🔧 Correções Aplicadas
 
 ### 1. Script de Teste - Criar Alerta
-**Problema 1**: 
+
+**Problema 1**:
+
 - Campo `source` não existe no `CreateAlertDto`
 - Tipo `SYMPTOM` não existe no enum `AlertType`
 
 **Solução 1**:
+
 - Removido campo `source`
 - Alterado para `type: "CRITICAL_SYMPTOM"`
 - Adicionado campo `context` com metadados
 
-**Problema 2**: 
+**Problema 2**:
+
 - Campo `context` estava validado como `@IsString()` mas deveria aceitar objetos JSON
 
 **Solução 2**:
+
 - Alterado validação de `@IsString()` para `@IsObject()` no `CreateAlertDto`
 - Agora aceita objetos JSON corretamente
 
 **Antes**:
+
 ```json
 {
   "type": "SYMPTOM",
@@ -170,6 +188,7 @@
 ```
 
 **Depois**:
+
 ```json
 {
   "type": "CRITICAL_SYMPTOM",
@@ -195,6 +214,7 @@
 ## 🎯 Próximos Testes Recomendados
 
 ### Testes de Integração
+
 - [ ] Testar criação de paciente completo
 - [ ] Testar atualização de paciente (PATCH)
 - [ ] Testar deleção de paciente (DELETE)
@@ -203,6 +223,7 @@
 - [ ] Testar atualização de alerta (acknowledge, resolve)
 
 ### Testes de Validação
+
 - [ ] Testar validação de campos obrigatórios
 - [ ] Testar validação de tipos (enums)
 - [ ] Testar validação de formato (email, data, etc.)
@@ -210,6 +231,7 @@
 - [ ] Testar acesso com tenant incorreto
 
 ### Testes de Performance
+
 - [ ] Testar paginação em listas grandes
 - [ ] Testar filtros combinados
 - [ ] Testar ordenação
@@ -231,4 +253,3 @@ Todos os scripts testam os mesmos endpoints e podem ser executados em qualquer a
 Todos os endpoints principais estão funcionando corretamente. A API está pronta para integração com o frontend.
 
 **Status Geral**: ✅ **APROVADO**
-

@@ -229,7 +229,7 @@ SaaS multi-tenant para otimização de processos oncológicos com agente de IA c
 **Estrutura**:
 
 ```
-database: medsaas_production
+database: ONCONAV_production
 ├─ schema: tenant_hospital_1
 │  ├─ patients
 │  ├─ conversations

@@ -1,8 +1,8 @@
-# OncoSaas - Plataforma de Navegação Oncológica
+# ONCONAV - Plataforma de Navegação Oncológica
 
 SaaS multi-tenant para navegação oncológica com agente de IA conversacional no WhatsApp, priorização inteligente de casos, sistema de alertas e dashboard para equipe de enfermagem.
 
-[![GitHub](https://img.shields.io/badge/GitHub-OncoSaas-blue)](https://github.com/luizfiorimr/OncoSaas)
+[![GitHub](https://img.shields.io/badge/GitHub-ONCONAV-blue)](https://github.com/luizfiorimr/OncoNav)
 
 ## 🚀 Status do Projeto
 
@@ -51,12 +51,12 @@ SaaS multi-tenant para navegação oncológica com agente de IA conversacional n
 ## Estrutura do Projeto
 
 ```
-OncoSaas/
-├── frontend/              # Next.js 14 (React + TypeScript)
-├── backend/               # NestJS (Node.js + TypeScript)
-├── ai-service/            # Python FastAPI (IA/ML)
+ONCONAV/
+├── frontend/              # Next.js 14 (React + TypeScript) - porta 3000
+├── backend/               # NestJS (Node.js + TypeScript) - porta 3002
+├── ai-service/            # Python FastAPI (IA/ML) - porta 8001
 ├── docs/                  # Documentação completa
-└── docker-compose.yml     # Ambiente de desenvolvimento
+└── docker-compose.yml     # Ambiente de desenvolvimento (PostgreSQL, Redis, RabbitMQ)
 ```
 
 ## Stack Tecnológico
@@ -107,13 +107,15 @@ Consulte a documentação completa em `docs/`:
 ```bash
 # 1. Dependências (raiz + cada serviço)
 npm install
-cd frontend && npm install
-cd backend && npm install
-cd ai-service && pip install -r requirements.txt
+cd frontend && npm install && cd ..
+cd backend && npm install && cd ..
+cd ai-service && pip install -r requirements.txt && cd ..
 
 # 2. Variáveis de ambiente
 cp .env.example .env
-# Edite o arquivo com as credenciais locais (Postgres, APIs, etc.)
+cp .env.example backend/.env
+cp .env.example frontend/.env.local
+# Edite os arquivos conforme necessário
 
 # 3. Infra local (PostgreSQL, Redis, RabbitMQ)
 npm run docker:up   # equivale a docker-compose up -d
@@ -121,11 +123,36 @@ npm run docker:up   # equivale a docker-compose up -d
 # 4. Aplicar migrations
 npm run db:migrate
 
-# 5. Ambiente de desenvolvimento (Frontend + Backend + AI Service)
+# 5. Popular banco com dados de teste (IMPORTANTE!)
+cd backend && npx prisma db seed && cd ..
+
+# 6. Ambiente de desenvolvimento (Frontend + Backend + AI Service)
 npm run dev
 ```
 
-> `npm run dev` agora sobe os três serviços simultaneamente.  
+### 🔑 Credenciais de Teste
+
+Após executar o seed, use estas credenciais para acessar o sistema:
+
+| Usuário       | Email                           | Senha      | Perfil      |
+| ------------- | ------------------------------- | ---------- | ----------- |
+| Administrador | `admin@hospitalteste.com`       | `senha123` | ADMIN       |
+| Oncologista   | `oncologista@hospitalteste.com` | `senha123` | ONCOLOGIST  |
+| Enfermeira    | `enfermeira@hospitalteste.com`  | `senha123` | NURSE       |
+| Coordenador   | `coordenador@hospitalteste.com` | `senha123` | COORDINATOR |
+
+### 🌐 URLs dos Serviços
+
+| Serviço     | URL                          | Descrição               |
+| ----------- | ---------------------------- | ----------------------- |
+| Frontend    | http://localhost:3000        | Interface web (Next.js) |
+| Backend API | http://localhost:3002/api/v1 | API REST (NestJS)       |
+| AI Service  | http://localhost:8001        | Serviço de IA (FastAPI) |
+| PostgreSQL  | localhost:5433               | Banco de dados          |
+| Redis       | localhost:6379               | Cache                   |
+| RabbitMQ    | localhost:5672 / 15672       | Mensageria / Dashboard  |
+
+> `npm run dev` sobe os três serviços simultaneamente.  
 > Se `OPENAI_API_KEY`/`ANTHROPIC_API_KEY` não estiverem definidos, o AI Service responde com mensagens mockadas
 > (útil para desenvolvimento). Para trabalhar com WhatsApp Embedded Signup/Meta, use `npm run dev:https`.
 
@@ -190,7 +217,7 @@ cd backend && npm run test:cov # Com cobertura
 
 ## 🔗 Links Úteis
 
-- **Repositório GitHub**: [github.com/luizfiorimr/OncoSaas](https://github.com/luizfiorimr/OncoSaas)
+- **Repositório GitHub**: [github.com/luizfiorimr/OncoNav](https://github.com/luizfiorimr/OncoNav)
 - **Documentação Completa**: Ver pasta `docs/`
 
 ## 📝 Licença

@@ -40,14 +40,14 @@ INSERT INTO alerts (
 
 ### Parâmetros
 
-| Parâmetro | Tipo | Descrição | Exemplo |
-|-----------|------|-----------|---------|
-| `$1` | `uuid` | **tenantId** (obrigatório) | `'550e8400-e29b-41d4-a716-446655440000'` |
-| `$2` | `uuid` | **patientId** (obrigatório) | `'660e8400-e29b-41d4-a716-446655440001'` |
-| `$3` | `text` | **type** (enum AlertType) | `'CRITICAL_SYMPTOM'` |
-| `$4` | `text` | **severity** (enum AlertSeverity) | `'CRITICAL'` |
-| `$5` | `text` | **message** (obrigatório) | `'Paciente relatou febre alta (39°C)'` |
-| `$6` | `jsonb` | **context** (opcional) | `'{"symptoms": ["febre"], "conversationId": "..."}'` |
+| Parâmetro | Tipo    | Descrição                         | Exemplo                                              |
+| --------- | ------- | --------------------------------- | ---------------------------------------------------- |
+| `$1`      | `uuid`  | **tenantId** (obrigatório)        | `'550e8400-e29b-41d4-a716-446655440000'`             |
+| `$2`      | `uuid`  | **patientId** (obrigatório)       | `'660e8400-e29b-41d4-a716-446655440001'`             |
+| `$3`      | `text`  | **type** (enum AlertType)         | `'CRITICAL_SYMPTOM'`                                 |
+| `$4`      | `text`  | **severity** (enum AlertSeverity) | `'CRITICAL'`                                         |
+| `$5`      | `text`  | **message** (obrigatório)         | `'Paciente relatou febre alta (39°C)'`               |
+| `$6`      | `jsonb` | **context** (opcional)            | `'{"symptoms": ["febre"], "conversationId": "..."}'` |
 
 ---
 
@@ -98,6 +98,7 @@ INSERT INTO alerts (
 **Query Mode**: Execute Query
 
 **Query**:
+
 ```sql
 INSERT INTO alerts (
   id,
@@ -121,7 +122,7 @@ INSERT INTO alerts (
   'PENDING'::"AlertStatus",
   NOW(),
   NOW()
-) RETURNING 
+) RETURNING
   id,
   "tenantId",
   "patientId",
@@ -134,6 +135,7 @@ INSERT INTO alerts (
 ```
 
 **Input JSON** (do node anterior):
+
 ```json
 {
   "tenantId": "550e8400-e29b-41d4-a716-446655440000",
@@ -195,12 +197,12 @@ INSERT INTO alerts (
 
 ```sql
 -- Query de validação (executar antes do INSERT)
-SELECT 
+SELECT
   id,
   "tenantId",
   name
 FROM patients
-WHERE 
+WHERE
   id = $1::uuid
   AND "tenantId" = $2::uuid;
 ```
@@ -237,7 +239,7 @@ O backend NestJS só emite WebSocket quando cria alerta via `AlertsService.creat
 @Post(':id/emit-websocket')
 async emitWebSocket(@Param('id') id: string, @CurrentUser() user: any) {
   const alert = await this.alertsService.findOne(id, user.tenantId);
-  
+
   // Emitir eventos WebSocket
   if (alert.severity === 'CRITICAL') {
     this.alertsGateway.emitCriticalAlert(user.tenantId, alert);
@@ -247,7 +249,7 @@ async emitWebSocket(@Param('id') id: string, @CurrentUser() user: any) {
     user.tenantId,
     await this.alertsService.getOpenAlertsCount(user.tenantId)
   );
-  
+
   return { success: true };
 }
 ```
@@ -288,6 +290,7 @@ Body: {
 ```
 
 **Vantagens**:
+
 - ✅ Validação automática
 - ✅ WebSocket automático
 - ✅ Auditoria completa
@@ -300,16 +303,18 @@ Body: {
 ### Para Queries SQL Diretas
 
 **Credenciais PostgreSQL**:
+
 - Host: `localhost` (ou IP do servidor)
 - Port: `5433` (conforme docker-compose.yml)
-- Database: `medsaas_development`
+- Database: `ONCONAV_development`
 - User: `n8n_agent` (criar usuário específico)
 - Password: `senha_segura`
 
 **Criar usuário**:
+
 ```sql
 CREATE USER n8n_agent WITH PASSWORD 'senha_segura';
-GRANT CONNECT ON DATABASE medsaas_development TO n8n_agent;
+GRANT CONNECT ON DATABASE ONCONAV_development TO n8n_agent;
 GRANT USAGE ON SCHEMA public TO n8n_agent;
 GRANT SELECT, INSERT, UPDATE ON ALL TABLES IN SCHEMA public TO n8n_agent;
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO n8n_agent;
@@ -318,11 +323,13 @@ GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO n8n_agent;
 ### Para Chamadas HTTP ao Backend
 
 **Header de Autenticação**:
+
 ```
 Authorization: Bearer {JWT_TOKEN}
 ```
 
 **Obter token**:
+
 - Criar usuário sistema no backend
 - Fazer login e obter token JWT
 - Armazenar token como variável de ambiente no n8n
@@ -362,7 +369,7 @@ Authorization: Bearer {JWT_TOKEN}
 WITH patient_check AS (
   SELECT id, "tenantId"
   FROM patients
-  WHERE 
+  WHERE
     id = $1::uuid  -- patientId
     AND "tenantId" = $2::uuid  -- tenantId
 )
@@ -426,4 +433,3 @@ RETURNING *;
    - Sempre validar paciente existe
    - Sempre incluir `tenantId`
    - Considerar webhook para emitir WebSocket
-

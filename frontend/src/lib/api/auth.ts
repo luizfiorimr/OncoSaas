@@ -3,6 +3,11 @@ import { apiClient } from './client';
 export interface LoginDto {
   email: string;
   password: string;
+  /**
+   * ID do tenant (opcional, mas recomendado para ambientes multi-tenant)
+   * Se não fornecido, o sistema tentará encontrar o usuário apenas pelo email.
+   */
+  tenantId?: string;
 }
 
 export interface RegisterDto {

@@ -1,8 +1,8 @@
 import { registerAs } from '@nestjs/config';
 
 export default registerAs('database', () => ({
-  url: process.env.DATABASE_URL || 'postgresql://medsaas:medsaas_dev@localhost:5432/medsaas_development',
+  url:
+    process.env.DATABASE_URL ||
+    'postgresql://ONCONAV:ONCONAV_dev@localhost:5432/ONCONAV_development',
   schema: process.env.DATABASE_SCHEMA || 'public',
 }));
-
-

@@ -1,11 +1,11 @@
-# Script de teste da API MEDSAAS (PowerShell)
+# Script de teste da API ONCONAV (PowerShell)
 # Uso: .\scripts\test-api.ps1
 
 $BASE_URL = "http://localhost:3002/api/v1"
 $TENANT_ID = ""
 $ACCESS_TOKEN = ""
 
-Write-Host "🧪 Testando API MEDSAAS" -ForegroundColor Cyan
+Write-Host "🧪 Testando API ONCONAV" -ForegroundColor Cyan
 Write-Host "========================"
 Write-Host ""
 

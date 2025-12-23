@@ -2,7 +2,7 @@
 
 ## Resumo Executivo
 
-Este documento contém os textos completos para a proposta do projeto MEDSAAS (OncoSaas) no programa Centelha Espírito Santo, focando em:
+Este documento contém os textos completos para a proposta do projeto ONCONAV (OncoSaas) no programa Centelha Espírito Santo, focando em:
 
 - **Oportunidade**: Problema crítico na oncologia brasileira e oportunidade de mercado
 - **Solução**: Plataforma inovadora com IA e WhatsApp

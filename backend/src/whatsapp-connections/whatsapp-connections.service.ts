@@ -70,9 +70,14 @@ export class WhatsAppConnectionsService {
       this.configService.get<string>('META_OAUTH_REDIRECT_URI') ||
       this.configService.get<string>('META_REDIRECT_URI') ||
       'http://localhost:3002/api/v1/whatsapp-connections/oauth/callback';
-    this.encryptionKey =
-      this.configService.get<string>('ENCRYPTION_KEY') ||
-      'default-key-change-in-production-32-bytes!!';
+    const configuredEncryptionKey = this.configService.get<string>('ENCRYPTION_KEY');
+    const isProduction = this.configService.get<string>('NODE_ENV') === 'production';
+    
+    if (isProduction && !configuredEncryptionKey) {
+      throw new Error('ENCRYPTION_KEY must be configured in production environment');
+    }
+    
+    this.encryptionKey = configuredEncryptionKey || 'default-key-change-in-production-32-bytes!!';
     this.metaApiBaseUrl = `https://graph.facebook.com/${this.metaApiVersion}`;
 
     // Configurar versão da API via variável de ambiente (SDK usa FACEBOOK_ADS_API_VERSION)
@@ -956,9 +961,11 @@ export class WhatsAppConnectionsService {
     accessToken: string
   ): Promise<void> {
     try {
+      // CORREÇÃO: Usar BACKEND_URL ao invés de FRONTEND_URL para webhook
+      const backendUrl = this.configService.get<string>('BACKEND_URL') || 'http://localhost:3002';
       const webhookUrl =
         this.configService.get<string>('WEBHOOK_URL') ||
-        `${this.configService.get<string>('FRONTEND_URL') || 'http://localhost:3000'}/api/v1/whatsapp-connections/webhook`;
+        `${backendUrl}/api/v1/whatsapp-connections/webhook`;
       const verifyToken =
         this.configService.get<string>('WHATSAPP_WEBHOOK_VERIFY_TOKEN') ||
         'webhook-verify-token-change-in-production';

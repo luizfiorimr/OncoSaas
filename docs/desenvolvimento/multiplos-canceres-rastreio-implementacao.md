@@ -182,7 +182,7 @@ npx prisma migrate dev --name add_cancer_diagnosis
 **Ou aplicar manualmente:**
 
 ```bash
-psql -U postgres -d medsaas -f backend/prisma/migrations/add_cancer_diagnosis/migration.sql
+psql -U postgres -d ONCONAV -f backend/prisma/migrations/add_cancer_diagnosis/migration.sql
 ```
 
 ---

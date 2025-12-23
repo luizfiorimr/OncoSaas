@@ -14,7 +14,7 @@
 
 ```bash
 git clone <repository-url>
-cd MEDSAAS
+cd ONCONAV
 ```
 
 ### 2. Configure variáveis de ambiente
@@ -31,6 +31,7 @@ docker-compose up -d
 ```
 
 Isso iniciará:
+
 - PostgreSQL (porta 5432)
 - Redis (porta 6379)
 - RabbitMQ (porta 5672, management UI 15672)
@@ -86,7 +87,7 @@ AI Service estará disponível em: http://localhost:8001
 ## Estrutura de Pastas
 
 ```
-MEDSAAS/
+ONCONAV/
 ├── frontend/              # Next.js 14
 │   ├── src/
 │   │   ├── app/          # App Router
@@ -166,16 +167,17 @@ cd backend && npm run test:e2e
 ## Troubleshooting
 
 ### Erro de conexão com PostgreSQL
+
 - Verifique se Docker Compose está rodando: `docker-compose ps`
 - Verifique se a porta 5432 não está em uso
 - Verifique as credenciais no `.env`
 
 ### Erro de Prisma
+
 - Execute `npx prisma generate` novamente
 - Verifique se `DATABASE_URL` está correto no `.env`
 
 ### Erro de módulos Python
+
 - Ative o venv: `source ai-service/.venv/bin/activate`
 - Reinstale dependências: `pip install -r requirements.txt`
-
-

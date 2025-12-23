@@ -1,13 +1,13 @@
 #!/bin/bash
 
-# Script de teste da API MEDSAAS
+# Script de teste da API ONCONAV
 # Uso: ./scripts/test-api.sh
 
 BASE_URL="http://localhost:3002/api/v1"
 TENANT_ID=""
 ACCESS_TOKEN=""
 
-echo "🧪 Testando API MEDSAAS"
+echo "🧪 Testando API ONCONAV"
 echo "========================"
 echo ""
 

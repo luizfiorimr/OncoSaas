@@ -5,17 +5,19 @@ Este documento contém as queries SQL que o agente de IA no n8n pode executar di
 ## Configuração de Conexão no n8n
 
 **Credenciais PostgreSQL**:
+
 - Host: Endereço do banco de dados
 - Port: 5432 (padrão)
-- Database: Nome do banco (ex: `medsaas_development`)
+- Database: Nome do banco (ex: `ONCONAV_development`)
 - User: Usuário com permissões (recomendado: criar usuário específico `n8n_agent`)
 - Password: Senha do usuário
 - SSL: Habilitado (produção)
 
 **Criar usuário específico para n8n**:
+
 ```sql
 CREATE USER n8n_agent WITH PASSWORD 'senha_segura';
-GRANT CONNECT ON DATABASE medsaas TO n8n_agent;
+GRANT CONNECT ON DATABASE ONCONAV TO n8n_agent;
 GRANT USAGE ON SCHEMA public TO n8n_agent;
 GRANT SELECT, INSERT, UPDATE ON ALL TABLES IN SCHEMA public TO n8n_agent;
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO n8n_agent;
@@ -45,8 +47,8 @@ if (normalized.startsWith('550')) {
 return {
   json: {
     normalizedPhone: normalized,
-    originalPhone: phone
-  }
+    originalPhone: phone,
+  },
 };
 ```
 
@@ -55,9 +57,10 @@ return {
 ### 1. Buscar Paciente por Telefone
 
 **Query**:
+
 ```sql
-SELECT 
-  id, 
+SELECT
+  id,
   "tenantId",
   name,
   phone, -- descriptografar depois se necessário
@@ -78,6 +81,7 @@ LIMIT 1;
 ```
 
 **Parâmetros**:
+
 - `$1`: `tenantId` (UUID do tenant)
 - `$2`: Telefone normalizado (ex: "5511999999999")
 
@@ -88,8 +92,9 @@ LIMIT 1;
 ### 2. Buscar Histórico de Mensagens do Paciente
 
 **Query**:
+
 ```sql
-SELECT 
+SELECT
   id,
   "patientId",
   "conversationId",
@@ -112,14 +117,16 @@ LIMIT 20;
 ```
 
 **Parâmetros**:
+
 - `$1`: `tenantId` (UUID)
 - `$2`: `patientId` (UUID)
 
 ### 3. Buscar Dados Completos do Paciente (com JOINs)
 
 **Query**:
+
 ```sql
-SELECT 
+SELECT
   p.id,
   p.name,
   p."birthDate",
@@ -164,14 +171,16 @@ LIMIT 1;
 ```
 
 **Parâmetros**:
+
 - `$1`: `tenantId` (UUID)
 - `$2`: `patientId` (UUID)
 
 ### 4. Buscar Alertas Pendentes do Paciente
 
 **Query**:
+
 ```sql
-SELECT 
+SELECT
   id,
   type,
   severity,
@@ -183,7 +192,7 @@ FROM alerts
 WHERE "tenantId" = $1::uuid
   AND "patientId" = $2::uuid
   AND status != 'RESOLVED'
-ORDER BY 
+ORDER BY
   CASE severity
     WHEN 'CRITICAL' THEN 1
     WHEN 'HIGH' THEN 2
@@ -194,14 +203,16 @@ ORDER BY
 ```
 
 **Parâmetros**:
+
 - `$1`: `tenantId` (UUID)
 - `$2`: `patientId` (UUID)
 
 ### 5. Buscar Observações Clínicas Recentes
 
 **Query**:
+
 ```sql
-SELECT 
+SELECT
   id,
   code,
   display,
@@ -219,6 +230,7 @@ LIMIT 50;
 ```
 
 **Parâmetros**:
+
 - `$1`: `tenantId` (UUID)
 - `$2`: `patientId` (UUID)
 
@@ -231,10 +243,12 @@ O n8n deve usar endpoints REST do backend NestJS para **criar/atualizar** dados 
 **Endpoint**: `POST /api/v1/messages`
 
 **Headers**:
+
 - `Authorization: Bearer {jwt_token}` ou `X-API-Key: {api_key}`
 - `X-Tenant-Id: {tenantId}` (se usar API Key)
 
 **Body**:
+
 ```json
 {
   "patientId": "uuid",
@@ -259,6 +273,7 @@ O n8n deve usar endpoints REST do backend NestJS para **criar/atualizar** dados 
 **Endpoint**: `POST /api/v1/observations`
 
 **Body**:
+
 ```json
 {
   "patientId": "uuid",
@@ -280,6 +295,7 @@ O n8n deve usar endpoints REST do backend NestJS para **criar/atualizar** dados 
 **Endpoint**: `POST /api/v1/alerts`
 
 **Body**:
+
 ```json
 {
   "patientId": "uuid",
@@ -295,6 +311,7 @@ O n8n deve usar endpoints REST do backend NestJS para **criar/atualizar** dados 
 ```
 
 **Vantagens**:
+
 - ✅ Validação automática
 - ✅ WebSocket automático
 - ✅ Auditoria completa
@@ -302,6 +319,7 @@ O n8n deve usar endpoints REST do backend NestJS para **criar/atualizar** dados 
 #### Opção B: SQL Direto no PostgreSQL
 
 **Query SQL**:
+
 ```sql
 INSERT INTO alerts (
   id,
@@ -337,6 +355,7 @@ INSERT INTO alerts (
 **Endpoint**: `POST /api/v1/patients/:id/priority`
 
 **Body**:
+
 ```json
 {
   "score": 85,
@@ -351,6 +370,7 @@ INSERT INTO alerts (
 **Endpoint**: `POST /api/v1/questionnaire-responses`
 
 **Body**:
+
 ```json
 {
   "patientId": "uuid",
@@ -423,4 +443,3 @@ INSERT INTO alerts (
 3. **Performance**: Queries com `phoneHash` são indexadas e rápidas
 4. **Validação**: Endpoints REST fazem validação e auditoria - usar para escrita
 5. **WebSocket**: Alertas criados via API REST emitem eventos WebSocket automaticamente
-

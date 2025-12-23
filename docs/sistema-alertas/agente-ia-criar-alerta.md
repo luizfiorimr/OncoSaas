@@ -5,8 +5,9 @@
 **O agente de IA NÃO cria alertas diretamente no banco de dados.**
 
 **Fluxo correto:**
+
 ```
-Agente de IA (Python) 
+Agente de IA (Python)
     ↓ (HTTP POST)
 Backend NestJS (TypeScript)
     ↓ (Prisma)
@@ -14,6 +15,7 @@ Banco de Dados PostgreSQL
 ```
 
 **Por quê?**
+
 - ✅ Validação de negócio (verificar paciente existe, pertence ao tenant)
 - ✅ Isolamento de dados (tenantId sempre incluído)
 - ✅ WebSocket automático (notificações em tempo real)
@@ -25,12 +27,15 @@ Banco de Dados PostgreSQL
 ## 🔌 Endpoint para Criar Alerta
 
 ### URL
+
 ```
 POST http://localhost:3002/api/v1/alerts
 ```
 
 ### Autenticação
+
 **Token JWT obrigatório** no header:
+
 ```
 Authorization: Bearer {JWT_TOKEN}
 ```
@@ -61,17 +66,17 @@ Authorization: Bearer {JWT_TOKEN}
 
 ### Campos Obrigatórios
 
-| Campo | Tipo | Descrição | Exemplo |
-|-------|------|-----------|---------|
-| `patientId` | `string` (UUID) | ID do paciente | `"550e8400-e29b-41d4-a716-446655440000"` |
-| `type` | `AlertType` (enum) | Tipo do alerta | `"CRITICAL_SYMPTOM"` |
-| `severity` | `AlertSeverity` (enum) | Severidade | `"CRITICAL"`, `"HIGH"`, `"MEDIUM"`, `"LOW"` |
-| `message` | `string` | Mensagem descritiva | `"Paciente relatou febre alta"` |
+| Campo       | Tipo                   | Descrição           | Exemplo                                     |
+| ----------- | ---------------------- | ------------------- | ------------------------------------------- |
+| `patientId` | `string` (UUID)        | ID do paciente      | `"550e8400-e29b-41d4-a716-446655440000"`    |
+| `type`      | `AlertType` (enum)     | Tipo do alerta      | `"CRITICAL_SYMPTOM"`                        |
+| `severity`  | `AlertSeverity` (enum) | Severidade          | `"CRITICAL"`, `"HIGH"`, `"MEDIUM"`, `"LOW"` |
+| `message`   | `string`               | Mensagem descritiva | `"Paciente relatou febre alta"`             |
 
 ### Campos Opcionais
 
-| Campo | Tipo | Descrição | Exemplo |
-|-------|------|-----------|---------|
+| Campo     | Tipo            | Descrição            | Exemplo             |
+| --------- | --------------- | -------------------- | ------------------- |
 | `context` | `object` (JSON) | Metadados adicionais | Ver exemplos abaixo |
 
 ---
@@ -125,11 +130,11 @@ from typing import Dict, Optional
 
 class BackendClient:
     """Cliente HTTP para comunicação com o backend NestJS"""
-    
+
     def __init__(self):
         self.base_url = os.getenv("BACKEND_URL", "http://localhost:3002")
         self.service_token = os.getenv("BACKEND_SERVICE_TOKEN")  # Token de serviço
-        
+
     async def create_alert(
         self,
         patient_id: str,
@@ -141,7 +146,7 @@ class BackendClient:
     ) -> Dict:
         """
         Cria um alerta no backend
-        
+
         Args:
             patient_id: UUID do paciente
             alert_type: Tipo do alerta (ex: "CRITICAL_SYMPTOM")
@@ -149,36 +154,36 @@ class BackendClient:
             message: Mensagem descritiva do alerta
             context: Metadados adicionais (opcional)
             tenant_id: ID do tenant (se não fornecido, backend usa do token)
-            
+
         Returns:
             Dict com o alerta criado
         """
         url = f"{self.base_url}/api/v1/alerts"
-        
+
         headers = {
             "Authorization": f"Bearer {self.service_token}",
             "Content-Type": "application/json",
         }
-        
+
         # Se tenant_id fornecido, adicionar header (se backend suportar)
         if tenant_id:
             headers["X-Tenant-Id"] = tenant_id
-        
+
         payload = {
             "patientId": patient_id,
             "type": alert_type,
             "severity": severity,
             "message": message,
         }
-        
+
         if context:
             payload["context"] = context
-        
+
         async with httpx.AsyncClient(timeout=30.0) as client:
             response = await client.post(url, json=payload, headers=headers)
             response.raise_for_status()  # Levanta exceção se erro HTTP
             return response.json()
-    
+
     async def create_critical_symptom_alert(
         self,
         patient_id: str,
@@ -190,7 +195,7 @@ class BackendClient:
     ) -> Dict:
         """
         Método helper para criar alerta de sintoma crítico
-        
+
         Args:
             patient_id: UUID do paciente
             symptoms: Lista de sintomas detectados (ex: ["febre", "dispneia"])
@@ -198,7 +203,7 @@ class BackendClient:
             conversation_id: ID da conversa (opcional)
             message_id: ID da mensagem que gerou o alerta (opcional)
             confidence: Confiança na detecção (0.0 a 1.0)
-            
+
         Returns:
             Dict com o alerta criado
         """
@@ -207,12 +212,12 @@ class BackendClient:
             "detectedBy": "ai_agent",
             "confidence": confidence,
         }
-        
+
         if conversation_id:
             context["conversationId"] = conversation_id
         if message_id:
             context["messageId"] = message_id
-        
+
         return await self.create_alert(
             patient_id=patient_id,
             alert_type="CRITICAL_SYMPTOM",
@@ -232,7 +237,7 @@ class WhatsAppAgent:
     def __init__(self):
         self.backend_client = BackendClient()
         # ... resto da inicialização
-    
+
     async def process_message(
         self,
         message: str,
@@ -245,18 +250,18 @@ class WhatsAppAgent:
         Processa mensagem e cria alerta se necessário
         """
         # ... processamento com LLM ...
-        
+
         # Detectar sintomas críticos
         critical_symptoms = self._detect_critical_symptoms(message)
-        
+
         # Se detectou sintomas críticos, criar alerta
         if critical_symptoms:
             try:
                 alert_message = self._build_alert_message(
-                    critical_symptoms, 
+                    critical_symptoms,
                     patient_context
                 )
-                
+
                 alert = await self.backend_client.create_critical_symptom_alert(
                     patient_id=patient_id,
                     symptoms=critical_symptoms,
@@ -264,29 +269,29 @@ class WhatsAppAgent:
                     conversation_id=conversation_id,
                     confidence=0.9,  # Alta confiança na detecção
                 )
-                
+
                 print(f"✅ Alerta criado: {alert['id']}")
-                
+
             except Exception as e:
                 print(f"❌ Erro ao criar alerta: {e}")
                 # Logar erro mas não interromper fluxo
-        
+
         return {
             "response": agent_response,
             "critical_symptoms": critical_symptoms,
             "structured_data": structured_data,
             "should_alert": len(critical_symptoms) > 0,
         }
-    
+
     def _build_alert_message(
-        self, 
-        symptoms: list[str], 
+        self,
+        symptoms: list[str],
         patient_context: Dict
     ) -> str:
         """Constrói mensagem descritiva do alerta"""
         patient_name = patient_context.get("name", "Paciente")
         symptoms_str = ", ".join(symptoms)
-        
+
         return (
             f"Paciente {patient_name} relatou sintomas críticos: {symptoms_str}. "
             f"Requer atenção imediata da equipe de enfermagem."
@@ -310,12 +315,13 @@ async createServiceToken(tenantId: string): Promise<string> {
     roles: ['ADMIN'], // Permissão para criar alertas
     type: 'service', // Tipo: service token
   };
-  
+
   return this.jwtService.sign(payload);
 }
 ```
 
 **Armazenar no `.env` do AI Service:**
+
 ```bash
 BACKEND_SERVICE_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ```
@@ -323,7 +329,8 @@ BACKEND_SERVICE_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
 ### Opção 2: Usuário Sistema (Alternativa)
 
 Criar um usuário sistema no banco:
-- Email: `ai-service@medsaas.internal`
+
+- Email: `ai-service@ONCONAV.internal`
 - Role: `ADMIN` ou `COORDINATOR`
 - Fazer login e usar token JWT retornado
 
@@ -431,7 +438,7 @@ async def create_alert_with_retry(
         except Exception as e:
             print(f"❌ Erro inesperado: {e}")
             return None
-    
+
     return None
 ```
 

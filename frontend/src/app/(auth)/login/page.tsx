@@ -41,7 +41,8 @@ export default function LoginPage() {
         window.location.href = '/dashboard';
       }
     } catch (err: unknown) {
-      const errorMessage = err instanceof Error ? err.message : 'Erro ao fazer login';
+      const errorMessage =
+        err instanceof Error ? err.message : 'Erro ao fazer login';
       setError(errorMessage);
       setIsLoading(false);
     }
@@ -52,7 +53,7 @@ export default function LoginPage() {
       <div className="max-w-md w-full space-y-8 p-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            MEDSAAS
+            ONCONAV
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
             Faça login para acessar o dashboard

@@ -1,5 +1,5 @@
 {
-  "name": "medsaas-frontend",
+  "name": "ONCONAV-frontend",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -58,7 +58,7 @@
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",
     "eslint": "^8.57.0",
-    "eslint-config-next": "14.2.5",
+    "eslint-config-next": "^16.0.9",
     "eslint-config-prettier": "^9.1.2",
     "prettier": "^3.6.2"
   },

@@ -114,7 +114,7 @@ O banco utiliza uma abordagem **híbrida** de multi-tenancy:
 A conexão é configurada através da variável `DATABASE_URL` no arquivo `.env`:
 
 ```env
-DATABASE_URL=postgresql://medsaas:medsaas_dev@localhost:5433/medsaas_development
+DATABASE_URL=postgresql://ONCONAV:ONCONAV_dev@localhost:5433/ONCONAV_development
 ```
 
 **Formato da URL:**
@@ -130,11 +130,11 @@ O PostgreSQL é executado via Docker Compose:
 ```yaml
 postgres:
   image: postgres:15-alpine
-  container_name: medsaas-postgres
+  container_name: ONCONAV-postgres
   environment:
-    POSTGRES_USER: medsaas
-    POSTGRES_PASSWORD: medsaas_dev
-    POSTGRES_DB: medsaas_development
+    POSTGRES_USER: ONCONAV
+    POSTGRES_PASSWORD: ONCONAV_dev
+    POSTGRES_DB: ONCONAV_development
   ports:
     - '5433:5432' # Porta externa 5433
 ```
@@ -143,9 +143,9 @@ postgres:
 
 - **Host**: `localhost`
 - **Porta**: `5433` (externa) / `5432` (interna do container)
-- **Usuário**: `medsaas`
-- **Senha**: `medsaas_dev`
-- **Database**: `medsaas_development`
+- **Usuário**: `ONCONAV`
+- **Senha**: `ONCONAV_dev`
+- **Database**: `ONCONAV_development`
 
 ---
 
@@ -219,13 +219,13 @@ npx prisma migrate reset
 **Conectar via psql:**
 
 ```bash
-psql -h localhost -p 5433 -U medsaas -d medsaas_development
+psql -h localhost -p 5433 -U ONCONAV -d ONCONAV_development
 ```
 
 **Ou usando URL completa:**
 
 ```bash
-psql postgresql://medsaas:medsaas_dev@localhost:5433/medsaas_development
+psql postgresql://ONCONAV:ONCONAV_dev@localhost:5433/ONCONAV_development
 ```
 
 **Comandos úteis no psql:**
@@ -276,9 +276,9 @@ export class PatientsService {
 
 - **Host**: `localhost`
 - **Port**: `5433`
-- **Database**: `medsaas_development`
-- **Username**: `medsaas`
-- **Password**: `medsaas_dev`
+- **Database**: `ONCONAV_development`
+- **Username**: `ONCONAV`
+- **Password**: `ONCONAV_dev`
 
 ---
 
@@ -496,7 +496,7 @@ WHERE m."processedBy" = 'AGENT'
 
 ### Erro: "Database does not exist"
 
-- Criar banco manualmente: `CREATE DATABASE medsaas_development;`
+- Criar banco manualmente: `CREATE DATABASE ONCONAV_development;`
 - Ou executar migrations: `npx prisma migrate dev`
 
 ### Erro: "Relation does not exist"
@@ -507,7 +507,7 @@ WHERE m."processedBy" = 'AGENT'
 ### Erro: "Permission denied"
 
 - Verificar credenciais no `.env`
-- Verificar se usuário tem permissões: `GRANT ALL PRIVILEGES ON DATABASE medsaas_development TO medsaas;`
+- Verificar se usuário tem permissões: `GRANT ALL PRIVILEGES ON DATABASE ONCONAV_development TO ONCONAV;`
 
 ### Resetar Banco de Dados (Desenvolvimento)
 

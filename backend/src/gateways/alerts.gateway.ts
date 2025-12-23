@@ -50,8 +50,17 @@ export class AlertsGateway implements OnGatewayConnection, OnGatewayDisconnect {
       }
 
       // Verificar e decodificar token
+      const jwtSecret = this.configService.get<string>('JWT_SECRET');
+      const isProduction = this.configService.get<string>('NODE_ENV') === 'production';
+      
+      if (isProduction && !jwtSecret) {
+        this.logger.error('JWT_SECRET must be configured in production environment');
+        client.disconnect();
+        return;
+      }
+      
       const payload = this.jwtService.verify(token, {
-        secret: this.configService.get<string>('JWT_SECRET') || 'your-secret-key',
+        secret: jwtSecret || 'your-secret-key',
       });
 
       // Adicionar informações do usuário ao socket

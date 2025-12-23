@@ -5,16 +5,16 @@
 ### URL de Conexão
 
 ```
-postgresql://medsaas:medsaas_dev@localhost:5433/medsaas_development
+postgresql://ONCONAV:ONCONAV_dev@localhost:5433/ONCONAV_development
 ```
 
 ### Credenciais
 
 - **Host**: `localhost`
 - **Porta**: `5433`
-- **Usuário**: `medsaas`
-- **Senha**: `medsaas_dev`
-- **Database**: `medsaas_development`
+- **Usuário**: `ONCONAV`
+- **Senha**: `ONCONAV_dev`
+- **Database**: `ONCONAV_development`
 
 ---
 
@@ -55,10 +55,10 @@ npx prisma migrate reset
 
 ```bash
 # Conectar
-psql -h localhost -p 5433 -U medsaas -d medsaas_development
+psql -h localhost -p 5433 -U ONCONAV -d ONCONAV_development
 
 # Ou com URL
-psql postgresql://medsaas:medsaas_dev@localhost:5433/medsaas_development
+psql postgresql://ONCONAV:ONCONAV_dev@localhost:5433/ONCONAV_development
 ```
 
 ---
@@ -110,7 +110,7 @@ await prisma.patient.findMany({
 ## Variável de Ambiente
 
 ```env
-DATABASE_URL=postgresql://medsaas:medsaas_dev@localhost:5433/medsaas_development
+DATABASE_URL=postgresql://ONCONAV:ONCONAV_dev@localhost:5433/ONCONAV_development
 ```
 
 ---

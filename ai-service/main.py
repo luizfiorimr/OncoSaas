@@ -23,13 +23,13 @@ settings = Settings()
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup
-    print("🤖 AI Service starting...")
+    print("[AI Service] Starting...")
     yield
     # Shutdown
-    print("🤖 AI Service shutting down...")
+    print("[AI Service] Shutting down...")
 
 app = FastAPI(
-    title="MEDSAAS AI Service",
+    title="ONCONAV AI Service",
     description="Serviço de IA para priorização e agente conversacional",
     version="0.1.0",
     lifespan=lifespan,
@@ -49,7 +49,7 @@ app.include_router(router, prefix="/api/v1", tags=["ai"])
 
 @app.get("/")
 async def root():
-    return {"message": "MEDSAAS AI Service"}
+    return {"message": "ONCONAV AI Service"}
 
 if __name__ == "__main__":
     import uvicorn

@@ -39,7 +39,7 @@ req_extensions = v3_req
 C=BR
 ST=Sao Paulo
 L=Sao Paulo
-O=MedSaaS Development
+O=ONCONAV Development
 OU=Development
 CN=localhost
 

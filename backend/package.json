@@ -1,5 +1,5 @@
 {
-  "name": "medsaas-backend",
+  "name": "ONCONAV-backend",
   "version": "0.1.0",
   "description": "Backend API para Plataforma Oncológica",
   "author": "",
@@ -89,6 +89,9 @@
     "*.{json,md}": [
       "prettier --write"
     ]
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   },
   "jest": {
     "moduleFileExtensions": [

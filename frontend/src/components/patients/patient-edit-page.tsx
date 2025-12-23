@@ -187,32 +187,6 @@ export function PatientEditPage({ patientId }: PatientEditPageProps) {
         ehrPatientId: patient.ehrPatientId || undefined,
       };
       
-      console.log('Patient data:', {
-        patient: {
-          cancerType: patient.cancerType,
-          currentStage: patient.currentStage,
-          performanceStatus: patient.performanceStatus,
-          diagnosisDate: patient.diagnosisDate,
-        },
-        primaryDiagnosis: primaryDiagnosis ? {
-          cancerType: primaryDiagnosis.cancerType,
-          stage: primaryDiagnosis.stage,
-          diagnosisDate: primaryDiagnosis.diagnosisDate,
-        } : null,
-        extracted: {
-          cancerType,
-          stage,
-          diagnosisDate,
-          performanceStatusValue,
-        },
-        formData: {
-          cancerType: formData.cancerType,
-          currentStage: formData.currentStage,
-          performanceStatus: formData.performanceStatus,
-          diagnosisDate: formData.diagnosisDate,
-        },
-      });
-      
       // Usar reset com keepDefaultValues: false para garantir que todos os valores sejam aplicados
       reset(formData, {
         keepDefaultValues: false,
@@ -247,19 +221,6 @@ export function PatientEditPage({ patientId }: PatientEditPageProps) {
         setValue('grade', formData.grade, { shouldValidate: false });
       }
       
-      // Log após reset para verificar se os valores foram aplicados
-      setTimeout(() => {
-        console.log('Values after reset:', {
-          cancerType: watch('cancerType'),
-          currentStage: watch('currentStage'),
-          performanceStatus: watch('performanceStatus'),
-          diagnosisDate: watch('diagnosisDate'),
-          tStage: watch('tStage'),
-          nStage: watch('nStage'),
-          mStage: watch('mStage'),
-          grade: watch('grade'),
-        });
-      }, 100);
     }
   }, [patient, isLoading, reset, setValue]);
 

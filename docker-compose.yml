@@ -1,24 +1,24 @@
 services:
   postgres:
     image: postgres:15-alpine
-    container_name: medsaas-postgres
+    container_name: ONCONAV-postgres
     environment:
-      POSTGRES_USER: medsaas
-      POSTGRES_PASSWORD: medsaas_dev
-      POSTGRES_DB: medsaas_development
+      POSTGRES_USER: ONCONAV
+      POSTGRES_PASSWORD: ONCONAV_dev
+      POSTGRES_DB: ONCONAV_development
     ports:
       - '5433:5432' # Porta externa 5433 para evitar conflito com medassist-postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U medsaas']
+      test: ['CMD-SHELL', 'pg_isready -U ONCONAV']
       interval: 10s
       timeout: 5s
       retries: 5
 
   redis:
     image: redis:7-alpine
-    container_name: medsaas-redis
+    container_name: ONCONAV-redis
     ports:
       - '6379:6379'
     volumes:
@@ -31,10 +31,10 @@ services:
 
   rabbitmq:
     image: rabbitmq:3-management-alpine
-    container_name: medsaas-rabbitmq
+    container_name: ONCONAV-rabbitmq
     environment:
-      RABBITMQ_DEFAULT_USER: medsaas
-      RABBITMQ_DEFAULT_PASS: medsaas_dev
+      RABBITMQ_DEFAULT_USER: ONCONAV
+      RABBITMQ_DEFAULT_PASS: ONCONAV_dev
     ports:
       - '5672:5672'
       - '15672:15672'

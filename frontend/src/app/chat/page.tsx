@@ -27,10 +27,11 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { EmptyState } from '@/components/ui/empty-state';
 import { User, MessageSquare } from 'lucide-react';
 import { NavigationBar } from '@/components/shared/navigation-bar';
+import { toast } from 'sonner';
 
 export default function ChatPage() {
   const router = useRouter();
-  const { user, isAuthenticated, initialize } = useAuthStore();
+  const { user, isAuthenticated, isInitializing, initialize } = useAuthStore();
   const [selectedPatient, setSelectedPatient] = useState<string | null>(null);
   const [selectedAlert, setSelectedAlert] = useState<Alert | null>(null);
   const [isNursingActive, setIsNursingActive] = useState(false);
@@ -179,8 +180,9 @@ export default function ChatPage() {
         conversationId: conversationId || undefined,
       });
     } catch (error) {
-      console.error('Erro ao enviar mensagem:', error);
-      // TODO: Mostrar toast de erro
+      toast.error('Erro ao enviar mensagem', {
+        description: error instanceof Error ? error.message : 'Tente novamente em alguns instantes.',
+      });
     }
   };
 
@@ -200,9 +202,11 @@ export default function ChatPage() {
       try {
         await assumeMessageMutation.mutateAsync(unassumedMessage.id);
         setIsNursingActive(true);
+        toast.success('Conversa assumida com sucesso');
       } catch (error) {
-        console.error('Erro ao assumir conversa:', error);
-        // TODO: Mostrar toast de erro
+        toast.error('Erro ao assumir conversa', {
+          description: error instanceof Error ? error.message : 'Tente novamente em alguns instantes.',
+        });
       }
     } else {
       // Se não há mensagens não assumidas, apenas ativar modo manual

@@ -829,34 +829,8 @@ export class OncologyNavigationService {
         markedOverdue++;
       }
 
-      // Verificar se já existe um alerta pendente para esta etapa
-      // Buscar todos os alertas pendentes do tipo NAVIGATION_DELAY para este paciente
-      // e verificar se algum tem o stepId no context
-      const existingAlerts = await this.prisma.alert.findMany({
-        where: {
-          tenantId,
-          patientId: step.patientId,
-          type: AlertType.NAVIGATION_DELAY,
-          status: {
-            in: ['PENDING', 'ACKNOWLEDGED'],
-          },
-        },
-        select: {
-          id: true,
-          context: true,
-        },
-      });
-
-      // Verificar se algum alerta tem o stepId no context
-      const existingAlert = existingAlerts.find((alert) => {
-        if (!alert.context || typeof alert.context !== 'object') {
-          return false;
-        }
-        const context = alert.context as { stepId?: string };
-        return context.stepId === step.id;
-      });
-
       // Criar alerta apenas se não existir um alerta pendente para esta etapa
+      // A verificação de duplicidade é feita dentro de checkAndCreateAlertForStep
       const alertCreated = await this.checkAndCreateAlertForStep(
         step,
         tenantId
@@ -1066,50 +1040,6 @@ export class OncologyNavigationService {
     });
 
     return allSteps;
-  }
-
-  /**
-   * Retorna as etapas esperadas para cada tipo de câncer em cada fase da jornada
-   * @deprecated Use getNavigationStepsForAllStages para sempre retornar etapas de todos os estágios
-   */
-  private getNavigationStepsForCancerType(
-    cancerType: string,
-    currentStage: JourneyStage,
-    patientStatus?: PatientStatus
-  ): Array<{
-    journeyStage: JourneyStage;
-    stepKey: string;
-    stepName: string;
-    stepDescription: string;
-    isRequired: boolean;
-    expectedDate?: Date;
-    dueDate?: Date;
-  }> {
-    // Se paciente está em tratamento paliativo, usar etapas específicas
-    if (patientStatus === PatientStatus.PALLIATIVE_CARE) {
-      return this.getPalliativeCareSteps(currentStage);
-    }
-
-    const type = cancerType.toLowerCase();
-
-    switch (type) {
-      case 'colorectal':
-        return this.getColorectalCancerSteps(currentStage);
-      case 'breast':
-        return this.getBreastCancerSteps(currentStage);
-      case 'lung':
-        return this.getLungCancerSteps(currentStage);
-      case 'prostate':
-        return this.getProstateCancerSteps(currentStage);
-      case 'kidney':
-        return this.getKidneyCancerSteps(currentStage);
-      case 'bladder':
-        return this.getBladderCancerSteps(currentStage);
-      case 'testicular':
-        return this.getTesticularCancerSteps(currentStage);
-      default:
-        return this.getGenericCancerSteps(currentStage);
-    }
   }
 
   /**

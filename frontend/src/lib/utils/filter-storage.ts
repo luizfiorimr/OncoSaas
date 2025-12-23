@@ -8,7 +8,7 @@ export interface PatientFilters {
   cancerType?: string | null;
 }
 
-const FILTERS_STORAGE_KEY = 'medsaas-patient-filters';
+const FILTERS_STORAGE_KEY = 'ONCONAV-patient-filters';
 
 /**
  * Salva os filtros no localStorage
@@ -53,4 +53,3 @@ export function clearFiltersFromStorage(): void {
     console.error('Erro ao limpar filtros do localStorage:', error);
   }
 }
-
