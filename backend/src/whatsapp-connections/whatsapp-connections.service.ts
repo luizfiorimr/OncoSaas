@@ -73,11 +73,17 @@ export class WhatsAppConnectionsService {
     const configuredEncryptionKey = this.configService.get<string>('ENCRYPTION_KEY');
     const isProduction = this.configService.get<string>('NODE_ENV') === 'production';
     
-    if (isProduction && !configuredEncryptionKey) {
-      throw new Error('ENCRYPTION_KEY must be configured in production environment');
+    if (!configuredEncryptionKey) {
+      if (isProduction) {
+        throw new Error('ENCRYPTION_KEY must be configured in production environment');
+      }
+      this.logger.warn(
+        '⚠️ ENCRYPTION_KEY not configured. Using insecure default key. ' +
+        'This is acceptable for development but MUST be configured for production.'
+      );
     }
     
-    this.encryptionKey = configuredEncryptionKey || 'default-key-change-in-production-32-bytes!!';
+    this.encryptionKey = configuredEncryptionKey || 'default-dev-key-32-bytes-long!!';
     this.metaApiBaseUrl = `https://graph.facebook.com/${this.metaApiVersion}`;
 
     // Configurar versão da API via variável de ambiente (SDK usa FACEBOOK_ADS_API_VERSION)

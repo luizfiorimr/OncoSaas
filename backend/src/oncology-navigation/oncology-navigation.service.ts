@@ -2,6 +2,7 @@ import {
   Injectable,
   NotFoundException,
   BadRequestException,
+  Logger,
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateNavigationStepDto } from './dto/create-navigation-step.dto';
@@ -16,6 +17,8 @@ import { AlertType, AlertSeverity } from '@prisma/client';
 
 @Injectable()
 export class OncologyNavigationService {
+  private readonly logger = new Logger(OncologyNavigationService.name);
+
   constructor(
     private readonly prisma: PrismaService,
     private readonly alertsService: AlertsService
@@ -362,8 +365,8 @@ export class OncologyNavigationService {
       throw new NotFoundException(`Patient with ID ${patientId} not found`);
     }
 
-    console.log(
-      `[OncologyNavigation] Inicializando etapas para paciente ${patientId}, tipo: ${cancerType}, estágio: ${stage}, status: ${patient.status}`
+    this.logger.log(
+      `Inicializando etapas para paciente ${patientId}, tipo: ${cancerType}, estágio: ${stage}, status: ${patient.status}`
     );
 
     // Remover etapas existentes para este paciente e tipo de câncer
@@ -387,13 +390,13 @@ export class OncologyNavigationService {
             patient.status
           );
 
-    console.log(
-      `[OncologyNavigation] Encontradas ${steps.length} etapas para ${cancerType} no estágio ${stage}`
+    this.logger.log(
+      `Encontradas ${steps.length} etapas para ${cancerType} no estágio ${stage}`
     );
 
     if (steps.length === 0) {
-      console.warn(
-        `[OncologyNavigation] Nenhuma etapa encontrada para tipo ${cancerType} no estágio ${stage}`
+      this.logger.warn(
+        `Nenhuma etapa encontrada para tipo ${cancerType} no estágio ${stage}`
       );
       return;
     }
@@ -438,16 +441,16 @@ export class OncologyNavigationService {
           }
         }
       } catch (error) {
-        console.error(
-          `[OncologyNavigation] Erro ao criar etapa ${stepConfig.stepKey}:`,
-          error
+        this.logger.error(
+          `Erro ao criar etapa ${stepConfig.stepKey}:`,
+          error instanceof Error ? error.stack : String(error)
         );
         throw error;
       }
     }
 
-    console.log(
-      `[OncologyNavigation] Criadas ${createdCount} etapas para paciente ${patientId}`
+    this.logger.log(
+      `Criadas ${createdCount} etapas para paciente ${patientId}`
     );
   }
 
@@ -588,9 +591,9 @@ export class OncologyNavigationService {
           }
         }
       } catch (error) {
-        console.error(
-          `[OncologyNavigation] Erro ao criar etapa ${stepConfig.stepKey}:`,
-          error
+        this.logger.error(
+          `Erro ao criar etapa ${stepConfig.stepKey}:`,
+          error instanceof Error ? error.stack : String(error)
         );
         // Continuar criando outras etapas mesmo se uma falhar
       }
@@ -706,9 +709,9 @@ export class OncologyNavigationService {
           skipped++;
         }
       } catch (error) {
-        console.error(
+        this.logger.error(
           `Erro ao inicializar etapas para paciente ${patient.id}:`,
-          error
+          error instanceof Error ? error.stack : String(error)
         );
         errors++;
       }
@@ -918,20 +921,20 @@ export class OncologyNavigationService {
           },
           tenantId
         );
-        console.log(
-          `[OncologyNavigation] ✅ Alerta criado para etapa atrasada: ${step.stepName} (${daysOverdue} dias)`
+        this.logger.log(
+          `✅ Alerta criado para etapa atrasada: ${step.stepName} (${daysOverdue} dias)`
         );
         return true;
       } catch (error) {
-        console.error(
-          `[OncologyNavigation] ❌ Erro ao criar alerta para etapa ${step.id}:`,
-          error
+        this.logger.error(
+          `❌ Erro ao criar alerta para etapa ${step.id}:`,
+          error instanceof Error ? error.stack : String(error)
         );
         return false;
       }
     } else {
-      console.log(
-        `[OncologyNavigation] ⏭️ Alerta já existe para etapa ${step.stepName}, pulando criação`
+      this.logger.debug(
+        `⏭️ Alerta já existe para etapa ${step.stepName}, pulando criação`
       );
       return false;
     }

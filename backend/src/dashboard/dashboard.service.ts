@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { DashboardMetricsDto } from './dto/dashboard-metrics.dto';
 import {
@@ -26,6 +26,8 @@ import {
 
 @Injectable()
 export class DashboardService {
+  private readonly logger = new Logger(DashboardService.name);
+
   constructor(private readonly prisma: PrismaService) {}
 
   async getMetrics(tenantId: string): Promise<DashboardMetricsDto> {
@@ -1248,8 +1250,8 @@ export class DashboardService {
    */
   async getCriticalTimelines(tenantId: string): Promise<CriticalTimelinesDto> {
     try {
-      console.log(
-        `[getCriticalTimelines] Iniciando cálculo para tenantId: ${tenantId}`
+      this.logger.debug(
+        `Iniciando cálculo de prazos críticos para tenantId: ${tenantId}`
       );
       // Benchmarks baseados em guidelines (NCCN, ESMO, INCA)
       const benchmarks: Record<string, CriticalTimelineBenchmark[]> = {
@@ -1702,9 +1704,9 @@ export class DashboardService {
             }
           } catch (error) {
             // Se houver erro ao calcular uma métrica específica, continuar com as outras
-            console.error(
+            this.logger.error(
               `Erro ao calcular métrica ${benchmark.metric} para ${cancerType}:`,
-              error
+              error instanceof Error ? error.stack : String(error)
             );
           }
 
@@ -1745,21 +1747,17 @@ export class DashboardService {
         metricsWithNoData: metrics.filter((m) => m.status === 'NO_DATA').length,
       };
 
-      console.log(
-        `[getCriticalTimelines] Cálculo concluído. Total de métricas: ${metrics.length}`
+      this.logger.debug(
+        `Cálculo de prazos críticos concluído. Total de métricas: ${metrics.length}`
       );
       return {
         metrics,
         summary,
       };
     } catch (error) {
-      console.error(
-        '[getCriticalTimelines] Erro ao calcular prazos críticos:',
-        error
-      );
-      console.error(
-        '[getCriticalTimelines] Stack trace:',
-        error instanceof Error ? error.stack : 'N/A'
+      this.logger.error(
+        'Erro ao calcular prazos críticos:',
+        error instanceof Error ? error.stack : String(error)
       );
       // Retornar estrutura vazia em caso de erro
       return {

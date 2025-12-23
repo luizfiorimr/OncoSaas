@@ -1,4 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
 import { oncologyNavigationApi } from '@/lib/api/oncology-navigation';
 
 export const usePatientNavigationSteps = (patientId: string | null) => {
@@ -56,6 +57,13 @@ export const useInitializeNavigationSteps = () => {
       queryClient.invalidateQueries({
         queryKey: ['navigation-steps', variables.patientId],
       });
+      toast.success('Etapas de navegação inicializadas!');
+    },
+    onError: (error: Error) => {
+      console.error('Erro ao inicializar etapas:', error);
+      toast.error('Falha ao inicializar etapas de navegação.', {
+        description: error.message || 'Tente novamente.',
+      });
     },
   });
 };
@@ -75,6 +83,13 @@ export const useUpdateNavigationStep = () => {
       queryClient.invalidateQueries({
         queryKey: ['navigation-steps'],
       });
+      toast.success('Etapa atualizada com sucesso!');
+    },
+    onError: (error: Error) => {
+      console.error('Erro ao atualizar etapa:', error);
+      toast.error('Falha ao atualizar etapa.', {
+        description: error.message || 'Tente novamente.',
+      });
     },
   });
 };
@@ -88,7 +103,14 @@ export const useInitializeAllPatients = () => {
       // Invalidar todas as queries de pacientes e etapas
       queryClient.invalidateQueries({ queryKey: ['patients'] });
       queryClient.invalidateQueries({ queryKey: ['navigation-steps'] });
+      toast.success('Etapas inicializadas para todos os pacientes!');
       return result;
+    },
+    onError: (error: Error) => {
+      console.error('Erro ao inicializar etapas para todos:', error);
+      toast.error('Falha ao inicializar etapas.', {
+        description: error.message || 'Tente novamente.',
+      });
     },
   });
 };
@@ -99,9 +121,16 @@ export const useUploadStepFile = () => {
   return useMutation({
     mutationFn: ({ stepId, file }: { stepId: string; file: File }) =>
       oncologyNavigationApi.uploadFile(stepId, file),
-    onSuccess: (_, variables) => {
+    onSuccess: () => {
       // Invalidar etapas do paciente
       queryClient.invalidateQueries({ queryKey: ['navigation-steps'] });
+      toast.success('Arquivo enviado com sucesso!');
+    },
+    onError: (error: Error) => {
+      console.error('Erro ao enviar arquivo:', error);
+      toast.error('Falha ao enviar arquivo.', {
+        description: error.message || 'Verifique o arquivo e tente novamente.',
+      });
     },
   });
 };

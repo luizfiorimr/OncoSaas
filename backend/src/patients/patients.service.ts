@@ -4,6 +4,7 @@ import {
   BadRequestException,
   Inject,
   forwardRef,
+  Logger,
 } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreatePatientDto, Gender, CancerType } from './dto/create-patient.dto';
@@ -30,13 +31,22 @@ type PatientWithDiagnoses = Prisma.PatientGetPayload<{
 
 @Injectable()
 export class PatientsService {
+  private readonly logger = new Logger(PatientsService.name);
+
   constructor(
     private readonly prisma: PrismaService,
     @Inject(forwardRef(() => OncologyNavigationService))
     private readonly navigationService?: OncologyNavigationService
   ) {}
 
-  async findAll(tenantId: string): Promise<Patient[]> {
+  async findAll(
+    tenantId: string,
+    options?: { limit?: number; offset?: number }
+  ): Promise<Patient[]> {
+    // Limite padrão de 200 pacientes para evitar problemas de performance
+    const limit = options?.limit && options.limit > 0 ? Math.min(options.limit, 500) : 200;
+    const offset = options?.offset && options.offset > 0 ? options.offset : 0;
+
     const patients = await this.prisma.patient.findMany({
       where: { tenantId },
       include: {
@@ -48,6 +58,12 @@ export class PatientsService {
           },
         },
       },
+      orderBy: [
+        { priorityScore: 'desc' }, // Maior score primeiro
+        { createdAt: 'desc' },     // Mais recente primeiro
+      ],
+      take: limit,
+      skip: offset,
     });
 
     // Ordenar por prioridade: CRITICAL > HIGH > MEDIUM > LOW
@@ -258,7 +274,10 @@ export class PatientsService {
         );
       } catch (error) {
         // Log erro mas não falha a criação do paciente
-        console.error('Erro ao inicializar etapas de navegação:', error);
+        this.logger.error(
+          'Erro ao inicializar etapas de navegação:',
+          error instanceof Error ? error.stack : String(error)
+        );
       }
     }
 
@@ -377,7 +396,10 @@ export class PatientsService {
             newStage
           );
         } catch (error) {
-          console.error('Erro ao atualizar etapas de navegação:', error);
+          this.logger.error(
+            'Erro ao atualizar etapas de navegação:',
+            error instanceof Error ? error.stack : String(error)
+          );
         }
       }
     }
@@ -622,9 +644,9 @@ export class PatientsService {
                       currentStage as JourneyStage
                     );
                   } catch (error) {
-                    console.error(
+                    this.logger.error(
                       `Erro ao inicializar navegação para paciente ${patient.id}:`,
-                      error
+                      error instanceof Error ? error.stack : String(error)
                     );
                   }
                 }
@@ -711,7 +733,10 @@ export class PatientsService {
         );
       } catch (error) {
         // Se houver erro ao buscar etapas, usar array vazio
-        console.error('Erro ao buscar etapas de navegação:', error);
+        this.logger.error(
+          'Erro ao buscar etapas de navegação:',
+          error instanceof Error ? error.stack : String(error)
+        );
         navigationSteps = [];
       }
     }

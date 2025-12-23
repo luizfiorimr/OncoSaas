@@ -7,6 +7,7 @@ import {
   Param,
   Query,
   UseGuards,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { AlertsService } from './alerts.service';
 import { CreateAlertDto } from './dto/create-alert.dto';
@@ -78,7 +79,10 @@ export class AlertsController {
     UserRole.NURSE,
     UserRole.COORDINATOR
   )
-  async findOne(@Param('id') id: string, @CurrentUser() user: any) {
+  async findOne(
+    @Param('id', ParseUUIDPipe) id: string,
+    @CurrentUser() user: any
+  ) {
     return this.alertsService.findOne(id, user.tenantId);
   }
 
@@ -99,7 +103,7 @@ export class AlertsController {
     UserRole.COORDINATOR
   )
   async update(
-    @Param('id') id: string,
+    @Param('id', ParseUUIDPipe) id: string,
     @Body() updateAlertDto: UpdateAlertDto,
     @CurrentUser() user: any
   ) {
@@ -113,7 +117,10 @@ export class AlertsController {
     UserRole.NURSE,
     UserRole.COORDINATOR
   )
-  async acknowledge(@Param('id') id: string, @CurrentUser() user: any) {
+  async acknowledge(
+    @Param('id', ParseUUIDPipe) id: string,
+    @CurrentUser() user: any
+  ) {
     return this.alertsService.acknowledge(id, user.tenantId, user.id);
   }
 
@@ -124,7 +131,10 @@ export class AlertsController {
     UserRole.NURSE,
     UserRole.COORDINATOR
   )
-  async resolve(@Param('id') id: string, @CurrentUser() user: any) {
+  async resolve(
+    @Param('id', ParseUUIDPipe) id: string,
+    @CurrentUser() user: any
+  ) {
     return this.alertsService.resolve(id, user.tenantId, user.id);
   }
 }

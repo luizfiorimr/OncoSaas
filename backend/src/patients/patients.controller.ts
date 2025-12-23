@@ -11,6 +11,7 @@ import {
   UseInterceptors,
   UploadedFile,
   BadRequestException,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { PatientsService } from './patients.service';
@@ -119,7 +120,10 @@ export class PatientsController {
     UserRole.NURSE,
     UserRole.COORDINATOR
   )
-  async getDetail(@Param('id') id: string, @CurrentUser() user: any) {
+  async getDetail(
+    @Param('id', ParseUUIDPipe) id: string,
+    @CurrentUser() user: any
+  ) {
     const patient = await this.patientsService.getDetail(id, user.tenantId);
     return { data: patient };
   }
@@ -132,7 +136,7 @@ export class PatientsController {
     UserRole.COORDINATOR
   )
   async getCancerDiagnoses(
-    @Param('id') patientId: string,
+    @Param('id', ParseUUIDPipe) patientId: string,
     @CurrentUser() user: any
   ) {
     const diagnoses = await this.patientsService.getCancerDiagnoses(
@@ -145,7 +149,7 @@ export class PatientsController {
   @Post(':id/cancer-diagnoses')
   @Roles(UserRole.ADMIN, UserRole.ONCOLOGIST, UserRole.COORDINATOR)
   async createCancerDiagnosis(
-    @Param('id') patientId: string,
+    @Param('id', ParseUUIDPipe) patientId: string,
     @Body() createDto: CreateCancerDiagnosisDto,
     @CurrentUser() user: any
   ) {
@@ -160,8 +164,8 @@ export class PatientsController {
   @Patch(':id/cancer-diagnoses/:diagnosisId')
   @Roles(UserRole.ADMIN, UserRole.ONCOLOGIST, UserRole.COORDINATOR)
   async updateCancerDiagnosis(
-    @Param('id') patientId: string,
-    @Param('diagnosisId') diagnosisId: string,
+    @Param('id', ParseUUIDPipe) patientId: string,
+    @Param('diagnosisId', ParseUUIDPipe) diagnosisId: string,
     @Body() updateDto: UpdateCancerDiagnosisDto,
     @CurrentUser() user: any
   ) {
@@ -181,7 +185,7 @@ export class PatientsController {
     UserRole.NURSE,
     UserRole.COORDINATOR
   )
-  findOne(@Param('id') id: string, @CurrentUser() user: any) {
+  findOne(@Param('id', ParseUUIDPipe) id: string, @CurrentUser() user: any) {
     return this.patientsService.findOne(id, user.tenantId);
   }
 
@@ -194,7 +198,7 @@ export class PatientsController {
   @Patch(':id')
   @Roles(UserRole.ADMIN, UserRole.ONCOLOGIST, UserRole.COORDINATOR)
   update(
-    @Param('id') id: string,
+    @Param('id', ParseUUIDPipe) id: string,
     @Body() updatePatientDto: UpdatePatientDto,
     @CurrentUser() user: any
   ) {
@@ -204,7 +208,7 @@ export class PatientsController {
   @Post(':id/priority')
   @Roles(UserRole.ADMIN, UserRole.COORDINATOR) // Sistema/AI pode atualizar prioridade
   async updatePriority(
-    @Param('id') id: string,
+    @Param('id', ParseUUIDPipe) id: string,
     @Body() updatePriorityDto: UpdatePriorityDto,
     @CurrentUser() user: any
   ) {
@@ -217,7 +221,7 @@ export class PatientsController {
 
   @Delete(':id')
   @Roles(UserRole.ADMIN)
-  remove(@Param('id') id: string, @CurrentUser() user: any) {
+  remove(@Param('id', ParseUUIDPipe) id: string, @CurrentUser() user: any) {
     return this.patientsService.remove(id, user.tenantId);
   }
 }

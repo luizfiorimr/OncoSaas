@@ -57,10 +57,17 @@ export class DashboardController {
     @Query('cancerType') cancerType?: string,
     @Query('maxResults') maxResults?: string
   ): Promise<PatientWithCriticalStepDto[]> {
+    // Validar e converter maxResults com fallback seguro
+    let parsedMaxResults: number | undefined;
+    if (maxResults) {
+      const parsed = parseInt(maxResults, 10);
+      parsedMaxResults = !isNaN(parsed) && parsed > 0 ? Math.min(parsed, 100) : undefined;
+    }
+    
     return this.dashboardService.getPatientsWithCriticalSteps(user.tenantId, {
       journeyStage,
       cancerType,
-      maxResults: maxResults ? parseInt(maxResults, 10) : undefined,
+      maxResults: parsedMaxResults,
     });
   }
 

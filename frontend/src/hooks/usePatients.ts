@@ -1,4 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
 import { patientsApi, Patient, CreatePatientDto, UpdatePatientDto } from '@/lib/api/patients';
 
 export const usePatients = () => {
@@ -24,6 +25,13 @@ export const useCreatePatient = () => {
     mutationFn: (data: CreatePatientDto) => patientsApi.create(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['patients'] });
+      toast.success('Paciente criado com sucesso!');
+    },
+    onError: (error: Error) => {
+      console.error('Erro ao criar paciente:', error);
+      toast.error('Falha ao criar paciente.', {
+        description: error.message || 'Verifique os dados e tente novamente.',
+      });
     },
   });
 };
@@ -37,6 +45,13 @@ export const useUpdatePatient = () => {
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ['patients'] });
       queryClient.invalidateQueries({ queryKey: ['patients', variables.id] });
+      toast.success('Paciente atualizado com sucesso!');
+    },
+    onError: (error: Error) => {
+      console.error('Erro ao atualizar paciente:', error);
+      toast.error('Falha ao atualizar paciente.', {
+        description: error.message || 'Verifique os dados e tente novamente.',
+      });
     },
   });
 };
@@ -48,6 +63,13 @@ export const useDeletePatient = () => {
     mutationFn: (id: string) => patientsApi.delete(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['patients'] });
+      toast.success('Paciente removido com sucesso!');
+    },
+    onError: (error: Error) => {
+      console.error('Erro ao remover paciente:', error);
+      toast.error('Falha ao remover paciente.', {
+        description: error.message || 'Tente novamente mais tarde.',
+      });
     },
   });
 };

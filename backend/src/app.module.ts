@@ -19,6 +19,7 @@ import { InternalNotesModule } from './internal-notes/internal-notes.module';
 import { InterventionsModule } from './interventions/interventions.module';
 import { TreatmentsModule } from './treatments/treatments.module';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
+import { ThrottleGuard } from './common/guards/throttle.guard';
 
 @Module({
   imports: [
@@ -46,6 +47,11 @@ import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
   controllers: [AppController],
   providers: [
     AppService,
+    // Rate Limiting global - 100 req/min geral, 10 req/min para login
+    {
+      provide: APP_GUARD,
+      useClass: ThrottleGuard,
+    },
     {
       provide: APP_GUARD,
       useClass: JwtAuthGuard,

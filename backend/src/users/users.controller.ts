@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   Request,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -33,7 +34,7 @@ export class UsersController {
   @Get(':id')
   @UseGuards(RolesGuard)
   @Roles(UserRole.ADMIN, UserRole.NURSE_CHIEF, UserRole.COORDINATOR)
-  async findOne(@Param('id') id: string, @Request() req) {
+  async findOne(@Param('id', ParseUUIDPipe) id: string, @Request() req) {
     return this.usersService.findOne(id, req.user.tenantId);
   }
 
@@ -52,7 +53,7 @@ export class UsersController {
   @UseGuards(RolesGuard)
   @Roles(UserRole.ADMIN, UserRole.NURSE_CHIEF)
   async update(
-    @Param('id') id: string,
+    @Param('id', ParseUUIDPipe) id: string,
     @Body() updateUserDto: UpdateUserDto,
     @Request() req
   ) {
@@ -67,7 +68,7 @@ export class UsersController {
   @Delete(':id')
   @UseGuards(RolesGuard)
   @Roles(UserRole.ADMIN)
-  async remove(@Param('id') id: string, @Request() req) {
+  async remove(@Param('id', ParseUUIDPipe) id: string, @Request() req) {
     return this.usersService.remove(id, req.user.tenantId);
   }
 }
