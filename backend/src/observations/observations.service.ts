@@ -227,7 +227,10 @@ export class ObservationsService {
     }
 
     return this.prisma.observation.update({
-      where: { id },
+      where: {
+        id,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
       data: updateData,
       include: {
         patient: {
@@ -253,7 +256,10 @@ export class ObservationsService {
     }
 
     await this.prisma.observation.delete({
-      where: { id },
+      where: {
+        id,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
     });
   }
 
@@ -277,7 +283,10 @@ export class ObservationsService {
     }
 
     return this.prisma.observation.update({
-      where: { id },
+      where: {
+        id,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
       data: {
         syncedToEHR: true,
         syncedAt: new Date(),

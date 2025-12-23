@@ -55,8 +55,11 @@ export class FHIRSyncService {
       // Tentar sincronizar paciente primeiro
       await this.syncPatientToEHR(config, observation.patientId);
       // Buscar novamente para pegar ehrPatientId atualizado
-      const updatedPatient = await this.prisma.patient.findUnique({
-        where: { id: observation.patientId },
+      const updatedPatient = await this.prisma.patient.findFirst({
+        where: {
+          id: observation.patientId,
+          tenantId: config.tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+        },
         select: { ehrPatientId: true },
       });
       if (!updatedPatient?.ehrPatientId) {
@@ -78,7 +81,10 @@ export class FHIRSyncService {
 
       // Atualizar observação com fhirResourceId
       const updated = await this.prisma.observation.update({
-        where: { id: observationId },
+        where: {
+          id: observationId,
+          tenantId: config.tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+        },
         data: {
           fhirResourceId: createdObservation.id,
           syncedToEHR: true,
@@ -130,7 +136,10 @@ export class FHIRSyncService {
 
       // Atualizar paciente com ehrPatientId
       await this.prisma.patient.update({
-        where: { id: patientId },
+        where: {
+          id: patientId,
+          tenantId: config.tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+        },
         data: {
           ehrPatientId: createdPatient.id,
         },

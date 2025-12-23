@@ -126,7 +126,10 @@ export class MessagesService {
     }
 
     const updatedMessage = await this.prisma.message.update({
-      where: { id },
+      where: {
+        id,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
       data: updateMessageDto,
       include: {
         patient: {
@@ -159,7 +162,10 @@ export class MessagesService {
     }
 
     const updatedMessage = await this.prisma.message.update({
-      where: { id },
+      where: {
+        id,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
       data: {
         assumedBy: userId,
         assumedAt: new Date(),

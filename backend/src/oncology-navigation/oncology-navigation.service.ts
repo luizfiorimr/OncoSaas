@@ -292,7 +292,10 @@ export class OncologyNavigationService {
     }
 
     const updatedStep = await this.prisma.navigationStep.update({
-      where: { id: stepId },
+      where: {
+        id: stepId,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
       data: updateData,
     });
 
@@ -315,7 +318,10 @@ export class OncologyNavigationService {
           updateDto.isCompleted !== true
         ) {
           await this.prisma.navigationStep.update({
-            where: { id: stepId },
+            where: {
+              id: stepId,
+              tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+            },
             data: { status: NavigationStepStatus.OVERDUE },
           });
           updatedStep.status = NavigationStepStatus.OVERDUE;
@@ -329,7 +335,10 @@ export class OncologyNavigationService {
           updateDto.isCompleted !== true
         ) {
           await this.prisma.navigationStep.update({
-            where: { id: stepId },
+            where: {
+              id: stepId,
+              tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+            },
             data: { status: NavigationStepStatus.PENDING },
           });
           updatedStep.status = NavigationStepStatus.PENDING;
@@ -624,6 +633,7 @@ export class OncologyNavigationService {
     errors: number;
   }> {
     // Buscar todos os pacientes com tipo de câncer mas sem etapas
+    // Limitar a 1000 pacientes para evitar problemas de performance
     const patients = await this.prisma.patient.findMany({
       where: {
         tenantId,
@@ -805,6 +815,7 @@ export class OncologyNavigationService {
     alertsCreated: number;
   }> {
     const now = new Date();
+    // Limitar a 5000 etapas para evitar problemas de performance
     const overdueSteps = await this.prisma.navigationStep.findMany({
       where: {
         tenantId,
@@ -826,6 +837,8 @@ export class OncologyNavigationService {
           },
         },
       },
+      orderBy: { dueDate: 'asc' },
+      take: 5000, // Limitar para evitar problemas de performance
     });
 
     let markedOverdue = 0;
@@ -835,7 +848,10 @@ export class OncologyNavigationService {
       // Marcar como atrasada se ainda não estiver marcada
       if (step.status !== NavigationStepStatus.OVERDUE) {
         await this.prisma.navigationStep.update({
-          where: { id: step.id },
+          where: {
+            id: step.id,
+            tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+          },
           data: { status: NavigationStepStatus.OVERDUE },
         });
         markedOverdue++;

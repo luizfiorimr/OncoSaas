@@ -350,7 +350,10 @@ export class PatientsService {
     if (updatePatientDto.ehrId !== undefined) updateData.ehrPatientId = updatePatientDto.ehrId;
 
     const updatedPatient = await this.prisma.patient.update({
-      where: { id },
+      where: {
+        id,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
       data: updateData,
       include: {
         cancerDiagnoses: {
@@ -434,7 +437,10 @@ export class PatientsService {
     const [updatedPatient] = await this.prisma.$transaction([
       // Atualizar score no paciente
       this.prisma.patient.update({
-        where: { id },
+        where: {
+          id,
+          tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+        },
         data: {
           priorityScore: updatePriorityDto.score,
           priorityCategory: updatePriorityDto.category,
@@ -468,7 +474,10 @@ export class PatientsService {
     }
 
     await this.prisma.patient.delete({
-      where: { id },
+      where: {
+        id,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
     });
   }
 
@@ -972,7 +981,10 @@ export class PatientsService {
     }
 
     return this.prisma.cancerDiagnosis.update({
-      where: { id: diagnosisId },
+      where: {
+        id: diagnosisId,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
       data: updateData,
     });
   }

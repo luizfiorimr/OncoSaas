@@ -161,7 +161,10 @@ export class AlertsService {
     }
 
     const updatedAlert = await this.prisma.alert.update({
-      where: { id },
+      where: {
+        id,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
       data: updateData,
       include: {
         patient: {

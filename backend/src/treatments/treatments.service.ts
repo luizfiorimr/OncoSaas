@@ -208,7 +208,10 @@ export class TreatmentsService {
     if (updateDto.metadata !== undefined) updateData.metadata = updateDto.metadata;
 
     return this.prisma.treatment.update({
-      where: { id },
+      where: {
+        id,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
       data: updateData,
       include: {
         diagnosis: {
@@ -238,7 +241,10 @@ export class TreatmentsService {
     }
 
     await this.prisma.treatment.delete({
-      where: { id },
+      where: {
+        id,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
     });
   }
 }

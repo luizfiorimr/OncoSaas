@@ -151,7 +151,10 @@ export class InternalNotesService {
     }
 
     return this.prisma.internalNote.update({
-      where: { id },
+      where: {
+        id,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
       data: updateInternalNoteDto,
       include: {
         author: {
@@ -197,7 +200,10 @@ export class InternalNotesService {
     }
 
     await this.prisma.internalNote.delete({
-      where: { id },
+      where: {
+        id,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
     });
   }
 }

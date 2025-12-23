@@ -190,7 +190,10 @@ export class UsersService {
 
     // Atualizar usuário
     const user = await this.prisma.user.update({
-      where: { id },
+      where: {
+        id,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
       data: updateData,
       select: {
         id: true,
@@ -242,7 +245,10 @@ export class UsersService {
     }
 
     await this.prisma.user.delete({
-      where: { id },
+      where: {
+        id,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
     });
 
     return { message: 'User deleted successfully' };
