@@ -10,6 +10,7 @@ import {
   UseInterceptors,
   UploadedFile,
   BadRequestException,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
@@ -45,7 +46,7 @@ export class OncologyNavigationController {
 
   @Get('patients/:patientId/steps')
   async getPatientSteps(
-    @Param('patientId') patientId: string,
+    @Param('patientId', ParseUUIDPipe) patientId: string,
     @Request() req: any
   ) {
     return this.navigationService.getPatientNavigationSteps(
@@ -56,7 +57,7 @@ export class OncologyNavigationController {
 
   @Get('patients/:patientId/steps/:journeyStage')
   async getStepsByStage(
-    @Param('patientId') patientId: string,
+    @Param('patientId', ParseUUIDPipe) patientId: string,
     @Param('journeyStage') journeyStage: JourneyStage,
     @Request() req: any
   ) {
@@ -70,7 +71,7 @@ export class OncologyNavigationController {
   @Post('patients/:patientId/initialize')
   @Roles(UserRole.ADMIN, UserRole.COORDINATOR, UserRole.ONCOLOGIST)
   async initializeSteps(
-    @Param('patientId') patientId: string,
+    @Param('patientId', ParseUUIDPipe) patientId: string,
     @Body() body: { cancerType: string; currentStage: JourneyStage },
     @Request() req: any
   ) {
@@ -95,7 +96,7 @@ export class OncologyNavigationController {
   @Patch('steps/:id')
   @Roles(UserRole.ADMIN, UserRole.COORDINATOR, UserRole.ONCOLOGIST)
   async updateStep(
-    @Param('id') id: string,
+    @Param('id', ParseUUIDPipe) id: string,
     @Body() updateDto: UpdateNavigationStepDto,
     @Request() req: any
   ) {
@@ -153,7 +154,7 @@ export class OncologyNavigationController {
     })
   )
   async uploadFile(
-    @Param('id') id: string,
+    @Param('id', ParseUUIDPipe) id: string,
     @UploadedFile() file: MulterFile | undefined,
     @Request() req: any
   ) {
@@ -218,7 +219,7 @@ export class OncologyNavigationController {
   @Post('check-overdue/:patientId')
   @Roles(UserRole.ADMIN, UserRole.COORDINATOR, UserRole.ONCOLOGIST)
   async checkOverdueForPatient(
-    @Param('patientId') patientId: string,
+    @Param('patientId', ParseUUIDPipe) patientId: string,
     @Request() req: any
   ) {
     // Verificar etapas atrasadas apenas para um paciente específico
@@ -231,7 +232,7 @@ export class OncologyNavigationController {
   @Post('patients/:patientId/stages/:journeyStage/create-missing')
   @Roles(UserRole.ADMIN, UserRole.COORDINATOR, UserRole.ONCOLOGIST)
   async createMissingStepsForStage(
-    @Param('patientId') patientId: string,
+    @Param('patientId', ParseUUIDPipe) patientId: string,
     @Param('journeyStage') journeyStage: JourneyStage,
     @Request() req: any
   ) {

@@ -7,15 +7,16 @@ import {
   IsDateString,
   IsArray,
   IsNumber,
+  IsUUID,
 } from 'class-validator';
 import { MessageDirection, MessageType, ProcessedBy } from '@prisma/client';
 
 export class CreateMessageDto {
-  @IsString()
+  @IsUUID()
   @IsNotEmpty()
   patientId: string;
 
-  @IsString()
+  @IsUUID()
   @IsOptional()
   conversationId?: string; // Agrupa mensagens da mesma conversa
 

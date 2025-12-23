@@ -9,11 +9,14 @@ import {
   IsObject,
   Min,
   Max,
+  IsUUID,
+  IsNotEmpty,
 } from 'class-validator';
 import { TreatmentType, TreatmentIntent, TreatmentStatus, TreatmentResponse } from '@prisma/client';
 
 export class CreateTreatmentDto {
-  @IsString()
+  @IsUUID()
+  @IsNotEmpty()
   diagnosisId: string; // ID do CancerDiagnosis
 
   @IsEnum(TreatmentType)

@@ -8,6 +8,7 @@ import {
   Body,
   UseGuards,
   Request,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { TreatmentsService } from './treatments.service';
 import { CreateTreatmentDto } from './dto/create-treatment.dto';
@@ -35,7 +36,7 @@ export class TreatmentsController {
 
   @Get('patient/:patientId')
   async findAllByPatient(
-    @Param('patientId') patientId: string,
+    @Param('patientId', ParseUUIDPipe) patientId: string,
     @Request() req: any
   ) {
     return this.treatmentsService.findAllByPatient(
@@ -46,7 +47,7 @@ export class TreatmentsController {
 
   @Get('diagnosis/:diagnosisId')
   async findAllByDiagnosis(
-    @Param('diagnosisId') diagnosisId: string,
+    @Param('diagnosisId', ParseUUIDPipe) diagnosisId: string,
     @Request() req: any
   ) {
     return this.treatmentsService.findAllByDiagnosis(
@@ -56,7 +57,7 @@ export class TreatmentsController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string, @Request() req: any) {
+  async findOne(@Param('id', ParseUUIDPipe) id: string, @Request() req: any) {
     return this.treatmentsService.findOne(id, req.user.tenantId);
   }
 
@@ -64,7 +65,7 @@ export class TreatmentsController {
   @UseGuards(RolesGuard)
   @Roles(UserRole.ADMIN, UserRole.ONCOLOGIST, UserRole.COORDINATOR)
   async update(
-    @Param('id') id: string,
+    @Param('id', ParseUUIDPipe) id: string,
     @Body() updateDto: UpdateTreatmentDto,
     @Request() req: any
   ) {
@@ -74,7 +75,7 @@ export class TreatmentsController {
   @Delete(':id')
   @UseGuards(RolesGuard)
   @Roles(UserRole.ADMIN, UserRole.ONCOLOGIST)
-  async remove(@Param('id') id: string, @Request() req: any) {
+  async remove(@Param('id', ParseUUIDPipe) id: string, @Request() req: any) {
     await this.treatmentsService.remove(id, req.user.tenantId);
     return { message: 'Treatment deleted successfully' };
   }

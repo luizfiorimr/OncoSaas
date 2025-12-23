@@ -7,6 +7,7 @@ import {
   Param,
   Query,
   UseGuards,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { MessagesService } from './messages.service';
 import { CreateMessageDto } from './dto/create-message.dto';
@@ -53,7 +54,7 @@ export class MessagesController {
     UserRole.COORDINATOR
   )
   getConversation(
-    @Param('patientId') patientId: string,
+    @Param('patientId', ParseUUIDPipe) patientId: string,
     @CurrentUser() user: any,
     @Query('limit') limit?: string
   ) {
@@ -71,7 +72,7 @@ export class MessagesController {
     UserRole.NURSE,
     UserRole.COORDINATOR
   )
-  findOne(@Param('id') id: string, @CurrentUser() user: any) {
+  findOne(@Param('id', ParseUUIDPipe) id: string, @CurrentUser() user: any) {
     return this.messagesService.findOne(id, user.tenantId);
   }
 
@@ -101,7 +102,7 @@ export class MessagesController {
     UserRole.COORDINATOR
   )
   update(
-    @Param('id') id: string,
+    @Param('id', ParseUUIDPipe) id: string,
     @Body() updateMessageDto: UpdateMessageDto,
     @CurrentUser() user: any
   ) {
@@ -115,7 +116,7 @@ export class MessagesController {
     UserRole.NURSE,
     UserRole.COORDINATOR
   )
-  assumeConversation(@Param('id') id: string, @CurrentUser() user: any) {
+  assumeConversation(@Param('id', ParseUUIDPipe) id: string, @CurrentUser() user: any) {
     return this.messagesService.assumeConversation(id, user.tenantId, user.id);
   }
 }
