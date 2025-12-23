@@ -12,6 +12,7 @@ import {
   UploadedFile,
   BadRequestException,
   ParseUUIDPipe,
+  Query,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { PatientsService } from './patients.service';
@@ -48,8 +49,18 @@ export class PatientsController {
     UserRole.NURSE,
     UserRole.COORDINATOR
   )
-  findAll(@CurrentUser() user: any) {
-    return this.patientsService.findAll(user.tenantId);
+  findAll(
+    @CurrentUser() user: any,
+    @Query('limit') limit?: string,
+    @Query('offset') offset?: string
+  ) {
+    return this.patientsService.findAll(
+      user.tenantId,
+      {
+        limit: limit ? parseInt(limit, 10) : undefined,
+        offset: offset ? parseInt(offset, 10) : undefined,
+      }
+    );
   }
 
   @Get('by-phone/:phone')

@@ -34,7 +34,7 @@ export class AlertsController {
   findAll(
     @CurrentUser() user: any,
     @Query('patientId') patientId?: string,
-    @Query('status') status?: AlertStatus,
+    @Query('status', new ParseEnumPipe(AlertStatus, { optional: true })) status?: AlertStatus,
     @Query('limit') limit?: string,
     @Query('offset') offset?: string
   ) {
