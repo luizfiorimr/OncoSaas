@@ -7,6 +7,7 @@ import {
   UseGuards,
   Query,
   Request,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { InterventionsService } from './interventions.service';
 import { CreateInterventionDto } from './dto/create-intervention.dto';
@@ -55,6 +56,43 @@ export class InterventionsController {
     );
   }
 
+  @Get()
+  @Roles(
+    UserRole.NURSE,
+    UserRole.NURSE_CHIEF,
+    UserRole.COORDINATOR,
+    UserRole.ONCOLOGIST,
+    UserRole.ADMIN
+  )
+  async findAll(
+    @Request() req,
+    @Query('limit') limit?: string,
+    @Query('offset') offset?: string
+  ) {
+    // Validar e converter limit/offset com fallback seguro
+    let parsedLimit: number | undefined;
+    if (limit) {
+      const parsed = parseInt(limit, 10);
+      parsedLimit = !isNaN(parsed) && parsed > 0 ? parsed : undefined;
+    }
+    
+    let parsedOffset: number | undefined;
+    if (offset) {
+      const parsed = parseInt(offset, 10);
+      parsedOffset = !isNaN(parsed) && parsed >= 0 ? parsed : undefined;
+    }
+
+    return this.interventionsService.findAll(
+      req.user.tenantId,
+      undefined,
+      undefined,
+      {
+        limit: parsedLimit,
+        offset: parsedOffset,
+      }
+    );
+  }
+
   @Get('patient/:patientId')
   @Roles(
     UserRole.NURSE,
@@ -63,11 +101,33 @@ export class InterventionsController {
     UserRole.ONCOLOGIST,
     UserRole.ADMIN
   )
-  async findByPatient(@Param('patientId') patientId: string, @Request() req) {
+  async findByPatient(
+    @Param('patientId', ParseUUIDPipe) patientId: string,
+    @Request() req,
+    @Query('limit') limit?: string,
+    @Query('offset') offset?: string
+  ) {
+    // Validar e converter limit/offset com fallback seguro
+    let parsedLimit: number | undefined;
+    if (limit) {
+      const parsed = parseInt(limit, 10);
+      parsedLimit = !isNaN(parsed) && parsed > 0 ? parsed : undefined;
+    }
+    
+    let parsedOffset: number | undefined;
+    if (offset) {
+      const parsed = parseInt(offset, 10);
+      parsedOffset = !isNaN(parsed) && parsed >= 0 ? parsed : undefined;
+    }
+
     return this.interventionsService.findAll(
       req.user.tenantId,
       undefined,
-      patientId
+      patientId,
+      {
+        limit: parsedLimit,
+        offset: parsedOffset,
+      }
     );
   }
 
@@ -79,7 +139,7 @@ export class InterventionsController {
     UserRole.ONCOLOGIST,
     UserRole.ADMIN
   )
-  async findOne(@Param('id') id: string, @Request() req) {
+  async findOne(@Param('id', ParseUUIDPipe) id: string, @Request() req) {
     return this.interventionsService.findOne(id, req.user.tenantId);
   }
 }

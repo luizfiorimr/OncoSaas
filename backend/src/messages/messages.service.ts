@@ -12,11 +12,19 @@ export class MessagesService {
     private readonly messagesGateway: MessagesGateway
   ) {}
 
-  async findAll(tenantId: string, patientId?: string): Promise<Message[]> {
+  async findAll(
+    tenantId: string,
+    patientId?: string,
+    options?: { limit?: number; offset?: number }
+  ): Promise<Message[]> {
     const where: any = { tenantId };
     if (patientId) {
       where.patientId = patientId;
     }
+
+    // Limite padrão de 100 registros para evitar problemas de performance
+    const limit = options?.limit && options.limit > 0 ? Math.min(options.limit, 500) : 100;
+    const offset = options?.offset && options.offset > 0 ? options.offset : 0;
 
     return this.prisma.message.findMany({
       where,
@@ -30,6 +38,8 @@ export class MessagesService {
           },
         },
       },
+      take: limit,
+      skip: offset,
     });
   }
 
@@ -116,7 +126,10 @@ export class MessagesService {
     }
 
     const updatedMessage = await this.prisma.message.update({
-      where: { id },
+      where: {
+        id,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
       data: updateMessageDto,
       include: {
         patient: {
@@ -149,7 +162,10 @@ export class MessagesService {
     }
 
     const updatedMessage = await this.prisma.message.update({
-      where: { id },
+      where: {
+        id,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
       data: {
         assumedBy: userId,
         assumedAt: new Date(),

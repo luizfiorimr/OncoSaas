@@ -9,6 +9,7 @@ import {
   UseGuards,
   Query,
   Request,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { InternalNotesService } from './internal-notes.service';
 import { CreateInternalNoteDto } from './dto/create-internal-note.dto';
@@ -51,8 +52,33 @@ export class InternalNotesController {
     UserRole.ONCOLOGIST,
     UserRole.ADMIN
   )
-  async findAll(@Request() req, @Query('patientId') patientId?: string) {
-    return this.internalNotesService.findAll(req.user.tenantId, patientId);
+  async findAll(
+    @Request() req,
+    @Query('patientId') patientId?: string,
+    @Query('limit') limit?: string,
+    @Query('offset') offset?: string
+  ) {
+    // Validar e converter limit/offset com fallback seguro
+    let parsedLimit: number | undefined;
+    if (limit) {
+      const parsed = parseInt(limit, 10);
+      parsedLimit = !isNaN(parsed) && parsed > 0 ? parsed : undefined;
+    }
+    
+    let parsedOffset: number | undefined;
+    if (offset) {
+      const parsed = parseInt(offset, 10);
+      parsedOffset = !isNaN(parsed) && parsed >= 0 ? parsed : undefined;
+    }
+
+    return this.internalNotesService.findAll(
+      req.user.tenantId,
+      patientId,
+      {
+        limit: parsedLimit,
+        offset: parsedOffset,
+      }
+    );
   }
 
   @Get(':id')
@@ -63,7 +89,7 @@ export class InternalNotesController {
     UserRole.ONCOLOGIST,
     UserRole.ADMIN
   )
-  async findOne(@Param('id') id: string, @Request() req) {
+  async findOne(@Param('id', ParseUUIDPipe) id: string, @Request() req) {
     return this.internalNotesService.findOne(id, req.user.tenantId);
   }
 
@@ -76,7 +102,7 @@ export class InternalNotesController {
     UserRole.ADMIN
   )
   async update(
-    @Param('id') id: string,
+    @Param('id', ParseUUIDPipe) id: string,
     @Body() updateInternalNoteDto: UpdateInternalNoteDto,
     @Request() req
   ) {
@@ -97,7 +123,7 @@ export class InternalNotesController {
     UserRole.ONCOLOGIST,
     UserRole.ADMIN
   )
-  async remove(@Param('id') id: string, @Request() req) {
+  async remove(@Param('id', ParseUUIDPipe) id: string, @Request() req) {
     return this.internalNotesService.remove(
       id,
       req.user.tenantId,

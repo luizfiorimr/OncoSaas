@@ -76,7 +76,12 @@ export class InterventionsService {
     });
   }
 
-  async findAll(tenantId: string, userId?: string, patientId?: string) {
+  async findAll(
+    tenantId: string,
+    userId?: string,
+    patientId?: string,
+    options?: { limit?: number; offset?: number }
+  ) {
     const where: any = { tenantId };
     if (userId) {
       where.userId = userId;
@@ -84,6 +89,10 @@ export class InterventionsService {
     if (patientId) {
       where.patientId = patientId;
     }
+
+    // Limite padrão de 100 registros para evitar problemas de performance
+    const limit = options?.limit && options.limit > 0 ? Math.min(options.limit, 500) : 100;
+    const offset = options?.offset && options.offset > 0 ? options.offset : 0;
 
     return this.prisma.intervention.findMany({
       where,
@@ -112,6 +121,8 @@ export class InterventionsService {
           },
         },
       },
+      take: limit,
+      skip: offset,
     });
   }
 
@@ -155,12 +166,14 @@ export class InterventionsService {
   }
 
   async findByUser(tenantId: string, userId: string) {
+    // Limitar a 500 intervenções por usuário para evitar problemas de performance
     return this.prisma.intervention.findMany({
       where: {
         tenantId,
         userId,
       },
       orderBy: { createdAt: 'desc' },
+      take: 500, // Limitar para evitar problemas de performance
       include: {
         user: {
           select: {

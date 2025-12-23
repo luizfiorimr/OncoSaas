@@ -34,9 +34,32 @@ export class AlertsController {
   findAll(
     @CurrentUser() user: any,
     @Query('patientId') patientId?: string,
-    @Query('status') status?: AlertStatus
+    @Query('status', new ParseEnumPipe(AlertStatus, { optional: true })) status?: AlertStatus,
+    @Query('limit') limit?: string,
+    @Query('offset') offset?: string
   ) {
-    return this.alertsService.findAll(user.tenantId, patientId, status);
+    // Validar e converter limit/offset com fallback seguro
+    let parsedLimit: number | undefined;
+    if (limit) {
+      const parsed = parseInt(limit, 10);
+      parsedLimit = !isNaN(parsed) && parsed > 0 ? parsed : undefined;
+    }
+    
+    let parsedOffset: number | undefined;
+    if (offset) {
+      const parsed = parseInt(offset, 10);
+      parsedOffset = !isNaN(parsed) && parsed >= 0 ? parsed : undefined;
+    }
+
+    return this.alertsService.findAll(
+      user.tenantId,
+      patientId,
+      status,
+      {
+        limit: parsedLimit,
+        offset: parsedOffset,
+      }
+    );
   }
 
   @Get('critical')

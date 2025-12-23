@@ -8,6 +8,7 @@ import {
   UseGuards,
   HttpCode,
   HttpStatus,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { QuestionnaireResponsesService } from './questionnaire-responses.service';
 import { CreateQuestionnaireResponseDto } from './dto/create-questionnaire-response.dto';
@@ -48,12 +49,31 @@ export class QuestionnaireResponsesController {
   findAll(
     @CurrentUser() user: any,
     @Query('patientId') patientId?: string,
-    @Query('questionnaireId') questionnaireId?: string
+    @Query('questionnaireId') questionnaireId?: string,
+    @Query('limit') limit?: string,
+    @Query('offset') offset?: string
   ) {
+    // Validar e converter limit/offset com fallback seguro
+    let parsedLimit: number | undefined;
+    if (limit) {
+      const parsed = parseInt(limit, 10);
+      parsedLimit = !isNaN(parsed) && parsed > 0 ? parsed : undefined;
+    }
+    
+    let parsedOffset: number | undefined;
+    if (offset) {
+      const parsed = parseInt(offset, 10);
+      parsedOffset = !isNaN(parsed) && parsed >= 0 ? parsed : undefined;
+    }
+
     return this.questionnaireResponsesService.findAll(
       user.tenantId,
       patientId,
-      questionnaireId
+      questionnaireId,
+      {
+        limit: parsedLimit,
+        offset: parsedOffset,
+      }
     );
   }
 
@@ -64,7 +84,7 @@ export class QuestionnaireResponsesController {
     UserRole.NURSE,
     UserRole.COORDINATOR
   )
-  findOne(@Param('id') id: string, @CurrentUser() user: any) {
+  findOne(@Param('id', ParseUUIDPipe) id: string, @CurrentUser() user: any) {
     return this.questionnaireResponsesService.findOne(id, user.tenantId);
   }
 }

@@ -16,16 +16,20 @@ interface RateLimitRecord {
  * Guard simples de Rate Limiting
  * Limita requisições por IP para prevenir abusos
  * 
- * Configuração padrão:
+ * Configuração:
  * - 100 requisições por minuto para endpoints gerais
- * - 10 requisições por minuto para login (mais restritivo)
+ * - 10 requisições por minuto para login/register (mais restritivo)
+ * - 200 requisições por minuto para webhooks (WhatsApp pode enviar muitas notificações)
+ * - 30 requisições por minuto para health/ready (monitoramento)
  */
 @Injectable()
 export class ThrottleGuard implements CanActivate {
   private readonly store = new Map<string, RateLimitRecord>();
   private readonly defaultLimit = 100; // requisições
   private readonly defaultTtl = 60000; // 1 minuto em ms
-  private readonly loginLimit = 10; // limite mais restritivo para login
+  private readonly loginLimit = 10; // limite mais restritivo para login/register
+  private readonly webhookLimit = 200; // limite para webhooks (WhatsApp pode enviar muitas notificações)
+  private readonly healthLimit = 30; // limite para health checks
   private readonly cleanupInterval = 60000; // limpar registros antigos a cada minuto
 
   constructor() {
@@ -39,7 +43,15 @@ export class ThrottleGuard implements CanActivate {
     const path = request.path;
     
     // Determinar limite baseado no endpoint
-    const limit = this.isLoginEndpoint(path) ? this.loginLimit : this.defaultLimit;
+    let limit = this.defaultLimit;
+    if (this.isLoginEndpoint(path)) {
+      limit = this.loginLimit;
+    } else if (this.isWebhookEndpoint(path)) {
+      limit = this.webhookLimit;
+    } else if (this.isHealthEndpoint(path)) {
+      limit = this.healthLimit;
+    }
+    
     const key = `${ip}:${path}`;
 
     const now = Date.now();
@@ -84,6 +96,14 @@ export class ThrottleGuard implements CanActivate {
     return path.includes('/auth/login') || path.includes('/auth/register');
   }
 
+  private isWebhookEndpoint(path: string): boolean {
+    return path.includes('/webhook') || path.includes('/whatsapp-connections') && path.includes('/webhook');
+  }
+
+  private isHealthEndpoint(path: string): boolean {
+    return path === '/health' || path === '/ready' || path === '/api/v1/health' || path === '/api/v1/ready';
+  }
+
   private cleanup(): void {
     const now = Date.now();
     for (const [key, record] of this.store.entries()) {
@@ -93,4 +113,5 @@ export class ThrottleGuard implements CanActivate {
     }
   }
 }
+
 

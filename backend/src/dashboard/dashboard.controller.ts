@@ -1,4 +1,4 @@
-import { Controller, Get, Query, UseGuards } from '@nestjs/common';
+import { Controller, Get, Query, UseGuards, ParseEnumPipe } from '@nestjs/common';
 import { DashboardService } from './dashboard.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { TenantGuard } from '../auth/guards/tenant.guard';
@@ -53,7 +53,7 @@ export class DashboardController {
   @Roles(UserRole.ONCOLOGIST, UserRole.ADMIN, UserRole.COORDINATOR, UserRole.NURSE, UserRole.NURSE_CHIEF)
   async getPatientsWithCriticalSteps(
     @CurrentUser() user: any,
-    @Query('journeyStage') journeyStage?: JourneyStage,
+    @Query('journeyStage', new ParseEnumPipe(JourneyStage, { optional: true })) journeyStage?: JourneyStage,
     @Query('cancerType') cancerType?: string,
     @Query('maxResults') maxResults?: string
   ): Promise<PatientWithCriticalStepDto[]> {

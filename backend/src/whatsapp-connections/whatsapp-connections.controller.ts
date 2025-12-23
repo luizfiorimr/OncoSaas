@@ -13,6 +13,7 @@ import {
   Query,
   Res,
   Logger,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { TenantGuard } from '../auth/guards/tenant.guard';
@@ -33,13 +34,36 @@ export class WhatsAppConnectionsController {
 
   @Get()
   @UseGuards(JwtAuthGuard, TenantGuard)
-  async findAll(@Request() req) {
-    return this.whatsappConnectionsService.findAll(req.user.tenantId);
+  async findAll(
+    @Request() req,
+    @Query('limit') limit?: string,
+    @Query('offset') offset?: string
+  ) {
+    // Validar e converter limit/offset com fallback seguro
+    let parsedLimit: number | undefined;
+    if (limit) {
+      const parsed = parseInt(limit, 10);
+      parsedLimit = !isNaN(parsed) && parsed > 0 ? parsed : undefined;
+    }
+    
+    let parsedOffset: number | undefined;
+    if (offset) {
+      const parsed = parseInt(offset, 10);
+      parsedOffset = !isNaN(parsed) && parsed >= 0 ? parsed : undefined;
+    }
+
+    return this.whatsappConnectionsService.findAll(
+      req.user.tenantId,
+      {
+        limit: parsedLimit,
+        offset: parsedOffset,
+      }
+    );
   }
 
   @Get(':id')
   @UseGuards(JwtAuthGuard, TenantGuard)
-  async findOne(@Param('id') id: string, @Request() req) {
+  async findOne(@Param('id', ParseUUIDPipe) id: string, @Request() req) {
     return this.whatsappConnectionsService.findOne(id, req.user.tenantId);
   }
 
@@ -116,7 +140,7 @@ export class WhatsAppConnectionsController {
   @Put(':id')
   @UseGuards(JwtAuthGuard, TenantGuard)
   async update(
-    @Param('id') id: string,
+    @Param('id', ParseUUIDPipe) id: string,
     @Body() updateDto: UpdateWhatsAppConnectionDto,
     @Request() req
   ) {
@@ -130,13 +154,13 @@ export class WhatsAppConnectionsController {
   @Delete(':id')
   @UseGuards(JwtAuthGuard, TenantGuard)
   @HttpCode(HttpStatus.NO_CONTENT)
-  async remove(@Param('id') id: string, @Request() req) {
+  async remove(@Param('id', ParseUUIDPipe) id: string, @Request() req) {
     await this.whatsappConnectionsService.remove(id, req.user.tenantId);
   }
 
   @Post(':id/test')
   @UseGuards(JwtAuthGuard, TenantGuard)
-  async testConnection(@Param('id') id: string, @Request() req) {
+  async testConnection(@Param('id', ParseUUIDPipe) id: string, @Request() req) {
     return this.whatsappConnectionsService.testConnection(
       id,
       req.user.tenantId
@@ -145,7 +169,7 @@ export class WhatsAppConnectionsController {
 
   @Post(':id/set-default')
   @UseGuards(JwtAuthGuard, TenantGuard)
-  async setDefault(@Param('id') id: string, @Request() req) {
+  async setDefault(@Param('id', ParseUUIDPipe) id: string, @Request() req) {
     return this.whatsappConnectionsService.setDefault(
       id,
       req.user.tenantId

@@ -32,6 +32,7 @@ export class OncologyNavigationService {
     patientId: string,
     tenantId: string
   ): Promise<any[]> {
+    // Limitar a 500 etapas por paciente para evitar problemas de performance
     const steps = await this.prisma.navigationStep.findMany({
       where: {
         patientId,
@@ -42,6 +43,7 @@ export class OncologyNavigationService {
         { expectedDate: 'asc' },
         { createdAt: 'asc' },
       ],
+      take: 500, // Limitar para evitar problemas de performance
     });
 
     // Verificar se há etapas para todos os estágios da jornada
@@ -110,6 +112,7 @@ export class OncologyNavigationService {
               { expectedDate: 'asc' },
               { createdAt: 'asc' },
             ],
+            take: 500, // Limitar para evitar problemas de performance
           });
 
           // Garantir que journeyStage seja retornado como string
@@ -136,6 +139,7 @@ export class OncologyNavigationService {
     tenantId: string,
     journeyStage: JourneyStage
   ): Promise<any[]> {
+    // Limitar a 200 etapas por estágio para evitar problemas de performance
     return this.prisma.navigationStep.findMany({
       where: {
         patientId,
@@ -147,6 +151,7 @@ export class OncologyNavigationService {
         { expectedDate: 'asc' },
         { createdAt: 'asc' },
       ],
+      take: 200, // Limitar para evitar problemas de performance
     });
   }
 
@@ -187,9 +192,12 @@ export class OncologyNavigationService {
       throw new NotFoundException('Patient not found');
     }
 
-    // Obter journey do paciente
-    const journey = await this.prisma.patientJourney.findUnique({
-      where: { patientId: createDto.patientId },
+    // Obter journey do paciente (sempre incluir tenantId para isolamento)
+    const journey = await this.prisma.patientJourney.findFirst({
+      where: {
+        patientId: createDto.patientId,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
     });
 
     const step = await this.prisma.navigationStep.create({
@@ -289,7 +297,10 @@ export class OncologyNavigationService {
     }
 
     const updatedStep = await this.prisma.navigationStep.update({
-      where: { id: stepId },
+      where: {
+        id: stepId,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
       data: updateData,
     });
 
@@ -312,7 +323,10 @@ export class OncologyNavigationService {
           updateDto.isCompleted !== true
         ) {
           await this.prisma.navigationStep.update({
-            where: { id: stepId },
+            where: {
+              id: stepId,
+              tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+            },
             data: { status: NavigationStepStatus.OVERDUE },
           });
           updatedStep.status = NavigationStepStatus.OVERDUE;
@@ -326,7 +340,10 @@ export class OncologyNavigationService {
           updateDto.isCompleted !== true
         ) {
           await this.prisma.navigationStep.update({
-            where: { id: stepId },
+            where: {
+              id: stepId,
+              tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+            },
             data: { status: NavigationStepStatus.PENDING },
           });
           updatedStep.status = NavigationStepStatus.PENDING;
@@ -401,9 +418,12 @@ export class OncologyNavigationService {
       return;
     }
 
-    // Obter journey do paciente
-    const journey = await this.prisma.patientJourney.findUnique({
-      where: { patientId },
+    // Obter journey do paciente (sempre incluir tenantId para isolamento)
+    const journey = await this.prisma.patientJourney.findFirst({
+      where: {
+        patientId,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
     });
 
     // Criar todas as etapas
@@ -551,9 +571,12 @@ export class OncologyNavigationService {
       return { created: 0, skipped: existingSteps.length };
     }
 
-    // Obter journey do paciente
-    const journey = await this.prisma.patientJourney.findUnique({
-      where: { patientId },
+    // Obter journey do paciente (sempre incluir tenantId para isolamento)
+    const journey = await this.prisma.patientJourney.findFirst({
+      where: {
+        patientId,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
     });
 
     // Criar apenas as etapas faltantes
@@ -615,6 +638,7 @@ export class OncologyNavigationService {
     errors: number;
   }> {
     // Buscar todos os pacientes com tipo de câncer mas sem etapas
+    // Limitar a 1000 pacientes para evitar problemas de performance
     const patients = await this.prisma.patient.findMany({
       where: {
         tenantId,
@@ -732,6 +756,7 @@ export class OncologyNavigationService {
     alertsCreated: number;
   }> {
     const now = new Date();
+    // Limitar a 500 etapas por paciente para evitar problemas de performance
     const overdueSteps = await this.prisma.navigationStep.findMany({
       where: {
         tenantId,
@@ -754,6 +779,8 @@ export class OncologyNavigationService {
           },
         },
       },
+      orderBy: { dueDate: 'asc' },
+      take: 500, // Limitar para evitar problemas de performance
     });
 
     let markedOverdue = 0;
@@ -796,6 +823,7 @@ export class OncologyNavigationService {
     alertsCreated: number;
   }> {
     const now = new Date();
+    // Limitar a 5000 etapas para evitar problemas de performance
     const overdueSteps = await this.prisma.navigationStep.findMany({
       where: {
         tenantId,
@@ -817,6 +845,8 @@ export class OncologyNavigationService {
           },
         },
       },
+      orderBy: { dueDate: 'asc' },
+      take: 5000, // Limitar para evitar problemas de performance
     });
 
     let markedOverdue = 0;
@@ -826,7 +856,10 @@ export class OncologyNavigationService {
       // Marcar como atrasada se ainda não estiver marcada
       if (step.status !== NavigationStepStatus.OVERDUE) {
         await this.prisma.navigationStep.update({
-          where: { id: step.id },
+          where: {
+            id: step.id,
+            tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+          },
           data: { status: NavigationStepStatus.OVERDUE },
         });
         markedOverdue++;

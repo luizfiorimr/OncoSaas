@@ -101,6 +101,7 @@ export class DashboardService {
     });
 
     // Tempo médio de resposta a alertas (em minutos)
+    // Limitar a 1000 registros mais recentes para evitar problemas de performance
     const resolvedAlerts = await this.prisma.alert.findMany({
       where: {
         tenantId,
@@ -112,6 +113,8 @@ export class DashboardService {
         createdAt: true,
         resolvedAt: true,
       },
+      orderBy: { resolvedAt: 'desc' },
+      take: 1000, // Limitar para evitar problemas de performance
     });
 
     let averageResponseTimeMinutes: number | null = null;
@@ -234,6 +237,7 @@ export class DashboardService {
     // ========== MÉTRICAS CLÍNICAS CRÍTICAS ==========
 
     // 1. Time-to-Treatment: Tempo médio desde diagnóstico confirmado até início de tratamento
+    // Limitar a 2000 registros mais recentes para evitar problemas de performance
     const patientsWithTreatment = await this.prisma.patientJourney.findMany({
       where: {
         tenantId,
@@ -245,6 +249,8 @@ export class DashboardService {
         diagnosisDate: true,
         treatmentStartDate: true,
       },
+      orderBy: { treatmentStartDate: 'desc' },
+      take: 2000, // Limitar para evitar problemas de performance
     });
 
     let averageTimeToTreatmentDays: number | null = null;
@@ -265,6 +271,7 @@ export class DashboardService {
 
     // 2. Time-to-Diagnosis: Tempo médio desde primeira etapa DIAGNOSIS até diagnóstico confirmado
     // Buscar pacientes com diagnóstico confirmado e primeira etapa DIAGNOSIS
+    // Limitar a 2000 registros mais recentes para evitar problemas de performance
     const patientsWithDiagnosis = await this.prisma.patient.findMany({
       where: {
         tenantId,
@@ -289,6 +296,8 @@ export class DashboardService {
           },
         },
       },
+      orderBy: { createdAt: 'desc' },
+      take: 2000, // Limitar para evitar problemas de performance
     });
 
     let averageTimeToDiagnosisDays: number | null = null;
@@ -315,6 +324,7 @@ export class DashboardService {
     }
 
     // 3. Estadiamento Completo: % de pacientes com estadiamento completo antes de tratamento
+    // Limitar a 2000 registros mais recentes para evitar problemas de performance
     const patientsWithStaging = await this.prisma.patientJourney.findMany({
       where: {
         tenantId,
@@ -324,6 +334,8 @@ export class DashboardService {
         stagingDate: true,
         treatmentStartDate: true,
       },
+      orderBy: { treatmentStartDate: 'desc' },
+      take: 2000, // Limitar para evitar problemas de performance
     });
 
     const patientsWithCompleteStaging = patientsWithStaging.filter(
@@ -359,6 +371,7 @@ export class DashboardService {
       'biomarker_alk',
     ];
 
+    // Limitar a 5000 registros para evitar problemas de performance
     const pendingBiomarkerSteps = await this.prisma.navigationStep.findMany({
       where: {
         tenantId,
@@ -374,11 +387,13 @@ export class DashboardService {
         patientId: true,
       },
       distinct: ['patientId'],
+      take: 5000, // Limitar para evitar problemas de performance
     });
 
     const pendingBiomarkersCount = pendingBiomarkerSteps.length;
 
     // 5. Taxa de Adesão ao Tratamento: % de pacientes que completam ciclos conforme planejado
+    // Limitar a 2000 registros mais recentes para evitar problemas de performance
     const patientsInTreatment = await this.prisma.patientJourney.findMany({
       where: {
         tenantId,
@@ -390,6 +405,8 @@ export class DashboardService {
         currentCycle: true,
         totalCycles: true,
       },
+      orderBy: { treatmentStartDate: 'desc' },
+      take: 2000, // Limitar para evitar problemas de performance
     });
 
     const patientsOnTrack = patientsInTreatment.filter(
@@ -439,6 +456,7 @@ export class DashboardService {
     startDate.setHours(0, 0, 0, 0);
 
     // Estatísticas de alertas por dia
+    // Limitar a 10000 registros para evitar problemas de performance (período de 90 dias)
     const alerts = await this.prisma.alert.findMany({
       where: {
         tenantId,
@@ -448,6 +466,8 @@ export class DashboardService {
         createdAt: true,
         severity: true,
       },
+      orderBy: { createdAt: 'desc' },
+      take: 10000, // Limitar para evitar problemas de performance
     });
 
     // Agrupar por data e severidade
@@ -488,6 +508,7 @@ export class DashboardService {
     }
 
     // Estatísticas de pacientes por dia
+    // Limitar a 10000 registros para evitar problemas de performance (período de 90 dias)
     const patients = await this.prisma.patient.findMany({
       where: {
         tenantId,
@@ -498,6 +519,8 @@ export class DashboardService {
         priorityScore: true,
         status: true,
       },
+      orderBy: { createdAt: 'desc' },
+      take: 10000, // Limitar para evitar problemas de performance
     });
 
     const patientsByDate = new Map<
@@ -1051,6 +1074,8 @@ export class DashboardService {
     fourteenDaysAgo.setDate(fourteenDaysAgo.getDate() - 14);
 
     // Buscar etapas críticas (OVERDUE obrigatórias ou próximas do prazo)
+    // Limitar a 5000 registros para evitar problemas de performance
+    const maxResults = filters?.maxResults || 5000;
     const criticalSteps = await this.prisma.navigationStep.findMany({
       where: {
         tenantId,
@@ -1085,6 +1110,11 @@ export class DashboardService {
           },
         ],
       },
+      orderBy: [
+        { status: 'asc' }, // OVERDUE primeiro
+        { dueDate: 'asc' },
+      ],
+      take: maxResults, // Limitar para evitar problemas de performance
       include: {
         patient: {
           select: {
@@ -1153,6 +1183,7 @@ export class DashboardService {
           : 0;
 
         // Contar etapas totais e concluídas do paciente
+        // Limitar a 500 registros (um paciente não deve ter mais que isso)
         const allPatientSteps = await this.prisma.navigationStep.findMany({
           where: {
             tenantId,
@@ -1161,6 +1192,7 @@ export class DashboardService {
           select: {
             isCompleted: true,
           },
+          take: 500, // Limitar para evitar problemas de performance
         });
 
         const totalSteps = allPatientSteps.length;
@@ -1403,6 +1435,7 @@ export class DashboardService {
                 if (cancerType) {
                   whereClause.cancerType = cancerType;
                 }
+                // Limitar a 2000 registros para evitar problemas de performance
                 const patients = await this.prisma.patient.findMany({
                   where: whereClause,
                   include: {
@@ -1421,6 +1454,8 @@ export class DashboardService {
                       },
                     },
                   },
+                  orderBy: { createdAt: 'desc' },
+                  take: 2000, // Limitar para evitar problemas de performance
                 });
 
                 const validTimes = patients
@@ -1519,6 +1554,7 @@ export class DashboardService {
                 if (cancerType) {
                   whereClause.cancerType = cancerType;
                 }
+                // Limitar a 2000 registros para evitar problemas de performance
                 const biopsySteps = await this.prisma.navigationStep.findMany({
                   where: whereClause,
                   include: {
@@ -1540,6 +1576,8 @@ export class DashboardService {
                       },
                     },
                   },
+                  orderBy: { completedAt: 'desc' },
+                  take: 2000, // Limitar para evitar problemas de performance
                 });
 
                 const validTimes = biopsySteps
@@ -1581,6 +1619,7 @@ export class DashboardService {
                 if (cancerType) {
                   whereClause.cancerType = cancerType;
                 }
+                // Limitar a 2000 registros para evitar problemas de performance
                 const patients = await this.prisma.patient.findMany({
                   where: whereClause,
                   include: {
@@ -1608,6 +1647,8 @@ export class DashboardService {
                       },
                     },
                   },
+                  orderBy: { createdAt: 'desc' },
+                  take: 2000, // Limitar para evitar problemas de performance
                 });
 
                 const validTimes = patients
@@ -1645,6 +1686,7 @@ export class DashboardService {
                 if (cancerType) {
                   whereClause.cancerType = cancerType;
                 }
+                // Limitar a 2000 registros para evitar problemas de performance
                 const patients = await this.prisma.patient.findMany({
                   where: whereClause,
                   include: {
@@ -1672,6 +1714,8 @@ export class DashboardService {
                       },
                     },
                   },
+                  orderBy: { createdAt: 'desc' },
+                  take: 2000, // Limitar para evitar problemas de performance
                 });
 
                 const validTimes = patients

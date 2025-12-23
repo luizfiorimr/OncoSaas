@@ -1,8 +1,8 @@
-import { IsString, IsNotEmpty, IsEnum, IsOptional, IsObject } from 'class-validator';
+import { IsString, IsNotEmpty, IsEnum, IsOptional, IsObject, IsUUID } from 'class-validator';
 import { AlertType, AlertSeverity } from '@prisma/client';
 
 export class CreateAlertDto {
-  @IsString()
+  @IsUUID()
   @IsNotEmpty()
   patientId: string;
 

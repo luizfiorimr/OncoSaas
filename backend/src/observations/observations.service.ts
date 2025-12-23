@@ -28,7 +28,8 @@ export class ObservationsService {
   async findAll(
     tenantId: string,
     patientId?: string,
-    code?: string
+    code?: string,
+    options?: { limit?: number; offset?: number }
   ): Promise<Observation[]> {
     const where: any = { tenantId };
     if (patientId) {
@@ -37,6 +38,10 @@ export class ObservationsService {
     if (code) {
       where.code = code;
     }
+
+    // Limite padrão de 100 registros para evitar problemas de performance
+    const limit = options?.limit && options.limit > 0 ? Math.min(options.limit, 500) : 100;
+    const offset = options?.offset && options.offset > 0 ? options.offset : 0;
 
     return this.prisma.observation.findMany({
       where,
@@ -49,6 +54,8 @@ export class ObservationsService {
           },
         },
       },
+      take: limit,
+      skip: offset,
     });
   }
 
@@ -220,7 +227,10 @@ export class ObservationsService {
     }
 
     return this.prisma.observation.update({
-      where: { id },
+      where: {
+        id,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
       data: updateData,
       include: {
         patient: {
@@ -246,7 +256,10 @@ export class ObservationsService {
     }
 
     await this.prisma.observation.delete({
-      where: { id },
+      where: {
+        id,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
     });
   }
 
@@ -270,7 +283,10 @@ export class ObservationsService {
     }
 
     return this.prisma.observation.update({
-      where: { id },
+      where: {
+        id,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
       data: {
         syncedToEHR: true,
         syncedAt: new Date(),
@@ -283,6 +299,7 @@ export class ObservationsService {
    * Buscar observações não sincronizadas com EHR
    */
   async findUnsynced(tenantId: string): Promise<Observation[]> {
+    // Limitar a 1000 observações não sincronizadas para evitar problemas de performance
     return this.prisma.observation.findMany({
       where: {
         tenantId,
@@ -297,6 +314,7 @@ export class ObservationsService {
           },
         },
       },
+      take: 1000, // Limitar para evitar problemas de performance
     });
   }
 }

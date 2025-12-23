@@ -27,8 +27,31 @@ export class UsersController {
   @Get()
   @UseGuards(RolesGuard)
   @Roles(UserRole.ADMIN, UserRole.NURSE_CHIEF, UserRole.COORDINATOR)
-  async findAll(@Request() req) {
-    return this.usersService.findAll(req.user.tenantId);
+  async findAll(
+    @Request() req,
+    @Query('limit') limit?: string,
+    @Query('offset') offset?: string
+  ) {
+    // Validar e converter limit/offset com fallback seguro
+    let parsedLimit: number | undefined;
+    if (limit) {
+      const parsed = parseInt(limit, 10);
+      parsedLimit = !isNaN(parsed) && parsed > 0 ? parsed : undefined;
+    }
+    
+    let parsedOffset: number | undefined;
+    if (offset) {
+      const parsed = parseInt(offset, 10);
+      parsedOffset = !isNaN(parsed) && parsed >= 0 ? parsed : undefined;
+    }
+
+    return this.usersService.findAll(
+      req.user.tenantId,
+      {
+        limit: parsedLimit,
+        offset: parsedOffset,
+      }
+    );
   }
 
   @Get(':id')

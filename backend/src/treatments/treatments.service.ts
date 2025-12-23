@@ -87,6 +87,7 @@ export class TreatmentsService {
     patientId: string,
     tenantId: string
   ): Promise<any[]> {
+    // Limitar a 200 tratamentos por paciente para evitar problemas de performance
     return this.prisma.treatment.findMany({
       where: {
         patientId,
@@ -104,6 +105,7 @@ export class TreatmentsService {
       orderBy: {
         startDate: 'desc',
       },
+      take: 200, // Limitar para evitar problemas de performance
     });
   }
 
@@ -114,6 +116,7 @@ export class TreatmentsService {
     diagnosisId: string,
     tenantId: string
   ): Promise<any[]> {
+    // Limitar a 100 tratamentos por diagnóstico para evitar problemas de performance
     return this.prisma.treatment.findMany({
       where: {
         diagnosisId,
@@ -122,6 +125,7 @@ export class TreatmentsService {
       orderBy: {
         startDate: 'desc',
       },
+      take: 100, // Limitar para evitar problemas de performance
     });
   }
 
@@ -208,7 +212,10 @@ export class TreatmentsService {
     if (updateDto.metadata !== undefined) updateData.metadata = updateDto.metadata;
 
     return this.prisma.treatment.update({
-      where: { id },
+      where: {
+        id,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
       data: updateData,
       include: {
         diagnosis: {
@@ -238,7 +245,10 @@ export class TreatmentsService {
     }
 
     await this.prisma.treatment.delete({
-      where: { id },
+      where: {
+        id,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
     });
   }
 }

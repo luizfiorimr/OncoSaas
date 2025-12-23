@@ -6,6 +6,7 @@ import {
   IsEnum,
   IsObject,
   IsArray,
+  IsUUID,
 } from 'class-validator';
 import { NavigationStepStatus } from '@prisma/client';
 
@@ -22,7 +23,7 @@ export class UpdateNavigationStepDto {
   @IsOptional()
   completedAt?: string;
 
-  @IsString()
+  @IsUUID()
   @IsOptional()
   completedBy?: string;
 

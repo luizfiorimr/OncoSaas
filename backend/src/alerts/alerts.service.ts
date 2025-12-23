@@ -161,7 +161,10 @@ export class AlertsService {
     }
 
     const updatedAlert = await this.prisma.alert.update({
-      where: { id },
+      where: {
+        id,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
       data: updateData,
       include: {
         patient: {
@@ -215,6 +218,7 @@ export class AlertsService {
   }
 
   async getCriticalAlerts(tenantId: string): Promise<Alert[]> {
+    // Limitar a 500 alertas críticos para evitar problemas de performance
     return this.prisma.alert.findMany({
       where: {
         tenantId,
@@ -232,6 +236,7 @@ export class AlertsService {
           },
         },
       },
+      take: 500, // Limitar para evitar problemas de performance
     });
   }
 

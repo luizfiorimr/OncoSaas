@@ -101,10 +101,19 @@ export class WhatsAppConnectionsService {
   /**
    * Listar todas as conexões do tenant
    */
-  async findAll(tenantId: string): Promise<WhatsAppConnection[]> {
+  async findAll(
+    tenantId: string,
+    options?: { limit?: number; offset?: number }
+  ): Promise<WhatsAppConnection[]> {
+    // Limite padrão de 50 registros (geralmente poucas conexões por tenant)
+    const limit = options?.limit && options.limit > 0 ? Math.min(options.limit, 200) : 50;
+    const offset = options?.offset && options.offset > 0 ? options.offset : 0;
+
     return this.prisma.whatsAppConnection.findMany({
       where: { tenantId },
       orderBy: { createdAt: 'desc' },
+      take: limit,
+      skip: offset,
     });
   }
 
@@ -491,7 +500,10 @@ export class WhatsAppConnectionsService {
           if (existing) {
             // Atualizar conexão existente
             const updated = await this.prisma.whatsAppConnection.update({
-              where: { id: existing.id },
+              where: {
+                id: existing.id,
+                tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+              },
               data: {
                 phoneNumberId: phoneNumber.id,
                 whatsappBusinessAccountId: account.id,
@@ -681,7 +693,10 @@ export class WhatsAppConnectionsService {
     }
 
     return this.prisma.whatsAppConnection.update({
-      where: { id },
+      where: {
+        id,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
       data: updateData,
     });
   }
@@ -691,7 +706,12 @@ export class WhatsAppConnectionsService {
    */
   async remove(id: string, tenantId: string): Promise<void> {
     const connection = await this.findOne(id, tenantId);
-    await this.prisma.whatsAppConnection.delete({ where: { id } });
+    await this.prisma.whatsAppConnection.delete({
+      where: {
+        id,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
+    });
   }
 
   /**
@@ -745,7 +765,10 @@ export class WhatsAppConnectionsService {
 
       // Atualizar última sincronização
       await this.prisma.whatsAppConnection.update({
-        where: { id },
+        where: {
+          id,
+          tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+        },
         data: {
           lastSyncAt: new Date(),
           lastError: null,
@@ -762,7 +785,10 @@ export class WhatsAppConnectionsService {
 
       // Atualizar último erro
       await this.prisma.whatsAppConnection.update({
-        where: { id },
+        where: {
+          id,
+          tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+        },
         data: {
           lastError: errorMessage,
           status: WhatsAppConnectionStatus.ERROR,
@@ -870,7 +896,10 @@ export class WhatsAppConnectionsService {
           if (existing) {
             // Atualizar conexão existente
             const updated = await this.prisma.whatsAppConnection.update({
-              where: { id: existing.id },
+              where: {
+                id: existing.id,
+                tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+              },
               data: {
                 phoneNumberId: phoneNumber.id,
                 whatsappBusinessAccountId: account.id,
@@ -1018,7 +1047,10 @@ export class WhatsAppConnectionsService {
 
     // Marcar esta como padrão
     return this.prisma.whatsAppConnection.update({
-      where: { id },
+      where: {
+        id,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
       data: { isDefault: true },
     });
   }

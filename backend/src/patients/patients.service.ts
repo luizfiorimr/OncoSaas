@@ -350,7 +350,10 @@ export class PatientsService {
     if (updatePatientDto.ehrId !== undefined) updateData.ehrPatientId = updatePatientDto.ehrId;
 
     const updatedPatient = await this.prisma.patient.update({
-      where: { id },
+      where: {
+        id,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
       data: updateData,
       include: {
         cancerDiagnoses: {
@@ -434,7 +437,10 @@ export class PatientsService {
     const [updatedPatient] = await this.prisma.$transaction([
       // Atualizar score no paciente
       this.prisma.patient.update({
-        where: { id },
+        where: {
+          id,
+          tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+        },
         data: {
           priorityScore: updatePriorityDto.score,
           priorityCategory: updatePriorityDto.category,
@@ -468,7 +474,10 @@ export class PatientsService {
     }
 
     await this.prisma.patient.delete({
-      where: { id },
+      where: {
+        id,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
     });
   }
 
@@ -491,35 +500,43 @@ export class PatientsService {
     const created: Patient[] = [];
 
     return new Promise((resolve, reject) => {
-      const stream = Readable.from(csvBuffer.toString('utf-8'));
+      let streamError: Error | null = null;
 
-      stream
-        .pipe(
-          csv({
-            headers: [
-              'name',
-              'cpf',
-              'dataNascimento',
-              'sexo',
-              'telefone',
-              'email',
-              'tipoCancer',
-              'dataDiagnostico',
-              'estagio',
-              'oncologistaResponsavel',
-              'currentStage',
-            ],
+      try {
+        const stream = Readable.from(csvBuffer.toString('utf-8'));
+
+        stream
+          .pipe(
+            csv({
+              headers: [
+                'name',
+                'cpf',
+                'dataNascimento',
+                'sexo',
+                'telefone',
+                'email',
+                'tipoCancer',
+                'dataDiagnostico',
+                'estagio',
+                'oncologistaResponsavel',
+                'currentStage',
+              ],
+            })
+          )
+          .on('data', (row) => {
+            try {
+              results.push(row as any);
+            } catch (error) {
+              this.logger.error('Erro ao processar linha do CSV:', error);
+              // Continuar processamento mesmo com erro em uma linha
+            }
           })
-        )
-        .on('data', (row) => {
-          results.push(row as any);
-        })
-        .on('end', async () => {
-          try {
-            // Validar e criar pacientes
-            for (let i = 0; i < results.length; i++) {
-              const row = results[i];
-              const rowErrors: string[] = [];
+          .on('end', async () => {
+            try {
+              // Validar e criar pacientes
+              for (let i = 0; i < results.length; i++) {
+                const row = results[i];
+                const rowErrors: string[] = [];
 
               // Validações básicas
               if (!row.name || row.name.trim().length < 2) {
@@ -598,40 +615,64 @@ export class PatientsService {
                   (row as any).currentStage || (row.dataDiagnostico ? 'DIAGNOSIS' : 'SCREENING');
 
                 // Criar paciente
-                const patient = await this.prisma.patient.create({
-                  data: {
-                    name: createDto.name,
-                    cpf: createDto.cpf,
-                    birthDate: new Date(row.dataNascimento),
-                    gender: createDto.gender,
-                    phone: createDto.phone,
-                    email: createDto.email,
-                    cancerType: createDto.cancerType,
-                    stage: createDto.stage,
-                    diagnosisDate: row.dataDiagnostico
-                      ? new Date(row.dataDiagnostico)
-                      : null,
-                    currentStage: currentStage as JourneyStage,
-                    tenantId,
-                    phoneHash,
-                  },
-                });
+                let patient;
+                try {
+                  patient = await this.prisma.patient.create({
+                    data: {
+                      name: createDto.name,
+                      cpf: createDto.cpf,
+                      birthDate: new Date(row.dataNascimento),
+                      gender: createDto.gender,
+                      phone: createDto.phone,
+                      email: createDto.email,
+                      cancerType: createDto.cancerType,
+                      stage: createDto.stage,
+                      diagnosisDate: row.dataDiagnostico
+                        ? new Date(row.dataDiagnostico)
+                        : null,
+                      currentStage: currentStage as JourneyStage,
+                      tenantId,
+                      phoneHash,
+                    },
+                  });
+                } catch (error) {
+                  // Erro específico de constraint (ex: CPF duplicado)
+                  if (error instanceof Error) {
+                    if (error.message.includes('Unique constraint') || error.message.includes('duplicate')) {
+                      rowErrors.push(`CPF ou telefone já cadastrado: ${error.message}`);
+                    } else {
+                      rowErrors.push(`Erro ao criar paciente: ${error.message}`);
+                    }
+                  } else {
+                    rowErrors.push('Erro desconhecido ao criar paciente');
+                  }
+                  errors.push({ row: i + 2, errors: rowErrors });
+                  continue;
+                }
 
                 // Criar diagnóstico de câncer se tipoCancer fornecido
                 if (row.tipoCancer) {
-                  await this.prisma.cancerDiagnosis.create({
-                    data: {
-                      tenantId,
-                      patientId: patient.id,
-                      cancerType: row.tipoCancer,
-                      diagnosisDate: row.dataDiagnostico
-                        ? new Date(row.dataDiagnostico)
-                        : new Date(),
-                      diagnosisConfirmed: true,
-                      isPrimary: true,
-                      isActive: true,
-                    },
-                  });
+                  try {
+                    await this.prisma.cancerDiagnosis.create({
+                      data: {
+                        tenantId,
+                        patientId: patient.id,
+                        cancerType: row.tipoCancer,
+                        diagnosisDate: row.dataDiagnostico
+                          ? new Date(row.dataDiagnostico)
+                          : new Date(),
+                        diagnosisConfirmed: true,
+                        isPrimary: true,
+                        isActive: true,
+                      },
+                    });
+                  } catch (error) {
+                    this.logger.error(
+                      `Erro ao criar diagnóstico para paciente ${patient.id}:`,
+                      error instanceof Error ? error.stack : String(error)
+                    );
+                    // Não falhar o import por erro no diagnóstico, apenas logar
+                  }
                 }
 
                 // Inicializar etapas de navegação
@@ -662,18 +703,35 @@ export class PatientsService {
               }
             }
 
-            resolve({
-              success: created.length,
-              errors,
-              created,
-            });
-          } catch (error) {
-            reject(error);
-          }
-        })
-        .on('error', (error) => {
-          reject(error);
-        });
+              resolve({
+                success: created.length,
+                errors,
+                created,
+              });
+            } catch (error) {
+              this.logger.error('Erro ao processar CSV:', error);
+              reject(
+                error instanceof Error
+                  ? error
+                  : new Error('Erro desconhecido ao processar CSV')
+              );
+            }
+          })
+          .on('error', (error) => {
+            streamError = error instanceof Error ? error : new Error(String(error));
+            this.logger.error('Erro no stream do CSV:', streamError);
+            reject(
+              new Error(`Erro ao ler CSV: ${streamError.message}`)
+            );
+          });
+      } catch (error) {
+        this.logger.error('Erro ao criar stream do CSV:', error);
+        reject(
+          error instanceof Error
+            ? error
+            : new Error('Erro ao processar arquivo CSV')
+        );
+      }
     });
   }
 
@@ -923,7 +981,10 @@ export class PatientsService {
     }
 
     return this.prisma.cancerDiagnosis.update({
-      where: { id: diagnosisId },
+      where: {
+        id: diagnosisId,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
       data: updateData,
     });
   }
@@ -949,6 +1010,7 @@ export class PatientsService {
       throw new NotFoundException(`Patient with ID ${patientId} not found`);
     }
 
+    // Limitar a 50 diagnósticos por paciente para evitar problemas de performance
     return this.prisma.cancerDiagnosis.findMany({
       where: {
         patientId,
@@ -959,6 +1021,7 @@ export class PatientsService {
         { isPrimary: 'desc' },
         { diagnosisDate: 'desc' },
       ],
+      take: 50, // Limitar para evitar problemas de performance
     });
   }
 }

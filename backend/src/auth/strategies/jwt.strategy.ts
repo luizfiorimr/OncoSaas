@@ -25,13 +25,23 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: JwtPayload) {
-    const user = await this.prisma.user.findUnique({
-      where: { id: payload.sub },
+    // Usar findFirst com tenantId para garantir isolamento multi-tenant
+    // Mesmo que id seja único, incluir tenantId adiciona camada extra de segurança
+    const user = await this.prisma.user.findFirst({
+      where: {
+        id: payload.sub,
+        tenantId: payload.tenantId, // Verificar tenantId do token
+      },
       include: { tenant: true },
     });
 
     if (!user) {
       throw new UnauthorizedException('User not found');
+    }
+
+    // Verificar se tenantId do token corresponde ao do usuário
+    if (user.tenantId !== payload.tenantId) {
+      throw new UnauthorizedException('Invalid tenant');
     }
 
     return {

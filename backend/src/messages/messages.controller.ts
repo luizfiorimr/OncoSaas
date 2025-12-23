@@ -7,6 +7,7 @@ import {
   Param,
   Query,
   UseGuards,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { MessagesService } from './messages.service';
 import { CreateMessageDto } from './dto/create-message.dto';
@@ -30,8 +31,33 @@ export class MessagesController {
     UserRole.NURSE,
     UserRole.COORDINATOR
   )
-  findAll(@CurrentUser() user: any, @Query('patientId') patientId?: string) {
-    return this.messagesService.findAll(user.tenantId, patientId);
+  findAll(
+    @CurrentUser() user: any,
+    @Query('patientId') patientId?: string,
+    @Query('limit') limit?: string,
+    @Query('offset') offset?: string
+  ) {
+    // Validar e converter limit/offset com fallback seguro
+    let parsedLimit: number | undefined;
+    if (limit) {
+      const parsed = parseInt(limit, 10);
+      parsedLimit = !isNaN(parsed) && parsed > 0 ? parsed : undefined;
+    }
+    
+    let parsedOffset: number | undefined;
+    if (offset) {
+      const parsed = parseInt(offset, 10);
+      parsedOffset = !isNaN(parsed) && parsed >= 0 ? parsed : undefined;
+    }
+
+    return this.messagesService.findAll(
+      user.tenantId,
+      patientId,
+      {
+        limit: parsedLimit,
+        offset: parsedOffset,
+      }
+    );
   }
 
   @Get('unassumed/count')
@@ -53,14 +79,21 @@ export class MessagesController {
     UserRole.COORDINATOR
   )
   getConversation(
-    @Param('patientId') patientId: string,
+    @Param('patientId', ParseUUIDPipe) patientId: string,
     @CurrentUser() user: any,
     @Query('limit') limit?: string
   ) {
+    // Validar e converter limit com fallback seguro
+    let parsedLimit = 50; // Default
+    if (limit) {
+      const parsed = parseInt(limit, 10);
+      parsedLimit = !isNaN(parsed) && parsed > 0 ? Math.min(parsed, 500) : 50;
+    }
+
     return this.messagesService.getConversation(
       patientId,
       user.tenantId,
-      limit ? parseInt(limit, 10) : 50
+      parsedLimit
     );
   }
 
@@ -71,7 +104,7 @@ export class MessagesController {
     UserRole.NURSE,
     UserRole.COORDINATOR
   )
-  findOne(@Param('id') id: string, @CurrentUser() user: any) {
+  findOne(@Param('id', ParseUUIDPipe) id: string, @CurrentUser() user: any) {
     return this.messagesService.findOne(id, user.tenantId);
   }
 
@@ -101,7 +134,7 @@ export class MessagesController {
     UserRole.COORDINATOR
   )
   update(
-    @Param('id') id: string,
+    @Param('id', ParseUUIDPipe) id: string,
     @Body() updateMessageDto: UpdateMessageDto,
     @CurrentUser() user: any
   ) {
@@ -115,7 +148,7 @@ export class MessagesController {
     UserRole.NURSE,
     UserRole.COORDINATOR
   )
-  assumeConversation(@Param('id') id: string, @CurrentUser() user: any) {
+  assumeConversation(@Param('id', ParseUUIDPipe) id: string, @CurrentUser() user: any) {
     return this.messagesService.assumeConversation(id, user.tenantId, user.id);
   }
 }

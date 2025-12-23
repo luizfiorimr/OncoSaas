@@ -6,11 +6,12 @@ import {
   IsBoolean,
   IsDateString,
   IsObject,
+  IsUUID,
 } from 'class-validator';
 import { JourneyStage } from '@prisma/client';
 
 export class CreateNavigationStepDto {
-  @IsString()
+  @IsUUID()
   @IsNotEmpty()
   patientId: string;
 
