@@ -158,6 +158,8 @@ Após executar o seed, use estas credenciais para acessar o sistema:
 
 ⚙️ **Husky**: após instalar as dependências, execute `npm run prepare` para reinstalar os Git hooks (pre-commit/pre-push).
 
+✅ **Validação do Setup**: Execute `npm run validate` para verificar se todas as ferramentas e dependências estão configuradas corretamente.
+
 📘 Guia completo (pré-requisitos, troubleshooting e deploy):  
 `docs/desenvolvimento/setup-e-deploy.md`
 
@@ -190,9 +192,12 @@ O projeto inclui configuração completa de:
 **Comandos principais:**
 
 ```bash
+# Validação
+npm run validate          # Validar setup completo
+
 # Lint
-npm run lint              # Frontend
-cd backend && npm run lint # Backend
+npm run lint              # Frontend + Backend
+cd backend && npm run lint # Backend apenas
 
 # Formatação
 npm run format            # Formatar tudo
