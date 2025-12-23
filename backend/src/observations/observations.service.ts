@@ -299,6 +299,7 @@ export class ObservationsService {
    * Buscar observações não sincronizadas com EHR
    */
   async findUnsynced(tenantId: string): Promise<Observation[]> {
+    // Limitar a 1000 observações não sincronizadas para evitar problemas de performance
     return this.prisma.observation.findMany({
       where: {
         tenantId,
@@ -313,6 +314,7 @@ export class ObservationsService {
           },
         },
       },
+      take: 1000, // Limitar para evitar problemas de performance
     });
   }
 }

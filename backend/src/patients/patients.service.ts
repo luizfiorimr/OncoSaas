@@ -1010,6 +1010,7 @@ export class PatientsService {
       throw new NotFoundException(`Patient with ID ${patientId} not found`);
     }
 
+    // Limitar a 50 diagnósticos por paciente para evitar problemas de performance
     return this.prisma.cancerDiagnosis.findMany({
       where: {
         patientId,
@@ -1020,6 +1021,7 @@ export class PatientsService {
         { isPrimary: 'desc' },
         { diagnosisDate: 'desc' },
       ],
+      take: 50, // Limitar para evitar problemas de performance
     });
   }
 }
