@@ -20,6 +20,7 @@ export class CreateTreatmentDto {
   diagnosisId: string; // ID do CancerDiagnosis
 
   @IsEnum(TreatmentType)
+  @IsNotEmpty()
   treatmentType: TreatmentType;
 
   @IsString()

@@ -40,12 +40,18 @@ export class ObservationsController {
   findAll(
     @Request() req,
     @Query('patientId') patientId?: string,
-    @Query('code') code?: string
+    @Query('code') code?: string,
+    @Query('limit') limit?: string,
+    @Query('offset') offset?: string
   ) {
     return this.observationsService.findAll(
       req.user.tenantId,
       patientId,
-      code
+      code,
+      {
+        limit: limit ? parseInt(limit, 10) : undefined,
+        offset: offset ? parseInt(offset, 10) : undefined,
+      }
     );
   }
 

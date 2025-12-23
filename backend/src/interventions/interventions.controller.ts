@@ -56,6 +56,30 @@ export class InterventionsController {
     );
   }
 
+  @Get()
+  @Roles(
+    UserRole.NURSE,
+    UserRole.NURSE_CHIEF,
+    UserRole.COORDINATOR,
+    UserRole.ONCOLOGIST,
+    UserRole.ADMIN
+  )
+  async findAll(
+    @Request() req,
+    @Query('limit') limit?: string,
+    @Query('offset') offset?: string
+  ) {
+    return this.interventionsService.findAll(
+      req.user.tenantId,
+      undefined,
+      undefined,
+      {
+        limit: limit ? parseInt(limit, 10) : undefined,
+        offset: offset ? parseInt(offset, 10) : undefined,
+      }
+    );
+  }
+
   @Get('patient/:patientId')
   @Roles(
     UserRole.NURSE,
@@ -64,11 +88,20 @@ export class InterventionsController {
     UserRole.ONCOLOGIST,
     UserRole.ADMIN
   )
-  async findByPatient(@Param('patientId', ParseUUIDPipe) patientId: string, @Request() req) {
+  async findByPatient(
+    @Param('patientId', ParseUUIDPipe) patientId: string,
+    @Request() req,
+    @Query('limit') limit?: string,
+    @Query('offset') offset?: string
+  ) {
     return this.interventionsService.findAll(
       req.user.tenantId,
       undefined,
-      patientId
+      patientId,
+      {
+        limit: limit ? parseInt(limit, 10) : undefined,
+        offset: offset ? parseInt(offset, 10) : undefined,
+      }
     );
   }
 

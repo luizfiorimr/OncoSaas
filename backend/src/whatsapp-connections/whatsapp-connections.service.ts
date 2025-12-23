@@ -101,10 +101,19 @@ export class WhatsAppConnectionsService {
   /**
    * Listar todas as conexões do tenant
    */
-  async findAll(tenantId: string): Promise<WhatsAppConnection[]> {
+  async findAll(
+    tenantId: string,
+    options?: { limit?: number; offset?: number }
+  ): Promise<WhatsAppConnection[]> {
+    // Limite padrão de 50 registros (geralmente poucas conexões por tenant)
+    const limit = options?.limit && options.limit > 0 ? Math.min(options.limit, 200) : 50;
+    const offset = options?.offset && options.offset > 0 ? options.offset : 0;
+
     return this.prisma.whatsAppConnection.findMany({
       where: { tenantId },
       orderBy: { createdAt: 'desc' },
+      take: limit,
+      skip: offset,
     });
   }
 

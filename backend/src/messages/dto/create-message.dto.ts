@@ -68,7 +68,7 @@ export class CreateMessageDto {
   @IsOptional()
   alertTriggered?: boolean;
 
-  @IsString()
+  @IsUUID()
   @IsOptional()
   assumedBy?: string; // userId que assumiu (handoff manual)
 }

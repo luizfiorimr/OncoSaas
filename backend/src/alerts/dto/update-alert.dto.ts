@@ -1,6 +1,6 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateAlertDto } from './create-alert.dto';
-import { IsEnum, IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsOptional, IsUUID } from 'class-validator';
 import { AlertStatus } from '@prisma/client';
 
 export class UpdateAlertDto extends PartialType(CreateAlertDto) {
@@ -8,11 +8,11 @@ export class UpdateAlertDto extends PartialType(CreateAlertDto) {
   @IsOptional()
   status?: AlertStatus;
 
-  @IsString()
+  @IsUUID()
   @IsOptional()
   acknowledgedBy?: string; // ID do usuário que reconheceu
 
-  @IsString()
+  @IsUUID()
   @IsOptional()
   resolvedBy?: string; // ID do usuário que resolveu
 }

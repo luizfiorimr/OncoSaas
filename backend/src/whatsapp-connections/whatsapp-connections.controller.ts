@@ -34,8 +34,18 @@ export class WhatsAppConnectionsController {
 
   @Get()
   @UseGuards(JwtAuthGuard, TenantGuard)
-  async findAll(@Request() req) {
-    return this.whatsappConnectionsService.findAll(req.user.tenantId);
+  async findAll(
+    @Request() req,
+    @Query('limit') limit?: string,
+    @Query('offset') offset?: string
+  ) {
+    return this.whatsappConnectionsService.findAll(
+      req.user.tenantId,
+      {
+        limit: limit ? parseInt(limit, 10) : undefined,
+        offset: offset ? parseInt(offset, 10) : undefined,
+      }
+    );
   }
 
   @Get(':id')
