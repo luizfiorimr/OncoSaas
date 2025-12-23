@@ -34,9 +34,19 @@ export class AlertsController {
   findAll(
     @CurrentUser() user: any,
     @Query('patientId') patientId?: string,
-    @Query('status') status?: AlertStatus
+    @Query('status') status?: AlertStatus,
+    @Query('limit') limit?: string,
+    @Query('offset') offset?: string
   ) {
-    return this.alertsService.findAll(user.tenantId, patientId, status);
+    return this.alertsService.findAll(
+      user.tenantId,
+      patientId,
+      status,
+      {
+        limit: limit ? parseInt(limit, 10) : undefined,
+        offset: offset ? parseInt(offset, 10) : undefined,
+      }
+    );
   }
 
   @Get('critical')

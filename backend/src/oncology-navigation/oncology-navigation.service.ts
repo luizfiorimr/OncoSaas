@@ -187,9 +187,12 @@ export class OncologyNavigationService {
       throw new NotFoundException('Patient not found');
     }
 
-    // Obter journey do paciente
-    const journey = await this.prisma.patientJourney.findUnique({
-      where: { patientId: createDto.patientId },
+    // Obter journey do paciente (sempre incluir tenantId para isolamento)
+    const journey = await this.prisma.patientJourney.findFirst({
+      where: {
+        patientId: createDto.patientId,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
     });
 
     const step = await this.prisma.navigationStep.create({
@@ -401,9 +404,12 @@ export class OncologyNavigationService {
       return;
     }
 
-    // Obter journey do paciente
-    const journey = await this.prisma.patientJourney.findUnique({
-      where: { patientId },
+    // Obter journey do paciente (sempre incluir tenantId para isolamento)
+    const journey = await this.prisma.patientJourney.findFirst({
+      where: {
+        patientId,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
     });
 
     // Criar todas as etapas
@@ -551,9 +557,12 @@ export class OncologyNavigationService {
       return { created: 0, skipped: existingSteps.length };
     }
 
-    // Obter journey do paciente
-    const journey = await this.prisma.patientJourney.findUnique({
-      where: { patientId },
+    // Obter journey do paciente (sempre incluir tenantId para isolamento)
+    const journey = await this.prisma.patientJourney.findFirst({
+      where: {
+        patientId,
+        tenantId, // SEMPRE incluir tenantId para isolamento multi-tenant
+      },
     });
 
     // Criar apenas as etapas faltantes

@@ -52,8 +52,20 @@ export class InternalNotesController {
     UserRole.ONCOLOGIST,
     UserRole.ADMIN
   )
-  async findAll(@Request() req, @Query('patientId') patientId?: string) {
-    return this.internalNotesService.findAll(req.user.tenantId, patientId);
+  async findAll(
+    @Request() req,
+    @Query('patientId') patientId?: string,
+    @Query('limit') limit?: string,
+    @Query('offset') offset?: string
+  ) {
+    return this.internalNotesService.findAll(
+      req.user.tenantId,
+      patientId,
+      {
+        limit: limit ? parseInt(limit, 10) : undefined,
+        offset: offset ? parseInt(offset, 10) : undefined,
+      }
+    );
   }
 
   @Get(':id')
