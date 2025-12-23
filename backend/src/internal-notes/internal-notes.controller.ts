@@ -9,6 +9,7 @@ import {
   UseGuards,
   Query,
   Request,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { InternalNotesService } from './internal-notes.service';
 import { CreateInternalNoteDto } from './dto/create-internal-note.dto';
@@ -63,7 +64,7 @@ export class InternalNotesController {
     UserRole.ONCOLOGIST,
     UserRole.ADMIN
   )
-  async findOne(@Param('id') id: string, @Request() req) {
+  async findOne(@Param('id', ParseUUIDPipe) id: string, @Request() req) {
     return this.internalNotesService.findOne(id, req.user.tenantId);
   }
 
@@ -76,7 +77,7 @@ export class InternalNotesController {
     UserRole.ADMIN
   )
   async update(
-    @Param('id') id: string,
+    @Param('id', ParseUUIDPipe) id: string,
     @Body() updateInternalNoteDto: UpdateInternalNoteDto,
     @Request() req
   ) {
@@ -97,7 +98,7 @@ export class InternalNotesController {
     UserRole.ONCOLOGIST,
     UserRole.ADMIN
   )
-  async remove(@Param('id') id: string, @Request() req) {
+  async remove(@Param('id', ParseUUIDPipe) id: string, @Request() req) {
     return this.internalNotesService.remove(
       id,
       req.user.tenantId,

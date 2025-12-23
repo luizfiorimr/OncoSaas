@@ -1,5 +1,5 @@
 /**
- * Script de teste da API MEDSAAS (Node.js)
+ * Script de teste da API ONCONAV (Node.js)
  * Uso: node scripts/test-api.js
  */
 
@@ -96,7 +96,7 @@ async function testEndpoint(method, endpoint, data = null, description) {
  * Executar todos os testes
  */
 async function runTests() {
-  console.log(`${colors.cyan}🧪 Testando API MEDSAAS${colors.reset}`);
+  console.log(`${colors.cyan}🧪 Testando API ONCONAV${colors.reset}`);
   console.log('========================');
   console.log('');
 

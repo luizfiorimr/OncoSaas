@@ -55,8 +55,13 @@ export class QuestionnaireResponsesService {
   async findAll(
     tenantId: string,
     patientId?: string,
-    questionnaireId?: string
+    questionnaireId?: string,
+    options?: { limit?: number; offset?: number }
   ): Promise<QuestionnaireResponse[]> {
+    // Limite padrão de 100 registros para evitar problemas de performance
+    const limit = options?.limit && options.limit > 0 ? Math.min(options.limit, 500) : 100;
+    const offset = options?.offset && options.offset > 0 ? options.offset : 0;
+
     return this.prisma.questionnaireResponse.findMany({
       where: {
         tenantId,
@@ -81,6 +86,8 @@ export class QuestionnaireResponsesService {
       orderBy: {
         completedAt: 'desc',
       },
+      take: limit,
+      skip: offset,
     });
   }
 

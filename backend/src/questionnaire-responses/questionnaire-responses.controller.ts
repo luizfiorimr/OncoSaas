@@ -8,6 +8,7 @@ import {
   UseGuards,
   HttpCode,
   HttpStatus,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { QuestionnaireResponsesService } from './questionnaire-responses.service';
 import { CreateQuestionnaireResponseDto } from './dto/create-questionnaire-response.dto';
@@ -48,12 +49,18 @@ export class QuestionnaireResponsesController {
   findAll(
     @CurrentUser() user: any,
     @Query('patientId') patientId?: string,
-    @Query('questionnaireId') questionnaireId?: string
+    @Query('questionnaireId') questionnaireId?: string,
+    @Query('limit') limit?: string,
+    @Query('offset') offset?: string
   ) {
     return this.questionnaireResponsesService.findAll(
       user.tenantId,
       patientId,
-      questionnaireId
+      questionnaireId,
+      {
+        limit: limit ? parseInt(limit, 10) : undefined,
+        offset: offset ? parseInt(offset, 10) : undefined,
+      }
     );
   }
 
@@ -64,7 +71,7 @@ export class QuestionnaireResponsesController {
     UserRole.NURSE,
     UserRole.COORDINATOR
   )
-  findOne(@Param('id') id: string, @CurrentUser() user: any) {
+  findOne(@Param('id', ParseUUIDPipe) id: string, @CurrentUser() user: any) {
     return this.questionnaireResponsesService.findOne(id, user.tenantId);
   }
 }

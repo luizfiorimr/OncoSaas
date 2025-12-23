@@ -7,6 +7,7 @@ import {
   UseGuards,
   Query,
   Request,
+  ParseUUIDPipe,
 } from '@nestjs/common';
 import { InterventionsService } from './interventions.service';
 import { CreateInterventionDto } from './dto/create-intervention.dto';
@@ -63,7 +64,7 @@ export class InterventionsController {
     UserRole.ONCOLOGIST,
     UserRole.ADMIN
   )
-  async findByPatient(@Param('patientId') patientId: string, @Request() req) {
+  async findByPatient(@Param('patientId', ParseUUIDPipe) patientId: string, @Request() req) {
     return this.interventionsService.findAll(
       req.user.tenantId,
       undefined,
@@ -79,7 +80,7 @@ export class InterventionsController {
     UserRole.ONCOLOGIST,
     UserRole.ADMIN
   )
-  async findOne(@Param('id') id: string, @Request() req) {
+  async findOne(@Param('id', ParseUUIDPipe) id: string, @Request() req) {
     return this.interventionsService.findOne(id, req.user.tenantId);
   }
 }
