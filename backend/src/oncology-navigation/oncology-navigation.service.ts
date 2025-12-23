@@ -32,6 +32,7 @@ export class OncologyNavigationService {
     patientId: string,
     tenantId: string
   ): Promise<any[]> {
+    // Limitar a 500 etapas por paciente para evitar problemas de performance
     const steps = await this.prisma.navigationStep.findMany({
       where: {
         patientId,
@@ -42,6 +43,7 @@ export class OncologyNavigationService {
         { expectedDate: 'asc' },
         { createdAt: 'asc' },
       ],
+      take: 500, // Limitar para evitar problemas de performance
     });
 
     // Verificar se há etapas para todos os estágios da jornada
@@ -110,6 +112,7 @@ export class OncologyNavigationService {
               { expectedDate: 'asc' },
               { createdAt: 'asc' },
             ],
+            take: 500, // Limitar para evitar problemas de performance
           });
 
           // Garantir que journeyStage seja retornado como string
@@ -136,6 +139,7 @@ export class OncologyNavigationService {
     tenantId: string,
     journeyStage: JourneyStage
   ): Promise<any[]> {
+    // Limitar a 200 etapas por estágio para evitar problemas de performance
     return this.prisma.navigationStep.findMany({
       where: {
         patientId,
@@ -147,6 +151,7 @@ export class OncologyNavigationService {
         { expectedDate: 'asc' },
         { createdAt: 'asc' },
       ],
+      take: 200, // Limitar para evitar problemas de performance
     });
   }
 
@@ -751,6 +756,7 @@ export class OncologyNavigationService {
     alertsCreated: number;
   }> {
     const now = new Date();
+    // Limitar a 500 etapas por paciente para evitar problemas de performance
     const overdueSteps = await this.prisma.navigationStep.findMany({
       where: {
         tenantId,
@@ -773,6 +779,8 @@ export class OncologyNavigationService {
           },
         },
       },
+      orderBy: { dueDate: 'asc' },
+      take: 500, // Limitar para evitar problemas de performance
     });
 
     let markedOverdue = 0;

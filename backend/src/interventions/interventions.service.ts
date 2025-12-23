@@ -166,12 +166,14 @@ export class InterventionsService {
   }
 
   async findByUser(tenantId: string, userId: string) {
+    // Limitar a 500 intervenções por usuário para evitar problemas de performance
     return this.prisma.intervention.findMany({
       where: {
         tenantId,
         userId,
       },
       orderBy: { createdAt: 'desc' },
+      take: 500, // Limitar para evitar problemas de performance
       include: {
         user: {
           select: {

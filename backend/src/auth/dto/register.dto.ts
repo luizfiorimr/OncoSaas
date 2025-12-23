@@ -4,6 +4,7 @@ import {
   IsString,
   MinLength,
   IsEnum,
+  IsUUID,
 } from 'class-validator';
 import { UserRole } from '@prisma/client';
 
@@ -25,7 +26,7 @@ export class RegisterDto {
   @IsNotEmpty()
   role: UserRole;
 
-  @IsString()
+  @IsUUID()
   @IsNotEmpty()
   tenantId: string;
 }
